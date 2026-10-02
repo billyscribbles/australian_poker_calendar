@@ -1,0 +1,158 @@
+{
+  "source": "https://somuchpoker.com/poker-calendar/2026?view=list&month=10",
+  "scraped": "2026-10-03",
+  "note": "Asian series touching October 2026. The listing also carried WPT Prime Cyprus, WPT Venetian Las Vegas Fall, WPT Prime Lodge Championship (Austin) and the Victorian Poker Championship; the first three are outside Asia and the last is already on the Australian calendar, so none are kept here.",
+  "series": [
+    {
+      "name": "APT Jeju 2026",
+      "start": "2026-09-25",
+      "end": "2026-10-07",
+      "country": "South Korea",
+      "place": "Jeju, LES A Casino",
+      "prize": "5B KRW",
+      "events": 136,
+      "url": "https://somuchpoker.com/events-calendar/apt/2026/apt-jeju-2026"
+    },
+    {
+      "name": "U Series Championship Osaka Q3 2026",
+      "start": "2026-10-02",
+      "end": "2026-10-06",
+      "country": "Japan",
+      "place": "Osaka",
+      "prize": null,
+      "events": null,
+      "url": "https://somuchpoker.com/events-calendar/usc/2026/u-series-champ-osaka-q3-2026"
+    },
+    {
+      "name": "Super Cup 7 Incheon 2026",
+      "start": "2026-10-08",
+      "end": "2026-10-18",
+      "country": "South Korea",
+      "place": "Incheon",
+      "prize": null,
+      "events": null,
+      "url": "https://somuchpoker.com/events-calendar/sc/2026/super-cup-7-incheon-2026"
+    },
+    {
+      "name": "JOPT 2026 Tokyo #03",
+      "start": "2026-10-08",
+      "end": "2026-10-12",
+      "country": "Japan",
+      "place": "Tokyo",
+      "prize": null,
+      "events": null,
+      "url": "https://somuchpoker.com/events-calendar/jopt/2026/jopt-2026-tokyo-03"
+    },
+    {
+      "name": "Poker Dream 26 Malaysia",
+      "start": "2026-10-08",
+      "end": "2026-10-19",
+      "country": "Malaysia",
+      "place": "Pahang, Resorts World Genting",
+      "prize": "7.3M MYR",
+      "events": 116,
+      "url": "https://somuchpoker.com/events-calendar/pd/2026/poker-dream-26-malaysia"
+    },
+    {
+      "name": "APPT Championship 2026",
+      "start": "2026-10-08",
+      "end": "2026-10-19",
+      "country": "Philippines",
+      "place": "Manila, Okada Manila",
+      "prize": "126.3M PHP",
+      "events": 99,
+      "url": "https://somuchpoker.com/events-calendar/appt/2026/appt-championship-2026"
+    },
+    {
+      "name": "KPC Poker Series October 2026",
+      "start": "2026-10-10",
+      "end": "2026-10-21",
+      "country": "South Korea",
+      "place": "Jeju, LES A Casino",
+      "prize": "1.7B KRW",
+      "events": 73,
+      "url": "https://somuchpoker.com/events-calendar/kpc-poker/2026/kpc-series-october-2026"
+    },
+    {
+      "name": "QPC Circuit 2026",
+      "start": "2026-10-12",
+      "end": "2026-10-21",
+      "country": "Vietnam",
+      "place": null,
+      "prize": null,
+      "events": null,
+      "url": "https://somuchpoker.com/events-calendar/qpc/2026/qpc-circuit-2026"
+    },
+    {
+      "name": "TMT Championship 2026",
+      "start": "2026-10-16",
+      "end": "2026-10-26",
+      "country": "Taiwan",
+      "place": "Taipei City, CTP Asia Poker Arena",
+      "prize": "48M NTD",
+      "events": 81,
+      "url": "https://somuchpoker.com/events-calendar/tmt/2026/tmt-championship-2026"
+    },
+    {
+      "name": "USOP Grand Championship Vietnam 2026",
+      "start": "2026-10-22",
+      "end": "2026-11-04",
+      "country": "Vietnam",
+      "place": null,
+      "prize": "160B VND",
+      "events": null,
+      "status": "moved",
+      "url": "https://somuchpoker.com/events-calendar/usop/2026/usop-grand-championship-vietnam-2026"
+    },
+    {
+      "name": "MGM Poker Championship 2026",
+      "start": "2026-10-23",
+      "end": "2026-11-02",
+      "country": "Macau",
+      "place": null,
+      "prize": null,
+      "events": null,
+      "url": "https://somuchpoker.com/events-calendar/mgm/2026/mgm-poker-championship-2026"
+    },
+    {
+      "name": "Jeju Poker Festival 2026",
+      "start": "2026-10-28",
+      "end": "2026-11-11",
+      "country": "South Korea",
+      "place": "Jeju",
+      "prize": null,
+      "events": null,
+      "url": "https://somuchpoker.com/events-calendar/jpf/2026/jeju-poker-festival-2026"
+    },
+    {
+      "name": "JOPT 2026 Osaka #02",
+      "start": "2026-10-29",
+      "end": "2026-11-03",
+      "country": "Japan",
+      "place": "Osaka",
+      "prize": null,
+      "events": null,
+      "url": "https://somuchpoker.com/events-calendar/jopt/2026/jopt-2026-osaka-02"
+    },
+    {
+      "name": "WPT Seoul 2026",
+      "start": "2026-10-30",
+      "end": "2026-11-09",
+      "country": "South Korea",
+      "place": "Incheon, Inspire Casino",
+      "prize": "1.3B KRW",
+      "events": 54,
+      "url": "https://somuchpoker.com/events-calendar/wpt/2026/wpt-seoul-2026"
+    },
+    {
+      "name": "The Labyrinth Trail – GOP Incheon 2026",
+      "start": "2026-10-30",
+      "end": "2026-11-08",
+      "country": "South Korea",
+      "place": "Incheon, Paradise City Incheon",
+      "prize": "643.8M KRW",
+      "events": 77,
+      "url": "https://somuchpoker.com/events-calendar/gop/2026/the-labyrinth-trail-gop-incheon-2026"
+    }
+  ]
+}

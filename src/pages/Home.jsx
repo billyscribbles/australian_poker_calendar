@@ -9,7 +9,7 @@ import PokerCalendar from '../components/PokerCalendar.jsx'
 import PlayerNews from '../components/PlayerNews.jsx'
 import PlayersOfTheYear from '../components/PlayersOfTheYear.jsx'
 import Promotions from '../components/Promotions.jsx'
-import Guides from '../components/Guides.jsx'
+import AsiaTours from '../components/AsiaTours.jsx'
 import FAQ from '../components/FAQ.jsx'
 import PokerRooms from '../components/PokerRooms.jsx'
 import './Home.css'
@@ -35,7 +35,7 @@ export default function Home() {
           <PlayersOfTheYear />
         </section>
         <Promotions />
-        <Guides />
+        <AsiaTours />
         <FAQ />
         <PokerRooms />
       </div>

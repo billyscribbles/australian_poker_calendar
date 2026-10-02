@@ -39,7 +39,7 @@ export const site = {
           { label: 'Poker Rules', to: '/how-to-play' },
           { label: 'Poker Calendar', to: '/poker-calendar/2026' },
           { label: 'Poker Players', to: '/players' },
-          { label: 'Live Poker Guides', to: '/guides' },
+          { label: 'Poker Tours in Asia', to: '/guides' },
           { label: 'Why Trust Us', to: '/about' },
           { label: 'Responsible Gambling', to: '/responsible-gambling' },
           { label: 'RSS Feed', to: '/rss' },

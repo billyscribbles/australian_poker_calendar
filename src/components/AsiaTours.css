@@ -1,0 +1,119 @@
+.asia-tours__head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.asia-tours__head .section-heading {
+  flex: 1;
+  min-width: 0;
+}
+
+.asia-tours__arrows {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+  /* Sit level with the heading text, not its bottom margin. */
+  margin-bottom: 20px;
+}
+
+.asia-tours__arrow {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-accent);
+  background: var(--color-bg-card);
+  color: var(--color-champagne);
+  cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.asia-tours__arrow:hover {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+.asia-tours__row {
+  gap: 16px;
+  padding: 0 0 12px;
+  margin: 0;
+  list-style: none;
+  scroll-snap-type: x mandatory;
+}
+
+.asia-tour {
+  flex: 0 0 260px;
+  scroll-snap-align: start;
+  padding: 16px;
+  border-radius: var(--radius-xl);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+}
+
+.asia-tour__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.asia-tour__logo {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+}
+
+.asia-tour__country {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.asia-tour__flag {
+  width: 20px;
+  height: 15px;
+  border-radius: 2px;
+}
+
+.asia-tour__name {
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.asia-tour__facts {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--color-muted);
+}
+
+.asia-tour__fact {
+  display: flex;
+  gap: 4px;
+}
+
+.asia-tour__fact dd {
+  margin: 0;
+  color: var(--color-text);
+}
+
+@media (max-width: 600px) {
+  .asia-tour {
+    flex-basis: 240px;
+  }
+}

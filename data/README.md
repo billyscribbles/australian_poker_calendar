@@ -1,6 +1,6 @@
 # Australian Poker Schedule — Series Timeline
 
-Source: https://australianpokerschedule.com.au/series-timeline/ (scraped 2026-10-02). Full data: `poker-series-timeline.json` / `.csv`. Melbourne Champs II full tournament schedule: `melbourne-champs-ii-schedule.json`.
+Source: https://australianpokerschedule.com.au/series-timeline/ (scraped 2026-10-02). Full data: `poker-series-timeline.json` / `.csv`. Melbourne Champs II full tournament schedule: `melbourne-champs-ii-schedule.json`. Crown Victorian Poker Championship 2026 full tournament schedule (from Crown's PDF, 2026-10-03): `victorian-poker-championship-2026-schedule.json`. Asian series touching October 2026, from the SoMuchPoker calendar (2026-10-03): `somuchpoker-asia-2026-10.json`, drawn by the home page's Poker Tours in Asia strip.
 
 19 series listed, running 2026-09-30 to 2027-04-24.
 

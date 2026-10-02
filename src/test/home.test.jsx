@@ -1,3 +1,5 @@
+import { existsSync } from 'node:fs'
+import { join } from 'node:path'
 // Contract: the home page sections render their fixtures and the two pieces of
 // behaviour the design specifies — a single-open FAQ accordion and a pulsing
 // LIVE badge — work as described in the handoff README.
@@ -19,7 +21,7 @@ import { calendar } from '../content/calendar.js'
 import { playerNews } from '../content/playerNews.js'
 import { playersOfTheYear } from '../content/playersOfTheYear.js'
 import { promotions } from '../content/promotions.js'
-import { guides } from '../content/guides.js'
+import { asiaTours } from '../content/asiaTours.js'
 import { partners } from '../content/partners.js'
 
 const withRouter = (ui) => render(<MemoryRouter>{ui}</MemoryRouter>)
@@ -188,11 +190,14 @@ describe('home fixtures — shape each section renders', () => {
     })
   })
 
-  it('promotions, guides and partners have what their cards read', () => {
+  it('promotions, Asia tours and partners have what their cards read', () => {
     hasLinks(promotions.items)
-    hasLinks(guides.items)
-    for (const guide of guides.items) {
-      for (const row of guides.rows) expect(guide[row.key], row.key).toBeTruthy()
+    expect(asiaTours.items.length).toBeGreaterThan(0)
+    for (const tour of asiaTours.items) {
+      expect(tour.name && tour.dates && tour.country && tour.logoSrc, tour.name).toBeTruthy()
+      expect(asiaTours.flags[tour.country], tour.country).toBeTruthy()
+      expect(existsSync(join('public', tour.logoSrc)), tour.logoSrc).toBe(true)
+      expect(existsSync(join('public', asiaTours.flags[tour.country])), tour.country).toBe(true)
     }
     expect(partners.items.length).toBeGreaterThan(0)
     for (const partner of partners.items) expect(partner.name).toBeTruthy()
