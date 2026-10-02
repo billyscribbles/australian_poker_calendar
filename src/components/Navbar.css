@@ -68,9 +68,22 @@
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  white-space: nowrap;
   transition:
     border-color var(--transition-fast),
     color var(--transition-fast);
+}
+
+/* Four tabs across a tablet: tighter type so "Poker Calendar" stays on one line. */
+@media (max-width: 900px) {
+  .site-header__tabs {
+    gap: 8px;
+  }
+  .nav-tab {
+    gap: 8px;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+  }
 }
 
 .nav-tab:hover,
@@ -83,10 +96,6 @@
   flex: none;
   width: 20px;
   height: 20px;
-}
-
-.nav-tab__chevron {
-  opacity: 0.7;
 }
 
 @media (max-width: 600px) {
@@ -125,8 +134,5 @@
     height: 52px;
     font-size: 13px;
     letter-spacing: 0.04em;
-  }
-  .nav-tab__chevron {
-    margin-left: auto;
   }
 }

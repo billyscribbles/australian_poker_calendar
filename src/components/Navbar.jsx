@@ -1,15 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import {
-  ChevronDown,
-  Newspaper,
-  CalendarDays,
-  MapPin,
-  Users,
-  BookOpen,
-  Menu,
-  X,
-} from 'lucide-react'
+import { Newspaper, CalendarDays, MapPin, Users, BookOpen, Menu, X } from 'lucide-react'
 import { site } from '../config/site.config.js'
 import Img from './Img.jsx'
 import './Navbar.css'
@@ -103,12 +94,6 @@ export default function Navbar() {
                 <Icon size={20} strokeWidth={1.75} className="nav-tab__icon" aria-hidden="true" />
               )}
               {tab.label}
-              <ChevronDown
-                size={10}
-                strokeWidth={2.5}
-                className="nav-tab__chevron"
-                aria-hidden="true"
-              />
             </Link>
           )
         })}
