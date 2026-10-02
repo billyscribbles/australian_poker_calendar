@@ -126,6 +126,15 @@ function assertOgImage() {
         '1200px wide at roughly 1.91:1 (1200x630), or the card is cropped or refused.',
     )
   }
+  // The head declares og:image:width/height from site.config so the card
+  // renders on the first share; a stale declaration crops it instead.
+  const declared = { width: siteConfig.seo.ogImageWidth, height: siteConfig.seo.ogImageHeight }
+  if (declared.width !== size.width || declared.height !== size.height) {
+    fail(
+      `site.config.js declares seo.ogImageWidth/Height as ${declared.width}x${declared.height} ` +
+        `but ${src} is ${size.width}x${size.height}. Update the config to match the file.`,
+    )
+  }
   // The shipped placeholder is named for what it is, so this can tell "nobody
   // has made a card yet" from "this is the real card" without hashing bytes.
   // Harmless while VITE_SITE_URL is unset or example.com — that is a scaffold

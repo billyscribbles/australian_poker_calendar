@@ -98,12 +98,25 @@ export const site = {
     // fails again if this placeholder is still here when VITE_SITE_URL is a real
     // domain — see assertOgImage in scripts/prerender.mjs.
     ogImage: '/brand/og-image.png',
+    // Its pixel size, declared so Facebook renders the card on the first share
+    // instead of after its crawler has fetched the image. assertOgImage in
+    // scripts/prerender.mjs fails the build if the file disagrees.
+    ogImageWidth: 1200,
+    ogImageHeight: 630,
+    ogImageAlt: 'Australian Poker Calendar — poker tournament schedule, events and news',
     locale: 'en_AU',
   },
 
   integrations: {
     formspreeId: import.meta.env.VITE_FORMSPREE_ID || '',
     gaId: import.meta.env.VITE_GA_ID || '',
+
+    // Site-ownership proofs for Google Search Console and Bing Webmaster
+    // Tools, rendered as meta tags on every page when set. The DNS record is
+    // the better method (it verifies the whole domain, www and apex, in one
+    // go); these are the fallback. See docs/SEO.md.
+    googleSiteVerification: import.meta.env.VITE_GOOGLE_SITE_VERIFICATION || '',
+    bingSiteVerification: import.meta.env.VITE_BING_SITE_VERIFICATION || '',
 
     // Ask before loading analytics, and show a cookie banner to ask with.
     //

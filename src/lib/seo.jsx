@@ -5,7 +5,11 @@ import { site } from '../config/site.config.js'
 // get a machine-readable brand record. Becomes LocalBusiness automatically when
 // a contact address/phone is present.
 const organizationLd = (() => {
-  const sameAs = Object.values(site.social || {}).filter(Boolean)
+  // A bare platform root (https://www.facebook.com/) is a placeholder, not a
+  // profile; listing it as sameAs would tell Google the brand IS Facebook.
+  const sameAs = Object.values(site.social || {}).filter(
+    (url) => url && new URL(url).pathname !== '/',
+  )
   const hasLocation = Boolean(site.contact?.location || site.contact?.phone)
   const schema = {
     '@context': 'https://schema.org',
@@ -54,6 +58,10 @@ export default function SEO({
   const url = `${seo.siteUrl}${path}`
   const blockRobots = noindex || import.meta.env.VITE_NOINDEX === 'true'
   const pageLd = (Array.isArray(jsonLd) ? jsonLd : [jsonLd]).filter(Boolean)
+  // The brand card's size and alt. A page's own `image` has neither, and the
+  // unfurlers measure it themselves.
+  const isBrandImage = rawImage === seo.ogImage
+  const { googleSiteVerification, bingSiteVerification } = site.integrations
 
   return (
     <Helmet>
@@ -66,12 +74,19 @@ export default function SEO({
       <meta property="og:title" content={resolvedTitle} />
       <meta property="og:description" content={resolvedDescription} />
       <meta property="og:image" content={resolvedImage} />
+      {isBrandImage && <meta property="og:image:width" content={String(seo.ogImageWidth)} />}
+      {isBrandImage && <meta property="og:image:height" content={String(seo.ogImageHeight)} />}
+      {isBrandImage && <meta property="og:image:alt" content={seo.ogImageAlt} />}
       <meta property="og:locale" content={seo.locale} />
       <meta property="og:site_name" content={site.brand.name} />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={resolvedTitle} />
       <meta name="twitter:description" content={resolvedDescription} />
       <meta name="twitter:image" content={resolvedImage} />
+      {googleSiteVerification && (
+        <meta name="google-site-verification" content={googleSiteVerification} />
+      )}
+      {bingSiteVerification && <meta name="msvalidate.01" content={bingSiteVerification} />}
       <script type="application/ld+json">{organizationLd}</script>
       {pageLd.map((schema, i) => (
         <script key={i} type="application/ld+json">

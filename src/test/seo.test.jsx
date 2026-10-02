@@ -95,3 +95,43 @@ describe('SEO — social card contract', () => {
     expect(ogImage().content).toBe('https://cdn.example.com/card.png')
   })
 })
+
+describe('SEO — card size and ownership proofs', () => {
+  it('declares the brand card’s size and alt, and no size for a page’s own image', async () => {
+    const { unmount } = renderSEO({ title: 'Home' })
+    await waitFor(() =>
+      expect(document.head.querySelector('meta[property="og:image:width"]')).not.toBeNull(),
+    )
+    expect(document.head.querySelector('meta[property="og:image:width"]').content).toBe(
+      String(site.seo.ogImageWidth),
+    )
+    expect(document.head.querySelector('meta[property="og:image:alt"]').content).toBe(
+      site.seo.ogImageAlt,
+    )
+    unmount()
+    document.head.querySelectorAll('[data-rh]').forEach((el) => el.remove())
+    renderSEO({ title: 'Event', image: '/images/events/card.webp' })
+    await waitFor(() =>
+      expect(document.head.querySelector('meta[property="og:image"]')).not.toBeNull(),
+    )
+    expect(document.head.querySelector('meta[property="og:image:width"]')).toBeNull()
+  })
+
+  it('emits the verification tags only when the env sets them', async () => {
+    renderSEO({ title: 'Home' })
+    await waitFor(() => expect(document.title).toContain('Home'))
+    expect(document.head.querySelector('meta[name="google-site-verification"]')).toBeNull()
+    expect(document.head.querySelector('meta[name="msvalidate.01"]')).toBeNull()
+  })
+
+  it('leaves bare platform roots out of the Organization sameAs', async () => {
+    renderSEO({ title: 'Home' })
+    await waitFor(() =>
+      expect(document.head.querySelector('script[type="application/ld+json"]')).not.toBeNull(),
+    )
+    const org = JSON.parse(
+      document.head.querySelector('script[type="application/ld+json"]').textContent,
+    )
+    for (const url of org.sameAs ?? []) expect(new URL(url).pathname).not.toBe('/')
+  })
+})
