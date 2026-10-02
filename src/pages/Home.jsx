@@ -1,4 +1,5 @@
 import SEO from '../lib/seo.jsx'
+import { websiteLd } from '../lib/structuredData.js'
 import { site } from '../config/site.config.js'
 import EventsBanner from '../components/EventsBanner.jsx'
 import FeaturedNews from '../components/FeaturedNews.jsx'
@@ -17,10 +18,10 @@ import './Home.css'
 export default function Home() {
   return (
     <main className="home">
-      <SEO />
-      {/* The design has no visible page title; the brand name is the document's
-          h1 for crawlers and screen readers without changing the layout. */}
-      <h1 className="sr-only">{site.brand.name}</h1>
+      <SEO jsonLd={websiteLd()} />
+      {/* The design has no visible page title; site.config's homeHeading is the
+          document's h1 for crawlers and screen readers without changing the layout. */}
+      <h1 className="sr-only">{site.seo.homeHeading}</h1>
       <EventsBanner />
       <div className="home__sections container">
         <FeaturedNews />

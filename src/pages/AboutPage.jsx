@@ -7,7 +7,7 @@ import './AboutPage.css'
 export default function AboutPage() {
   return (
     <main>
-      <SEO title="About" path="/about" />
+      <SEO title={about.seo.title} description={about.seo.description} path="/about" />
       <section className="about-hero">
         <div className="container">
           <span className="section-eyebrow">{about.eyebrow}</span>

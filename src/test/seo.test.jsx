@@ -54,6 +54,28 @@ describe('SEO — canonical contract', () => {
   })
 })
 
+describe('SEO — structured data contract', () => {
+  const ldScripts = () =>
+    [...document.head.querySelectorAll('script[type="application/ld+json"]')].map((el) =>
+      JSON.parse(el.textContent),
+    )
+
+  it('always emits the Organization record', async () => {
+    renderSEO({ title: 'Home' })
+    await waitFor(() => expect(ldScripts().length).toBe(1))
+    expect(ldScripts()[0]['@type']).toBe('Organization')
+    expect(ldScripts()[0].name).toBe(site.brand.name)
+  })
+
+  it('emits each page graph passed through jsonLd after the Organization record', async () => {
+    const website = { '@context': 'https://schema.org', '@type': 'WebSite', name: 'x' }
+    const list = { '@context': 'https://schema.org', '@type': 'ItemList', name: 'y' }
+    renderSEO({ title: 'Home', jsonLd: [website, null, list] })
+    await waitFor(() => expect(ldScripts().length).toBe(3))
+    expect(ldScripts().map((s) => s['@type'])).toEqual(['Organization', 'WebSite', 'ItemList'])
+  })
+})
+
 describe('SEO — social card contract', () => {
   const ogImage = () => document.head.querySelector('meta[property="og:image"]')
 

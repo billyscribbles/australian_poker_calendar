@@ -71,10 +71,16 @@ export const site = {
   },
 
   seo: {
-    defaultTitle: 'Australian Poker Calendar — Poker News, Events & Players',
+    defaultTitle: 'Australian Poker Calendar — Poker Schedule, Events & News',
     titleTemplate: '%s · Australian Poker Calendar',
     description:
-      'Live tournament coverage, the full Australian and Asia-Pacific poker calendar, player news and rankings, promotions and country guides.',
+      "Australia's poker calendar: the full poker tournament schedule with every series and event, dates, venues and buy-ins, plus poker news, player rankings and promotions.",
+    // The home document's h1. The design has no visible page title, so it is
+    // read by crawlers and screen readers only; it names the site and what the
+    // site is for.
+    homeHeading: 'Australian Poker Calendar: Poker Tournament Schedule, Events & News',
+    // Other names the site goes by, for the WebSite record's alternateName.
+    alternateNames: ['APC'],
     siteUrl: import.meta.env.VITE_SITE_URL || 'https://example.com',
     // A real 1200x630 PNG. The build FAILS on an SVG or a wrong-shaped file, and
     // fails again if this placeholder is still here when VITE_SITE_URL is a real

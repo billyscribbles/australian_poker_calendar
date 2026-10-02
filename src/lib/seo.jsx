@@ -32,7 +32,18 @@ const organizationLd = (() => {
 //
 // `noindex` (per page, e.g. the 404) or VITE_NOINDEX=true (whole build, e.g.
 // staging — see docs/ENVIRONMENTS.md) emits <meta name="robots" noindex>.
-export default function SEO({ title, description, image, path = '', noindex = false }) {
+//
+// `jsonLd` is the page's own structured data (one object or an array; see
+// lib/structuredData.js), emitted alongside the Organization record every
+// page carries.
+export default function SEO({
+  title,
+  description,
+  image,
+  path = '',
+  noindex = false,
+  jsonLd = null,
+}) {
   const seo = site.seo
   const resolvedTitle = title ? seo.titleTemplate.replace('%s', title) : seo.defaultTitle
   const resolvedDescription = description || seo.description
@@ -42,6 +53,7 @@ export default function SEO({ title, description, image, path = '', noindex = fa
   const resolvedImage = /^https?:/i.test(rawImage) ? rawImage : `${seo.siteUrl}${rawImage}`
   const url = `${seo.siteUrl}${path}`
   const blockRobots = noindex || import.meta.env.VITE_NOINDEX === 'true'
+  const pageLd = (Array.isArray(jsonLd) ? jsonLd : [jsonLd]).filter(Boolean)
 
   return (
     <Helmet>
@@ -61,6 +73,11 @@ export default function SEO({ title, description, image, path = '', noindex = fa
       <meta name="twitter:description" content={resolvedDescription} />
       <meta name="twitter:image" content={resolvedImage} />
       <script type="application/ld+json">{organizationLd}</script>
+      {pageLd.map((schema, i) => (
+        <script key={i} type="application/ld+json">
+          {JSON.stringify(schema)}
+        </script>
+      ))}
     </Helmet>
   )
 }

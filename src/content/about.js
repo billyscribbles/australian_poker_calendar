@@ -2,6 +2,11 @@
 // this file holds the body and the "how the calendar is compiled" notes.
 
 export const about = {
+  seo: {
+    title: 'About the Australian Poker Calendar',
+    description:
+      'Who compiles the Australian Poker Calendar, how every poker tournament series, schedule and event on it is sourced and checked, and why you can trust it.',
+  },
   eyebrow: 'About',
   intro:
     'Australian Poker Calendar covers live poker in Australia and the Asia-Pacific: the series, the venues, the players and the stories from the felt.',
