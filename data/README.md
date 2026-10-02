@@ -1,6 +1,6 @@
 # Australian Poker Schedule — Series Timeline
 
-Source: https://australianpokerschedule.com.au/series-timeline/ (scraped 2026-10-02). Full data: `poker-series-timeline.json` / `.csv`. Melbourne Champs II full tournament schedule: `melbourne-champs-ii-schedule.json`. Crown Victorian Poker Championship 2026 full tournament schedule (from Crown's PDF, 2026-10-03): `victorian-poker-championship-2026-schedule.json`. APLPT Queensland 2026 (Brisbane, Broncos Club) full tournament schedule (from APL's series schedule PDF, 2026-10-03): `aplpt-brisbane-2026-schedule.json`. Asian series touching October 2026, from the SoMuchPoker calendar (2026-10-03): `somuchpoker-asia-2026-10.json`, drawn by the home page's Poker Tours in Asia strip. PlayLive Melbourne Summer Championship 2026 full tournament schedule (from PlayLive's poster PDF, 2026-10-03): `playlive-summer-championship-2026-schedule.json`; PlayLive's series are not on the Australian Poker Schedule timeline, so that series has no record below. NPL Super Series 2026 Main Event flights (Club Willoughby), from NPL's own Super Series page on 2026-10-03: `npl-super-series-2026-schedule.json`; NPL's series are not on the timeline either, and are recorded below from npl.com.au.
+Source: https://australianpokerschedule.com.au/series-timeline/ (scraped 2026-10-02). Full data: `poker-series-timeline.json` / `.csv`. Melbourne Champs II full tournament schedule: `melbourne-champs-ii-schedule.json`. Crown Victorian Poker Championship 2026 full tournament schedule (from Crown's PDF, 2026-10-03): `victorian-poker-championship-2026-schedule.json`. APLPT Queensland 2026 (Brisbane, Broncos Club) full tournament schedule (from APL's series schedule PDF, 2026-10-03): `aplpt-brisbane-2026-schedule.json`. Asian series touching October 2026, from the SoMuchPoker calendar (2026-10-03): `somuchpoker-asia-2026-10.json`, drawn by the home page's Poker Tours in Asia strip. PlayLive Melbourne Summer Championship 2026 full tournament schedule (from PlayLive's poster PDF, 2026-10-03): `playlive-summer-championship-2026-schedule.json`; PlayLive's series are not on the Australian Poker Schedule timeline, so that series has no record below. PlayLive Melbourne Millions 2027 full tournament schedule (from PlayLive's schedule PDF, 2026-10-03): `playlive-melbourne-millions-2027-schedule.json`. NPL Super Series 2026 Main Event flights (Club Willoughby), from NPL's own Super Series page on 2026-10-03: `npl-super-series-2026-schedule.json`; NPL's series are not on the timeline either, and are recorded below from npl.com.au.
 
 19 series listed, running 2026-09-30 to 2027-04-24.
 
@@ -151,6 +151,20 @@ Not on the Australian Poker Schedule timeline; taken from PlayLive's own series 
 - Guarantee: $3,000,000 across the series; $500,000 Main Event ($1,500), $1,000,000 Melbourne Millions Main Event ($2,500)
 - Schedule: `data/playlive-summer-championship-2026-schedule.json`, transcribed from PlayLive's two-page Summer Schedule poster PDF on 2026-10-03 (the page is `src/content/eventPlayLiveSummerChampionship2026.js`)
 - Promo art: `public/images/promos/playlive-summer-championship.webp` (the calendar banner, which links to the series page on this site)
+
+### PlayLive Melbourne – Melbourne Millions 2027 (VIC)
+
+Not on the Australian Poker Schedule timeline; taken from PlayLive's own series page and schedule PDF.
+
+- URL: https://playlive.melbourne/#series
+- Schedule PDF: https://playlive.melbourne/series/melbourne-millions/schedule.pdf
+- Dates: 2027-01-20 to 2027-02-09 (21 days; Series 1 of PlayLive's 2027 season)
+- Tour / brand: PlayLive Melbourne
+- Organiser: PlayLive Melbourne · https://playlive.melbourne/
+- Venue: PlayLive Melbourne, 129 York St, South Melbourne VIC 3205, Australia
+- Guarantee: over $5,000,000 across the series; $1,000,000 Main Event ($2,500), $750,000 Melbourne Poker Open ($1,500), $500,000 Opening Event ($600), $500,000 25K Super Highroller ($26,000), $500,000 10K Highroller ($10,500), $500,000 Mini Main Event ($1,150)
+- Schedule: `data/playlive-melbourne-millions-2027-schedule.json`, transcribed from the two-page schedule PDF on 2026-10-03 (the page is `src/content/eventPlayLiveMelbourneMillions2027.js`)
+- Key art: `public/images/events/playlive-melbourne-millions-2027.webp`, PlayLive's portrait poster cropped to 4:5
 
 ### NPL – Super Series 2026 – Club Willoughby (NSW)
 

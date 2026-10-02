@@ -1,4 +1,4 @@
-// Every series on the calendar has a page at its href, /events/<slug>. Six are
+// Every series on the calendar has a page at its href, /events/<slug>. Seven are
 // hand-built posters (one content file each, below); the rest are derived from
 // the series' row in content/festivals.js until the operator publishes a
 // schedule. src/routes.js emits one route per festival and passes the path;
@@ -9,6 +9,7 @@ import { event as victorianPokerChampionship2026 } from './eventVictorianPokerCh
 import { event as sydneyShowdown2026 } from './eventSydneyShowdown2026.js'
 import { event as aplptBrisbane2026 } from './eventAplptBrisbane2026.js'
 import { event as playLiveSummerChampionship2026 } from './eventPlayLiveSummerChampionship2026.js'
+import { event as playLiveMelbourneMillions2027 } from './eventPlayLiveMelbourneMillions2027.js'
 import { event as nplSuperSeries2026 } from './eventNplSuperSeries2026.js'
 import { festivals, STATUS_LABELS } from './festivals.js'
 import { formatRangeWithYear } from '../lib/calendar.js'
@@ -19,6 +20,7 @@ export const eventPages = {
   victorianPokerChampionship2026,
   sydneyShowdown2026,
   playLiveSummerChampionship2026,
+  playLiveMelbourneMillions2027,
   aplptBrisbane2026,
   nplSuperSeries2026,
 }

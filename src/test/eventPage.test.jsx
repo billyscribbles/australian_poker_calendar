@@ -12,6 +12,8 @@ import EventPage from '../pages/EventPage.jsx'
 import { eventPages, eventFor, schedulePending } from '../content/eventPages.js'
 import { festivals } from '../content/festivals.js'
 import { ROUTES } from '../routes.js'
+import { existsSync } from 'node:fs'
+import { join } from 'node:path'
 
 expect.extend(toHaveNoViolations)
 
@@ -130,6 +132,14 @@ describeSeriesPage({
 })
 
 describeSeriesPage({
+  key: 'playLiveMelbourneMillions2027',
+  path: '/events/playlive-melbourne-millions-2027',
+  rows: 126,
+  days: 21,
+  sample: ['Main Event – Day 1A', '25K Super Highroller – Day 1', 'Berserker'],
+})
+
+describeSeriesPage({
   key: 'aplptBrisbane2026',
   path: '/events/aplpt-brisbane',
   rows: 67,
@@ -201,6 +211,38 @@ describe('EventPage — PlayLive Summer Championship specifics', () => {
         expect(row.buyIn, row.name).toMatch(/^\$[\d,]+$/)
       }
     }
+  })
+})
+
+describe('EventPage — PlayLive Melbourne Millions specifics', () => {
+  const event = eventPages.playLiveMelbourneMillions2027
+
+  it('features every Main Event day and nothing else', () => {
+    for (const row of event.schedule) {
+      expect(row.featured, `${row.date} ${row.time} ${row.name}`).toBe(
+        /^Main Event – Day/.test(row.name),
+      )
+    }
+    expect(event.schedule.filter((r) => r.featured)).toHaveLength(15)
+  })
+
+  it('says qualifiers only on every unpriced Day 2+ row and prices every other row', () => {
+    for (const row of event.schedule) {
+      const later = /Day [2-5]\b/.test(row.name) && !/Day 1/.test(row.name)
+      if (row.split === 'Qualifiers only') {
+        expect(later, row.name).toBe(true)
+        expect(row.buyIn).toBe('')
+        expect(row.regoTime, row.name).toBe('')
+      } else {
+        expect(row.buyIn, row.name).toMatch(/^\$[\d,]+$/)
+        expect(row.regoTime, row.name).toMatch(/^(\d{1,2}:\d{2} [AP]M|Day 2)$/)
+      }
+    }
+  })
+
+  it('carries the poster as the hero key art', () => {
+    expect(event.image.src).toBe('/images/events/playlive-melbourne-millions-2027.webp')
+    expect(existsSync(join(process.cwd(), 'public', event.image.src))).toBe(true)
   })
 })
 
