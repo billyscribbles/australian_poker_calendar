@@ -13,8 +13,8 @@ export const faq = {
   /** @type {FaqItem[]} */
   items: [
     {
-      q: 'Does Australian Poker Calendar cover global news, or does it only focus on news from the Asian region?',
-      a: 'We cover poker news from around the world, with a particular emphasis on the Asia-Pacific scene: live tournament coverage, player interviews and local guides.',
+      q: 'Does Australian Poker Calendar cover global news, or does it only focus on Australia?',
+      a: 'We focus on Australia. Our coverage is the Australian live scene: tournament series, poker rooms, player news and venue guides. Overseas events appear only when an Australian player is involved or a tour brings a stop here.',
     },
     {
       q: 'Where do the calendar dates come from, and how often are they updated?',
@@ -34,7 +34,7 @@ export const faq = {
     },
     {
       q: 'Is Australian Poker Calendar affiliated with a casino or tour operator?',
-      a: 'No. We are an independent publisher. Listings are free for operators and our coverage is not tied to any one venue or tour.',
+      a: 'No. We are an independent publisher. Calendar listings are a paid placement for operators, and our editorial coverage is not tied to any one venue or tour.',
     },
     {
       q: 'How can I advertise with you or have my event covered?',
