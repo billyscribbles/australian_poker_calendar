@@ -61,7 +61,11 @@ function webfonts() {
           attrs: { rel: 'stylesheet', href, media: 'print', 'data-font-swap': '' },
           injectTo: 'head',
         },
-        { tag: 'noscript', children: [{ tag: 'link', attrs: { rel: 'stylesheet', href } }], injectTo: 'head' },
+        {
+          tag: 'noscript',
+          children: [{ tag: 'link', attrs: { rel: 'stylesheet', href } }],
+          injectTo: 'head',
+        },
         { tag: 'script', attrs: { src: '/font-swap.js', defer: '' }, injectTo: 'head' },
       ]
     },
