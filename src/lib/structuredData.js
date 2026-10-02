@@ -127,3 +127,66 @@ function festivalAsEvent(festival) {
     statusCode: festival.status,
   }
 }
+
+/**
+ * The trail above a page, for Google's breadcrumb rich result. `items` are
+ * `{ name, path }` from the home page down to the page itself; the last one
+ * is the page and carries no link.
+ *
+ * @param {{ name: string, path: string }[]} items
+ */
+export function breadcrumbLd(items) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      ...(index < items.length - 1 && { item: absolute(item.path) }),
+    })),
+  }
+}
+
+/**
+ * A tour operator as a schema.org Organization: the name people search for,
+ * its own site and its mark.
+ *
+ * @param {import('../content/tourPages.js').TourPage} tour
+ */
+export function tourLd(tour) {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: tour.name,
+    url: tour.website,
+    sameAs: [absolute(tour.path)],
+  }
+  if (tour.label && tour.label !== tour.name) schema.alternateName = tour.label
+  if (tour.logoSrc) schema.logo = absolute(tour.logoSrc)
+  return schema
+}
+
+/**
+ * A set of series as an ItemList of Events — a city's, or a tour's — so a
+ * crawler reads every stop from the page that lists them.
+ *
+ * @param {import('../content/festivals.js').Festival[]} festivals
+ * @param {{ path: string, seo: { title: string, description: string } }} page
+ */
+export function seriesListLd(festivals, page) {
+  const sorted = [...festivals].sort((a, b) => a.start.localeCompare(b.start))
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: page.seo.title,
+    description: page.seo.description,
+    url: absolute(page.path),
+    numberOfItems: sorted.length,
+    itemListElement: sorted.map((festival, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      item: eventLd(festivalAsEvent(festival), false),
+    })),
+  }
+}

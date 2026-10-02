@@ -15,6 +15,8 @@
 
 import { preload } from './lazyWithRetry.js'
 import { festivals, YEARS } from './content/festivals.js'
+import { cities } from './content/cities.js'
+import { tourPages, toursPath } from './content/tourPages.js'
 
 /** The calendar document for `year`; CalendarPage's year switcher links these. */
 export const calendarPath = (year) => `/poker-calendar/${year}`
@@ -53,6 +55,27 @@ export const ROUTES = [
     load: () => import('./pages/WhereToPlayPage.jsx'),
     module: 'src/pages/WhereToPlayPage.jsx',
   },
+  // One page per city the series are dealt in (content/cities.js): what
+  // "poker in Sydney" should land on.
+  ...cities.map((city) => ({
+    path: city.path,
+    load: () => import('./pages/CityPage.jsx'),
+    module: 'src/pages/CityPage.jsx',
+    props: { path: city.path },
+  })),
+  // The operators: an index and one page per tour at the href
+  // calendarPage.tours already carries (content/tourPages.js).
+  {
+    path: toursPath,
+    load: () => import('./pages/ToursPage.jsx'),
+    module: 'src/pages/ToursPage.jsx',
+  },
+  ...tourPages.map((tour) => ({
+    path: tour.path,
+    load: () => import('./pages/TourPage.jsx'),
+    module: 'src/pages/TourPage.jsx',
+    props: { path: tour.path },
+  })),
   // Holding page until the first series' results are in. noindex while it has
   // no standings; drop the flag when the rankings table lands.
   {

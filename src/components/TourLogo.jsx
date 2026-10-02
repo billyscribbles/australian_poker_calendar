@@ -21,8 +21,9 @@ const tourByCode = new Map(calendarPage.tours.map((tour) => [tour.code, tour]))
  * @param {string} props.code
  * @param {'icon' | 'wordmark'} props.variant
  * @param {number} [props.size]  icon diameter in px (default 44); wordmark height (default 56)
+ * @param {boolean} [props.priority]  true when the mark is the page's LCP image (a hero wordmark)
  */
-export default function TourLogo({ code, variant, size }) {
+export default function TourLogo({ code, variant, size, priority = false }) {
   const tour = tourByCode.get(code)
   const isIcon = variant === 'icon'
   const px = size ?? (isIcon ? 44 : 56)
@@ -32,7 +33,14 @@ export default function TourLogo({ code, variant, size }) {
   if (src) {
     return (
       <span className={className} style={style} aria-hidden="true">
-        <Img src={src} alt="" width={isIcon ? px : px * 3} height={px} className="tour-logo__img" />
+        <Img
+          src={src}
+          alt=""
+          width={isIcon ? px : px * 3}
+          height={px}
+          priority={priority}
+          className="tour-logo__img"
+        />
       </span>
     )
   }

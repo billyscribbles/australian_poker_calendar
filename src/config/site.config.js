@@ -40,20 +40,26 @@ export const site = {
       button: 'Subscribe',
     },
     followHeading: 'Follow Us',
+    // Every link here must have a route in src/routes.js: a footer link to a
+    // 404 is on every page, so it is the first broken link a crawler finds.
+    // The "Poker by city" and "Poker tours" columns are generated in
+    // Footer.jsx from content/cities.js and content/tourPages.js.
     columns: [
       {
         title: 'We have everything you need!',
         links: [
-          { label: 'Poker Rules', to: '/how-to-play' },
-          { label: 'Poker Calendar', to: '/poker-calendar/2026' },
+          { label: 'Poker Calendar 2026', to: '/poker-calendar/2026' },
+          { label: 'Poker Calendar 2027', to: '/poker-calendar/2027' },
+          { label: 'Poker Tours', to: '/tours' },
+          { label: 'Where to Play', to: '/where-to-play' },
           { label: 'Poker Players', to: '/players' },
-          { label: 'Poker Tours in Asia', to: '/guides' },
           { label: 'Why Trust Us', to: '/about' },
-          { label: 'Responsible Gambling', to: '/responsible-gambling' },
-          { label: 'RSS Feed', to: '/rss' },
+          { label: 'Contact', to: '/contact' },
         ],
       },
     ],
+    cityColumn: 'Poker by city',
+    tourColumn: 'Poker tours',
     copyright: 'Copyright © 2026 All Rights Reserved',
     legal: [
       { label: 'Privacy Policy', to: '/privacy' },

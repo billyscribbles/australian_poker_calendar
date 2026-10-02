@@ -1,73 +1,32 @@
-import { MapPin, ExternalLink } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import SEO from '../lib/seo.jsx'
+import { breadcrumbLd } from '../lib/structuredData.js'
 import { whereToPlay } from '../content/whereToPlay.js'
-import TourLogo from '../components/TourLogo.jsx'
+import { cities, cityPage } from '../content/cities.js'
+import VenueCard from '../components/VenueCard.jsx'
 import './WhereToPlayPage.css'
 
-/** @typedef {import('../content/whereToPlay.js').VenueCard} VenueCard */
-
-/** The hostname a link goes to, as the visible text beside "Visit website". */
-function host(url) {
-  try {
-    return new URL(url).hostname.replace(/^www\./, '')
-  } catch {
-    return url
-  }
-}
-
-/** @param {{ venue: VenueCard }} props */
-function VenueCard({ venue }) {
-  const { operatorsLabel, visitLabel } = whereToPlay
-  return (
-    <li className="venue-card glow-card">
-      <div className="venue-card__marks" aria-hidden="true">
-        {venue.operators.map((operator) => (
-          <TourLogo key={operator.code} code={operator.code} variant="icon" size={48} />
-        ))}
-      </div>
-      <div className="venue-card__body">
-        <h3 className="venue-card__name">{venue.name}</h3>
-        <address className="venue-card__address">
-          <MapPin size={14} strokeWidth={1.75} aria-hidden="true" />
-          {venue.address}
-        </address>
-        <p className="venue-card__operators">
-          <span className="venue-card__operators-label">{operatorsLabel}</span>{' '}
-          {venue.operators.map((operator, i) => (
-            <span key={operator.code}>
-              {i > 0 && ', '}
-              <a href={operator.website} target="_blank" rel="noopener noreferrer">
-                {operator.name}
-              </a>
-            </span>
-          ))}
-        </p>
-        <a
-          className="venue-card__link"
-          href={venue.website}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`${visitLabel}: ${venue.name}`}
-        >
-          {visitLabel}
-          <span className="venue-card__host">{host(venue.website)}</span>
-          <ExternalLink size={14} strokeWidth={1.75} aria-hidden="true" />
-        </a>
-      </div>
-    </li>
-  )
-}
+const PATH = '/where-to-play'
 
 /**
- * Where to play: one section per state, a card per venue. Everything comes
- * from content/whereToPlay.js; the operator marks and colours from
- * calendarPage.tours and tourBrands.js through TourLogo.
+ * Where to play: one section per state, a card per venue, and the way in to
+ * each city's own page. Everything comes from content/whereToPlay.js and
+ * content/cities.js; the operator marks and colours from calendarPage.tours
+ * and tourBrands.js through TourLogo.
  */
 export default function WhereToPlayPage() {
   const { seo, eyebrow, title, intro, jumpLabel, countLabel, states } = whereToPlay
   return (
     <main>
-      <SEO title={seo.title} description={seo.description} path="/where-to-play" />
+      <SEO
+        title={seo.title}
+        description={seo.description}
+        path={PATH}
+        jsonLd={breadcrumbLd([
+          { name: 'Home', path: '/' },
+          { name: title, path: PATH },
+        ])}
+      />
       <section className="venues-hero">
         <div className="container">
           <span className="section-eyebrow">{eyebrow}</span>
@@ -79,6 +38,13 @@ export default function WhereToPlayPage() {
                 {state.name}
                 <span className="venues-jump__count">{state.venues.length}</span>
               </a>
+            ))}
+          </nav>
+          <nav className="venues-jump venues-jump--cities" aria-label={cityPage.otherHeading}>
+            {cities.map((city) => (
+              <Link key={city.slug} className="venues-jump__link" to={city.path}>
+                {city.heading}
+              </Link>
             ))}
           </nav>
         </div>

@@ -1,0 +1,219 @@
+/* The city, tour and tours-index pages: a hero with the trail, eyebrow,
+ * title and intro, then plain sections — series lists, venue cards, chips
+ * through to the related pages. The tour hero sits on the operator's own
+ * colours (--tour-primary / --tour-secondary from content/tourBrands.js). */
+
+.hub-page {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  padding-bottom: 64px;
+}
+
+.hub-hero {
+  --tour-fill: var(--tour-primary, var(--color-accent));
+  --tour-glow: var(--tour-secondary, var(--tour-fill));
+  padding: 56px 0 44px;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.hub-hero--tour {
+  border-bottom-color: color-mix(in srgb, var(--tour-fill) 42%, var(--color-border));
+  background:
+    radial-gradient(
+      80% 140% at 100% 0%,
+      color-mix(in srgb, var(--tour-glow) 30%, transparent) 0%,
+      transparent 60%
+    ),
+    linear-gradient(
+      100deg,
+      var(--color-bg-inset) 0%,
+      color-mix(in srgb, var(--tour-fill) 24%, var(--color-bg-inset)) 100%
+    );
+}
+
+.hub-hero__mark {
+  margin-bottom: 20px;
+}
+
+.hub-hero__mark .tour-logo--wordmark .tour-logo__img {
+  object-position: left center;
+}
+
+.hub-hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 5.5vw, 72px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+  color: var(--color-text);
+  margin: 0 0 20px;
+  text-wrap: balance;
+  font-optical-sizing: auto;
+}
+
+.hub-hero__intro {
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--color-muted);
+  max-width: 720px;
+  margin: 0;
+  text-wrap: pretty;
+}
+
+.hub-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.hub-hero__action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 20px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-card);
+  color: var(--color-text);
+  font-size: 14px;
+  font-weight: 600;
+  transition:
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.hub-hero__action:hover,
+.hub-hero__action:focus-visible {
+  border-color: var(--color-accent);
+  color: var(--color-champagne);
+}
+
+.hub-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  /* A flex child with auto margins (.container) shrinks to its content;
+   * this keeps every section the full container width. */
+  width: 100%;
+}
+
+.hub-empty {
+  margin: 0;
+  padding: 20px 24px;
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-muted);
+  line-height: 1.6;
+}
+
+/* Chips: the operators in a city, the cities a tour visits, the other pages. */
+.hub-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hub-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 6px 16px 6px 6px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-card);
+  color: var(--color-text);
+  font-size: 14px;
+  font-weight: 600;
+  transition:
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.hub-chip--plain {
+  padding-left: 16px;
+}
+
+.hub-chip:hover,
+.hub-chip:focus-visible {
+  border-color: var(--color-accent);
+  color: var(--color-champagne);
+}
+
+/* The tours index: one card per operator. */
+.tour-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tour-card {
+  --tour-fill: var(--tour-primary, var(--color-accent));
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 22px;
+  color: var(--color-text);
+}
+
+.tour-card__mark {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 64px;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--tour-fill) 18%, var(--color-bg-inset));
+}
+
+.tour-card__mark .tour-logo--wordmark .tour-logo__img {
+  object-position: left center;
+}
+
+.tour-card__name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+.tour-card__meta {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-muted);
+}
+
+@media (max-width: 1024px) {
+  .tour-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .hub-page {
+    gap: 36px;
+  }
+  .hub-hero {
+    padding: 36px 0 32px;
+  }
+}
+
+@media (max-width: 600px) {
+  .tour-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}

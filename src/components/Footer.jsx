@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom'
 import { Youtube, Facebook, Instagram, Twitter } from 'lucide-react'
 import { site } from '../config/site.config.js'
 import { consent } from '../content/consent.js'
+import { cities } from '../content/cities.js'
+import { tourPages } from '../content/tourPages.js'
 import { openConsent } from '../lib/consent.js'
 import Img from './Img.jsx'
 import VenueCta from './VenueCta.jsx'
@@ -17,6 +19,19 @@ const SOCIALS = [
 
 export default function Footer() {
   const { brand, footer, social, contact } = site
+  // The config's own columns, then one of city pages and one of tour pages,
+  // generated so a new city or operator is linked from every page at once.
+  const columns = [
+    ...footer.columns,
+    {
+      title: footer.cityColumn,
+      links: cities.map((city) => ({ label: city.heading, to: city.path })),
+    },
+    {
+      title: footer.tourColumn,
+      links: tourPages.map((tour) => ({ label: tour.name, to: tour.path })),
+    },
+  ]
 
   return (
     <footer className="footer">
@@ -74,7 +89,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {footer.columns.map((col) => (
+        {columns.map((col) => (
           <div key={col.title}>
             <h2 className="footer__col-title">{col.title}</h2>
             <ul className="footer__links">
@@ -86,20 +101,22 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-            <div className="footer__contact">
-              {contact.phone && (
-                // A real tel: link. The href strips spacing so the dialler gets
-                // a clean number while the label keeps its formatting.
-                <a href={`tel:${contact.phone.replace(/[^\d+]/g, '')}`} className="footer__email">
-                  {contact.phone}
-                </a>
-              )}
-              {contact.email && (
-                <a href={`mailto:${contact.email}`} className="footer__email">
-                  {contact.email}
-                </a>
-              )}
-            </div>
+            {col === footer.columns[0] && (
+              <div className="footer__contact">
+                {contact.phone && (
+                  // A real tel: link. The href strips spacing so the dialler gets
+                  // a clean number while the label keeps its formatting.
+                  <a href={`tel:${contact.phone.replace(/[^\d+]/g, '')}`} className="footer__email">
+                    {contact.phone}
+                  </a>
+                )}
+                {contact.email && (
+                  <a href={`mailto:${contact.email}`} className="footer__email">
+                    {contact.email}
+                  </a>
+                )}
+              </div>
+            )}
           </div>
         ))}
       </div>

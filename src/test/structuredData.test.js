@@ -90,3 +90,36 @@ describe('eventListLd', () => {
     }
   })
 })
+
+describe('breadcrumbLd', () => {
+  it('numbers the trail from home and leaves the page itself unlinked', async () => {
+    const { breadcrumbLd } = await import('../lib/structuredData.js')
+    const ld = breadcrumbLd([
+      { name: 'Home', path: '/' },
+      { name: 'Poker in Sydney', path: '/poker/sydney' },
+    ])
+    expect(ld['@type']).toBe('BreadcrumbList')
+    expect(ld.itemListElement).toEqual([
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.seo.siteUrl}/` },
+      { '@type': 'ListItem', position: 2, name: 'Poker in Sydney' },
+    ])
+  })
+})
+
+describe('tourLd and seriesListLd', () => {
+  it('describes an operator and lists its series as Events', async () => {
+    const { tourLd, seriesListLd } = await import('../lib/structuredData.js')
+    const { tourFor } = await import('../content/tourPages.js')
+    const apl = tourFor('/tours/apl')
+    const org = tourLd(apl)
+    expect(org['@type']).toBe('Organization')
+    expect(org.name).toBe('APL')
+    expect(org.url).toBe(apl.website)
+    expect(org.logo).toMatch(/^https?:\/\/.+\.webp$/)
+    const list = seriesListLd(apl.series, apl)
+    expect(list['@type']).toBe('ItemList')
+    expect(list.url).toBe(`${site.seo.siteUrl}/tours/apl`)
+    expect(list.numberOfItems).toBe(apl.series.length)
+    expect(list.itemListElement.every((li) => li.item['@type'] === 'Event')).toBe(true)
+  })
+})
