@@ -24,7 +24,7 @@
  * @property {string} href
  * @property {string} source  where the row was taken from: the Australian Poker Schedule
  *                            event page, or the operator's own series page when the
- *                            series is not listed there (PlayLive Melbourne)
+ *                            series is not listed there (PlayLive Melbourne, NPL)
  * @property {string} website the operator's own page for the series
  */
 
@@ -41,6 +41,15 @@ const rows = [
     'South Melbourne, PlayLive Melbourne',
     'https://playlive.melbourne/#series',
     'https://playlive.melbourne/',
+  ],
+  [
+    'NPL',
+    'NPL Sydney Poker Open September 2026',
+    '2026-09-17',
+    '2026-09-20',
+    'Sydney, Bexley RSL',
+    'https://www.npl.com.au/SydneyPokerOpen',
+    'https://www.npl.com.au/SydneyPokerOpen',
   ],
   [
     'APT',
@@ -113,6 +122,15 @@ const rows = [
     'Albury, SS&A Club',
     'https://australianpokerschedule.com.au/event/aplpt-albury-ssa-club-nsw-1/',
     'https://playapl.com/aplpt',
+  ],
+  [
+    'NPL',
+    'NPL Super Series 2026',
+    '2026-11-19',
+    '2026-11-22',
+    'Sydney, Club Willoughby',
+    'https://www.npl.com.au/SuperSeries',
+    'https://www.npl.com.au/SuperSeries',
   ],
   [
     'PLAYLIVE',
@@ -238,6 +256,22 @@ export const STATUS_LABELS = {
   postponed: 'Postponed',
   moved: 'Moved',
 }
+
+/**
+ * Every year a series on the calendar touches, ascending. src/routes.js emits
+ * one calendar document per entry and CalendarPage links between them, so a
+ * new season's rows put its year on the calendar by themselves.
+ * @type {number[]}
+ */
+export const YEARS = [
+  ...new Set(
+    rows.flatMap(([, , start, end]) => {
+      const years = []
+      for (let y = Number(start.slice(0, 4)); y <= Number(end.slice(0, 4)); y++) years.push(y)
+      return years
+    }),
+  ),
+].sort()
 
 /** @type {Festival[]} */
 export const festivals = rows.map(([tour, name, start, end, place, source, website, status]) => ({

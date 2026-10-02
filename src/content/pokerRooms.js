@@ -27,6 +27,7 @@ const names = {
   CROWN: 'Crown Poker Melbourne',
   AURUM: 'Aurum Poker Grand',
   PLAYLIVE: 'PlayLive Melbourne',
+  NPL: 'National Poker League',
 }
 
 // Rooms whose strip tile differs from the calendar's mark. Crown's shipped

@@ -91,6 +91,17 @@ export const tourBrands = {
     source:
       'https://playlive.melbourne/ — theme tokens (--color-accent), series cards, logo-light.png',
   },
+  // National Poker League: the navy (#0D387C) and red (#CE2B2E) of the round
+  // NPL badge, white lettering. Their site's chrome is a darker red (#8E0000)
+  // and a blue (#153E80) from the same family. The badge is a solid disc, so
+  // the circle gets a white backing and the disc keeps its own colours.
+  NPL: {
+    primary: '#0D387C',
+    secondary: '#CE2B2E',
+    logo: 'light',
+    iconBg: '#FFFFFF',
+    source: 'https://www.npl.com.au/ — NPL_2D_Logo_500.png, custom.css and unify-globals.css',
+  },
 }
 
 /**

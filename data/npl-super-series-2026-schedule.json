@@ -1,0 +1,84 @@
+{
+  "series": "NPL Super Series 2026",
+  "source_url": "https://www.npl.com.au/SuperSeries",
+  "source_document": "NPL Super Series page, Next Event Schedule table, and the Main Event poster NPL_Main_Event_2026_Nov_1500px_v2.jpg",
+  "transcribed_from_poster": false,
+  "transcribed_on": "2026-10-03",
+  "organiser": "National Poker League (NPL)",
+  "venue": "Club Willoughby, 26 Crabbes Ave, North Willoughby NSW 2068",
+  "dates": "2026-11-19 to 2026-11-22",
+  "headline_stats": {
+    "main_event_guarantee": "$300,000",
+    "first_prize_guarantee": "$100,000",
+    "entry": "$1,150 ($1,000 + $150)",
+    "re_entries": 2
+  },
+  "notes": [
+    "NPL's table lists every flight as \"Main Event - Day 1\"; they are recorded here as Flight 1, 2 and 3 in date order. Day 2 is qualifiers only (entry shown as N/A).",
+    "Times are TBC on NPL's page; every event is dealer dealt.",
+    "The poster prints November 18-22 while the schedule table starts on the 19th; side events are to be announced. Confirm with NPL.",
+    "NPL Credits (1 credit = $1) can be used for any Super Series event except Day 2 of the Main Event."
+  ],
+  "events": [
+    {
+      "date": "2026-11-19",
+      "day": "Thursday",
+      "time": "TBC",
+      "event": "Main Event – Flight 1",
+      "listed_as": "Main Event - Day 1",
+      "guarantee": "$300,000 GTD",
+      "guarantee_amount": 300000,
+      "buy_in": 1150,
+      "entry": 1000,
+      "fee": 150,
+      "re_entries": 2,
+      "dealers": true,
+      "featured": true
+    },
+    {
+      "date": "2026-11-20",
+      "day": "Friday",
+      "time": "TBC",
+      "event": "Main Event – Flight 2",
+      "listed_as": "Main Event - Day 1",
+      "guarantee": "$300,000 GTD",
+      "guarantee_amount": 300000,
+      "buy_in": 1150,
+      "entry": 1000,
+      "fee": 150,
+      "re_entries": 2,
+      "dealers": true,
+      "featured": true
+    },
+    {
+      "date": "2026-11-21",
+      "day": "Saturday",
+      "time": "TBC",
+      "event": "Main Event – Flight 3",
+      "listed_as": "Main Event - Day 1",
+      "guarantee": "$300,000 GTD",
+      "guarantee_amount": 300000,
+      "buy_in": 1150,
+      "entry": 1000,
+      "fee": 150,
+      "re_entries": 2,
+      "dealers": true,
+      "featured": true
+    },
+    {
+      "date": "2026-11-22",
+      "day": "Sunday",
+      "time": "TBC",
+      "event": "Main Event – Day 2",
+      "listed_as": "Main Event - Day 2",
+      "guarantee": "$300,000 GTD",
+      "guarantee_amount": 300000,
+      "buy_in": null,
+      "entry": null,
+      "fee": null,
+      "re_entries": null,
+      "dealers": true,
+      "featured": true
+    }
+  ]
+}

@@ -54,6 +54,7 @@ PNG_MARKS = {
     "crown": False,
     "aurum": True,
     "playlive": False,
+    "npl": False,
 }
 SVG_MARKS = {"nps": "#F5F2EB"}
 
