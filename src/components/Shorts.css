@@ -1,0 +1,62 @@
+.shorts__row {
+  gap: 14px;
+  padding-bottom: 8px;
+}
+
+.short-card {
+  position: relative;
+  flex: none;
+  width: 180px;
+  height: 320px;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  transition: border-color var(--transition-fast);
+}
+
+.short-card:hover {
+  border-color: var(--color-accent);
+}
+
+.short-card__poster {
+  position: absolute;
+  inset: 0;
+}
+
+.short-card__duration {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 2px 6px;
+  border-radius: var(--radius-xs);
+  background: var(--color-overlay-soft);
+  color: var(--color-accent);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.short-card__play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding-left: 3px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-text);
+  transform: translate(-50%, -50%);
+}
+
+.short-card__caption {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 14px 12px;
+  background: linear-gradient(180deg, transparent, var(--color-overlay));
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.3;
+}

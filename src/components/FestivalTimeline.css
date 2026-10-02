@@ -1,0 +1,245 @@
+/* Geometry (--timeline-day, --timeline-head) is set inline by the component
+ * from the constants in src/lib/calendar.js, so CSS and the bar maths agree. */
+
+.timeline {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  background: var(--color-bg-inset);
+}
+
+.timeline__canvas {
+  position: relative;
+}
+
+/* Day header */
+.timeline__head {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  background: var(--color-bg-card);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.timeline__day {
+  flex: none;
+  width: var(--timeline-day);
+  padding: 10px 0 8px;
+  text-align: center;
+  border-right: 1px solid var(--color-grid-line);
+}
+
+.timeline__day--weekend {
+  background: var(--color-bg-weekend);
+}
+
+.timeline__day--today {
+  background: var(--color-bg-selected);
+}
+
+.timeline__weekday {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--color-muted);
+}
+
+.timeline__day--today .timeline__weekday {
+  color: var(--color-accent);
+}
+
+.timeline__daynum {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.1;
+  color: var(--color-text);
+}
+
+.timeline__day--weekend .timeline__daynum {
+  color: var(--color-muted);
+}
+
+.timeline__day--today .timeline__daynum {
+  color: var(--color-champagne);
+}
+
+/* Vertical grid lines under the bars */
+.timeline__grid {
+  position: absolute;
+  inset: var(--timeline-head) 0 0 0;
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--color-grid-line) 0 1px,
+    transparent 1px var(--timeline-day)
+  );
+  pointer-events: none;
+}
+
+/* Today marker */
+.timeline__today-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 3;
+  width: 2px;
+  background: var(--color-accent);
+  pointer-events: none;
+}
+
+.timeline__today-pill {
+  position: absolute;
+  top: 8px;
+  z-index: 4;
+  padding: 2px 8px;
+  border-radius: var(--radius-xs);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+/* Festival bars */
+.timeline__bars {
+  position: absolute;
+  inset: 0;
+}
+
+.timeline__bar {
+  position: absolute;
+  z-index: 2;
+}
+
+/* The bar reads --tour-primary / --tour-secondary set inline by the component
+ * from content/tourBrands.js. The fill is the card surface on the text side,
+ * flowing into the tour's own colour behind the logo on the right; an unknown
+ * tour falls back to the site's gold. The mixes are tuned so the dates/name/
+ * place column always sits on near-card darkness. */
+.timeline__bar-link {
+  --tour-fill: var(--tour-primary, var(--color-accent));
+  --tour-glow: var(--tour-secondary, var(--tour-fill));
+  --bar-brand-strong: color-mix(in srgb, var(--tour-fill) 58%, var(--color-bg-card));
+  --bar-brand-mid: color-mix(in srgb, var(--tour-fill) 22%, var(--color-bg-card));
+  --bar-brand-glow: color-mix(in srgb, var(--tour-glow) 38%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  height: 100%;
+  padding: var(--timeline-bar-pad) 16px var(--timeline-bar-pad) 14px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--tour-fill) 42%, var(--color-border));
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(70% 180% at 100% 50%, var(--bar-brand-glow) 0%, transparent 60%),
+    linear-gradient(
+      90deg,
+      var(--color-bg-card) 0%,
+      var(--color-bg-card) 38%,
+      var(--bar-brand-mid) 68%,
+      var(--bar-brand-strong) 100%
+    );
+  color: var(--color-text);
+  container-type: inline-size;
+  transition:
+    border-color var(--transition-fast),
+    filter var(--transition-fast);
+}
+
+/* A bar of five days or fewer has no room for a legible wordmark beside the
+ * name: at 46% of the bar it shrinks to a sliver and the name truncates
+ * instead. The circle icon by the name already says which tour it is, so the
+ * wordmark steps aside and the text keeps the full width. Clipped month-edge
+ * bars (a series running on into next month) hit this too, by design. */
+@container (max-width: 340px) {
+  .timeline__bar-link .tour-logo--wordmark {
+    display: none;
+  }
+}
+
+.timeline__bar-link:hover {
+  border-color: color-mix(in srgb, var(--tour-fill) 75%, var(--color-text));
+  filter: brightness(1.12);
+}
+
+.timeline__bar--clip-start .timeline__bar-link {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.timeline__bar--clip-end .timeline__bar-link {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.timeline__bar--live .timeline__bar-link {
+  border-color: var(--color-live);
+}
+
+/* Cancelled / postponed / moved: no brand colour, back to the neutral bar. */
+.timeline__bar--off .timeline__bar-link {
+  border-color: var(--color-control-border);
+  background: var(--gradient-bar);
+}
+
+.timeline__bar--off .tour-logo {
+  opacity: 0.55;
+}
+
+.timeline__bar-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.timeline__bar-dates,
+.timeline__bar-name,
+.timeline__bar-place {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.timeline__bar-name > .tour-logo {
+  display: inline-grid;
+  margin-right: 8px;
+  vertical-align: -4px;
+}
+
+.timeline__bar-dates {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--color-accent);
+}
+
+.timeline__bar-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.1;
+  color: var(--color-text);
+}
+
+.timeline__bar--off .timeline__bar-name {
+  color: var(--color-muted);
+}
+
+.timeline__bar-status {
+  margin-right: 6px;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-control-border);
+}
+
+.timeline__bar-place {
+  font-size: 12px;
+  color: var(--color-muted);
+}

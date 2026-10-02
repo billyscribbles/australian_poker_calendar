@@ -1,0 +1,47 @@
+{
+  "ci": {
+    "collect": {
+      "startServerCommand": "yarn start",
+      "startServerReadyPattern": "localhost:4173",
+      "url": [
+        "http://localhost:4173/",
+        "http://localhost:4173/poker-calendar/2026",
+        "http://localhost:4173/services",
+        "http://localhost:4173/about",
+        "http://localhost:4173/contact"
+      ],
+      "numberOfRuns": 3
+    },
+    "assert": {
+      "assertions": {
+        "categories:performance": [
+          "error",
+          {
+            "minScore": 0.9
+          }
+        ],
+        "categories:accessibility": [
+          "error",
+          {
+            "minScore": 0.9
+          }
+        ],
+        "categories:seo": [
+          "error",
+          {
+            "minScore": 0.95
+          }
+        ],
+        "categories:best-practices": [
+          "warn",
+          {
+            "minScore": 0.9
+          }
+        ]
+      }
+    },
+    "upload": {
+      "target": "temporary-public-storage"
+    }
+  }
+}

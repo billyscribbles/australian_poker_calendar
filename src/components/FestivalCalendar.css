@@ -1,0 +1,83 @@
+.festival-calendar__controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.segmented {
+  display: flex;
+  padding: 3px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-card);
+}
+
+.segmented__btn {
+  padding: 8px 18px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-muted);
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.segmented__btn:hover {
+  color: var(--color-champagne);
+}
+
+.segmented__btn[aria-pressed='true'] {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+.festival-calendar__count {
+  font-size: 14px;
+  color: var(--color-muted);
+}
+
+.festival-calendar__count strong {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.month-tabs {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 4px;
+  margin-bottom: 14px;
+}
+
+.month-tab {
+  padding: 10px 4px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-card);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-muted);
+  transition:
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.month-tab:hover {
+  border-color: var(--color-accent);
+  color: var(--color-champagne);
+}
+
+.month-tab[aria-pressed='true'] {
+  border-color: var(--color-accent);
+  background: var(--color-bg-selected);
+  color: var(--color-champagne);
+}
+
+@media (max-width: 900px) {
+  .month-tabs {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}

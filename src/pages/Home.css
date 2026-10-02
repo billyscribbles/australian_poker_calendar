@@ -1,0 +1,25 @@
+.home__sections {
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+  padding-top: 40px;
+}
+
+.home__two-col {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: 40px;
+}
+
+@media (max-width: 900px) {
+  .home__two-col {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .home__sections {
+    gap: 40px;
+    padding-top: 32px;
+  }
+}

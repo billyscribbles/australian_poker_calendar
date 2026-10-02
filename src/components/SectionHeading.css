@@ -1,0 +1,23 @@
+.section-heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 0 20px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  color: var(--color-text);
+}
+
+.section-heading__rule {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    var(--color-accent),
+    var(--color-control-border) 40%,
+    transparent
+  );
+}

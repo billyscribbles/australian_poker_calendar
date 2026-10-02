@@ -1,0 +1,35 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(yarn install)",
+      "Bash(yarn dev)",
+      "Bash(yarn build)",
+      "Bash(yarn preview)",
+      "Bash(yarn start)",
+      "Bash(yarn test)",
+      "Bash(yarn test:watch)",
+      "Bash(yarn lint)",
+      "Bash(yarn lint:fix)",
+      "Bash(yarn format)",
+      "Bash(yarn format:check)",
+      "Bash(git status)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "mcp__railway",
+      "mcp__chrome-devtools__lighthouse_audit"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/skills/security/hooks/check-secrets-before-commit.sh\""
+          }
+        ]
+      }
+    ]
+  }
+}

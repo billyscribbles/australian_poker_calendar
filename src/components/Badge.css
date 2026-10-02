@@ -1,0 +1,81 @@
+.badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-xs);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.badge--filled {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+.badge--outline {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* Status badges on event cards: a little larger, radius 6px. */
+.badge--selected,
+.badge--neutral {
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+}
+
+.badge--selected {
+  background: var(--color-bg-selected);
+  color: var(--color-accent);
+}
+
+.badge--neutral {
+  background: var(--color-bg-raised);
+  color: var(--color-text);
+}
+
+.live-badge {
+  display: inline-flex;
+  align-items: center;
+  background: var(--color-live-bg);
+  color: var(--color-live);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+}
+
+.live-badge--lg {
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: var(--radius-md);
+  font-size: 13px;
+}
+
+.live-badge--sm {
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+}
+
+.live-badge__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-live);
+  animation: live-pulse 1.4s infinite;
+}
+
+@keyframes live-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}

@@ -1,0 +1,200 @@
+// Contract: the home page sections render their fixtures and the two pieces of
+// behaviour the design specifies — a single-open FAQ accordion and a pulsing
+// LIVE badge — work as described in the handoff README.
+import { describe, it, expect } from 'vitest'
+import { render, screen, within } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import { MemoryRouter } from 'react-router-dom'
+import FAQ from '../components/FAQ.jsx'
+import EventsBanner from '../components/EventsBanner.jsx'
+import ImagePlaceholder from '../components/ImagePlaceholder.jsx'
+import { faq } from '../content/faq.js'
+import { heroEvent, sideEvents, ticker } from '../content/events.js'
+import { calendarPage } from '../content/calendarPage.js'
+import { featuredNews } from '../content/featuredNews.js'
+import { stories } from '../content/stories.js'
+import { shorts } from '../content/shorts.js'
+import { liveNews } from '../content/liveNews.js'
+import { calendar } from '../content/calendar.js'
+import { playerNews } from '../content/playerNews.js'
+import { playersOfTheYear } from '../content/playersOfTheYear.js'
+import { promotions } from '../content/promotions.js'
+import { guides } from '../content/guides.js'
+import { partners } from '../content/partners.js'
+
+const withRouter = (ui) => render(<MemoryRouter>{ui}</MemoryRouter>)
+
+describe('FAQ accordion — one open item at a time', () => {
+  const buttons = () => screen.getAllByRole('button')
+
+  it('opens the first item by default', () => {
+    render(<FAQ />)
+    expect(buttons()[0]).toHaveAttribute('aria-expanded', 'true')
+    expect(screen.getByText(faq.items[0].a)).toBeInTheDocument()
+    expect(screen.queryByText(faq.items[1].a)).not.toBeInTheDocument()
+  })
+
+  it('opening another item closes the current one', async () => {
+    render(<FAQ />)
+    await userEvent.click(buttons()[1])
+    expect(buttons()[1]).toHaveAttribute('aria-expanded', 'true')
+    expect(buttons()[0]).toHaveAttribute('aria-expanded', 'false')
+    expect(screen.getByText(faq.items[1].a)).toBeInTheDocument()
+    expect(screen.queryByText(faq.items[0].a)).not.toBeInTheDocument()
+  })
+
+  it('clicking the open item closes it, leaving none open', async () => {
+    render(<FAQ />)
+    await userEvent.click(buttons()[0])
+    for (const button of buttons()) {
+      expect(button).toHaveAttribute('aria-expanded', 'false')
+    }
+    for (const item of faq.items) {
+      expect(screen.queryByText(item.a)).not.toBeInTheDocument()
+    }
+  })
+
+  it('colours the last heading line gold and renders each question', () => {
+    render(<FAQ />)
+    const heading = screen.getByRole('heading', { level: 2 })
+    const lines = faq.headingLines
+    expect(within(heading).getByText(lines[lines.length - 1]).className).toBe('faq__heading-accent')
+    for (const item of faq.items) {
+      expect(screen.getByRole('button', { name: item.q })).toBeInTheDocument()
+    }
+  })
+})
+
+describe('EventsBanner — events and ticker from fixtures', () => {
+  it('renders the hero event, both side events and every ticker chip', () => {
+    withRouter(<EventsBanner />)
+    expect(screen.getByText(heroEvent.name)).toBeInTheDocument()
+    for (const event of sideEvents) {
+      expect(screen.getByRole('heading', { name: event.name })).toBeInTheDocument()
+    }
+    for (const event of ticker) {
+      expect(screen.getByText(event.name)).toBeInTheDocument()
+    }
+  })
+
+  it("shows the poker room's icon on every ticker chip", () => {
+    withRouter(<EventsBanner />)
+    const chips = document.querySelectorAll('.ticker-chip')
+    expect(chips.length).toBe(ticker.length)
+    for (const chip of chips) {
+      expect(chip.querySelector('.tour-logo--icon .tour-logo__img')).not.toBeNull()
+    }
+  })
+
+  it("shows status badges, each chip's guarantee or entries, and the live chip leaders", () => {
+    withRouter(<EventsBanner />)
+    const liveSideEvents = sideEvents.filter((event) => event.status === 'live')
+    expect(liveSideEvents.length).toBeGreaterThan(0)
+    expect(screen.getByText('Upcoming')).toBeInTheDocument()
+    for (const event of ticker) {
+      expect(screen.getAllByText(event.entries ?? event.guarantee).length).toBeGreaterThan(0)
+    }
+    const liveChips = ticker.filter((event) => event.live)
+    for (const live of liveChips) {
+      expect(screen.getByText(live.level)).toBeInTheDocument()
+      for (const leader of live.leaders) {
+        expect(screen.getByText(leader.stack)).toBeInTheDocument()
+      }
+    }
+    // Large LIVE badge on the hero and each live side card (with the pulsing dot),
+    // and a small one per live chip.
+    expect(document.querySelectorAll('.live-badge').length).toBe(
+      1 + liveSideEvents.length + liveChips.length,
+    )
+    expect(document.querySelectorAll('.side-event .live-badge--lg').length).toBe(
+      liveSideEvents.length,
+    )
+    expect(document.querySelector('.live-badge--lg .live-badge__dot')).not.toBeNull()
+  })
+})
+
+describe('ImagePlaceholder — swappable for a real image', () => {
+  it('renders decorative stripes with a label when there is no src', () => {
+    const { container } = render(<ImagePlaceholder label="story image" className="x" />)
+    const box = container.firstChild
+    expect(box).toHaveAttribute('aria-hidden', 'true')
+    expect(box.className).toContain('image-placeholder')
+    expect(box.className).toContain('x')
+    expect(box.textContent).toBe('[ story image ]')
+  })
+
+  it('renders an <img> with the same class once a src is provided', () => {
+    render(<ImagePlaceholder src="/p.webp" alt="A photo" width={96} height={64} className="x" />)
+    const img = screen.getByAltText('A photo')
+    expect(img.className).toContain('x')
+    expect(img).toHaveAttribute('loading', 'lazy')
+  })
+})
+
+describe('home fixtures — shape each section renders', () => {
+  const hasLinks = (items) => {
+    expect(items.length).toBeGreaterThan(0)
+    for (const item of items) {
+      expect(item.href, JSON.stringify(item)).toBeTruthy()
+    }
+  }
+
+  it('events: hero, two side events with a known status, ticker chips with a figure', () => {
+    expect(heroEvent.name && heroEvent.dates && heroEvent.place && heroEvent.venue).toBeTruthy()
+    expect(sideEvents).toHaveLength(2)
+    for (const event of sideEvents) expect(['live', 'upcoming']).toContain(event.status)
+    const codes = calendarPage.tours.map((t) => t.code)
+    for (const event of [heroEvent, ...sideEvents, ...ticker]) {
+      expect(codes, event.name).toContain(event.tour)
+    }
+    hasLinks(ticker)
+    for (const event of ticker) {
+      expect(event.buyIn && event.currency && event.name && event.date).toBeTruthy()
+      expect(event.entries ?? event.guarantee, event.name).toBeTruthy()
+    }
+    // A live chip needs a results feed behind it: level plus the top three stacks.
+    for (const live of ticker.filter((event) => event.live)) {
+      expect(live.level).toBeTruthy()
+      expect(live.leaders).toHaveLength(3)
+    }
+  })
+
+  it('news lists carry a title, a date and a link', () => {
+    expect(featuredNews.hero.title && featuredNews.hero.excerpt).toBeTruthy()
+    for (const list of [featuredNews.items, stories.items, liveNews.items, playerNews.items]) {
+      hasLinks(list)
+      for (const item of list) expect(item.title && item.date).toBeTruthy()
+    }
+  })
+
+  it('shorts have a duration and title', () => {
+    hasLinks(shorts.items)
+    for (const item of shorts.items) expect(item.duration && item.title).toBeTruthy()
+  })
+
+  it('calendar entries have a day, month, name, range and venue', () => {
+    hasLinks(calendar.items)
+    for (const entry of calendar.items) {
+      expect(entry.day && entry.month && entry.name && entry.range && entry.venue).toBeTruthy()
+    }
+  })
+
+  it('standings are ranked 1..n with points and earnings', () => {
+    hasLinks(playersOfTheYear.items)
+    playersOfTheYear.items.forEach((player, i) => {
+      expect(player.rank).toBe(i + 1)
+      expect(player.name && player.country && player.points && player.earnings).toBeTruthy()
+      expect(typeof player.cashes).toBe('number')
+    })
+  })
+
+  it('promotions, guides and partners have what their cards read', () => {
+    hasLinks(promotions.items)
+    hasLinks(guides.items)
+    for (const guide of guides.items) {
+      for (const row of guides.rows) expect(guide[row.key], row.key).toBeTruthy()
+    }
+    expect(partners.items.length).toBeGreaterThan(0)
+    for (const partner of partners.items) expect(partner.name).toBeTruthy()
+  })
+})

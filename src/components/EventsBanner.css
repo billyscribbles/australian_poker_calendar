@@ -1,0 +1,375 @@
+.events-banner {
+  background: var(--color-bg-inset);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.events-banner__grid {
+  max-width: var(--layout-container-max);
+  margin: 0 auto;
+  padding: 24px var(--layout-container-pad) 0;
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr) 56px;
+  gap: 16px;
+  align-items: stretch;
+}
+
+/* ---- Live hero card ---------------------------------------------------- */
+
+.live-event {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 44%;
+  min-height: 300px;
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  border: 1.5px solid var(--color-accent);
+  background: radial-gradient(
+    600px 300px at 90% 50%,
+    var(--color-bg-selected),
+    var(--color-bg-hero-end)
+  );
+  color: var(--color-text);
+  transition: box-shadow var(--transition-fast);
+}
+
+.live-event:hover {
+  box-shadow: var(--shadow-glow);
+}
+
+.live-event__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+  padding: 28px;
+}
+
+.live-event__title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.live-event__name {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 38px;
+  line-height: 1;
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.live-event__rule {
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-accent), transparent);
+}
+
+.live-event__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 16px;
+}
+
+.live-event__meta-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.live-event__meta-row svg {
+  flex: none;
+  color: var(--color-muted);
+}
+
+.live-event__visual {
+  /* The key visual fills its column edge to edge; the card's own radius and
+     overflow: hidden clip it. The <img> is a grid item, so stretch it to the
+     area rather than sizing it 100% × 100% — percentages here resolve before
+     margins and overflow the moment any are added. */
+  align-self: stretch;
+  justify-self: stretch;
+  width: auto;
+  height: auto;
+  min-width: 0;
+  min-height: 0;
+  object-position: center top;
+}
+
+.live-event__visual .image-placeholder__label {
+  font-size: 12px;
+  color: var(--color-muted);
+}
+
+.live-event__badge {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+}
+
+/* ---- Side event cards -------------------------------------------------- */
+
+.side-event {
+  --side-event-fade: 56px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 300px;
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-card);
+  color: var(--color-text);
+  transition: border-color var(--transition-fast);
+}
+
+.side-event:hover {
+  border-color: var(--color-accent);
+}
+
+/* The poster shows in full at the card's width — never cover-cropped — and
+   the name/date band below it is the card's own background. The band starts
+   overlapping the poster's bottom edge with a fade to that background, so the
+   art dissolves into the dark strip instead of being cut off by it. */
+.side-event__visual {
+  display: block;
+  width: 100%;
+  height: auto;
+  flex: none;
+}
+
+.side-event__visual.image-placeholder {
+  flex: 1;
+}
+
+.side-event__badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+}
+
+.side-event__content {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  /* top padding = the overlap, so the text always starts below the poster */
+  margin-top: calc(-1 * var(--side-event-fade));
+  padding: var(--side-event-fade) 18px 22px;
+  background: linear-gradient(180deg, transparent, var(--color-bg-card) var(--side-event-fade));
+}
+
+/* The room's icon sits beside the name rather than above it so the overlay
+   stays one row tall and covers as little of the key visual as possible. */
+.side-event__logo {
+  flex: none;
+}
+
+.side-event__text {
+  min-width: 0;
+}
+
+.side-event__name {
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 1.1;
+  /* Two lines, then clip: with the icon beside it the column is too narrow
+     to keep a series name like "Aurum Sydney Showdown" on one line. */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+.side-event__date {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--color-muted);
+}
+
+.side-event__date svg {
+  flex: none;
+}
+
+/* ---- More -------------------------------------------------------------- */
+
+.events-more {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-muted);
+  transition: color var(--transition-fast);
+}
+
+.events-more:hover {
+  color: var(--color-champagne);
+}
+
+.events-more__circle {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-accent);
+  background: var(--color-bg-card);
+  color: var(--color-champagne);
+}
+
+/* ---- Ticker ------------------------------------------------------------ */
+
+.ticker {
+  max-width: var(--layout-container-max);
+  margin: 0 auto;
+  padding: 20px var(--layout-container-pad) 24px;
+  gap: 12px;
+}
+
+.ticker-chip {
+  position: relative;
+  flex: none;
+  display: flex;
+  gap: 12px;
+  min-width: 300px;
+  padding: 12px;
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  transition: border-color var(--transition-fast);
+}
+
+.ticker-chip--live {
+  border-color: var(--color-live);
+}
+
+.ticker-chip:hover {
+  border-color: var(--color-accent);
+}
+
+.ticker-chip__logo {
+  flex: none;
+  align-self: center;
+}
+
+.ticker-chip__body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ticker-chip__buyin {
+  font-size: 15px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.ticker-chip__currency {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--color-muted);
+}
+
+.ticker-chip__name {
+  max-width: 220px;
+  font-size: 15px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ticker-chip__meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--color-muted);
+}
+
+.ticker-chip__leaders {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 120px;
+  padding-left: 12px;
+  border-left: 1px solid var(--color-border);
+  font-size: 12px;
+  color: var(--color-muted);
+}
+
+.ticker-chip__level {
+  margin-bottom: 2px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.ticker-chip__stack {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.ticker-chip__live {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}
+
+/* ---- Responsive -------------------------------------------------------- */
+
+@media (max-width: 900px) {
+  .events-banner__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .live-event,
+  .events-more {
+    grid-column: 1 / -1;
+  }
+  .events-more {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .events-banner__grid {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 16px 16px 0;
+  }
+  .live-event {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .live-event__body {
+    padding: 24px 20px 20px;
+  }
+  .live-event__name {
+    font-size: 32px;
+  }
+  /* Photo on top, copy beneath, like the side cards: it keeps the LIVE chip
+     on the image instead of across the wrapped title. */
+  .live-event__visual {
+    order: -1;
+    height: 220px;
+  }
+  .side-event {
+    min-height: 240px;
+  }
+  .ticker {
+    padding: 16px 16px 20px;
+  }
+}

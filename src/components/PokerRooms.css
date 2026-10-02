@@ -1,0 +1,192 @@
+/* "Poker rooms across Australia" — a slow marquee of wordmark tiles, each
+ * lit in its room's own colours on hover. --tour-primary / --tour-secondary
+ * are set inline per tile from content/tourBrands.js; the fallbacks keep an
+ * unknown room in the site's gold. */
+
+.poker-rooms {
+  text-align: center;
+}
+
+.poker-rooms__label {
+  margin: 0 0 20px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+/* The viewport fades the strip out at both edges so tiles slide in from
+ * nothing rather than being chopped at a hard line. Negative margin lets it
+ * bleed to the page edge inside the padded container. */
+.poker-rooms__viewport {
+  overflow: hidden;
+  margin: 0 calc(-1 * var(--layout-container-pad));
+  padding: 8px 0;
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+
+/* Two identical tracks side by side; the belt slides left by exactly one
+ * track so the loop is seamless. Hovering anywhere over the strip pauses
+ * it, so a tile can be read and clicked. */
+.poker-rooms__belt {
+  display: flex;
+  width: max-content;
+  animation: poker-rooms-slide 42s linear infinite;
+  will-change: transform;
+}
+
+.poker-rooms__viewport:hover .poker-rooms__belt,
+.poker-rooms__viewport:focus-within .poker-rooms__belt {
+  animation-play-state: paused;
+}
+
+@keyframes poker-rooms-slide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.poker-rooms__track {
+  display: flex;
+  flex: none;
+  gap: 14px;
+  padding: 0 7px;
+  list-style: none;
+}
+
+.poker-rooms__item {
+  flex: none;
+}
+
+/* The tile: the same bordered box as the old "featured in" strip, holding
+ * the real mark. At rest it is quiet — a border in the site's own line
+ * colour and the logo slightly dimmed. On hover the room's identity takes
+ * over: the border tints to its primary, its secondary glows beneath, and
+ * the mark lifts to full strength. */
+.poker-rooms__tile {
+  position: relative;
+  /* Flex, not grid: the logo's percentage height has to resolve against the
+   * tile's fixed height, and Chrome treats a stretched auto grid row as
+   * indefinite — the image then falls back to its attribute size and a tall
+   * mark (APL) is clipped. A flex container with a set height is definite. */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 190px;
+  height: 72px;
+  padding: 12px 20px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-card);
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    border-color var(--transition-base),
+    transform var(--transition-base),
+    box-shadow var(--transition-base);
+}
+
+/* The glow: the room's secondary colour, washed in from below the tile. */
+.poker-rooms__tile::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(
+    80% 120% at 50% 120%,
+    color-mix(in srgb, var(--tour-secondary, var(--color-accent)) 38%, transparent),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.poker-rooms__logo {
+  /* Definite size, contained: a near-square mark (APL at 1.4:1) must never
+   * depend on its own aspect ratio to fit the slot. */
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0.78;
+  filter: saturate(0.85);
+  transition:
+    opacity var(--transition-base),
+    filter var(--transition-base);
+}
+
+/* A dark mark (Crown, Aurum) sits on a white card so it reads. Restated for
+ * hover and focus so the card stays white whatever else those states paint. */
+.poker-rooms__tile[data-logo='dark'],
+.poker-rooms__tile[data-logo='dark']:hover,
+.poker-rooms__tile[data-logo='dark']:focus-visible {
+  background: var(--color-logo-backing);
+}
+
+.poker-rooms__tile:hover,
+.poker-rooms__tile:focus-visible {
+  border-color: var(--tour-primary, var(--color-accent));
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--tour-primary, var(--color-accent)) 45%, transparent),
+    0 12px 32px color-mix(in srgb, var(--tour-primary, var(--color-accent)) 28%, transparent);
+}
+
+.poker-rooms__tile:hover::before,
+.poker-rooms__tile:focus-visible::before {
+  opacity: 1;
+}
+
+.poker-rooms__tile:hover .poker-rooms__logo,
+.poker-rooms__tile:focus-visible .poker-rooms__logo {
+  opacity: 1;
+  filter: saturate(1);
+}
+
+.poker-rooms__tile:focus-visible {
+  outline: 2px solid var(--color-champagne);
+  outline-offset: 3px;
+}
+
+/* Reduced motion: no marquee. The first track becomes a centred, wrapping
+ * grid; the clone is dropped so nothing is shown twice. */
+@media (prefers-reduced-motion: reduce) {
+  .poker-rooms__viewport {
+    margin: 0;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+
+  .poker-rooms__belt {
+    display: block;
+    width: auto;
+    animation: none;
+  }
+
+  .poker-rooms__track {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .poker-rooms__track[aria-hidden='true'] {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .poker-rooms__tile {
+    width: 150px;
+    height: 60px;
+    padding: 10px 16px;
+  }
+
+  .poker-rooms__belt {
+    animation-duration: 32s;
+  }
+}

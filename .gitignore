@@ -1,0 +1,21 @@
+node_modules
+dist
+dist-ssr
+.DS_Store
+.env
+.env.local
+.env.*.local
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
+*.log
+.vite
+.prerender
+
+# local-only
+.firecrawl/
+.claude/settings.local.json

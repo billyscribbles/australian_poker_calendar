@@ -1,0 +1,67 @@
+.errorboundary {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  padding: 96px 0;
+}
+
+.errorboundary__inner {
+  text-align: center;
+}
+
+.errorboundary__title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+  margin: 16px 0 12px;
+  font-optical-sizing: auto;
+}
+
+.errorboundary__sub {
+  font-size: 17px;
+  color: var(--color-muted);
+  margin-bottom: 32px;
+}
+
+.errorboundary__actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.errorboundary__btn {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--color-accent);
+  padding: 12px 28px;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-accent);
+  transition: background var(--transition-fast);
+}
+
+.errorboundary__btn:hover {
+  background: var(--color-accent-dark);
+}
+
+.errorboundary__link {
+  display: inline-flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-accent);
+  padding: 12px 26px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--color-accent);
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.errorboundary__link:hover {
+  background: var(--color-accent);
+  color: #fff;
+}

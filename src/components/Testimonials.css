@@ -1,0 +1,49 @@
+.testimonials__head {
+  max-width: 720px;
+  margin-bottom: 56px;
+}
+
+.testimonials__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.testimonials__card {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.testimonials__quote-icon {
+  color: var(--color-accent);
+  opacity: 0.6;
+}
+
+.testimonials__quote {
+  font-family: var(--font-display);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--color-text);
+  flex-grow: 1;
+  font-optical-sizing: auto;
+}
+
+.testimonials__author-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.testimonials__author-role {
+  font-size: 13px;
+  color: var(--color-muted);
+  margin-top: 2px;
+}
+
+@media (max-width: 900px) {
+  .testimonials__grid {
+    grid-template-columns: 1fr;
+  }
+}

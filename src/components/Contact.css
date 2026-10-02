@@ -1,0 +1,125 @@
+.contact__inner {
+  max-width: 720px;
+}
+
+.contact__head {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.contact__head .section-sub {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.contact__form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contact__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.contact__field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contact__field span {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.contact__field input,
+.contact__field textarea {
+  padding: 14px 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  font-size: 15px;
+  font-family: var(--font-body);
+  transition:
+    border-color var(--transition-fast),
+    background var(--transition-fast);
+  resize: vertical;
+}
+
+.contact__field input:focus,
+.contact__field textarea:focus {
+  border-color: var(--color-accent);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* Honeypot — kept in the DOM and focusable for bots, hidden from humans/AT. */
+.contact__honeypot {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.contact__submit {
+  align-self: flex-start;
+  background: var(--color-accent);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 14px 30px;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-accent);
+  transition:
+    background var(--transition-fast),
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.contact__submit:hover:not(:disabled) {
+  background: var(--color-accent-dark);
+  transform: translateY(-2px);
+}
+
+.contact__submit:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+/* Live-region wrapper — always present, no box until it has a message. */
+.contact__status {
+  font-size: 14px;
+}
+
+.contact__status--success,
+.contact__status--error {
+  display: block;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+}
+
+.contact__status--success {
+  background: rgba(12, 140, 129, 0.15);
+  color: var(--color-accent-light);
+  border: 1px solid rgba(12, 140, 129, 0.4);
+}
+
+.contact__status--error {
+  background: rgba(255, 100, 100, 0.1);
+  color: #ffb3b3;
+  border: 1px solid rgba(255, 100, 100, 0.3);
+}
+
+@media (max-width: 600px) {
+  .contact__row {
+    grid-template-columns: 1fr;
+  }
+}

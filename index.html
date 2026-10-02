@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- The icon set, built from public/brand/icon-master.png by `yarn icons`.
+         The .ico is what Google's favicon fetcher looks for — an SVG alone is
+         enough for browsers but leaves a blank globe beside the site name in
+         search results. Regenerate whenever the logo changes. -->
+    <link rel="icon" href="/brand/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/svg+xml" href="/brand/favicon.svg" />
+    <link rel="apple-touch-icon" href="/brand/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#0E0E0E" />
+
+    <!-- Webfonts are NOT declared here. vite.config.js injects the preconnect
+         and stylesheet links from `googleFonts` in src/config/theme.config.js,
+         so the families the CSS asks for and the families actually fetched come
+         from one place and cannot drift apart.
+
+         Self-hosting instead: drop woff2 files into public/fonts/, write the
+         @font-face rules in src/index.css, set googleFonts to [], and uncomment
+         the preloads below with the real filenames. -->
+    <!--
+    <link rel="preload" href="/fonts/display.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/body.woff2" as="font" type="font/woff2" crossorigin />
+    -->
+
+    <!-- seo:fallback:start -->
+    <!-- Fallback SEO for `vite dev`, where nothing prerenders and Helmet only
+         catches up once the bundle runs. In a built document
+         scripts/prerender.mjs replaces this whole block with the page's own
+         Helmet output — leaving it in would put two <title> elements in one
+         document. Keep the markers.
+         Replace og-image.svg with a 1200x630 PNG before launch: most social
+         platforms do not render SVG previews. -->
+    <title>Australian Poker Calendar — Poker News, Events &amp; Players</title>
+    <meta
+      name="description"
+      content="Live tournament coverage, the full Australian and Asia-Pacific poker calendar, player news and rankings, promotions and country guides."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Australian Poker Calendar" />
+    <meta
+      property="og:description"
+      content="Live tournament coverage, the full Australian and Asia-Pacific poker calendar, player news and rankings, promotions and country guides."
+    />
+    <meta property="og:image" content="/brand/og-image.placeholder.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Australian Poker Calendar" />
+    <meta
+      name="twitter:description"
+      content="Live tournament coverage, the full Australian and Asia-Pacific poker calendar, player news and rankings, promotions and country guides."
+    />
+    <meta name="twitter:image" content="/brand/og-image.placeholder.png" />
+    <!-- seo:fallback:end -->
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

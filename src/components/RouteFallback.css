@@ -1,0 +1,35 @@
+.route-fallback {
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.route-fallback__spinner {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-accent);
+  animation: route-fallback-spin 0.7s linear infinite;
+}
+
+.route-fallback__label {
+  font-size: 14px;
+  color: var(--color-muted);
+}
+
+@keyframes route-fallback-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Reduced motion: drop the spin, keep the label visible as the loading cue. */
+@media (prefers-reduced-motion: reduce) {
+  .route-fallback__spinner {
+    animation: none;
+  }
+}

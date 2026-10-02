@@ -1,0 +1,1332 @@
+{
+  "source": "https://australianpokerschedule.com.au/series-timeline/",
+  "site": "Australian Poker Schedule (AustralianPokerSchedule.com.au)",
+  "scraped_at": "2026-10-02",
+  "event_count": 19,
+  "events": [
+    {
+      "title": "Australian Poker Tour – Melbourne Champs II (VIC)",
+      "url": "https://australianpokerschedule.com.au/event/australian-poker-tour-melbourne-champs-ii-vic/",
+      "slug": "australian-poker-tour-melbourne-champs-ii-vic",
+      "tour_brand": "Australian Poker Tour (APT)",
+      "region": "VIC",
+      "start_date": "2026-09-30",
+      "end_date": "2026-10-11",
+      "duration_days": 12,
+      "date_text": "September 30 - October 11",
+      "listing_date_text": "30September2026 September 30 - October 11",
+      "month_label": "Sep 2026",
+      "organiser": {
+        "name": "Australian Poker Tour",
+        "phone": "1300 566 979",
+        "email": "info@australianpokertour.com.au",
+        "website": "https://australianpokertour.com.au/"
+      },
+      "venue": {
+        "name": "Crown Melbourne, Metropol – Sky Bar 28",
+        "street": "8 Whiteman St",
+        "google_maps_search_url": "https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=8+Whiteman+St+Southbank%2C+Melbourne+VIC+3006+Australia",
+        "address_query": "8 Whiteman St Southbank, Melbourne VIC 3006 Australia",
+        "full_address": "8 Whiteman St, Southbank VIC 3006, Australia",
+        "google_place_cid": "8141569976729886558",
+        "city": "Southbank, Melbourne",
+        "state": "VIC",
+        "postcode": "3006",
+        "country": "Australia",
+        "lat": -37.8239578,
+        "lng": 144.9594467,
+        "google_formatted_address": "8 Whiteman St, Southbank VIC 3006, Australia"
+      },
+      "description": "",
+      "description_links": [],
+      "details": {
+        "start": "September 30",
+        "end": "October 11",
+        "website": "https://australianpokertour.com.au/"
+      },
+      "hero_image": {
+        "alt": "Australian Poker Tour - Melbourne Champs II (VIC)",
+        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/06/APT-MELB-CHAMPS-IIA.jpg"
+      },
+      "images": [
+        {
+          "alt": "Australian Poker Tour - Melbourne Champs II (VIC)",
+          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/06/APT-MELB-CHAMPS-IIA.jpg"
+        },
+        {
+          "alt": "Australian Poker Tour VIP Package best poker melbourne",
+          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/06/VIP-Package-V2.jpg"
+        },
+        {
+          "alt": "Australian Poker Tour - Melbourne Champs II (VIC)",
+          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/06/1080x1350-Final-MELB-CHAMPS-PG-1A.jpg"
+        },
+        {
+          "alt": "Australian Poker Tour - Melbourne Champs II (VIC)",
+          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/06/1080x1350-Final-MELB-CHAMPS-PG-2A.jpg"
+        }
+      ],
+      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/06/APT-MELB-CHAMPS-IIA.jpg",
+      "ical_url": "webcal://australianpokerschedule.com.au/event/australian-poker-tour-melbourne-champs-ii-vic/?ical=1",
+      "outlook_location": "Crown Melbourne, Metropol – Sky Bar 28, 8 Whiteman St, Southbank, Melbourne, VIC, 3006, Australia",
+      "source_scraped": "2026-10-02",
+      "poster_facts": {
+        "guarantee": "$1.5 Million+ guaranteed",
+        "events_count": "24 fully dealer-dealt events + satellites",
+        "days": "12 days of poker",
+        "presented_by": "Hachem Management Group",
+        "sponsors": ["Dazzla.tickets", "Linktech Australia", "Victorian Poker Championship"],
+        "main_event": "Melbourne Champs $1,650 (5 flights, $350K GTD)",
+        "vip_contact": "vip@australianpokertour.com.au",
+        "schedule_file": "data/melbourne-champs-ii-schedule.json"
+      }
+    },
+    {
+      "title": "Sydney Showdown – Aurum Poker Grand, St. Johns Park (NSW)",
+      "url": "https://australianpokerschedule.com.au/event/sydney-showdown-aurum-poker-grand-st-johns-park-nsw/",
+      "slug": "sydney-showdown-aurum-poker-grand-st-johns-park-nsw",
+      "tour_brand": "Aurum Poker",
+      "region": "NSW",
+      "start_date": "2026-10-01",
+      "end_date": "2026-10-19",
+      "duration_days": 19,
+      "date_text": "October 1 - October 19",
+      "listing_date_text": "01October2026 October 1 - October 19",
+      "month_label": "Oct 2026",
+      "organiser": {
+        "name": "Aurum Poker Grand",
+        "phone": "(02) 9610 3666",
+        "email": "info@aurumpoker.com.au",
+        "website": "https://aurumpoker.com.au/"
+      },
+      "venue": {
+        "name": "Aurum Poker Grand, St. Johns Park Bowling Club",
+        "street": "93 Edensor Rd",
+        "google_maps_search_url": "https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=93+Edensor+Rd+St+Johns+park+NSW+2176+Australia",
+        "address_query": "93 Edensor Rd St Johns park NSW 2176 Australia",
+        "full_address": "93 Edensor Rd, St Johns Park NSW 2176, Australia",
+        "google_place_cid": "3853455807606033330",
+        "city": "St Johns park",
+        "state": "NSW",
+        "postcode": "2176",
+        "country": "Australia",
+        "lat": -33.8838533,
+        "lng": 150.892674,
+        "google_formatted_address": "93 Edensor Rd, St Johns Park NSW 2176, Australia"
+      },
+      "description": "",
+      "description_links": [],
+      "details": {
+        "start": "October 1",
+        "end": "October 19",
+        "website": "https://aurumpoker.com.au/"
+      },
+      "hero_image": {
+        "alt": "Sydney Showdown - Aurum Poker Grand, St. Johns Park",
+        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/07/Untitled-20260716-153011-1199.jpg"
+      },
+      "images": [
+        {
+          "alt": "Sydney Showdown - Aurum Poker Grand, St. Johns Park",
+          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/07/Untitled-20260716-153011-1199.jpg"
+        }
+      ],
+      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/07/Untitled-20260716-153011-1199-1024x768.jpg",
+      "ical_url": "webcal://australianpokerschedule.com.au/event/sydney-showdown-aurum-poker-grand-st-johns-park-nsw/?ical=1",
+      "outlook_location": "Aurum Poker Grand, St. Johns Park Bowling Club, 93 Edensor Rd, St Johns park, NSW, 2176, Australia",
+      "source_scraped": "2026-10-02",
+      "poster_facts": {
+        "tagline": "The Gold Standard in Poker",
+        "status": "Save the dates (schedule not yet published)",
+        "host_club": "St Johns Park Bowling Club"
+      }
+    },
+    {
+      "title": "APLPT – Brisbane – Broncos Club (QLD)",
+      "url": "https://australianpokerschedule.com.au/event/aplpt-brisbane-broncos-club-qld-2/",
+      "slug": "aplpt-brisbane-broncos-club-qld-2",
+      "tour_brand": "APL Poker Tour (APLPT)",
+      "region": "QLD",
+      "start_date": "2026-10-06",
+      "end_date": "2026-10-11",
+      "duration_days": 6,
+      "date_text": "October 6 - October 11",
+      "listing_date_text": "06October2026 October 6 - October 11",
+      "month_label": "Oct 2026",
+      "organiser": {
+        "name": "Australian Poker League",
+        "phone": "1800 344 669",
+        "email": "info@playapl.com",
+        "website": "https://playapl.com/"
+      },
+      "venue": {
+        "name": "Broncos Club",
+        "street": "98 Fulcher Rd",
+        "google_maps_search_url": "https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=98+Fulcher+Rd+Red+Hill+QLD+4059+Australia",
+        "address_query": "98 Fulcher Rd Red Hill QLD 4059 Australia",
+        "full_address": "98 Fulcher Rd, Red Hill QLD 4059, Australia",
+        "google_place_cid": "12900301498720590046",
+        "city": "Red Hill",
+        "state": "QLD",
+        "postcode": "4059",
+        "country": "Australia",
+        "lat": -27.4490954,
+        "lng": 152.9960868,
+        "google_formatted_address": "98 Fulcher Rd, Red Hill QLD 4059, Australia"
+      },
+      "description": "",
+      "description_links": [],
+      "details": {
+        "start": "October 6",
+        "end": "October 11",
+        "website": "https://www.playapl.com/aplpt/"
+      },
+      "hero_image": {
+        "alt": "",
+        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/07/APLPT_generic.jpg"
+      },
+      "images": [
+        {
+          "alt": "",
+          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/07/APLPT_generic.jpg"
+        }
+      ],
+      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/07/APLPT_generic.jpg",
+      "ical_url": "webcal://australianpokerschedule.com.au/event/aplpt-brisbane-broncos-club-qld-2/?ical=1",
+      "outlook_location": "Broncos Club, 98 Fulcher Rd, Red Hill, QLD, 4059, Australia",
+      "source_scraped": "2026-10-02",
+      "poster_facts": {}
+    },
+    {
+      "title": "Crown Poker – Victorian Poker Champs, Melbourne (VIC)",
+      "url": "https://australianpokerschedule.com.au/event/crown-poker-victorian-poker-champs-melbourne-vic/",
+      "slug": "crown-poker-victorian-poker-champs-melbourne-vic",
+      "tour_brand": "Crown Poker",
+      "region": "VIC",
+      "start_date": "2026-10-12",
+      "end_date": "2026-10-27",
+      "duration_days": 16,
+      "date_text": "October 12 - October 27",
+      "listing_date_text": "12October2026 October 12 - October 27",
+      "month_label": "Oct 2026",
+      "organiser": {
+        "name": "Crown Poker",
+        "phone": "(03) 9292 8888",
+        "website": "https://www.crownmelbourne.com.au/casino/table-games/poker"
+      },
+      "venue": {
+        "name": "Crown Melbourne",
+        "street": "8 Whiteman St",
+        "google_maps_search_url": "https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=8+Whiteman+St+Southbank%2C+Melbourne+VIC+3006+Australia",
+        "address_query": "8 Whiteman St Southbank, Melbourne VIC 3006 Australia",
+        "full_address": "8 Whiteman St, Southbank VIC 3006, Australia",
+        "google_place_cid": "8141569976729886558",
+        "city": "Southbank, Melbourne",
+        "state": "VIC",
+        "postcode": "3006",
+        "country": "Australia",
+        "lat": -37.8239578,
+        "lng": 144.9594467,
+        "google_formatted_address": "8 Whiteman St, Southbank VIC 3006, Australia"
+      },
+      "description": "𝗧𝗛𝗘 𝗩𝗜𝗖𝗧𝗢𝗥𝗜𝗔𝗡 𝗣𝗢𝗞𝗘𝗥 𝗖𝗛𝗔𝗠𝗣𝗜𝗢𝗡𝗦𝗛𝗜𝗣 𝗥𝗘𝗧𝗨𝗥𝗡𝗦 𝗜𝗡 𝟮𝟬𝟮𝟲!\n\nAfter delivering a massive $2 Million Series in 2025, the Victorian Poker Championship is set to return to the iconic Crown Poker Room from 12-27 October 2026.\n\nFresh off the hugely successful return of the Aussie Millions, Crown Melbourne is once again preparing to welcome players from across Australia and around the world for two weeks of championship poker action.\n\nWith major events, packed side schedules, industry-leading tournament operations, and one of the most prestigious poker rooms in the Asia-Pacific, all signs point to the Victorian Poker Championship aiming to go even bigger in 2026.\n\n12-27 October 2026\n\nCrown Melbourne Poker Room\n\nFull schedule and satellite details coming soon\n\nThe countdown starts now!",
+      "description_links": [],
+      "details": {
+        "start": "October 12",
+        "end": "October 27",
+        "website": "https://www.crownmelbourne.com.au/casino/table-games/poker"
+      },
+      "hero_image": {
+        "alt": "2026 Crown Poker Melbourne - Victorian Poker Champs",
+        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/06/2026-Crown-Poker-Melbourne-Victorian-Poker-Champs.jpg"
+      },
+      "images": [
+        {
+          "alt": "2026 Crown Poker Melbourne - Victorian Poker Champs",
+          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/06/2026-Crown-Poker-Melbourne-Victorian-Poker-Champs.jpg"
+        }
+      ],
+      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/06/2026-Crown-Poker-Melbourne-Victorian-Poker-Champs.jpg",
+      "ical_url": "webcal://australianpokerschedule.com.au/event/crown-poker-victorian-poker-champs-melbourne-vic/?ical=1",
+      "outlook_location": "Crown Melbourne, 8 Whiteman St, Southbank, Melbourne, VIC, 3006, Australia",
+      "source_scraped": "2026-10-02",
+      "poster_facts": {
+        "prior_year": "$2 Million series in 2025",
+        "status": "Full schedule and satellite details coming soon"
+      }
+    },
+    {
+      "title": "APL – The Ville 600 – Townsville (QLD)",
+      "url": "https://australianpokerschedule.com.au/event/apl-the-ville-600-townsville-qld-3/",
+      "slug": "apl-the-ville-600-townsville-qld-3",
+      "tour_brand": "Australian Poker League (APL)",
+      "region": "QLD",
+      "start_date": "2026-10-18",
+      "end_date": "2026-10-25",
+      "duration_days": 8,
+      "date_text": "October 18 - October 25",
+      "listing_date_text": "18October2026 October 18 - October 25",
+      "month_label": "Oct 2026",
+      "organiser": {
+        "name": "Australian Poker League (inferred from event website playapl.com; no organiser block on page)",
+        "website": "https://playapl.com/"
+      },
+      "venue": {
+        "name": "The Ville Resort Casino",
+        "street": "Sir Leslie Thiess Dr",
+        "google_maps_search_url": "https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=Sir+Leslie+Thiess+Dr+Townsville+QLD+4810+Australia",
+        "address_query": "Sir Leslie Thiess Dr Townsville QLD 4810 Australia",
+        "full_address": "Sir Leslie Thiess Dr, Townsville City QLD 4810, Australia",
+        "google_place_cid": "6457001103532233432",
+        "city": "Townsville",
+        "state": "QLD",
+        "postcode": "4810",
+        "country": "Australia",
+        "lat": -19.2542771,
+        "lng": 146.8256752,
+        "google_formatted_address": "Sir Leslie Thiess Dr, Townsville City QLD 4810, Australia"
+      },
+      "description": "",
+      "description_links": [],
+      "details": {
+        "start": "October 18",
+        "end": "October 25",
+        "website": "https://playapl.com/"
+      },
+      "hero_image": {
+        "alt": "",
+        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2023/12/APL_ville600_generic.jpg"
+      },
+      "images": [
+        {
+          "alt": "",
+          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2023/12/APL_ville600_generic.jpg"
+        }
+      ],
+      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2023/12/APL_ville600_generic.jpg",
+      "ical_url": "webcal://australianpokerschedule.com.au/event/apl-the-ville-600-townsville-qld-3/?ical=1",
+      "outlook_location": "The Ville Resort Casino, Sir Leslie Thiess Dr, Townsville, QLD, 4810, Australia",
+      "source_scraped": "2026-10-02",
+      "poster_facts": {},
+      "organiser_inferred": true
+    },
+    {
+      "title": "Kings Poker – Sydney Millions – Kogarah/Sydney (NSW)",
+      "url": "https://australianpokerschedule.com.au/event/kings-poker-sydney-millions-kogarah-sydney-nsw/",
+      "slug": "kings-poker-sydney-millions-kogarah-sydney-nsw",
+      "tour_brand": "Kings Poker",
+      "region": "NSW",
+      "start_date": "2026-10-27",
+      "end_date": "2026-11-09",
+      "duration_days": 14,
+      "date_text": "October 27 - November 9",
+      "listing_date_text": "27October2026 October 27 - November 9",
+      "month_label": "Oct 2026",
+      "organiser": {
+        "name": "Kings Poker Sydney",
+        "website": "https://kingspoker.com.au/"
+      },
+      "venue": {
+        "name": "St. George Leagues Club",
+        "street": "124 Princes Hwy",
+        "google_maps_search_url": "https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=124+Princes+Hwy+Kogarah+NSW+2217+Australia",
+        "address_query": "124 Princes Hwy Kogarah NSW 2217 Australia",
+        "full_address": "124 Princes Hwy, Beverley Park NSW 2217, Australia",
+        "google_place_cid": "15155446269958877933",
+        "city": "Kogarah",
+        "state": "NSW",
+        "postcode": "2217",
+        "country": "Australia",
+        "lat": -33.9748356,
+        "lng": 151.1293057,
+        "google_formatted_address": "124 Princes Hwy, Beverley Park NSW 2217, Australia"
+      },
+      "description": "",
+      "description_links": [],
+      "details": {
+        "start": "October 27",
+        "end": "November 9",
+        "website": "https://kingspoker.com.au/"
+      },
+      "hero_image": {
+        "alt": "Kings Poker – Sydney Millions – Kogarah/Sydney (NSW)",
+        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/Kings-Poker-%E2%80%93-Sydney-Millions-%E2%80%93-Kogarah-Sydney.jpg"
+      },
+      "images": [
+        {
+          "alt": "Kings Poker – Sydney Millions – Kogarah/Sydney (NSW)",
+          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/Kings-Poker-%E2%80%93-Sydney-Millions-%E2%80%93-Kogarah-Sydney.jpg"
+        }
+      ],
+      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/Kings-Poker-%E2%80%93-Sydney-Millions-%E2%80%93-Kogarah-Sydney-1024x617.jpg",
+      "ical_url": "webcal://australianpokerschedule.com.au/event/kings-poker-sydney-millions-kogarah-sydney-nsw/?ical=1",
+      "outlook_location": "St. George Leagues Club, 124 Princes Hwy, Kogarah, NSW, 2217, Australia",
+      "source_scraped": "2026-10-02",
+      "poster_facts": {
+        "guarantee": "$4 Million+ series estimate",
+        "room": "Kings Room at St. George Leagues Club"
+      }
+    },
+    {
+      "title": "Australian Poker Tour – Sydney Champs (NSW)",
+      "url": "https://australianpokerschedule.com.au/event/australian-poker-tour-sydney-champs-nsw/",
+      "slug": "australian-poker-tour-sydney-champs-nsw",
+      "tour_brand": "Australian Poker Tour (APT)",
+      "region": "NSW",
+      "start_date": "2026-11-05",
+      "end_date": "2026-11-15",
+      "duration_days": 11,
+      "date_text": "November 5 - November 15",
+      "listing_date_text": "05November2026 November 5 - November 15",
+      "month_label": "Nov 2026",
+      "organiser": {
+        "name": "Australian Poker Tour",
+        "phone": "1300 566 979",
+        "email": "info@australianpokertour.com.au",
+        "website": "https://australianpokertour.com.au/"
+      },
+      "venue": {
+        "name": "Revesby Workers’ Club",
+        "street": "2B Brett St",
+        "google_maps_search_url": "https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=2B+Brett+St+Revesby+NSW+2212+Australia",
+        "address_query": "2B Brett St Revesby NSW 2212 Australia",
+        "full_address": "Workers Club, 2B Brett St, Revesby NSW 2212, Australia",
+        "google_place_cid": "15085532530973818437",
+        "city": "Revesby",
+        "state": "NSW",
+        "postcode": "2212",
+        "country": "Australia",
+        "website": "https://rwc.org.au/",
+        "lat": -33.9532588,
+        "lng": 151.0139422,
+        "google_formatted_address": "Workers Club, 2B Brett St, Revesby NSW 2212, Australia"
+      },
+      "description": "",
+      "description_links": [],
+      "details": {
+        "start": "November 5",
+        "end": "November 15",
+        "website": "https://australianpokertour.com.au/"
+      },
+      "hero_image": {
+        "alt": "",
+        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Australian-Poker-Tour-Generic.jpg"
+      },
+      "images": [
+        {
+          "alt": "",
+          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Australian-Poker-Tour-Generic.jpg"
+        }
+      ],
+      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Australian-Poker-Tour-Generic.jpg",
+      "ical_url": "webcal://australianpokerschedule.com.au/event/australian-poker-tour-sydney-champs-nsw/?ical=1",
+      "outlook_location": "Revesby Workers’ Club, 2B Brett St, Revesby, NSW, 2212, Australia",
+      "source_scraped": "2026-10-02",
+      "poster_facts": {}
+    },
+    {
+      "title": "APLPT – Albury – SS&A Club (NSW)",
+      "url": "https://australianpokerschedule.com.au/event/aplpt-albury-ssa-club-nsw-1/",
+      "slug": "aplpt-albury-ssa-club-nsw-1",
+      "tour_brand": "APL Poker Tour (APLPT)",
+      "region": "NSW",
+      "start_date": "2026-11-17",
+      "end_date": "2026-11-22",
+      "duration_days": 6,
+      "date_text": "November 17 - November 22",
+      "listing_date_text": "17November2026 November 17 - November 22",
+      "month_label": "Nov 2026",
+      "organiser": {
+        "name": "Australian Poker League",
+        "phone": "1800 344 669",
+        "email": "info@playapl.com",
+        "website": "https://playapl.com/"
+      },
+      "venue": {
+        "name": "SS&A Albury",
+        "street": "570/582 Olive St",
+        "google_maps_search_url": "https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=570%2F582+Olive+St+Albury+NSW+2640+Australia",
+        "address_query": "570/582 Olive St Albury NSW 2640 Australia",
+        "full_address": "570/582 Olive St, Albury NSW 2640, Australia",
+        "google_place_cid": "9242102400460718111",
+        "city": "Albury",
+        "state": "NSW",
+        "postcode": "2640",
+        "country": "Australia",
+        "lat": -36.078414,
+        "lng": 146.9196246,
+        "google_formatted_address": "570/582 Olive St, Albury NSW 2640, Australia"
+      },
+      "description": "",
+      "description_links": [],
+      "details": {
+        "start": "November 17",
+        "end": "November 22",
+        "website": "https://playapl.com/aplpt"
+      },
+      "hero_image": {
+        "alt": "",
+        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/07/APLPT_generic.jpg"
+      },
+      "images": [
+        {
+          "alt": "",
+          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/07/APLPT_generic.jpg"
+        }
+      ],
+      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/07/APLPT_generic.jpg",
+      "ical_url": "webcal://australianpokerschedule.com.au/event/aplpt-albury-ssa-club-nsw-1/?ical=1",
+      "outlook_location": "SS",
+      "source_scraped": "2026-10-02",
+      "poster_facts": {}
+    },
+    {
+      "title": "Australian Poker Tour – Gold Coast Champs (QLD)",
+      "url": "https://australianpokerschedule.com.au/event/australian-poker-tour-gold-coast-champs-qld/",
+      "slug": "australian-poker-tour-gold-coast-champs-qld",
+      "tour_brand": "Australian Poker Tour (APT)",
+      "region": "QLD",
+      "start_date": "2026-11-27",
+      "end_date": "2026-12-06",
+      "duration_days": 10,
+      "date_text": "November 27 - December 6",
+      "listing_date_text": "27November2026 November 27 - December 6",
+      "month_label": "Nov 2026",
+      "organiser": {
+        "name": "Australian Poker Tour",
+        "phone": "1300 566 979",
+        "email": "info@australianpokertour.com.au",
+        "website": "https://australianpokertour.com.au/"
+      },
+      "venue": {
+        "name": "Crowne Plaza Hotel, Surfers Paradise",
+        "street": "2807 Gold Coast Hwy",
+        "google_maps_search_url": "https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=2807+Gold+Coast+Hwy+Surfers+Paradise+Queensland+4217+Australia",
+        "address_query": "2807 Gold Coast Hwy Surfers Paradise Queensland 4217 Australia",
+        "full_address": "2807 Gold Coast Hwy, Surfers Paradise QLD 4217, Australia",
+        "google_place_cid": "8493836109057402976",
+        "city": "Surfers Paradise",
+        "state": "Queensland",
+        "postcode": "4217",
+        "country": "Australia",
+        "website": "https://crowneplazasurfersparadise.com.au/",
+        "lat": -28.0178214,
+        "lng": 153.4298943,
+        "google_formatted_address": "2807 Gold Coast Hwy, Surfers Paradise QLD 4217, Australia"
+      },
+      "description": "",
+      "description_links": [],
+      "details": {
+        "start": "November 27",
+        "end": "December 6",
+        "website": "https://australianpokertour.com.au/live-feed/"
+      },
+      "hero_image": {
+        "alt": "Australian Poker Tour November Gold Coast",
+        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Australian-Poker-Tour-November-Gold-Coast.jpg"
+      },
+      "images": [
+        {
+          "alt": "Australian Poker Tour November Gold Coast",
+          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Australian-Poker-Tour-November-Gold-Coast.jpg"
+        }
+      ],
+      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Australian-Poker-Tour-November-Gold-Coast.jpg",
+      "ical_url": "webcal://australianpokerschedule.com.au/event/australian-poker-tour-gold-coast-champs-qld/?ical=1",
+      "outlook_location": "Crowne Plaza Hotel, Surfers Paradise, 2807 Gold Coast Hwy, Surfers Paradise, Queensland, 4217, Australia",
+      "source_scraped": "2026-10-02",
+      "poster_facts": {}
+    },
+    {
+      "title": "Kings Poker – Kings Cup – Churchill’s Sports Bar Kingsford/Sydney (NSW)",
+      "url": "https://australianpokerschedule.com.au/event/kings-poker-kings-cup-churchills-sports-bar-kingsford-sydney-nsw-4/",
+      "slug": "kings-poker-kings-cup-churchills-sports-bar-kingsford-sydney-nsw-4",
+      "tour_brand": "Kings Poker",
+      "region": "NSW",
+      "start_date": "2026-12-01",
+      "end_date": "2026-12-13",
+      "duration_days": 13,
+      "date_text": "December 1 - December 13",
+      "listing_date_text": "01December2026 December 1 - December 13",
+      "month_label": "Dec 2026",
+      "organiser": {
+        "name": "Kings Poker Sydney",
+        "website": "https://kingspoker.com.au/"
+      },
+      "venue": {
+        "name": "Churchills Sports Bar",
+        "street": "536 Anzac Parade",
+        "google_maps_search_url": "https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=536+Anzac+Parade+Kingsford+NSW+2032+Australia",
+        "address_query": "536 Anzac Parade Kingsford NSW 2032 Australia",
+        "full_address": "536 Anzac Parade, Kingsford NSW 2032, Australia",
+        "google_place_cid": "17460798705859053173",
+        "city": "Kingsford",
+        "state": "NSW",
+        "postcode": "2032",
+        "country": "Australia",
+        "lat": -33.9238459,
+        "lng": 151.2281277,
+        "google_formatted_address": "536 Anzac Parade, Kingsford NSW 2032, Australia"
+      },
+      "description": "",
+      "description_links": [],
+      "details": {
+        "start": "December 1",
+        "end": "December 13",
+        "website": "https://kingspoker.com.au/"
+      },
+      "hero_image": {
+        "alt": "Kings Poker – Kings Cup – Churchill’s Sports Bar Kingsford/Sydney (NSW)",
+        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/Untitled-20260728-114333-0290-scaled.jpg"
+      },
+      "images": [
+        {
+          "alt": "Kings Poker – Kings Cup – Churchill’s Sports Bar Kingsford/Sydney (NSW)",
+          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/Untitled-20260728-114333-0290-scaled.jpg"
+        }
+      ],
+      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/Untitled-20260728-114333-0290-1024x576.jpg",
+      "ical_url": "webcal://australianpokerschedule.com.au/event/kings-poker-kings-cup-churchills-sports-bar-kingsford-sydney-nsw-4/?ical=1",
+      "outlook_location": "Churchills Sports Bar, 536 Anzac Parade, Kingsford, NSW, 2032, Australia",
+      "source_scraped": "2026-10-02",
+      "poster_facts": {
+        "guarantee": "$525,000 guaranteed",
+        "series_name": "The Kings Cup Series"
+      }
+    },
+    {
+      "title": "Australian Poker Tour – Melbourne Champs III (VIC)",
+      "url": "https://australianpokerschedule.com.au/event/australian-poker-tour-melbourne-champs-iii-vic/",
+      "slug": "australian-poker-tour-melbourne-champs-iii-vic",
+      "tour_brand": "Australian Poker Tour (APT)",
+      "region": "VIC",
+      "start_date": "2027-01-08",
+      "end_date": "2027-01-26",
+      "duration_days": 19,
+      "date_text": "January 8, 2027 - January 26, 2027",
+      "listing_date_text": "08January2027 January 8, 2027 - January 26, 2027",
+      "month_label": "Jan 2027",
+      "organiser": {
+        "name": "Australian Poker Tour",
+        "phone": "1300 566 979",
+        "email": "info@australianpokertour.com.au",
+        "website": "https://australianpokertour.com.au/"
+      },
+      "venue": {
+        "name": "Crown Melbourne",
+        "street": "8 Whiteman St",
+        "google_maps_search_url": "https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=8+Whiteman+St+Southbank%2C+Melbourne+VIC+3006+Australia",
+        "address_query": "8 Whiteman St Southbank, Melbourne VIC 3006 Australia",
+        "full_address": "8 Whiteman St, Southbank VIC 3006, Australia",
+        "google_place_cid": "8141569976729886558",
+        "city": "Southbank, Melbourne",
+        "state": "VIC",
+        "postcode": "3006",
+        "country": "Australia",
+        "lat": -37.8239578,
+        "lng": 144.9594467,
+        "google_formatted_address": "8 Whiteman St, Southbank VIC 3006, Australia"
+      },
+      "description": "",
+      "description_links": [],
+      "details": {
+        "start": "January 8, 2027",
+        "end": "January 26, 2027",
+        "website": "https://australianpokertour.com.au/"
+      },
+      "hero_image": {
+        "alt": "",
+        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Australian-Poker-Tour-Generic.jpg"
+      },
+      "images": [
+        {
+          "alt": "",
+          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Australian-Poker-Tour-Generic.jpg"
+        }
+      ],
+      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Australian-Poker-Tour-Generic.jpg",
+      "ical_url": "webcal://australianpokerschedule.com.au/event/australian-poker-tour-melbourne-champs-iii-vic/?ical=1",
+      "outlook_location": "Crown Melbourne, 8 Whiteman St, Southbank, Melbourne, VIC, 3006, Australia",
+      "source_scraped": "2026-10-02",
+      "poster_facts": {}
+    },
+    {
+      "title": "Kings Poker – Kings Cup – Churchill’s Sports Bar Kingsford/Sydney (NSW)",
+      "url": "https://australianpokerschedule.com.au/event/kings-poker-kings-cup-churchills-sports-bar-kingsford-sydney-nsw-5/",
+      "slug": "kings-poker-kings-cup-churchills-sports-bar-kingsford-sydney-nsw-5",
+      "tour_brand": "Kings Poker",
+      "region": "NSW",
+      "start_date": "2027-01-10",
+      "end_date": "2027-01-24",
+      "duration_days": 15,
+      "date_text": "January 10, 2027 - January 24, 2027",
+      "listing_date_text": "10January2027 January 10, 2027 - January 24, 2027",
+      "month_label": "Jan 2027",
+      "organiser": {
+        "name": "Kings Poker Sydney",
+        "website": "https://kingspoker.com.au/"
+      },
+      "venue": {
+        "name": "Churchills Sports Bar",
+        "street": "536 Anzac Parade",
+        "google_maps_search_url": "https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=536+Anzac+Parade+Kingsford+NSW+2032+Australia",
+        "address_query": "536 Anzac Parade Kingsford NSW 2032 Australia",
+        "full_address": "536 Anzac Parade, Kingsford NSW 2032, Australia",
+        "google_place_cid": "17460798705859053173",
+        "city": "Kingsford",
+        "state": "NSW",
+        "postcode": "2032",
+        "country": "Australia",
+        "lat": -33.9238459,
+        "lng": 151.2281277,
+        "google_formatted_address": "536 Anzac Parade, Kingsford NSW 2032, Australia"
+      },
+      "description": "",
+      "description_links": [],
+      "details": {
+        "start": "January 10, 2027",
+        "end": "January 24, 2027",
+        "website": "https://kingspoker.com.au/"
+      },
+      "hero_image": {
+        "alt": "Kings Poker – Kings Cup – Churchill’s Sports Bar Kingsford/Sydney (NSW)",
+        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/07/Untitled-20260728-114112-9996-scaled.jpg"
+      },
+      "images": [
+        {
+          "alt": "Kings Poker – Kings Cup – Churchill’s Sports Bar Kingsford/Sydney (NSW)",
+          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/07/Untitled-20260728-114112-9996-scaled.jpg"
+        }
+      ],
+      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/07/Untitled-20260728-114112-9996-1024x576.jpg",
+      "ical_url": "webcal://australianpokerschedule.com.au/event/kings-poker-kings-cup-churchills-sports-bar-kingsford-sydney-nsw-5/?ical=1",
+      "outlook_location": "Churchills Sports Bar, 536 Anzac Parade, Kingsford, NSW, 2032, Australia",
+      "source_scraped": "2026-10-02",
+      "poster_facts": {
+        "guarantee": "$525,000 guaranteed",
+        "series_name": "The Kings Cup Series"
+      }
+    },
+    {
+      "title": "Kings Poker – Chinese NY Lunar Series – Kogarah/Sydney (NSW)",
+      "url": "https://australianpokerschedule.com.au/event/kings-poker-chinese-ny-lunar-series-kogarah-sydney-nsw-2/",
+      "slug": "kings-poker-chinese-ny-lunar-series-kogarah-sydney-nsw-2",
+      "tour_brand": "Kings Poker",
+      "region": "NSW",
+      "start_date": "2027-02-02",
+      "end_date": "2027-02-15",
+      "duration_days": 14,
+      "date_text": "February 2, 2027 - February 15, 2027",
+      "listing_date_text": "02February2027 February 2, 2027 - February 15, 2027",
+      "month_label": "Feb 2027",
+      "organiser": {
+        "name": "Kings Poker Sydney",
+        "website": "https://kingspoker.com.au/"
+      },
+      "venue": {
+        "name": "St. George Leagues Club",
+        "street": "124 Princes Hwy",
+        "google_maps_search_url": "https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=124+Princes+Hwy+Kogarah+NSW+2217+Australia",
+        "address_query": "124 Princes Hwy Kogarah NSW 2217 Australia",
+        "full_address": "124 Princes Hwy, Beverley Park NSW 2217, Australia",
+        "google_place_cid": "15155446269958877933",
+        "city": "Kogarah",
+        "state": "NSW",
+        "postcode": "2217",
+        "country": "Australia",
+        "lat": -33.9748356,
+        "lng": 151.1293057,
+        "google_formatted_address": "124 Princes Hwy, Beverley Park NSW 2217, Australia"
+      },
+      "description": "",
+      "description_links": [],
+      "details": {
+        "start": "February 2, 2027",
+        "end": "February 15, 2027",
+        "website": "https://kingspoker.com.au/"
+      },
+      "hero_image": {
+        "alt": "Kings Poker - Chinese NY Lunar Series - Kogarah/Sydney (NSW)",
+        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/07/Untitled-20260728-113446-4489.jpg"
+      },
+      "images": [
+        {
+          "alt": "Kings Poker - Chinese NY Lunar Series - Kogarah/Sydney (NSW)",
+          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/07/Untitled-20260728-113446-4489.jpg"
+        }
+      ],
+      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/07/Untitled-20260728-113446-4489-1024x576.jpg",
+      "ical_url": "webcal://australianpokerschedule.com.au/event/kings-poker-chinese-ny-lunar-series-kogarah-sydney-nsw-2/?ical=1",
+      "outlook_location": "St. George Leagues Club, 124 Princes Hwy, Kogarah, NSW, 2217, Australia",
+      "source_scraped": "2026-10-02",
+      "poster_facts": {
+        "guarantee": "$2 Million+ estimate at Kings Room",
+        "room": "Kings Premium Poker Room"
+      }
+    },
+    {
+      "title": "Australian Poker Tour – Adelaide Champs II – Mawson Lakes (SA)",
+      "url": "https://australianpokerschedule.com.au/event/australian-poker-tour-adelaide-champs-ii-mawson-lakes-sa/",
+      "slug": "australian-poker-tour-adelaide-champs-ii-mawson-lakes-sa",
+      "tour_brand": "Australian Poker Tour (APT)",
+      "region": "SA",
+      "start_date": "2027-02-12",
+      "end_date": "2027-02-22",
+      "duration_days": 11,
+      "date_text": "February 12, 2027 - February 22, 2027",
+      "listing_date_text": "12February2027 February 12, 2027 - February 22, 2027",
+      "month_label": "Feb 2027",
+      "organiser": {
+        "name": "Australian Poker Tour",
+        "phone": "1300 566 979",
+        "email": "info@australianpokertour.com.au",
+        "website": "https://australianpokertour.com.au/"
+      },
+      "venue": {
+        "name": "Crowne Plaza Hotel, Mawson Lakes, Adelaide",
+        "street": "1-3 Metro Parade",
+        "google_maps_search_url": "https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=1-3+Metro+Parade+Mawson+Lakes+SA+5095+Australia",
+        "address_query": "1-3 Metro Parade Mawson Lakes SA 5095 Australia",
+        "full_address": "1-3 Metro Parade, Mawson Lakes SA 5095, Australia",
+        "google_place_cid": "2937729560682968242",
+        "city": "Mawson Lakes",
+        "state": "SA",
+        "postcode": "5095",
+        "country": "Australia",
+        "website": "https://www.ihg.com/crowneplaza/hotels/us/en/adelaide/adlml/hoteldetail",
+        "lat": -34.8060206,
+        "lng": 138.616711,
+        "google_formatted_address": "1-3 Metro Parade, Mawson Lakes SA 5095, Australia"
+      },
+      "description": "",
+      "description_links": [],
+      "details": {
+        "start": "February 12, 2027",
+        "end": "February 22, 2027",
+        "website": "https://australianpokertour.com.au/live-feed/"
+      },
+      "hero_image": {
+        "alt": "",
+        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Australian-Poker-Tour-Generic.jpg"
+      },
+      "images": [
+        {
+          "alt": "",
+          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Australian-Poker-Tour-Generic.jpg"
+        }
+      ],
+      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Australian-Poker-Tour-Generic.jpg",
+      "ical_url": "webcal://australianpokerschedule.com.au/event/australian-poker-tour-adelaide-champs-ii-mawson-lakes-sa/?ical=1",
+      "outlook_location": "Crowne Plaza Hotel, Mawson Lakes, Adelaide, 1-3 Metro Parade, Mawson Lakes, SA, 5095, Australia",
+      "source_scraped": "2026-10-02",
+      "poster_facts": {}
+    },
+    {
+      "title": "APL Million Sydney – The Star (NSW)",
+      "url": "https://australianpokerschedule.com.au/event/apl-million-sydney-the-star-nsw/",
+      "slug": "apl-million-sydney-the-star-nsw",
+      "tour_brand": "Australian Poker League (APL)",
+      "region": "NSW",
+      "start_date": "2027-02-24",
+      "end_date": "2027-03-15",
+      "duration_days": 20,
+      "date_text": "February 24, 2027 - March 15, 2027",
+      "listing_date_text": "24February2027 February 24, 2027 - March 15, 2027",
+      "month_label": "Feb 2027",
+      "organiser": {
+        "name": "Australian Poker League",
+        "phone": "1800 344 669",
+        "email": "info@playapl.com",
+        "website": "https://playapl.com/"
+      },
+      "venue": {
+        "name": "The Star, Sydney",
+        "street": "20-80 Pyrmont St",
+        "google_maps_search_url": "https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=20-80+Pyrmont+St+Pyrmont+NSW+2009+Australia",
+        "address_query": "20-80 Pyrmont St Pyrmont NSW 2009 Australia",
+        "full_address": "20-80 Pyrmont St, Pyrmont NSW 2009, Australia",
+        "google_place_cid": "4850043914112776913",
+        "city": "Pyrmont",
+        "state": "NSW",
+        "postcode": "2009",
+        "country": "Australia",
+        "lat": -33.8682823,
+        "lng": 151.1949879,
+        "google_formatted_address": "20-80 Pyrmont St, Pyrmont NSW 2009, Australia"
+      },
+      "description": "",
+      "description_links": [],
+      "details": {
+        "start": "February 24, 2027",
+        "end": "March 15, 2027",
+        "website": "https://playapl.com/"
+      },
+      "hero_image": {
+        "alt": "APL Million Sydney - The Star (NSW)",
+        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/08/Untitled-20260828-143752-3047.jpg"
+      },
+      "images": [
+        {
+          "alt": "APL Million Sydney - The Star (NSW)",
+          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/08/Untitled-20260828-143752-3047.jpg"
+        }
+      ],
+      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/08/Untitled-20260828-143752-3047-1024x576.jpg",
+      "ical_url": "webcal://australianpokerschedule.com.au/event/apl-million-sydney-the-star-nsw/?ical=1",
+      "outlook_location": "The Star, Sydney, 20-80 Pyrmont St, Pyrmont, NSW, 2009, Australia",
+      "source_scraped": "2026-10-02",
+      "poster_facts": {
+        "tagline": "Australia's largest poker series, now twice a year. We're going back to where it began!",
+        "series_name": "APL Million 2027",
+        "socials": {
+          "facebook": "Play APL",
+          "instagram": "APL_Major_Events",
+          "x": "APLMajorEvents"
+        },
+        "note": "18+ venue; GambleAware NSW 1800 858 858"
+      }
+    },
+    {
+      "title": "Nouméa Poker Series – Casinos de Nouméa, New Caledonia (STH PACIFIC)",
+      "url": "https://australianpokerschedule.com.au/event/noumea-poker-series-casinos-de-noumea-new-caledonia-sth-pacific/",
+      "slug": "noumea-poker-series-casinos-de-noumea-new-caledonia-sth-pacific",
+      "tour_brand": "Nouméa Poker Series",
+      "region": "STH PACIFIC",
+      "start_date": "2027-03-06",
+      "end_date": "2027-03-14",
+      "duration_days": 9,
+      "date_text": "March 6, 2027 - March 14, 2027",
+      "listing_date_text": "06March2027 March 6, 2027 - March 14, 2027",
+      "month_label": "Mar 2027",
+      "organiser": {
+        "name": "the Grand Casino de Nouméa",
+        "phone": "+687242020",
+        "website": "https://casinodenoumea.nc/"
+      },
+      "venue": {
+        "name": "the Grand Casino de Nouméa",
+        "street": "5 Prom. Pierre Vernier",
+        "google_maps_search_url": "https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=5+Prom.+Pierre+Vernier+Noum%C3%A9a+98800+New+Caledonia",
+        "address_query": "5 Prom. Pierre Vernier Nouméa 98800 New Caledonia",
+        "full_address": "5 Prom. Pierre Vernier, Nouméa 98800, New Caledonia",
+        "google_place_cid": "12695804411320938741",
+        "city": "Nouméa",
+        "postcode": "98800",
+        "country": "New Caledonia",
+        "website": "https://www.casinodenoumea.nc/",
+        "lat": -22.3093533,
+        "lng": 166.4515596,
+        "google_formatted_address": "5 Prom. Pierre Vernier, Nouméa 98800, New Caledonia"
+      },
+      "description": "",
+      "description_links": [],
+      "details": {
+        "start": "March 6, 2027",
+        "end": "March 14, 2027",
+        "website": "https://casinodenoumea.nc/en/"
+      },
+      "hero_image": {
+        "alt": "Nouméa Poker Series - Casinos de Nouméa New Caledonia",
+        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/08/Noumea-Poker-Series-Casinos-de-Noumea-New-Caledonia.jpg"
+      },
+      "images": [
+        {
+          "alt": "Nouméa Poker Series - Casinos de Nouméa New Caledonia",
+          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/08/Noumea-Poker-Series-Casinos-de-Noumea-New-Caledonia.jpg"
+        }
+      ],
+      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/08/Noumea-Poker-Series-Casinos-de-Noumea-New-Caledonia-1024x575.jpg",
+      "ical_url": "webcal://australianpokerschedule.com.au/event/noumea-poker-series-casinos-de-noumea-new-caledonia-sth-pacific/?ical=1",
+      "outlook_location": "the Grand Casino de Nouméa, 5 Prom. Pierre Vernier, Nouméa, 98800, New Caledonia",
+      "source_scraped": "2026-10-02",
+      "poster_facts": {
+        "tagline": "Where Poker Meets Paradise",
+        "days": "9-day poker festival in New Caledonia",
+        "series_name": "Nouméa Poker Series 2027"
+      }
+    },
+    {
+      "title": "Australian Poker Tour – Sydney Champs II (NSW)",
+      "url": "https://australianpokerschedule.com.au/event/australian-poker-tour-sydney-champs-ii-nsw/",
+      "slug": "australian-poker-tour-sydney-champs-ii-nsw",
+      "tour_brand": "Australian Poker Tour (APT)",
+      "region": "NSW",
+      "start_date": "2027-03-19",
+      "end_date": "2027-03-29",
+      "duration_days": 11,
+      "date_text": "March 19, 2027 - March 29, 2027",
+      "listing_date_text": "19March2027 March 19, 2027 - March 29, 2027",
+      "month_label": "Mar 2027",
+      "organiser": {
+        "name": "Australian Poker Tour",
+        "phone": "1300 566 979",
+        "email": "info@australianpokertour.com.au",
+        "website": "https://australianpokertour.com.au/"
+      },
+      "venue": {
+        "name": "Revesby Workers’ Club",
+        "street": "2B Brett St",
+        "google_maps_search_url": "https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=2B+Brett+St+Revesby+NSW+2212+Australia",
+        "address_query": "2B Brett St Revesby NSW 2212 Australia",
+        "full_address": "Workers Club, 2B Brett St, Revesby NSW 2212, Australia",
+        "google_place_cid": "15085532530973818437",
+        "city": "Revesby",
+        "state": "NSW",
+        "postcode": "2212",
+        "country": "Australia",
+        "website": "https://rwc.org.au/",
+        "lat": -33.9532588,
+        "lng": 151.0139422,
+        "google_formatted_address": "Workers Club, 2B Brett St, Revesby NSW 2212, Australia"
+      },
+      "description": "",
+      "description_links": [],
+      "details": {
+        "start": "March 19, 2027",
+        "end": "March 29, 2027",
+        "website": "https://australianpokertour.com.au/"
+      },
+      "hero_image": {
+        "alt": "",
+        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Australian-Poker-Tour-Generic.jpg"
+      },
+      "images": [
+        {
+          "alt": "",
+          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Australian-Poker-Tour-Generic.jpg"
+        }
+      ],
+      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Australian-Poker-Tour-Generic.jpg",
+      "ical_url": "webcal://australianpokerschedule.com.au/event/australian-poker-tour-sydney-champs-ii-nsw/?ical=1",
+      "outlook_location": "Revesby Workers’ Club, 2B Brett St, Revesby, NSW, 2212, Australia",
+      "source_scraped": "2026-10-02",
+      "poster_facts": {}
+    },
+    {
+      "title": "Australian Poker Tour – Melbourne Champs IV (VIC)",
+      "url": "https://australianpokerschedule.com.au/event/australian-poker-tour-melbourne-champs-iv-vic/",
+      "slug": "australian-poker-tour-melbourne-champs-iv-vic",
+      "tour_brand": "Australian Poker Tour (APT)",
+      "region": "VIC",
+      "start_date": "2027-04-08",
+      "end_date": "2027-04-18",
+      "duration_days": 11,
+      "date_text": "April 8, 2027 - April 18, 2027",
+      "listing_date_text": "08April2027 April 8, 2027 - April 18, 2027",
+      "month_label": "Apr 2027",
+      "organiser": {
+        "name": "Australian Poker Tour",
+        "phone": "1300 566 979",
+        "email": "info@australianpokertour.com.au",
+        "website": "https://australianpokertour.com.au/"
+      },
+      "venue": {
+        "name": "Crown Melbourne",
+        "street": "8 Whiteman St",
+        "google_maps_search_url": "https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=8+Whiteman+St+Southbank%2C+Melbourne+VIC+3006+Australia",
+        "address_query": "8 Whiteman St Southbank, Melbourne VIC 3006 Australia",
+        "full_address": "8 Whiteman St, Southbank VIC 3006, Australia",
+        "google_place_cid": "8141569976729886558",
+        "city": "Southbank, Melbourne",
+        "state": "VIC",
+        "postcode": "3006",
+        "country": "Australia",
+        "lat": -37.8239578,
+        "lng": 144.9594467,
+        "google_formatted_address": "8 Whiteman St, Southbank VIC 3006, Australia"
+      },
+      "description": "",
+      "description_links": [],
+      "details": {
+        "start": "April 8, 2027",
+        "end": "April 18, 2027",
+        "website": "https://australianpokertour.com.au/"
+      },
+      "hero_image": {
+        "alt": "",
+        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Australian-Poker-Tour-Generic.jpg"
+      },
+      "images": [
+        {
+          "alt": "",
+          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Australian-Poker-Tour-Generic.jpg"
+        }
+      ],
+      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Australian-Poker-Tour-Generic.jpg",
+      "ical_url": "webcal://australianpokerschedule.com.au/event/australian-poker-tour-melbourne-champs-iv-vic/?ical=1",
+      "outlook_location": "Crown Melbourne, 8 Whiteman St, Southbank, Melbourne, VIC, 3006, Australia",
+      "source_scraped": "2026-10-02",
+      "poster_facts": {}
+    },
+    {
+      "title": "2027 Aussie Millions – Crown Melbourne",
+      "url": "https://australianpokerschedule.com.au/event/2027-aussie-millions-crown-melbourne/",
+      "slug": "2027-aussie-millions-crown-melbourne",
+      "tour_brand": "Crown Poker",
+      "region": "VIC",
+      "start_date": "2027-04-08",
+      "end_date": "2027-04-24",
+      "duration_days": 17,
+      "date_text": "April 8, 2027 - April 24, 2027",
+      "listing_date_text": "08April2027 April 8, 2027 - April 24, 2027",
+      "month_label": "Apr 2027",
+      "organiser": {
+        "name": "Crown Poker",
+        "phone": "(03) 9292 8888",
+        "website": "https://www.crownmelbourne.com.au/casino/table-games/poker"
+      },
+      "venue": {
+        "name": "Crown Melbourne",
+        "street": "8 Whiteman St",
+        "google_maps_search_url": "https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=8+Whiteman+St+Southbank%2C+Melbourne+VIC+3006+Australia",
+        "address_query": "8 Whiteman St Southbank, Melbourne VIC 3006 Australia",
+        "full_address": "8 Whiteman St, Southbank VIC 3006, Australia",
+        "google_place_cid": "8141569976729886558",
+        "city": "Southbank, Melbourne",
+        "state": "VIC",
+        "postcode": "3006",
+        "country": "Australia",
+        "lat": -37.8239578,
+        "lng": 144.9594467,
+        "google_formatted_address": "8 Whiteman St, Southbank VIC 3006, Australia"
+      },
+      "description": "",
+      "description_links": [],
+      "details": {
+        "start": "April 8, 2027",
+        "end": "April 24, 2027",
+        "website": "https://www.crownmelbourne.com.au/casino/table-games/poker"
+      },
+      "hero_image": {
+        "alt": "2027 Aussie Millions - Crown Melbourne",
+        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2024/10/Aussie-Millions-Crown-2026.jpg"
+      },
+      "images": [
+        {
+          "alt": "2027 Aussie Millions - Crown Melbourne",
+          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2024/10/Aussie-Millions-Crown-2026.jpg"
+        }
+      ],
+      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2024/10/Aussie-Millions-Crown-2026.jpg",
+      "ical_url": "webcal://australianpokerschedule.com.au/event/2027-aussie-millions-crown-melbourne/?ical=1",
+      "outlook_location": "Crown Melbourne, 8 Whiteman St, Southbank, Melbourne, VIC, 3006, Australia",
+      "source_scraped": "2026-10-02",
+      "poster_facts": {}
+    }
+  ],
+  "organisers": [
+    {
+      "brand": "Australian Poker Tour (APT)",
+      "organiser_names": ["Australian Poker Tour"],
+      "phone": ["1300 566 979"],
+      "email": ["info@australianpokertour.com.au"],
+      "websites": [
+        "https://australianpokertour.com.au/",
+        "https://australianpokertour.com.au/live-feed/"
+      ],
+      "series": [
+        {
+          "title": "Australian Poker Tour – Melbourne Champs II (VIC)",
+          "dates": "2026-09-30 to 2026-10-11",
+          "venue": "Crown Melbourne, Metropol – Sky Bar 28",
+          "city": "Southbank, Melbourne",
+          "state": "VIC"
+        },
+        {
+          "title": "Australian Poker Tour – Sydney Champs (NSW)",
+          "dates": "2026-11-05 to 2026-11-15",
+          "venue": "Revesby Workers’ Club",
+          "city": "Revesby",
+          "state": "NSW"
+        },
+        {
+          "title": "Australian Poker Tour – Gold Coast Champs (QLD)",
+          "dates": "2026-11-27 to 2026-12-06",
+          "venue": "Crowne Plaza Hotel, Surfers Paradise",
+          "city": "Surfers Paradise",
+          "state": "Queensland"
+        },
+        {
+          "title": "Australian Poker Tour – Melbourne Champs III (VIC)",
+          "dates": "2027-01-08 to 2027-01-26",
+          "venue": "Crown Melbourne",
+          "city": "Southbank, Melbourne",
+          "state": "VIC"
+        },
+        {
+          "title": "Australian Poker Tour – Adelaide Champs II – Mawson Lakes (SA)",
+          "dates": "2027-02-12 to 2027-02-22",
+          "venue": "Crowne Plaza Hotel, Mawson Lakes, Adelaide",
+          "city": "Mawson Lakes",
+          "state": "SA"
+        },
+        {
+          "title": "Australian Poker Tour – Sydney Champs II (NSW)",
+          "dates": "2027-03-19 to 2027-03-29",
+          "venue": "Revesby Workers’ Club",
+          "city": "Revesby",
+          "state": "NSW"
+        },
+        {
+          "title": "Australian Poker Tour – Melbourne Champs IV (VIC)",
+          "dates": "2027-04-08 to 2027-04-18",
+          "venue": "Crown Melbourne",
+          "city": "Southbank, Melbourne",
+          "state": "VIC"
+        }
+      ]
+    },
+    {
+      "brand": "Aurum Poker",
+      "organiser_names": ["Aurum Poker Grand"],
+      "phone": ["(02) 9610 3666"],
+      "email": ["info@aurumpoker.com.au"],
+      "websites": ["https://aurumpoker.com.au/"],
+      "series": [
+        {
+          "title": "Sydney Showdown – Aurum Poker Grand, St. Johns Park (NSW)",
+          "dates": "2026-10-01 to 2026-10-19",
+          "venue": "Aurum Poker Grand, St. Johns Park Bowling Club",
+          "city": "St Johns park",
+          "state": "NSW"
+        }
+      ]
+    },
+    {
+      "brand": "APL Poker Tour (APLPT)",
+      "organiser_names": ["Australian Poker League"],
+      "phone": ["1800 344 669"],
+      "email": ["info@playapl.com"],
+      "websites": [
+        "https://playapl.com/",
+        "https://playapl.com/aplpt",
+        "https://www.playapl.com/aplpt/"
+      ],
+      "series": [
+        {
+          "title": "APLPT – Brisbane – Broncos Club (QLD)",
+          "dates": "2026-10-06 to 2026-10-11",
+          "venue": "Broncos Club",
+          "city": "Red Hill",
+          "state": "QLD"
+        },
+        {
+          "title": "APLPT – Albury – SS&A Club (NSW)",
+          "dates": "2026-11-17 to 2026-11-22",
+          "venue": "SS&A Albury",
+          "city": "Albury",
+          "state": "NSW"
+        }
+      ]
+    },
+    {
+      "brand": "Crown Poker",
+      "organiser_names": ["Crown Poker"],
+      "phone": ["(03) 9292 8888"],
+      "email": [],
+      "websites": ["https://www.crownmelbourne.com.au/casino/table-games/poker"],
+      "series": [
+        {
+          "title": "Crown Poker – Victorian Poker Champs, Melbourne (VIC)",
+          "dates": "2026-10-12 to 2026-10-27",
+          "venue": "Crown Melbourne",
+          "city": "Southbank, Melbourne",
+          "state": "VIC"
+        },
+        {
+          "title": "2027 Aussie Millions – Crown Melbourne",
+          "dates": "2027-04-08 to 2027-04-24",
+          "venue": "Crown Melbourne",
+          "city": "Southbank, Melbourne",
+          "state": "VIC"
+        }
+      ]
+    },
+    {
+      "brand": "Australian Poker League (APL)",
+      "organiser_names": [
+        "Australian Poker League",
+        "Australian Poker League (inferred from event website playapl.com; no organiser block on page)"
+      ],
+      "phone": ["1800 344 669"],
+      "email": ["info@playapl.com"],
+      "websites": ["https://playapl.com/"],
+      "series": [
+        {
+          "title": "APL – The Ville 600 – Townsville (QLD)",
+          "dates": "2026-10-18 to 2026-10-25",
+          "venue": "The Ville Resort Casino",
+          "city": "Townsville",
+          "state": "QLD"
+        },
+        {
+          "title": "APL Million Sydney – The Star (NSW)",
+          "dates": "2027-02-24 to 2027-03-15",
+          "venue": "The Star, Sydney",
+          "city": "Pyrmont",
+          "state": "NSW"
+        }
+      ]
+    },
+    {
+      "brand": "Kings Poker",
+      "organiser_names": ["Kings Poker Sydney"],
+      "phone": [],
+      "email": [],
+      "websites": ["https://kingspoker.com.au/"],
+      "series": [
+        {
+          "title": "Kings Poker – Sydney Millions – Kogarah/Sydney (NSW)",
+          "dates": "2026-10-27 to 2026-11-09",
+          "venue": "St. George Leagues Club",
+          "city": "Kogarah",
+          "state": "NSW"
+        },
+        {
+          "title": "Kings Poker – Kings Cup – Churchill’s Sports Bar Kingsford/Sydney (NSW)",
+          "dates": "2026-12-01 to 2026-12-13",
+          "venue": "Churchills Sports Bar",
+          "city": "Kingsford",
+          "state": "NSW"
+        },
+        {
+          "title": "Kings Poker – Kings Cup – Churchill’s Sports Bar Kingsford/Sydney (NSW)",
+          "dates": "2027-01-10 to 2027-01-24",
+          "venue": "Churchills Sports Bar",
+          "city": "Kingsford",
+          "state": "NSW"
+        },
+        {
+          "title": "Kings Poker – Chinese NY Lunar Series – Kogarah/Sydney (NSW)",
+          "dates": "2027-02-02 to 2027-02-15",
+          "venue": "St. George Leagues Club",
+          "city": "Kogarah",
+          "state": "NSW"
+        }
+      ]
+    },
+    {
+      "brand": "Nouméa Poker Series",
+      "organiser_names": ["the Grand Casino de Nouméa"],
+      "phone": ["+687242020"],
+      "email": [],
+      "websites": ["https://casinodenoumea.nc/", "https://casinodenoumea.nc/en/"],
+      "series": [
+        {
+          "title": "Nouméa Poker Series – Casinos de Nouméa, New Caledonia (STH PACIFIC)",
+          "dates": "2027-03-06 to 2027-03-14",
+          "venue": "the Grand Casino de Nouméa",
+          "city": "Nouméa",
+          "state": "New Caledonia"
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Scraped 2026-10-02 from the Series Timeline list view plus each event detail page (The Events Calendar WordPress plugin).",
+    "Dates are from each page's Google Calendar export link, so they are exact ISO dates. duration_days is inclusive.",
+    "poster_facts were read off the event hero/poster images (guarantees, taglines, sponsors). The full Melbourne Champs II tournament schedule is in data/melbourne-champs-ii-schedule.json.",
+    "Venue lat/lng and google_formatted_address come from the embedded Google Map on each page.",
+    "The Victorian Poker Champs page is the only event with written description copy; all others list only dates, organiser and venue."
+  ]
+}

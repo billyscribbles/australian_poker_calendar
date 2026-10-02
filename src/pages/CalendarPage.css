@@ -1,0 +1,128 @@
+.calendar-page {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding-top: 32px;
+}
+
+.calendar-page__title {
+  margin: 0 0 20px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 42px;
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+  color: var(--color-text);
+  text-wrap: pretty;
+}
+
+/* Tour strip */
+.tour-strip {
+  gap: 10px;
+  padding-bottom: 6px;
+}
+
+.tour-tile {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 110px;
+  height: 56px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-card);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.06em;
+  color: var(--color-muted);
+  transition:
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.tour-tile:hover,
+.tour-tile:focus-visible {
+  border-color: var(--color-accent);
+  color: var(--color-champagne);
+}
+
+/* A tile with a wordmark: the grey mark at rest, the colour one stacked on
+ * top and faded in on hover. Both share the one grid cell so the swap never
+ * moves anything; the tile's own width/height stay the text tile's. */
+.tour-tile__logo {
+  grid-area: 1 / 1;
+  width: 100px;
+  height: 40px;
+  object-fit: contain;
+  transition: opacity var(--transition-fast);
+}
+
+.tour-tile__logo--colour {
+  opacity: 0;
+}
+
+.tour-tile:hover .tour-tile__logo--colour,
+.tour-tile:focus-visible .tour-tile__logo--colour {
+  opacity: 1;
+}
+
+.tour-tile:hover .tour-tile__logo:not(.tour-tile__logo--colour),
+.tour-tile:focus-visible .tour-tile__logo:not(.tour-tile__logo--colour) {
+  opacity: 0;
+}
+
+.tour-tile--all {
+  border-style: dashed;
+  border-color: var(--color-control-border);
+  background: none;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: var(--color-accent);
+}
+
+/* Promo banner slot */
+.calendar-page__banner {
+  display: grid;
+  place-items: center;
+  /* The artwork's own shape (1080×135), so nothing is cropped at any width. */
+  aspect-ratio: 8 / 1;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+}
+
+.calendar-page__banner picture {
+  display: contents;
+}
+
+.calendar-page__banner-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 600px) {
+  /* Matches the 750×300 phone cut in calendarPage.banner.mobileSrc. */
+  .calendar-page__banner {
+    aspect-ratio: 5 / 2;
+  }
+}
+
+/* Up Next */
+.calendar-page__up-next {
+  padding-top: 16px;
+}
+
+@media (max-width: 600px) {
+  .calendar-page {
+    gap: 32px;
+    padding-top: 24px;
+  }
+  .calendar-page__title {
+    font-size: 32px;
+  }
+}

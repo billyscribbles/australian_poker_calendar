@@ -1,0 +1,10 @@
+dist
+dist-ssr
+.prerender
+.yarn
+.pnp.cjs
+.pnp.loader.mjs
+yarn.lock
+public
+.agents
+.claude

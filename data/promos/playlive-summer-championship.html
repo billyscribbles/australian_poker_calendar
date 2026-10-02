@@ -1,0 +1,71 @@
+<!doctype html>
+<!-- Source for public/images/promos/playlive-summer-championship.webp (1080×135, shipped at 2×).
+     Re-render:
+       "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --hide-scrollbars \
+         --allow-file-access-from-files --window-size=1080,135 --force-device-scale-factor=2 \
+         --virtual-time-budget=8000 --screenshot=out.png "file://$PWD/data/promos/playlive-summer-championship.html"
+       cwebp -q 85 out.png -o public/images/promos/playlive-summer-championship.webp -->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Montserrat:wght@800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="_shared.css" />
+    <style>
+      html,
+      body {
+        width: 1080px;
+        height: 135px;
+      }
+      .banner {
+        width: 1080px;
+        height: 135px;
+        background-position: 50% 24%;
+      }
+      .logo {
+        position: absolute;
+        left: 30px;
+        top: 36px;
+      }
+      .logo img {
+        height: 62px;
+      }
+      .lockup {
+        left: 380px;
+        top: 4px;
+        width: 322px;
+      }
+      .lockup img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+      .prize {
+        right: 32px;
+        top: 30px;
+      }
+      .gtd {
+        font-size: 38px;
+      }
+      .dates {
+        font-size: 20px;
+        margin-top: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="banner">
+      <div class="wash"></div>
+      <div class="tint"></div>
+      <div class="logo"><img src="../../public/images/tours/playlive.png" alt="" /></div>
+      <div class="lockup"><img src="assets/summer-championship-lockup.png" alt="" /></div>
+      <div class="prize">
+        <div class="gtd">$3,000,000 GTD</div>
+        <div class="dates">November 26<sup>th</sup> - December 15<sup>th</sup></div>
+      </div>
+    </div>
+  </body>
+</html>

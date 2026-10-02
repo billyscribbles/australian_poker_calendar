@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          # .nvmrc is the single source of truth for the Node version —
+          # local dev, CI, and Railway (Nixpacks) all read it.
+          node-version-file: .nvmrc
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Lint
+        run: yarn lint
+
+      - name: Check formatting
+        run: yarn format:check
+
+      - name: Test
+        run: yarn test
+
+      - name: Build
+        run: yarn build
+
+      # Enforces the CLAUDE.md launch thresholds: performance >= 90,
+      # accessibility >= 90, SEO >= 95. Serves the build via `yarn start`.
+      # Four routes, not one: the home page alone never exercises the contact
+      # form (where a11y problems cluster), a lazy route's own CSS, or a page
+      # whose prerendered document differs from the shell.
+      - name: Lighthouse
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          configPath: ./lighthouserc.json
+          temporaryPublicStorage: true

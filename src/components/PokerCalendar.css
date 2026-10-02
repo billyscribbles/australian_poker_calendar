@@ -1,0 +1,63 @@
+.poker-calendar__list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.calendar-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px;
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  transition: border-color var(--transition-fast);
+}
+
+.calendar-card:hover {
+  border-color: var(--color-accent);
+}
+
+.calendar-card__date {
+  flex: none;
+  width: 54px;
+  padding-right: 12px;
+  border-right: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.calendar-card__day {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 26px;
+  line-height: 1;
+  color: var(--color-accent);
+}
+
+.calendar-card__month {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--color-muted);
+}
+
+.calendar-card__body {
+  min-width: 0;
+}
+
+.calendar-card__name {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.5;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.calendar-card__meta {
+  font-size: 12px;
+  color: var(--color-muted);
+}

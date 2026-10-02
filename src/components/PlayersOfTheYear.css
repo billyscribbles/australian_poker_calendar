@@ -1,0 +1,78 @@
+.poy__list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.standing {
+  display: grid;
+  grid-template-columns: auto 56px 1fr auto;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--color-bg-selected), var(--color-bg-card));
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  transition: border-color var(--transition-fast);
+}
+
+.standing:hover {
+  border-color: var(--color-accent);
+}
+
+.standing__rank {
+  width: 32px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 28px;
+  color: var(--color-accent);
+}
+
+.standing__avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-accent);
+}
+
+.standing__body {
+  min-width: 0;
+}
+
+.standing__name {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.standing__sub {
+  font-size: 12px;
+  color: var(--color-muted);
+}
+
+.standing__index {
+  text-align: right;
+}
+
+.standing__index-label {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.standing__points {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 1;
+  color: var(--color-accent);
+}
+
+.standing__earnings {
+  font-size: 12px;
+  color: var(--color-muted);
+}

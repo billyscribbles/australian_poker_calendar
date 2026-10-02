@@ -1,0 +1,75 @@
+/* Shared styles for the PlayLive Summer Championship promo banners. The poster
+   look: an aerial sunset beach under a crimson multiply wash, the PlayLive
+   wordmark in its white/gold variant, and the supplied Summer Championship
+   lockup artwork. Rendered to webp by headless Chrome; see
+   the comment at the top of each .html file. */
+html,
+body {
+  margin: 0;
+  overflow: hidden;
+  background: #3a0a0e;
+}
+.banner {
+  position: relative;
+  overflow: hidden;
+  font-family: Montserrat, Arial, sans-serif;
+  color: #fff;
+  background: #3a0a0e url('assets/beach-sunset.jpg') center / cover no-repeat;
+}
+/* crimson wash, like the poster's overlay */
+.wash {
+  position: absolute;
+  inset: 0;
+  background: #8c1a22;
+  mix-blend-mode: multiply;
+  opacity: 0.78;
+}
+.tint {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(120, 16, 24, 0.55) 0%,
+    rgba(120, 16, 24, 0.05) 45%,
+    rgba(60, 8, 12, 0.55) 100%
+  );
+}
+.logo img {
+  display: block;
+  width: auto;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.55));
+}
+
+/* lockup: the supplied Summer Championship artwork (sun, rules, swooshes) */
+.lockup {
+  position: absolute;
+}
+.lockup img {
+  filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.45));
+}
+
+.prize {
+  position: absolute;
+  text-align: right;
+}
+.gtd {
+  font-weight: 800;
+  line-height: 1;
+  background: linear-gradient(180deg, #ffe9b0, #f4bd59 55%, #e5a23c);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+}
+.dates {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+}
+.dates sup {
+  font-size: 0.55em;
+  vertical-align: top;
+  position: relative;
+  top: 0.1em;
+}

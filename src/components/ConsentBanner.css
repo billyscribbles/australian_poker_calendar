@@ -1,0 +1,85 @@
+/* Intentionally minimal — a legal control, not a design feature. Restyle freely;
+   the behaviour lives in ConsentBanner.jsx and does not depend on any of this. */
+/* A single full-width bar along the bottom edge: text left, buttons right,
+   everything on one line. Below 900px the text is allowed to wrap. */
+.consent {
+  position: fixed;
+  z-index: 60;
+  inset: auto 0 0;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 12px 24px;
+  background: var(--color-dark);
+  color: #fff;
+  border-top: 1px solid var(--color-border);
+}
+
+.consent__text {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.82);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 900px) {
+  .consent {
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    padding: 12px 16px;
+  }
+  .consent__text {
+    flex-basis: 100%;
+    white-space: normal;
+  }
+}
+
+.consent__link {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.consent__link:hover {
+  color: var(--color-accent);
+}
+
+.consent__actions {
+  flex: none;
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.consent__btn {
+  white-space: nowrap;
+}
+
+.consent__btn {
+  padding: 8px 14px;
+  font: inherit;
+  font-size: 14px;
+  color: #fff;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+.consent__btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.consent__btn--accept {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  /* Gold fills take near-black text; white on gold is 2.1:1 and fails WCAG AA. */
+  color: var(--color-on-accent);
+}
+.consent__btn--accept:hover {
+  background: var(--color-accent-dark);
+}
