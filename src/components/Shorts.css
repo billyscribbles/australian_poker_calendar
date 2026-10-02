@@ -12,11 +12,6 @@
   overflow: hidden;
   border: 1px solid var(--color-border);
   color: var(--color-text);
-  transition: border-color var(--transition-fast);
-}
-
-.short-card:hover {
-  border-color: var(--color-accent);
 }
 
 .short-card__poster {

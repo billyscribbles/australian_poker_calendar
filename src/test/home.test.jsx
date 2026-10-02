@@ -188,15 +188,27 @@ describe('home fixtures — shape each section renders', () => {
 
   it('news lists carry a title, a date and a link', () => {
     expect(featuredNews.hero.title && featuredNews.hero.excerpt).toBeTruthy()
-    for (const list of [featuredNews.items, stories.items, liveNews.items, playerNews.items]) {
+    for (const list of [featuredNews.items, liveNews.items, playerNews.items]) {
       hasLinks(list)
       for (const item of list) expect(item.title && item.date).toBeTruthy()
     }
+    // Stories are teasers with no page behind them: title, date and artwork, no link.
+    expect(stories.items.length).toBeGreaterThan(0)
+    for (const item of stories.items) {
+      expect(item.title && item.date && item.imageSrc, item.title).toBeTruthy()
+      expect(item.href, item.title).toBeUndefined()
+      expect(existsSync(join('public', item.imageSrc)), item.imageSrc).toBe(true)
+    }
   })
 
-  it('shorts have a duration and title', () => {
-    hasLinks(shorts.items)
-    for (const item of shorts.items) expect(item.duration && item.title).toBeTruthy()
+  it('shorts have a duration, title and poster, and no link', () => {
+    // Teasers with no page or video behind them yet, like the stories.
+    expect(shorts.items.length).toBeGreaterThan(0)
+    for (const item of shorts.items) {
+      expect(item.duration && item.title && item.posterSrc, item.title).toBeTruthy()
+      expect(item.href, item.title).toBeUndefined()
+      expect(existsSync(join('public', item.posterSrc)), item.posterSrc).toBe(true)
+    }
   })
 
   it('calendar entries have a day, month, name, range and venue', () => {

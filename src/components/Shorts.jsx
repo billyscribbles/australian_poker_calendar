@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import { Play } from 'lucide-react'
 import { shorts } from '../content/shorts.js'
 import ImagePlaceholder from './ImagePlaceholder.jsx'
@@ -9,8 +8,9 @@ import './Shorts.css'
 
 /** @param {{ short: Short }} props */
 function ShortCard({ short }) {
+  // No page or video behind these yet, so the card is an article, not a link.
   return (
-    <Link to={short.href} className="short-card">
+    <article className="short-card">
       <ImagePlaceholder
         className="short-card__poster"
         src={short.posterSrc}
@@ -22,7 +22,7 @@ function ShortCard({ short }) {
         <Play size={14} strokeWidth={1.5} fill="currentColor" />
       </span>
       <span className="short-card__caption">{short.title}</span>
-    </Link>
+    </article>
   )
 }
 
@@ -33,7 +33,7 @@ export default function Shorts() {
       <SectionHeading id="shorts-heading">{shorts.heading}</SectionHeading>
       <div className="shorts__row scroll-row">
         {shorts.items.map((short) => (
-          <ShortCard key={short.href} short={short} />
+          <ShortCard key={short.title} short={short} />
         ))}
       </div>
     </section>
