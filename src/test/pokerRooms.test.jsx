@@ -51,9 +51,12 @@ describe('PokerRooms', () => {
     }
   })
 
-  it('content: Crown is a dark mark on a white card, with its own lockup', () => {
+  it('content: Crown and Aurum take inverse lockups on the dark card, not a white one', () => {
     const crown = pokerRooms.rooms.find((r) => r.code === 'CROWN')
-    expect(crown.tone).toBe('dark')
-    expect(crown.logoSrc).toBe('/images/tours/crown-on-white.png')
+    expect(crown.tone).toBe('light')
+    expect(crown.logoSrc).toBe('/images/tours/crown-on-dark.png')
+    const aurum = pokerRooms.rooms.find((r) => r.code === 'AURUM')
+    expect(aurum.tone).toBe('light')
+    expect(aurum.logoSrc).toBe('/images/tours/aurum-on-dark.png')
   })
 })

@@ -30,12 +30,15 @@ const names = {
   NPL: 'National Poker League',
 }
 
-// Rooms whose strip tile differs from the calendar's mark. Crown's shipped
-// lockup is gold and cream for the dark timeline bars; here Crown sits on a
-// white card, as on its own site, so the tile takes the near-black lockup.
+// Rooms whose strip tile differs from the calendar's mark. Both shipped
+// lockups were drawn for other surfaces: Crown's is gold and cream for the
+// dark timeline bars, Aurum's navy and gold for white. On the strip every
+// tile is the same dark card, so each takes an inverse lockup — the mark in
+// white (Aurum keeps its gold) — rather than flashing a white card.
 /** @type {Record<string, Partial<Pick<PokerRoom, 'logoSrc' | 'tone'>>>} */
 const overrides = {
-  CROWN: { logoSrc: '/images/tours/crown-on-white.png', tone: 'dark' },
+  CROWN: { logoSrc: '/images/tours/crown-on-dark.png', tone: 'light' },
+  AURUM: { logoSrc: '/images/tours/aurum-on-dark.png', tone: 'light' },
 }
 
 export const pokerRooms = {

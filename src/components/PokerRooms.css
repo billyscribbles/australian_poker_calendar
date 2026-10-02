@@ -120,7 +120,8 @@
     filter var(--transition-base);
 }
 
-/* A dark mark (Crown, Aurum) sits on a white card so it reads. Restated for
+/* A dark mark sits on a white card so it reads. No current room needs it;
+ * every tile ships an inverse lockup for the dark card instead. Restated for
  * hover and focus so the card stays white whatever else those states paint. */
 .poker-rooms__tile[data-logo='dark'],
 .poker-rooms__tile[data-logo='dark']:hover,

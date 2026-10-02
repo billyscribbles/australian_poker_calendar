@@ -25,7 +25,7 @@ export const theme = {
     'bg-raised': '#222222', // placeholder stripe alt, neutral badge
     'bg-selected': '#2C251B',
     'bg-hero-end': '#0F0E0C', // far stop of the live hero radial
-    'logo-backing': '#FFFFFF', // white card behind a dark partner mark (Crown, Aurum)
+    'logo-backing': '#FFFFFF', // white card behind a dark partner mark, if one ever ships
 
     // Content
     text: '#F5F2EB',
