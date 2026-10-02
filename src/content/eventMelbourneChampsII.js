@@ -28,6 +28,7 @@
  * @property {string} regoLevel  e.g. "Lvl 8", "Day 2"
  * @property {string} regoTime   e.g. "10:25 PM", "Day 2"
  * @property {string} [room]     where the poster names one, e.g. "Grand Room"
+ * @property {string} [dealt]    "Dealer" where the poster marks a dealer-dealt event
  * @property {boolean} featured
  * @property {string} [feeds]    tour code the satellite feeds
  */

@@ -29,9 +29,14 @@ describe('series status', () => {
   })
 
   it('chases a schedule only inside the windows', () => {
-    const brisbane = find(status, 'APLPT Brisbane') // starts 2026-10-06
+    const brisbane = find(status, 'APLPT Brisbane') // starts 2026-10-06, schedule up
     expect(brisbane.phase).toMatchObject({ key: 'upcoming', until: 3 })
-    expect(brisbane.jobs.some((j) => j.level === 'now' && /no schedule/.test(j.text))).toBe(true)
+    expect(brisbane.jobs.some((j) => /schedule/i.test(j.text))).toBe(false)
+
+    const oct15 = buildStatus('2026-10-15')
+    const townsville = find(oct15, 'APL The Ville 600 Townsville') // starts 2026-10-18, no schedule
+    expect(townsville.phase).toMatchObject({ key: 'upcoming', until: 3 })
+    expect(townsville.jobs.some((j) => j.level === 'now' && /no schedule/.test(j.text))).toBe(true)
 
     const aussieMillions = find(status, '2027 Aussie Millions') // six months out
     expect(aussieMillions.jobs.some((j) => /schedule/i.test(j.text))).toBe(false)

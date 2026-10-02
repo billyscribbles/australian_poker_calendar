@@ -1,6 +1,7 @@
 import { Fragment } from 'react'
 import { MapPin, CalendarClock } from 'lucide-react'
 import SEO from '../lib/seo.jsx'
+import { eventLd } from '../lib/structuredData.js'
 import { eventFor, schedulePending } from '../content/eventPages.js'
 import { tourBrandStyle } from '../content/tourBrands.js'
 import TourLogo from '../components/TourLogo.jsx'
@@ -31,7 +32,8 @@ function byDay(schedule) {
 
 // Every column a poster can carry. A page shows only the ones its schedule
 // fills: Crown prints no shot clock or late-rego time, so those drop out;
-// only Aurum prints a room, so that column appears on its page alone.
+// only Aurum prints a room and only APL marks dealer-dealt events, so each of
+// those columns appears on its page alone.
 const COLUMNS = [
   { key: 'time', label: 'Time' },
   { key: 'event', label: 'Event' },
@@ -43,6 +45,7 @@ const COLUMNS = [
   { key: 'regoLevel', label: 'Rego ends', sub: 'level' },
   { key: 'regoTime', label: 'Rego ends', sub: 'time' },
   { key: 'room', label: 'Room' },
+  { key: 'dealt', label: 'Dealt' },
 ]
 
 /** @param {{ row: import('../content/eventMelbourneChampsII.js').ScheduleRow }} props */
@@ -90,7 +93,12 @@ export default function EventPage({ path }) {
 
   return (
     <main className="event-page">
-      <SEO title={event.seo.title} description={event.seo.description} path={event.path} />
+      <SEO
+        title={event.seo.title}
+        description={event.seo.description}
+        path={event.path}
+        jsonLd={eventLd(event)}
+      />
 
       <header className="event-hero" style={tourBrandStyle(tour)}>
         {image && (

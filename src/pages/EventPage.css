@@ -332,7 +332,8 @@
 
 .schedule__cell--regoLevel,
 .schedule__cell--regoTime,
-.schedule__cell--room {
+.schedule__cell--room,
+.schedule__cell--dealt {
   font-size: 14px;
   white-space: normal;
 }
@@ -668,7 +669,8 @@
   .schedule__cell--reEntry,
   .schedule__cell--regoLevel,
   .schedule__cell--regoTime,
-  .schedule__cell--room {
+  .schedule__cell--room,
+  .schedule__cell--dealt {
     font-size: 13px;
     font-weight: 600;
   }
@@ -679,7 +681,8 @@
   .schedule__cell--reEntry::before,
   .schedule__cell--regoLevel::before,
   .schedule__cell--regoTime::before,
-  .schedule__cell--room::before {
+  .schedule__cell--room::before,
+  .schedule__cell--dealt::before {
     content: attr(data-label) ' ';
     font-weight: 500;
     letter-spacing: 0.06em;
