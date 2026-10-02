@@ -49,7 +49,8 @@ export const tourBrands = {
     secondary: '#BFEA63',
     logo: 'light',
     iconBg: '#0D1C2D',
-    source: 'https://www.playapl.com/aplpt — hero CTA, pills, aplpt.png',
+    source:
+      "https://www.playapl.com/aplpt — hero CTA, pills, aplpt.png; icon: the lockup's four-suit cluster redrawn in its chrome treatment (aplpt-qld-logo.png)",
   },
   // Kings Poker: red bars on a black wordmark; the site's accent is a brass gold
   // (#B8952F) used for prize figures and the active tab.
@@ -62,8 +63,10 @@ export const tourBrands = {
   },
   // Crown Melbourne: near-black (#0E0909), the muted gold of the crown mark in
   // their own logo SVG (#B4A169) and a cream lockup (#FCF8EA). crown.png is
-  // that lockup in its own tones — gold crown, cream CROWN — recoloured from
-  // the near-black original, which vanished into the dark end of the bar.
+  // that lockup in cream throughout, recoloured from the near-black original,
+  // which vanished into the dark end of the bar. The crown itself is not kept
+  // gold: the bar fades into the same gold, and a gold crown on it read as a
+  // faint stain. The circle icon keeps the gold crown on near-black.
   CROWN: {
     primary: '#B4A169',
     secondary: '#FCF8EA',
