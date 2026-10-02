@@ -1,4 +1,4 @@
-// Contract: every series on the calendar has a page at its href. Two are an
+// Contract: every series on the calendar has a page at its href. Four are an
 // operator's poster as a page — brand hero, the four headline stats, and the
 // full day-by-day schedule with featured rows (and, where the poster has them,
 // the rows that feed another series) marked. The rest draw the same hero from
@@ -121,6 +121,89 @@ describeSeriesPage({
   sample: ['Showdown Main Event – Flight 1A', 'Encore'],
 })
 
+describeSeriesPage({
+  key: 'playLiveSummerChampionship2026',
+  path: '/events/playlive-summer-championship',
+  rows: 114,
+  days: 20,
+  sample: ['Melb. Millions Main Event – Day 1', 'Berserker'],
+})
+
+describeSeriesPage({
+  key: 'aplptBrisbane2026',
+  path: '/events/aplpt-brisbane',
+  rows: 67,
+  days: 6,
+  sample: ['APLPT Queensland Main Event – Flight 1', 'Freezeout Finisher'],
+})
+
+describeSeriesPage({
+  key: 'nplSuperSeries2026',
+  path: '/events/npl-super-series-2026',
+  rows: 4,
+  days: 4,
+  sample: ['Main Event – Flight 1', 'Main Event – Day 2'],
+})
+
+describe('EventPage — NPL Super Series specifics', () => {
+  const event = eventPages.nplSuperSeries2026
+
+  it('features every Main Event day and shows the dealt column, no shot clock or rego', () => {
+    expect(event.schedule.every((r) => r.featured && r.dealt === 'Dealer')).toBe(true)
+    renderPage('nplSuperSeries2026')
+    const headers = screen.getAllByRole('columnheader').map((th) => th.textContent)
+    expect(headers.some((h) => /^dealt$/i.test(h))).toBe(true)
+    for (const dropped of [/shot clock/i, /rego ends/i, /^room$/i, /stack/i]) {
+      expect(headers.some((h) => dropped.test(h))).toBe(false)
+    }
+  })
+
+  it('prices the three flights and marks Day 2 as qualifiers only', () => {
+    const [f1, f2, f3, day2] = event.schedule
+    for (const flight of [f1, f2, f3]) {
+      expect(flight.buyIn).toBe('$1,150')
+      expect(flight.split).toBe('1,000+150')
+      expect(flight.reEntry).toBe('2')
+    }
+    expect(day2.buyIn).toBe('')
+    expect(day2.split).toBe('Qualifiers only')
+  })
+})
+
+describe('EventPage — PlayLive Summer Championship specifics', () => {
+  const event = eventPages.playLiveSummerChampionship2026
+
+  it('features the Main Event and Melbourne Millions Main Event days, nothing else', () => {
+    for (const row of event.schedule) {
+      const headline = /^(Melb\. Millions )?Main Event – Day/.test(row.name)
+      expect(row.featured, `${row.date} ${row.time} ${row.name}`).toBe(headline)
+    }
+    expect(event.schedule.filter((r) => r.featured)).toHaveLength(9)
+  })
+
+  it('shows late rego as a time only: no level, shot clock, re-entry or room column', () => {
+    renderPage('playLiveSummerChampionship2026')
+    const headers = screen.getAllByRole('columnheader').map((th) => th.textContent)
+    expect(headers.filter((h) => /rego ends/i.test(h))).toHaveLength(1)
+    expect(headers.some((h) => /rego ends.*time/i.test(h))).toBe(true)
+    for (const dropped of [/shot clock/i, /re-entry/i, /^room$/i]) {
+      expect(headers.some((h) => dropped.test(h))).toBe(false)
+    }
+  })
+
+  it('says qualifiers only on every Day 2+ row and prices every other row', () => {
+    for (const row of event.schedule) {
+      const later = /Day [234]\b/.test(row.name) && !/Day 1/.test(row.name)
+      if (row.split === 'Qualifiers only') {
+        expect(later, row.name).toBe(true)
+        expect(row.buyIn).toBe('')
+      } else {
+        expect(row.buyIn, row.name).toMatch(/^\$[\d,]+$/)
+      }
+    }
+  })
+})
+
 describe('EventPage — Aurum Sydney Showdown specifics', () => {
   const event = eventPages.sydneyShowdown2026
 
@@ -147,8 +230,12 @@ describe('EventPage — Aurum Sydney Showdown specifics', () => {
     expect(event.schedule.every((r) => r.room)).toBe(true)
   })
 
-  it('leaves the room column off the Crown and APT pages', () => {
-    for (const key of ['melbourneChampsII', 'victorianPokerChampionship2026']) {
+  it('leaves the room column off the Crown, APT and APL pages', () => {
+    for (const key of [
+      'melbourneChampsII',
+      'victorianPokerChampionship2026',
+      'aplptBrisbane2026',
+    ]) {
       const { unmount } = renderPage(key)
       const headers = screen.getAllByRole('columnheader').map((th) => th.textContent)
       expect(headers.some((h) => /^room$/i.test(h))).toBe(false)

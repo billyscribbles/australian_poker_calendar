@@ -1,4 +1,4 @@
-// Every series on the calendar has a page at its href, /events/<slug>. Three are
+// Every series on the calendar has a page at its href, /events/<slug>. Six are
 // hand-built posters (one content file each, below); the rest are derived from
 // the series' row in content/festivals.js until the operator publishes a
 // schedule. src/routes.js emits one route per festival and passes the path;
@@ -7,11 +7,21 @@
 import { event as melbourneChampsII } from './eventMelbourneChampsII.js'
 import { event as victorianPokerChampionship2026 } from './eventVictorianPokerChampionship2026.js'
 import { event as sydneyShowdown2026 } from './eventSydneyShowdown2026.js'
+import { event as aplptBrisbane2026 } from './eventAplptBrisbane2026.js'
+import { event as playLiveSummerChampionship2026 } from './eventPlayLiveSummerChampionship2026.js'
+import { event as nplSuperSeries2026 } from './eventNplSuperSeries2026.js'
 import { festivals, STATUS_LABELS } from './festivals.js'
 import { formatRangeWithYear } from '../lib/calendar.js'
 
 /** The hand-built pages, keyed by the name their content file exports. */
-export const eventPages = { melbourneChampsII, victorianPokerChampionship2026, sydneyShowdown2026 }
+export const eventPages = {
+  melbourneChampsII,
+  victorianPokerChampionship2026,
+  sydneyShowdown2026,
+  playLiveSummerChampionship2026,
+  aplptBrisbane2026,
+  nplSuperSeries2026,
+}
 
 /** What a derived page says where the poster would print the schedule. */
 export const schedulePending = {
@@ -57,11 +67,12 @@ function derive(festival) {
     venueDetail: venueDetail || city,
     city,
     status,
+    statusCode: festival.status,
     website: festival.website,
     image: null,
     seo: {
-      title: `${festival.name} — ${dates}`,
-      description: `${festival.name} runs ${dates} at ${where}. Dates, venue and the full schedule as soon as it is released, on the Australian Poker Calendar.`,
+      title: `${festival.name} — Poker Tournament Series, ${dates}`,
+      description: `${festival.name} is a live poker tournament series running ${dates} at ${where}. Dates, venue and the full event schedule as soon as it is released, on the Australian Poker Calendar.`,
     },
     stats: [],
     notes: [],

@@ -1,6 +1,6 @@
 # Australian Poker Schedule — Series Timeline
 
-Source: https://australianpokerschedule.com.au/series-timeline/ (scraped 2026-10-02). Full data: `poker-series-timeline.json` / `.csv`. Melbourne Champs II full tournament schedule: `melbourne-champs-ii-schedule.json`. Crown Victorian Poker Championship 2026 full tournament schedule (from Crown's PDF, 2026-10-03): `victorian-poker-championship-2026-schedule.json`. Asian series touching October 2026, from the SoMuchPoker calendar (2026-10-03): `somuchpoker-asia-2026-10.json`, drawn by the home page's Poker Tours in Asia strip.
+Source: https://australianpokerschedule.com.au/series-timeline/ (scraped 2026-10-02). Full data: `poker-series-timeline.json` / `.csv`. Melbourne Champs II full tournament schedule: `melbourne-champs-ii-schedule.json`. Crown Victorian Poker Championship 2026 full tournament schedule (from Crown's PDF, 2026-10-03): `victorian-poker-championship-2026-schedule.json`. APLPT Queensland 2026 (Brisbane, Broncos Club) full tournament schedule (from APL's series schedule PDF, 2026-10-03): `aplpt-brisbane-2026-schedule.json`. Asian series touching October 2026, from the SoMuchPoker calendar (2026-10-03): `somuchpoker-asia-2026-10.json`, drawn by the home page's Poker Tours in Asia strip. PlayLive Melbourne Summer Championship 2026 full tournament schedule (from PlayLive's poster PDF, 2026-10-03): `playlive-summer-championship-2026-schedule.json`; PlayLive's series are not on the Australian Poker Schedule timeline, so that series has no record below. NPL Super Series 2026 Main Event flights (Club Willoughby), from NPL's own Super Series page on 2026-10-03: `npl-super-series-2026-schedule.json`; NPL's series are not on the timeline either, and are recorded below from npl.com.au.
 
 19 series listed, running 2026-09-30 to 2027-04-24.
 
@@ -138,6 +138,46 @@ Source: https://australianpokerschedule.com.au/series-timeline/ (scraped 2026-10
 - Schedule: `data/sydney-showdown-2026-schedule.json`, transcribed from Aurum's October 2026 schedule PDF on 2026-10-03 (the page is `src/content/eventSydneyShowdown2026.js`)
 - Hero image: https://australianpokerschedule.com.au/wp-content/uploads/2026/07/Untitled-20260716-153011-1199.jpg
 - iCal: webcal://australianpokerschedule.com.au/event/sydney-showdown-aurum-poker-grand-st-johns-park-nsw/?ical=1
+
+### PlayLive Melbourne – Summer Championship (VIC)
+
+Not on the Australian Poker Schedule timeline; taken from PlayLive's own series page and poster.
+
+- URL: https://playlive.melbourne/#series
+- Dates: 2026-11-26 to 2026-12-15 (20 days)
+- Tour / brand: PlayLive Melbourne
+- Organiser: PlayLive Melbourne · https://playlive.melbourne/
+- Venue: PlayLive Melbourne, 129 York St, South Melbourne VIC 3205, Australia
+- Guarantee: $3,000,000 across the series; $500,000 Main Event ($1,500), $1,000,000 Melbourne Millions Main Event ($2,500)
+- Schedule: `data/playlive-summer-championship-2026-schedule.json`, transcribed from PlayLive's two-page Summer Schedule poster PDF on 2026-10-03 (the page is `src/content/eventPlayLiveSummerChampionship2026.js`)
+- Promo art: `public/images/promos/playlive-summer-championship.webp` (the calendar banner, which links to the series page on this site)
+
+### NPL – Super Series 2026 – Club Willoughby (NSW)
+
+Not on the Australian Poker Schedule timeline; taken from NPL's Super Series page and Main Event poster on 2026-10-03.
+
+- URL: https://www.npl.com.au/SuperSeries
+- Dates: 2026-11-19 to 2026-11-22 (4 days). The page's schedule table lists three Day 1 flights on 19–21 November and Day 2 on 22 November; the poster prints "November 18-22". Side events are "to be announced", so the 18th may fill in. Confirm with NPL before the event.
+- Tour / brand: National Poker League (NPL)
+- Organiser: National Poker League · https://www.npl.com.au/ · PO Box 1628, Crows Nest NSW 2065 · contact form only (https://www.npl.com.au/Contact; no public phone or email)
+- Venue: Club Willoughby, 26 Crabbes Ave, North Willoughby NSW 2068, Australia
+- Guarantee: $300,000 Main Event, $100,000 guaranteed first prize; entry $1,150 ($1,000 + $150), two re-entries, fully dealt
+- NPL Credits (1 credit = $1, won over a league season) can be used for any Super Series entry except Day 2 of the Main Event; they expire after each Super Series finals
+- Schedule: `data/npl-super-series-2026-schedule.json` (the page is `src/content/eventNplSuperSeries2026.js`)
+- Key art: `public/images/events/npl-super-series.webp`, the 1500×1500 Main Event poster cut to the 800×1000 hero
+- Poster: https://npldataendpoint-cjg8e4a6ftgkdzba.z03.azurefd.net//banners/NPL_Main_Event_2026_Nov_1500px_v2.jpg
+- Logo: https://npldataendpoint-cjg8e4a6ftgkdzba.z03.azurefd.net/logos/NPL_2D_Logo_500.png (the round badge, shipped as `public/images/tours/npl*.png`)
+
+### NPL – Sydney Poker Open – Bexley RSL (NSW)
+
+Not on the Australian Poker Schedule timeline; taken from NPL's Sydney Poker Open page on 2026-10-03. NPL runs it every quarter; the next date was not published at the time of the scrape.
+
+- URL: https://www.npl.com.au/SydneyPokerOpen
+- Dates: 2026-09-17 to 2026-09-20 (4 days): flights on 17, 18 and 19 September, Day 2 on 20 September
+- Tour / brand: National Poker League (NPL)
+- Venue: Bexley RSL, Sydney NSW
+- Guarantee: $100,000 minimum; the previous edition's prize pool reached $312,000. $750 entry, freezeout, 100K stack, fully dealt; 30-minute levels on Day 1 and 40 on Day 2
+- Poster: https://npldataendpoint-cjg8e4a6ftgkdzba.z03.azurefd.net//banners/SydPokerOpen_Sep_2026.jpg
 
 ### APLPT – Brisbane – Broncos Club (QLD)
 
