@@ -53,12 +53,14 @@ export default [
     },
   },
   {
-    // Test files, Vitest config, the production server and build scripts run
+    // Test files, Vitest config, the production and admin servers and build scripts run
     // under Node + Vitest globals.
     files: [
       'src/test/**/*.{js,jsx}',
       'scripts/**/*.{js,mjs}',
       'server/**/*.{js,mjs}',
+      'admin/server.mjs',
+      'admin/**/*.{js,mjs}',
       '*.config.js',
     ],
     languageOptions: {
