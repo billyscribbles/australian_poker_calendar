@@ -50,7 +50,7 @@ export const tourBrands = {
     logo: 'light',
     iconBg: '#0D1C2D',
     source:
-      "https://www.playapl.com/aplpt — hero CTA, pills, aplpt.png; icon: the lockup's four-suit cluster redrawn in its chrome treatment (aplpt-qld-logo.png)",
+      'https://www.playapl.com/aplpt — hero CTA, pills, aplpt.png; icon: the same lockup fitted in the circle',
   },
   // Kings Poker: red bars on a black wordmark; the site's accent is a brass gold
   // (#B8952F) used for prize figures and the active tab.
