@@ -40,8 +40,8 @@ const names = {
 }
 
 // Rooms whose strip tile differs from the calendar's mark. Both shipped
-// lockups were drawn for other surfaces: Crown's is gold and cream for the
-// dark timeline bars, Aurum's navy and gold for white. On the strip every
+// lockups were drawn for other surfaces: Crown's is cream for the gold
+// timeline bars, Aurum's navy and gold for white. On the strip every
 // tile is the same dark card, so each takes an inverse lockup — the mark in
 // white (Aurum keeps its gold) — rather than flashing a white card.
 /** @type {Record<string, Partial<Pick<PokerRoom, 'logoSrc' | 'tone'>>>} */
