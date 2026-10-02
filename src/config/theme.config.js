@@ -43,6 +43,7 @@ export const theme = {
     // Functional — always paired with a visible label.
     live: '#5EBB8A',
     'live-bg': '#16261D',
+    danger: '#E8847F', // form errors on the dark footer, 5:1 on bg-footer
     // Schedule rows that are satellites into another series — the red rows
     // on an operator's poster. Always paired with the feeding series' name.
     feeder: '#B3273A', // white text on it clears 6:1

@@ -1,0 +1,150 @@
+/* A drop zone around a file input. The input is kept in the DOM and
+   focusable; the zone draws focus and drag state on its behalf. */
+.upload {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.upload__zone {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 22px 16px 20px;
+  border-radius: var(--radius-sm);
+  border: 1px dashed var(--color-control-border);
+  background: var(--color-bg-card);
+  text-align: center;
+  cursor: pointer;
+  transition:
+    border-color var(--transition-fast),
+    background var(--transition-fast);
+}
+
+.upload__zone:hover,
+.upload__zone:focus-within {
+  border-color: var(--color-accent);
+}
+
+.upload__zone:focus-within {
+  box-shadow: 0 0 0 3px var(--color-accent-glow);
+}
+
+.upload__zone--over {
+  border-style: solid;
+  border-color: var(--color-accent);
+  background: var(--color-bg-selected);
+}
+
+.upload__zone--filled {
+  border-style: solid;
+}
+
+/* The real input: present and focusable, drawn nowhere. */
+.upload__input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.upload__icon {
+  color: var(--color-accent);
+  margin-bottom: 4px;
+}
+
+.upload__label {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.upload__hint {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--color-muted);
+  text-wrap: pretty;
+}
+
+.upload__prompt {
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--color-text-faint);
+}
+
+.upload__files {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.upload__file {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-inset);
+  color: var(--color-accent);
+  font-size: 13px;
+}
+
+.upload__file-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--color-text);
+}
+
+.upload__file-size {
+  flex-shrink: 0;
+  color: var(--color-text-faint);
+}
+
+.upload__remove {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin: -4px -6px -4px 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-muted);
+  transition:
+    color var(--transition-fast),
+    background var(--transition-fast);
+}
+
+.upload__remove:hover,
+.upload__remove:focus-visible {
+  color: var(--color-text);
+  background: var(--color-bg-raised);
+}
+
+.upload__errors {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--color-danger);
+}
+
+.upload__errors:empty {
+  display: none;
+}

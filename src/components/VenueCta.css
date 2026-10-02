@@ -1,0 +1,89 @@
+/* A slim band across the top of the footer: copy on the left, one button on
+   the right. It shares the footer's button treatment so the two read as one
+   piece of chrome. */
+.venue-cta {
+  border-bottom: 1px solid var(--color-border);
+  background: linear-gradient(180deg, var(--color-bg-card), var(--color-bg-footer));
+}
+
+.venue-cta__inner {
+  max-width: var(--layout-container-max);
+  margin: 0 auto;
+  padding: 32px var(--layout-container-pad);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px 40px;
+}
+
+.venue-cta__copy {
+  min-width: 0;
+}
+
+.venue-cta__eyebrow {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.venue-cta__heading {
+  margin: 0 0 6px;
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.venue-cta__sub {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--color-muted);
+  text-wrap: pretty;
+}
+
+.venue-cta__button {
+  flex-shrink: 0;
+  padding: 12px 20px;
+  border-radius: var(--radius-sm);
+  background: var(--color-accent);
+  border: 1px solid var(--color-accent);
+  color: var(--color-on-accent);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.venue-cta__button:hover {
+  background: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+  color: var(--color-on-accent);
+}
+
+.venue-cta__button:active {
+  background: var(--color-accent-pressed);
+  border-color: var(--color-accent-pressed);
+}
+
+@media (max-width: 600px) {
+  .venue-cta__inner {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 28px var(--layout-container-pad);
+  }
+  .venue-cta__heading {
+    font-size: 22px;
+  }
+  .venue-cta__button {
+    text-align: center;
+  }
+}

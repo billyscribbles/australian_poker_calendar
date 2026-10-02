@@ -1,0 +1,152 @@
+/* The listing form itself. The page that mounts it owns the surrounding
+   layout; this file is only the fields, the button and the live region. */
+.venue-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.venue-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.venue-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.venue-form__field span {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--color-muted);
+}
+
+.venue-form__field input,
+.venue-form__field textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  font-size: 14px;
+  font-family: var(--font-body);
+  line-height: 1.4;
+  resize: vertical;
+  transition: border-color var(--transition-fast);
+}
+
+.venue-form__field input:focus,
+.venue-form__field textarea:focus {
+  border-color: var(--color-accent);
+}
+
+/* The upload sections: a legend, one line of guidance and a grid of boxes. */
+.venue-form__uploads {
+  margin: 6px 0 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.venue-form__legend {
+  padding: 0;
+  margin-bottom: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--color-muted);
+}
+
+.venue-form__uploads-sub {
+  margin: 0 0 12px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--color-text-faint);
+}
+
+.venue-form__uploads-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+/* Honeypot — kept in the DOM and focusable for bots, hidden from humans/AT. */
+.venue-form__honeypot {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.venue-form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+}
+
+.venue-form__submit {
+  padding: 12px 20px;
+  border-radius: var(--radius-sm);
+  background: var(--color-accent);
+  border: 1px solid var(--color-accent);
+  color: var(--color-on-accent);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.2;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.venue-form__submit:hover:not(:disabled) {
+  background: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+}
+
+.venue-form__submit:active:not(:disabled) {
+  background: var(--color-accent-pressed);
+  border-color: var(--color-accent-pressed);
+}
+
+.venue-form__submit:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+/* Live-region wrapper — always present, no box until it has a message. */
+.venue-form__status {
+  margin: 0;
+  font-size: 14px;
+}
+
+.venue-form__status--success {
+  color: var(--color-accent);
+}
+
+.venue-form__status--error {
+  color: var(--color-danger);
+}
+
+@media (max-width: 600px) {
+  .venue-form__row,
+  .venue-form__uploads-grid {
+    grid-template-columns: 1fr;
+  }
+  .venue-form__field input,
+  .venue-form__field textarea {
+    font-size: 16px;
+  }
+  .venue-form__submit {
+    width: 100%;
+    text-align: center;
+  }
+}

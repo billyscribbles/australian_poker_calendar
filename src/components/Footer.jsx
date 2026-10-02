@@ -4,6 +4,7 @@ import { site } from '../config/site.config.js'
 import { consent } from '../content/consent.js'
 import { openConsent } from '../lib/consent.js'
 import Img from './Img.jsx'
+import VenueCta from './VenueCta.jsx'
 import './Footer.css'
 
 // Social keys in site.config, in display order, with their icon and label.
@@ -19,6 +20,7 @@ export default function Footer() {
 
   return (
     <footer className="footer">
+      <VenueCta />
       <div className="footer__main">
         <div>
           <Img
