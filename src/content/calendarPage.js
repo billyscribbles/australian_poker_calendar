@@ -9,6 +9,7 @@
  * @typedef {object} Tour
  * @property {string} code      matches Festival.tour; drawn in the logo box
  * @property {string} label     tile text in the tour strip
+ * @property {string} name      the operator's full name, for the Event records' organizer
  * @property {string} href
  * @property {string} website   the operator's own site, as linked from each APS event page
  * @property {string} [logoSrc] the full wordmark, transparent, in the operator's colours
@@ -31,8 +32,8 @@
 export const calendarPage = {
   /** @param {number} year */
   seo: (year) => ({
-    title: `${year} Australian Poker Calendar: Tournament Series Schedule`,
-    description: `Every confirmed ${year} poker series across Australia, month by month: dates, venues and tours from the Australian Poker Tour and APL to Kings Poker and Crown Poker. Updated as operators confirm their stops.`,
+    title: `${year} Australian Poker Schedule: Tournaments, Series & Events`,
+    description: `Every confirmed ${year} poker tournament series and event in Australia, month by month: dates, venues and buy-ins from the Australian Poker Tour, APL, Kings Poker, Crown Poker, Aurum and PlayLive. Updated as operators confirm their stops.`,
   }),
   /** @param {number} year */
   title: (year) => `${year} Australian Poker Calendar`,
@@ -42,6 +43,7 @@ export const calendarPage = {
     {
       code: 'APT',
       label: 'APT',
+      name: 'Australian Poker Tour',
       href: '/tours/australian-poker-tour',
       website: 'https://australianpokertour.com.au/',
       logoSrc: '/images/tours/apt.png',
@@ -51,6 +53,7 @@ export const calendarPage = {
     {
       code: 'APL',
       label: 'APL',
+      name: 'APL',
       href: '/tours/apl',
       website: 'https://playapl.com/',
       logoSrc: '/images/tours/apl.png',
@@ -60,6 +63,7 @@ export const calendarPage = {
     {
       code: 'APLPT',
       label: 'APLPT',
+      name: 'APL Poker Tour',
       href: '/tours/aplpt',
       website: 'https://www.playapl.com/aplpt',
       logoSrc: '/images/tours/aplpt.png',
@@ -69,6 +73,7 @@ export const calendarPage = {
     {
       code: 'KINGS',
       label: 'KINGS',
+      name: 'Kings Poker',
       href: '/tours/kings-poker',
       website: 'https://kingspoker.com.au/',
       logoSrc: '/images/tours/kings.png',
@@ -78,6 +83,7 @@ export const calendarPage = {
     {
       code: 'CROWN',
       label: 'CROWN',
+      name: 'Crown Poker',
       href: '/tours/crown-poker',
       website: 'https://www.crownmelbourne.com.au/casino/table-games/poker',
       logoSrc: '/images/tours/crown.png',
@@ -87,6 +93,7 @@ export const calendarPage = {
     {
       code: 'AURUM',
       label: 'AURUM',
+      name: 'Aurum Poker',
       href: '/tours/aurum-poker',
       website: 'https://aurumpoker.com.au/',
       logoSrc: '/images/tours/aurum.png',
@@ -96,11 +103,24 @@ export const calendarPage = {
     {
       code: 'PLAYLIVE',
       label: 'PLAYLIVE',
+      name: 'PlayLive Melbourne',
       href: '/tours/playlive-melbourne',
       website: 'https://playlive.melbourne/',
       logoSrc: '/images/tours/playlive.png',
       iconSrc: '/images/tours/playlive-icon.png',
       monoSrc: '/images/tours/playlive-mono.png',
+    },
+    {
+      code: 'NPL',
+      label: 'NPL',
+      name: 'National Poker League',
+      href: '/tours/national-poker-league',
+      website: 'https://www.npl.com.au/',
+      // No wide wordmark on NPL's site (its header lockup is 105×50); the
+      // round badge stands in for both shapes.
+      logoSrc: '/images/tours/npl.png',
+      iconSrc: '/images/tours/npl-icon.png',
+      monoSrc: '/images/tours/npl-mono.png',
     },
   ],
   allTours: { label: 'All tours →', href: '/tours' },
@@ -108,13 +128,14 @@ export const calendarPage = {
   // 1080×135 promo banner (shipped at 2× for retina). Clear `src` to fall
   // back to the striped placeholder. `mobileSrc` is an optional 750×300 cut
   // of the same artwork for phones, where an 8:1 strip is unreadable; without
-  // it the wide image is centre-cropped.
+  // it the wide image is centre-cropped. `href` is the series' own page on
+  // this site (its full schedule), not the operator's; the page links out.
   banner: {
     label: 'promo banner 1080×135',
     src: '/images/promos/playlive-summer-championship.webp',
     mobileSrc: '/images/promos/playlive-summer-championship-mobile.webp',
     alt: 'PlayLive Melbourne Summer Championship: $3,000,000 guaranteed, November 26 to December 15',
-    href: 'https://playlive.melbourne/',
+    href: '/events/playlive-summer-championship',
   },
 
   views: {

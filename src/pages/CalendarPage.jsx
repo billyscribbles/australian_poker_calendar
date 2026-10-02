@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import SEO from '../lib/seo.jsx'
+import { eventListLd } from '../lib/structuredData.js'
 import { calendarPage } from '../content/calendarPage.js'
 import { festivals, YEAR } from '../content/festivals.js'
 import ImagePlaceholder from '../components/ImagePlaceholder.jsx'
@@ -40,9 +41,9 @@ function Banner({ banner }) {
     </picture>
   )
   return banner.href ? (
-    <a href={banner.href} className="calendar-page__banner">
+    <Link to={banner.href} className="calendar-page__banner">
       {img}
-    </a>
+    </Link>
   ) : (
     <div className="calendar-page__banner">{img}</div>
   )
@@ -62,7 +63,12 @@ export default function CalendarPage({ year = YEAR }) {
 
   return (
     <main className="calendar-page container">
-      <SEO title={seo.title} description={seo.description} path={`/poker-calendar/${year}`} />
+      <SEO
+        title={seo.title}
+        description={seo.description}
+        path={`/poker-calendar/${year}`}
+        jsonLd={eventListLd(yearFestivals, year, seo)}
+      />
 
       <section className="calendar-page__head">
         <h1 className="calendar-page__title">{title}</h1>
