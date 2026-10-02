@@ -13,7 +13,8 @@
  * @property {string} href
  * @property {string} website   the operator's own site, as linked from each APS event page
  * @property {string} [logoSrc] the full wordmark, transparent, in the operator's colours
- * @property {string} [iconSrc] 256×256 transparent square mark, drawn in a circle
+ *                              (a WebP from scripts/gen-tour-webp.py; the PNG beside it is the source)
+ * @property {string} [iconSrc] 256×256 transparent square mark, drawn in a circle (WebP, as above)
  * @property {string} [monoSrc] the wordmark in one neutral grey, for a logo at rest
  *                              (built by scripts/gen-tour-mono.py — never hand-edit)
  */
@@ -52,8 +53,8 @@ export const calendarPage = {
       name: 'Australian Poker Tour',
       href: '/tours/australian-poker-tour',
       website: 'https://australianpokertour.com.au/',
-      logoSrc: '/images/tours/apt.png',
-      iconSrc: '/images/tours/apt-icon.png',
+      logoSrc: '/images/tours/apt.webp',
+      iconSrc: '/images/tours/apt-icon.webp',
       monoSrc: '/images/tours/apt-mono.png',
     },
     {
@@ -62,8 +63,8 @@ export const calendarPage = {
       name: 'APL',
       href: '/tours/apl',
       website: 'https://playapl.com/',
-      logoSrc: '/images/tours/apl.png',
-      iconSrc: '/images/tours/apl-icon.png',
+      logoSrc: '/images/tours/apl.webp',
+      iconSrc: '/images/tours/apl-icon.webp',
       monoSrc: '/images/tours/apl-mono.png',
     },
     {
@@ -72,8 +73,8 @@ export const calendarPage = {
       name: 'APL Poker Tour',
       href: '/tours/aplpt',
       website: 'https://www.playapl.com/aplpt',
-      logoSrc: '/images/tours/aplpt.png',
-      iconSrc: '/images/tours/aplpt-icon.png',
+      logoSrc: '/images/tours/aplpt.webp',
+      iconSrc: '/images/tours/aplpt-icon.webp',
       monoSrc: '/images/tours/aplpt-mono.png',
     },
     {
@@ -82,8 +83,8 @@ export const calendarPage = {
       name: 'Kings Poker',
       href: '/tours/kings-poker',
       website: 'https://kingspoker.com.au/',
-      logoSrc: '/images/tours/kings.png',
-      iconSrc: '/images/tours/kings-icon.png',
+      logoSrc: '/images/tours/kings.webp',
+      iconSrc: '/images/tours/kings-icon.webp',
       monoSrc: '/images/tours/kings-mono.png',
     },
     {
@@ -92,7 +93,7 @@ export const calendarPage = {
       name: 'Crown Poker',
       href: '/tours/crown-poker',
       website: 'https://www.crownmelbourne.com.au/casino/table-games/poker',
-      logoSrc: '/images/tours/crown.png',
+      logoSrc: '/images/tours/crown.webp',
       iconSrc: '/images/tours/crown-icon.svg',
       monoSrc: '/images/tours/crown-mono.png',
     },
@@ -102,8 +103,8 @@ export const calendarPage = {
       name: 'Aurum Poker',
       href: '/tours/aurum-poker',
       website: 'https://aurumpoker.com.au/',
-      logoSrc: '/images/tours/aurum.png',
-      iconSrc: '/images/tours/aurum-icon.png',
+      logoSrc: '/images/tours/aurum.webp',
+      iconSrc: '/images/tours/aurum-icon.webp',
       monoSrc: '/images/tours/aurum-mono.png',
     },
     {
@@ -112,8 +113,8 @@ export const calendarPage = {
       name: 'PlayLive Melbourne',
       href: '/tours/playlive-melbourne',
       website: 'https://playlive.melbourne/',
-      logoSrc: '/images/tours/playlive.png',
-      iconSrc: '/images/tours/playlive-icon.png',
+      logoSrc: '/images/tours/playlive.webp',
+      iconSrc: '/images/tours/playlive-icon.webp',
       monoSrc: '/images/tours/playlive-mono.png',
     },
     {
@@ -124,8 +125,8 @@ export const calendarPage = {
       website: 'https://www.npl.com.au/',
       // No wide wordmark on NPL's site (its header lockup is 105×50); the
       // round badge stands in for both shapes.
-      logoSrc: '/images/tours/npl.png',
-      iconSrc: '/images/tours/npl-icon.png',
+      logoSrc: '/images/tours/npl.webp',
+      iconSrc: '/images/tours/npl-icon.webp',
       monoSrc: '/images/tours/npl-mono.png',
     },
     {
@@ -134,8 +135,8 @@ export const calendarPage = {
       name: 'Empire Poker',
       href: '/tours/empire-poker',
       website: 'https://empirepoker.com.au/',
-      logoSrc: '/images/tours/empire.png',
-      iconSrc: '/images/tours/empire-icon.png',
+      logoSrc: '/images/tours/empire.webp',
+      iconSrc: '/images/tours/empire-icon.webp',
       monoSrc: '/images/tours/empire-mono.png',
     },
     {
@@ -144,8 +145,8 @@ export const calendarPage = {
       name: 'Poker Palace',
       href: '/tours/poker-palace',
       website: 'https://pokerpalace.com.au/',
-      logoSrc: '/images/tours/palace.png',
-      iconSrc: '/images/tours/palace-icon.png',
+      logoSrc: '/images/tours/palace.webp',
+      iconSrc: '/images/tours/palace-icon.webp',
       monoSrc: '/images/tours/palace-mono.png',
     },
     {
@@ -154,8 +155,8 @@ export const calendarPage = {
       name: 'Queen B’s Poker',
       href: '/tours/queen-bs-poker',
       website: 'https://www.queenbs.poker/',
-      logoSrc: '/images/tours/queenbs.png',
-      iconSrc: '/images/tours/queenbs-icon.png',
+      logoSrc: '/images/tours/queenbs.webp',
+      iconSrc: '/images/tours/queenbs-icon.webp',
       monoSrc: '/images/tours/queenbs-mono.png',
     },
     {
@@ -164,8 +165,8 @@ export const calendarPage = {
       name: 'WPT League',
       href: '/tours/wpt-league',
       website: 'https://www.wptleague.com/au/',
-      logoSrc: '/images/tours/wptl.png',
-      iconSrc: '/images/tours/wptl-icon.png',
+      logoSrc: '/images/tours/wptl.webp',
+      iconSrc: '/images/tours/wptl-icon.webp',
       monoSrc: '/images/tours/wptl-mono.png',
     },
     {
@@ -174,8 +175,8 @@ export const calendarPage = {
       name: 'Stacked Poker',
       href: '/tours/stacked-poker',
       website: 'https://stackedpoker.com.au/',
-      logoSrc: '/images/tours/stacked.png',
-      iconSrc: '/images/tours/stacked-icon.png',
+      logoSrc: '/images/tours/stacked.webp',
+      iconSrc: '/images/tours/stacked-icon.webp',
       monoSrc: '/images/tours/stacked-mono.png',
     },
     {
@@ -184,8 +185,8 @@ export const calendarPage = {
       name: 'Mixed Games Academy',
       href: '/tours/mixed-games-academy',
       website: 'https://mixedgamesacademy.au/',
-      logoSrc: '/images/tours/mga.png',
-      iconSrc: '/images/tours/mga-icon.png',
+      logoSrc: '/images/tours/mga.webp',
+      iconSrc: '/images/tours/mga-icon.webp',
       monoSrc: '/images/tours/mga-mono.png',
     },
     {
@@ -194,8 +195,8 @@ export const calendarPage = {
       name: 'The Star Poker',
       href: '/tours/the-star-poker',
       website: 'https://www.starpoker.com.au/sydney',
-      logoSrc: '/images/tours/star.png',
-      iconSrc: '/images/tours/star-icon.png',
+      logoSrc: '/images/tours/star.webp',
+      iconSrc: '/images/tours/star-icon.webp',
       monoSrc: '/images/tours/star-mono.png',
     },
     {
@@ -204,8 +205,8 @@ export const calendarPage = {
       name: 'Gambier Poker',
       href: '/tours/gambier-poker',
       website: 'https://gambierpoker.com.au/',
-      logoSrc: '/images/tours/gambier.png',
-      iconSrc: '/images/tours/gambier-icon.png',
+      logoSrc: '/images/tours/gambier.webp',
+      iconSrc: '/images/tours/gambier-icon.webp',
       monoSrc: '/images/tours/gambier-mono.png',
     },
     {
@@ -214,8 +215,8 @@ export const calendarPage = {
       name: 'Check Raise Poker',
       href: '/tours/check-raise-poker',
       website: 'https://www.checkraisepoker.com.au/',
-      logoSrc: '/images/tours/checkraise.png',
-      iconSrc: '/images/tours/checkraise-icon.png',
+      logoSrc: '/images/tours/checkraise.webp',
+      iconSrc: '/images/tours/checkraise-icon.webp',
       monoSrc: '/images/tours/checkraise-mono.png',
     },
   ],

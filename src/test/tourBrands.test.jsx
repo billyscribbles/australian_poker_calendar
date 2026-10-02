@@ -56,8 +56,8 @@ describe('brand colours on the calendar surfaces', () => {
     expect(bar.style.getPropertyValue('--tour-primary')).toBe(tourBrands.KINGS.primary)
     expect(bar.style.getPropertyValue('--tour-secondary')).toBe(tourBrands.KINGS.secondary)
     const imgs = within(bar).getAllByRole('presentation', { hidden: true })
-    const icon = imgs.find((i) => i.getAttribute('src') === '/images/tours/kings-icon.png')
-    const wordmark = imgs.find((i) => i.getAttribute('src') === '/images/tours/kings.png')
+    const icon = imgs.find((i) => i.getAttribute('src') === '/images/tours/kings-icon.webp')
+    const wordmark = imgs.find((i) => i.getAttribute('src') === '/images/tours/kings.webp')
     expect(icon.closest('.tour-logo')).toHaveClass('tour-logo--icon')
     expect(
       within(bar)
@@ -73,10 +73,10 @@ describe('brand colours on the calendar surfaces', () => {
     const icon = container.querySelector('.tour-logo--icon')
     expect(icon.style.getPropertyValue('--tour-icon-bg')).toBe(tourBrands.AURUM.iconBg)
     expect(icon.style.getPropertyValue('--tour-logo-size')).toBe('48px')
-    expect(icon.querySelector('img')).toHaveAttribute('src', '/images/tours/aurum-icon.png')
+    expect(icon.querySelector('img')).toHaveAttribute('src', '/images/tours/aurum-icon.webp')
     rerender(<TourLogo code="AURUM" variant="wordmark" size={60} />)
     const mark = container.querySelector('.tour-logo--wordmark')
-    expect(mark.querySelector('img')).toHaveAttribute('src', '/images/tours/aurum.png')
+    expect(mark.querySelector('img')).toHaveAttribute('src', '/images/tours/aurum.webp')
     expect(mark.style.getPropertyValue('--tour-logo-size')).toBe('60px')
   })
 
