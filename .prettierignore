@@ -1,6 +1,7 @@
 dist
 dist-ssr
 .prerender
+.lighthouseci
 .yarn
 .pnp.cjs
 .pnp.loader.mjs

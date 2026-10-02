@@ -19,3 +19,5 @@ dist-ssr
 # local-only
 .firecrawl/
 .claude/settings.local.json
+# Lighthouse CI's working directory from a local `lhci autorun`
+.lighthouseci/
