@@ -25,10 +25,14 @@ import { fileURLToPath } from 'node:url'
 import { createGzip, createBrotliCompress, constants as zlib } from 'node:zlib'
 import { pipeline } from 'node:stream'
 import { canonicalHost, legacyRedirects, cspExtra } from '../src/config/server.config.js'
+import { createAdminHandler } from '../admin/handler.mjs'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const DIST = join(root, 'dist')
 const PORT = Number(process.env.PORT) || 4173
+// The series dashboard at /admin. Local connections only unless ADMIN_PASSWORD
+// is set; see admin/handler.mjs.
+const admin = createAdminHandler()
 const HOST = process.env.HOST || '0.0.0.0'
 
 // Routes scripts/prerender.mjs wrote real HTML for. Anything outside this list
@@ -227,6 +231,10 @@ const server = createServer((req, res) => {
     res.writeHead(301, { Location: legacy, 'Cache-Control': 'public, max-age=86400' })
     return res.end()
   }
+
+  // The series dashboard. Before the trailing-slash rule, which it needs the
+  // other way round (relative URLs in the page resolve against /admin/).
+  if (admin(req, res)) return
 
   // One canonical URL per page. /about/ and /about are otherwise two live URLs
   // serving identical HTML, which is duplicate content Google has to resolve

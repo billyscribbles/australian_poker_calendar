@@ -275,6 +275,7 @@ code {
 }
 .grid--3 {
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  align-items: start;
 }
 .grid--cards {
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));

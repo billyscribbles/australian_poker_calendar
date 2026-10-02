@@ -637,7 +637,7 @@ function bindFilters() {
 
 async function load() {
   try {
-    const res = await fetch(`/api/status${state.today ? `?today=${state.today}` : ''}`)
+    const res = await fetch(`api/status${state.today ? `?today=${state.today}` : ''}`)
     if (!res.ok) throw new Error(await res.text())
     state.data = await res.json()
     state.error = ''

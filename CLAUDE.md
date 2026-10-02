@@ -60,22 +60,29 @@ public/brand/             wordmark, favicon set (yarn icons), og card
 public/images/tours/      operator logos: full colour, icon, and -mono (scripts/gen-tour-mono.py)
 scripts/                  prerender.mjs, gen-seo-files.mjs, gen-icons.mjs, gen-tour-mono.py,
                           series-status.mjs (the status model behind `yarn status` and admin/)
-admin/                    local ops dashboard: `yarn admin` → http://localhost:4400 (never deployed)
+admin/                    the series dashboard at /admin (handler.mjs, mounted by the site and dev servers)
 server/index.mjs          production server: prerendered docs, real 404s, cache headers, CSP
 docs/ENVIRONMENTS.md      main = staging, production branch, Railway envs
 ```
 
 ## Series status dashboard
 
-`yarn admin` serves `admin/` on port 4400: a left-nav dashboard of every series
-(phase, schedule up or not, data file, key art, home and calendar placements,
-scrape sync, organiser contact) and the jobs that follow from them (rotate a
-finished hero, chase an operator, refresh Up Next). It runs
-`scripts/series-status.mjs --json` in a fresh process on every refresh, so
+`/admin` on any of the servers (`yarn dev`, `yarn preview`, `yarn start`, and
+`yarn admin` on its own at port 4400) is a left-nav dashboard of every series:
+phase, schedule up or not, data file, key art, home and calendar placements,
+scrape sync, organiser contact, and the jobs that follow (rotate a finished
+hero, chase an operator, refresh Up Next). `admin/handler.mjs` answers it and
+runs `scripts/series-status.mjs --json` in a fresh process on every refresh, so
 content edits show up without a restart. `yarn status` prints the same jobs in
 the terminal; `--today=YYYY-MM-DD` simulates another day. The job rules live in
-`buildStatus()` and `src/test/seriesStatus.test.js` pins them. Site links point
-at the local preview (`SITE=` to change).
+`buildStatus()`; `src/test/seriesStatus.test.js` pins them and
+`src/test/admin.test.js` pins the gate.
+
+**Access.** The page lists organiser emails and phones. Without `ADMIN_PASSWORD`
+set, only connections from the machine itself are answered and everyone else
+gets a 404. Set `ADMIN_PASSWORD` on Railway (staging and production) to open it
+there behind HTTP Basic auth; any username, that password. It is never
+prerendered, never in the sitemap, and sends `X-Robots-Tag: noindex`.
 
 ## Routes
 

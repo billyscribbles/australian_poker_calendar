@@ -59,7 +59,7 @@ export default [
       'src/test/**/*.{js,jsx}',
       'scripts/**/*.{js,mjs}',
       'server/**/*.{js,mjs}',
-      'admin/server.mjs',
+      'admin/*.mjs',
       'admin/**/*.{js,mjs}',
       '*.config.js',
     ],

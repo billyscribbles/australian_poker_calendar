@@ -3,6 +3,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { visualizer } from 'rollup-plugin-visualizer'
 import { theme } from './src/config/theme.config.js'
+import { createAdminHandler } from './admin/handler.mjs'
 
 // The day this bundle is built, exposed to the app as import.meta.env.VITE_BUILD_DATE.
 //
@@ -57,6 +58,19 @@ function webfonts() {
   }
 }
 
+/** The series dashboard at /admin on the dev server, as on the site server. */
+function admin() {
+  const handle = createAdminHandler()
+  return {
+    name: 'site-admin',
+    configureServer(server) {
+      server.middlewares.use((req, res, next) => {
+        if (!handle(req, res)) next()
+      })
+    },
+  }
+}
+
 // `yarn build:analyze` sets ANALYZE=true to emit dist/bundle-stats.html.
 const analyze = process.env.ANALYZE === 'true'
 
@@ -68,6 +82,7 @@ export default defineConfig(({ isSsrBuild }) => ({
   plugins: [
     react(),
     webfonts(),
+    admin(),
     analyze && visualizer({ filename: 'dist/bundle-stats.html', gzipSize: true }),
   ].filter(Boolean),
   preview: {
