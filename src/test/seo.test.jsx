@@ -45,11 +45,11 @@ describe('SEO — robots directives', () => {
 
 describe('SEO — canonical contract', () => {
   it('canonical URL is built from site.config siteUrl + path', async () => {
-    renderSEO({ title: 'Services', path: '/services' })
+    renderSEO({ title: 'About', path: '/about' })
     await waitFor(() => {
       const canonical = document.head.querySelector('link[rel="canonical"]')
       expect(canonical).not.toBeNull()
-      expect(canonical.href).toBe(`${site.seo.siteUrl}/services`)
+      expect(canonical.href).toBe(`${site.seo.siteUrl}/about`)
     })
   })
 })

@@ -27,7 +27,7 @@ export const canonicalHost = null
 /**
  * 301s for URLs the old site ranked for.
  *
- * Nearly every client is a rebuild, and the pages Google already knows about are
+ * If an earlier site lived on this domain, the pages Google already knows about are
  * the most valuable thing the old site has. A dead URL throws that away; a 301
  * passes it to the new page. Fill this in from the old site's Search Console
  * "Pages" report or its sitemap before launch, and leave it empty otherwise.
@@ -37,15 +37,15 @@ export const canonicalHost = null
  * @type {Record<string, string>}
  */
 export const legacyRedirects = {
-  // '/our-services.html': '/services',
-  // '/index.php/about-us': '/about',
+  // '/series-timeline/': '/poker-calendar/2026',
+  // '/about-us/': '/about',
 }
 
 /**
  * Extra Content-Security-Policy sources, per directive.
  *
  * The baseline in server/index.mjs covers what the template itself loads —
- * Google Fonts, GA4 and Formspree. A client site that adds an embed (a booking
+ * Google Fonts, GA4 and Formspree. A page that adds an embed (a booking
  * widget, a map, a video player) has to name its origins here or the browser
  * blocks them, silently, in production only.
  *

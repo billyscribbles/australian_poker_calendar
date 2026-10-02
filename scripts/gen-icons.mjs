@@ -8,7 +8,7 @@
 // before anyone traced it. Every site built from this template inherited the
 // same gap.
 //
-// NOT part of `yarn build`. Icons change once, when a client's logo lands, so
+// NOT part of `yarn build`. Icons change once, when the logo lands, so
 // this runs on demand and the output is committed. That keeps the deploy build
 // free of image tooling — Railway never needs a rasteriser.
 //
@@ -213,7 +213,7 @@ function encodeIco(pngs) {
 if (!existsSync(MASTER)) {
   fail(
     `no ${MASTER}.\n` +
-      '  Export the client logo as a SQUARE PNG, at least 512x512, with the padding\n' +
+      '  Export the logo as a SQUARE PNG, at least 512x512, with the padding\n' +
       '  you want baked in, then run `yarn icons` again.',
   )
 }

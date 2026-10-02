@@ -1382,6 +1382,40 @@ __metadata:
   languageName: node
   linkType: hard
 
+"australian-poker-calendar@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "australian-poker-calendar@workspace:."
+  dependencies:
+    "@eslint/js": "npm:^9.18.0"
+    "@testing-library/dom": "npm:^10.4.1"
+    "@testing-library/jest-dom": "npm:^6.9.1"
+    "@testing-library/react": "npm:^16.3.2"
+    "@testing-library/user-event": "npm:^14.6.1"
+    "@types/react": "npm:^18.3.1"
+    "@types/react-dom": "npm:^18.3.1"
+    "@vitejs/plugin-react": "npm:^4.3.1"
+    eslint: "npm:^9.18.0"
+    eslint-config-prettier: "npm:^9.1.0"
+    eslint-plugin-jsx-a11y: "npm:^6.10.2"
+    eslint-plugin-react: "npm:^7.37.0"
+    eslint-plugin-react-hooks: "npm:^5.1.0"
+    eslint-plugin-react-refresh: "npm:^0.4.18"
+    framer-motion: "npm:^11.0.0"
+    globals: "npm:^15.14.0"
+    jest-axe: "npm:^9.0.0"
+    jsdom: "npm:^29.1.1"
+    lucide-react: "npm:^0.400.0"
+    prettier: "npm:^3.4.2"
+    react: "npm:^18.3.1"
+    react-dom: "npm:^18.3.1"
+    react-helmet-async: "npm:^3.0.0"
+    react-router-dom: "npm:^7.14.0"
+    rollup-plugin-visualizer: "npm:^5.12.0"
+    vite: "npm:^5.4.0"
+    vitest: "npm:^2.1.9"
+  languageName: unknown
+  linkType: soft
+
 "available-typed-arrays@npm:^1.0.7":
   version: 1.0.7
   resolution: "available-typed-arrays@npm:1.0.7"
@@ -2404,40 +2438,6 @@ __metadata:
   checksum: 10c0/0e0b50f6a843a282637d43674d1fb278dda1dd85f4f99b640024cfb10b85058aac0cc781bf689d5fe50b4b7f638e91e548560723a4e76e04fe96ae35ef039cee
   languageName: node
   linkType: hard
-
-"foundation@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "foundation@workspace:."
-  dependencies:
-    "@eslint/js": "npm:^9.18.0"
-    "@testing-library/dom": "npm:^10.4.1"
-    "@testing-library/jest-dom": "npm:^6.9.1"
-    "@testing-library/react": "npm:^16.3.2"
-    "@testing-library/user-event": "npm:^14.6.1"
-    "@types/react": "npm:^18.3.1"
-    "@types/react-dom": "npm:^18.3.1"
-    "@vitejs/plugin-react": "npm:^4.3.1"
-    eslint: "npm:^9.18.0"
-    eslint-config-prettier: "npm:^9.1.0"
-    eslint-plugin-jsx-a11y: "npm:^6.10.2"
-    eslint-plugin-react: "npm:^7.37.0"
-    eslint-plugin-react-hooks: "npm:^5.1.0"
-    eslint-plugin-react-refresh: "npm:^0.4.18"
-    framer-motion: "npm:^11.0.0"
-    globals: "npm:^15.14.0"
-    jest-axe: "npm:^9.0.0"
-    jsdom: "npm:^29.1.1"
-    lucide-react: "npm:^0.400.0"
-    prettier: "npm:^3.4.2"
-    react: "npm:^18.3.1"
-    react-dom: "npm:^18.3.1"
-    react-helmet-async: "npm:^3.0.0"
-    react-router-dom: "npm:^7.14.0"
-    rollup-plugin-visualizer: "npm:^5.12.0"
-    vite: "npm:^5.4.0"
-    vitest: "npm:^2.1.9"
-  languageName: unknown
-  linkType: soft
 
 "framer-motion@npm:^11.0.0":
   version: 11.18.2

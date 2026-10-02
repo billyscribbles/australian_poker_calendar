@@ -5,7 +5,7 @@ import { createElement, lazy } from 'react'
 //
 // Retries a failed chunk import once, then forces a reload: prevents a
 // white page on a stale tab after a redeploy (ChunkLoadError).
-const RELOAD_KEY = 'foundation:chunk-reloaded'
+const RELOAD_KEY = 'apc:chunk-reloaded'
 
 const isServer = typeof window === 'undefined'
 

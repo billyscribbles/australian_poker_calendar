@@ -1,5 +1,4 @@
-# Monthly, grouped dependency PRs — keeps the template (and every client clone
-# with Dependabot enabled) fresh without weekly noise. Majors arrive as their
+# Monthly, grouped dependency PRs — keeps the site fresh without weekly noise. Majors arrive as their
 # own PRs so breaking changes are reviewed deliberately.
 version: 2
 updates:

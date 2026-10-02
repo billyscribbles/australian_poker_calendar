@@ -127,7 +127,7 @@ function assertOgImage() {
     )
   }
   // The shipped placeholder is named for what it is, so this can tell "nobody
-  // has made a card yet" from "this is the client's card" without hashing bytes.
+  // has made a card yet" from "this is the real card" without hashing bytes.
   // Harmless while VITE_SITE_URL is unset or example.com — that is a scaffold
   // being built locally. Once there is a real domain, the site is going live
   // with a card that says "replace this card before launch", so stop the build.
@@ -136,7 +136,7 @@ function assertOgImage() {
   if (src.includes('.placeholder.') && realDomain) {
     fail(
       `seo.ogImage is still the template placeholder (${src}) but VITE_SITE_URL is ` +
-        `${siteUrl}. Export the client's own 1200x630 card to public/brand/ and point ` +
+        `${siteUrl}. Export the site's own 1200x630 card to public/brand/ and point ` +
         'seo.ogImage at it before shipping.',
     )
   }

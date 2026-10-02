@@ -1,5 +1,5 @@
 // Single source of truth for brand identity, nav, SEO, integrations.
-// Every new site starts by editing this file.
+// Edit this file, not the components, to change any of them.
 
 export const site = {
   brand: {

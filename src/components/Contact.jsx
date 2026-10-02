@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { site } from '../config/site.config.js'
+import { contact } from '../content/contact.js'
 import './Contact.css'
 import { trackConversion } from '../lib/analytics.js'
 
@@ -43,26 +44,24 @@ export default function Contact() {
     <section className="contact section section--dark" id="contact">
       <div className="container contact__inner">
         <div className="contact__head">
-          <span className="section-eyebrow">Get in touch</span>
-          <h2 className="section-label">Let's build something great.</h2>
-          <p className="section-sub">
-            Tell us about your project — we'll reply within one business day.
-          </p>
+          <span className="section-eyebrow">{contact.eyebrow}</span>
+          <h2 className="section-label">{contact.heading}</h2>
+          <p className="section-sub">{contact.sub}</p>
         </div>
 
         <form className="contact__form" onSubmit={handleSubmit}>
           <div className="contact__row">
             <label className="contact__field">
-              <span>Name</span>
+              <span>{contact.fields.name}</span>
               <input type="text" name="name" autoComplete="name" required />
             </label>
             <label className="contact__field">
-              <span>Email</span>
+              <span>{contact.fields.email}</span>
               <input type="email" name="email" autoComplete="email" required />
             </label>
           </div>
           <label className="contact__field">
-            <span>Message</span>
+            <span>{contact.fields.message}</span>
             <textarea name="message" rows="5" required />
           </label>
 
@@ -74,17 +73,17 @@ export default function Contact() {
           </label>
 
           <button type="submit" className="contact__submit" disabled={status === 'submitting'}>
-            {status === 'submitting' ? 'Sending…' : 'Send message →'}
+            {status === 'submitting' ? contact.submitting : contact.submit}
           </button>
 
           {/* Always-present live region so success/error is announced to AT. */}
           <p className="contact__status" role="status" aria-live="polite">
             {status === 'success' && (
-              <span className="contact__status--success">Thanks — we'll be in touch shortly.</span>
+              <span className="contact__status--success">{contact.success}</span>
             )}
             {status === 'error' && (
               <span className="contact__status--error">
-                Something went wrong. Email us directly at {site.contact.email}.
+                {contact.errorPrefix} {site.contact.email}.
               </span>
             )}
           </p>

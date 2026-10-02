@@ -18,7 +18,7 @@
 //   2. Visitors. The static HTML paints first, then React hydrates over it.
 //      With entrances live, sections that were painted go invisible again and
 //      fade back in as the visitor scrolls. The page appears to flicker under
-//      its own scroll. onrai_studio shipped exactly this bug, diagnosed it
+//      its own scroll. An earlier studio site shipped exactly this bug, diagnosed it
 //      three times, and settled it on 12 Sep 2026: no entrances, no scroll
 //      reveals — content is simply there, and a page is complete from first
 //      paint.

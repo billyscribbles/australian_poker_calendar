@@ -28,7 +28,7 @@ const app = (
 //
 // WHY THE PRELOAD: React adopts prerendered markup only if its first render
 // produces the same thing. A lazy page renders as an empty Suspense boundary on
-// that first pass, so hydrating a prerendered /services against it is React
+// that first pass, so hydrating a prerendered /about against it is React
 // #418/#422 — React throws the body away and client-renders, undoing the
 // prerender everywhere but "/". Loading the route's chunk first lets
 // lazyWithRetry render it synchronously, so the two agree and the markup

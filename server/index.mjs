@@ -14,7 +14,7 @@
 // canonical URL per page (no trailing-slash twins) and long-lived caching on
 // the hashed assets so the Lighthouse budget survives.
 //
-// No dependencies — Node's own http/fs/zlib cover all of it. Add per-client
+// No dependencies — Node's own http/fs/zlib cover all of it. Add per-site
 // concerns (a www -> apex redirect, legacy URL 301s) here when a site needs
 // them; the template ships none.
 
@@ -84,7 +84,7 @@ function cacheControl(pathname, ext) {
 // styles on elements. It is also the least dangerous of the unsafe-* values:
 // there is no 'unsafe-inline' for scripts here, which is the one that matters.
 //
-// A client site that adds an embed names its origins in cspExtra
+// A page that adds an embed names its origins in cspExtra
 // (src/config/server.config.js) rather than editing this.
 const CSP_BASE = {
   'default-src': ["'self'"],

@@ -47,11 +47,6 @@ export const ROUTES = [
     noindex: true,
   },
   {
-    path: '/services',
-    load: () => import('./pages/ServicesPage.jsx'),
-    module: 'src/pages/ServicesPage.jsx',
-  },
-  {
     path: '/about',
     load: () => import('./pages/AboutPage.jsx'),
     module: 'src/pages/AboutPage.jsx',

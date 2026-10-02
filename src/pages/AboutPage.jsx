@@ -1,7 +1,6 @@
 import SEO from '../lib/seo.jsx'
 import { site } from '../config/site.config.js'
-import Stats from '../components/Stats.jsx'
-import Testimonials from '../components/Testimonials.jsx'
+import { about } from '../content/about.js'
 import Contact from '../components/Contact.jsx'
 import './AboutPage.css'
 
@@ -11,13 +10,21 @@ export default function AboutPage() {
       <SEO title="About" path="/about" />
       <section className="about-hero">
         <div className="container">
-          <span className="section-eyebrow">About</span>
+          <span className="section-eyebrow">{about.eyebrow}</span>
           <h1 className="about-hero__title">{site.brand.name}</h1>
-          <p className="about-hero__sub">{site.brand.tagline}</p>
+          <p className="about-hero__sub">{about.intro}</p>
         </div>
       </section>
-      <Stats />
-      <Testimonials />
+      <section className="about-body section">
+        <div className="container about-body__inner">
+          {about.sections.map((item) => (
+            <article key={item.heading} className="about-body__item">
+              <h2 className="about-body__heading">{item.heading}</h2>
+              <p className="about-body__text">{item.body}</p>
+            </article>
+          ))}
+        </div>
+      </section>
       <Contact />
     </main>
   )

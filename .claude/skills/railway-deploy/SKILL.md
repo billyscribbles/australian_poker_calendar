@@ -1,17 +1,16 @@
 ---
 name: railway-deploy
-description: Deploy a Foundation client site to Railway. Use when the user says "deploy", "ship to Railway", "push live", "set up hosting", "create the Railway project", or asks to update env vars or check deploy logs for a site built from this template.
+description: Deploy the Australian Poker Calendar site to Railway. Use when the user says "deploy", "ship to Railway", "push live", "set up hosting", "create the Railway project", or asks to update env vars or check deploy logs for this site.
 ---
 
-# Railway deploy — Foundation client sites
+# Railway deploy — Australian Poker Calendar
 
-Deploys a site built from the Foundation template to Railway, using the Railway
-MCP server (configured in `.mcp.json`). This is Step 5 of "The Big Switch" —
-the `big-switch` skill hands off here once the site verifies locally.
+Deploys this site to Railway, using the Railway MCP server (configured in
+`.mcp.json`). Run it once the site verifies locally.
 
 **Read `docs/ENVIRONMENTS.md` first.** Every site runs two environments on one
 project: `main` → the `staging` environment, and the `production` branch → the
-`production` environment on the client's real domain. The steps below cover a
+`production` environment on the real domain. The steps below cover a
 single environment; that doc covers which environment you're targeting, the
 per-environment env-var matrix, and how a release is promoted. Deploy to staging
 first — production is never the default target.
@@ -29,7 +28,7 @@ first — production is never the default target.
 ## First deploy — new project
 
 1. `mcp__railway__check-railway-status` — confirm auth.
-2. `mcp__railway__list-projects` — check the client doesn't already have one.
+2. `mcp__railway__list-projects` — check the site doesn't already have one.
 3. `mcp__railway__create-project-and-link` — create the project and link this
    repo directory to it.
 4. `mcp__railway__link-service` (and `link-environment` if prompted) — attach
@@ -39,12 +38,12 @@ first — production is never the default target.
    - `VITE_FORMSPREE_ID` — required for the contact form
    - `VITE_SITE_URL` — required; the build templates `sitemap.xml`/`robots.txt`
      from it via `scripts/gen-seo-files.mjs`
-   - `VITE_GA_ID` — only if the client uses analytics
-   - `VITE_SENTRY_DSN` — only if the client uses error monitoring
+   - `VITE_GA_ID` — only if analytics is wanted
+   - `VITE_SENTRY_DSN` — only if error monitoring is wanted
    These are build-time vars (Vite inlines `VITE_*`), so they must be set
    **before** the deploy build runs.
 6. `mcp__railway__deploy` — trigger the deploy.
-7. `mcp__railway__generate-domain` — get a public URL (or attach the client's
+7. `mcp__railway__generate-domain` — get a public URL (or attach the site's
    custom domain in the Railway dashboard).
 
 ## Redeploy / update env vars

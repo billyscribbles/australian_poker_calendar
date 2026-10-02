@@ -19,7 +19,7 @@ process.env.VITE_BUILD_DATE ??= new Date().toISOString().slice(0, 10)
  * Injects the webfont links named in theme.config.js into <head>.
  *
  * WHY A PLUGIN RATHER THAN HARDCODED TAGS IN index.html: the font stack is part
- * of a client's brand and changes on every site, so index.html would have to be
+ * of the brand and changes per site, so index.html would have to be
  * hand-edited in lockstep with theme.config — and when it wasn't, the page
  * silently rendered the fallback family instead. It did, for months. Deriving
  * the tags from the same object the CSS variables come from means picking a font
@@ -30,7 +30,7 @@ process.env.VITE_BUILD_DATE ??= new Date().toISOString().slice(0, 10)
 function webfonts() {
   const families = theme.googleFonts ?? []
   return {
-    name: 'foundation-webfonts',
+    name: 'site-webfonts',
     transformIndexHtml() {
       if (!families.length) return []
       const href =
@@ -114,7 +114,7 @@ export default defineConfig(({ isSsrBuild }) => ({
     // interop at build time.
     noExternal: ['framer-motion', 'react-helmet-async'],
   },
-  // Vitest runs the foundation "contract" suite — see src/test/.
+  // Vitest runs the "contract" suite — see src/test/.
   test: {
     environment: 'jsdom',
     globals: true,
