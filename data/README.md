@@ -135,6 +135,7 @@ Source: https://australianpokerschedule.com.au/series-timeline/ (scraped 2026-10
 - Tagline: The Gold Standard in Poker
 - Status: Save the dates (schedule not yet published)
 - Host club: St Johns Park Bowling Club
+- Schedule: `data/sydney-showdown-2026-schedule.json`, transcribed from Aurum's October 2026 schedule PDF on 2026-10-03 (the page is `src/content/eventSydneyShowdown2026.js`)
 - Hero image: https://australianpokerschedule.com.au/wp-content/uploads/2026/07/Untitled-20260716-153011-1199.jpg
 - iCal: webcal://australianpokerschedule.com.au/event/sydney-showdown-aurum-poker-grand-st-johns-park-nsw/?ical=1
 

@@ -23,9 +23,11 @@ describe('routes — prerender contract', () => {
   it("each module id names the file that route's load() imports", () => {
     // Read off the source rather than calling load(): the assertion is about
     // the literal import path Rollup keys its manifest by.
+    // The event routes are one `festivals.map(...)` with a single import, so
+    // compare the distinct modules in order rather than one per route.
     const imports = [...source.matchAll(/import\('\.\/(pages\/\w+\.jsx)'\)/g)].map((m) => m[1])
     const declared = ROUTES.filter((r) => r.load).map((r) => r.module.replace(/^src\//, ''))
-    expect(imports).toEqual(declared)
+    expect([...new Set(imports)]).toEqual([...new Set(declared)])
   })
 
   it('exactly one catch-all, and it prerenders at a concrete path', () => {

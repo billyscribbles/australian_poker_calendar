@@ -43,6 +43,10 @@ export const theme = {
     // Functional — always paired with a visible label.
     live: '#5EBB8A',
     'live-bg': '#16261D',
+    // Schedule rows that are satellites into another series — the red rows
+    // on an operator's poster. Always paired with the feeding series' name.
+    feeder: '#B3273A', // white text on it clears 6:1
+    'on-feeder': '#FFFFFF',
 
     // Overlays behind text on imagery.
     overlay: 'rgba(14, 14, 14, 0.96)',

@@ -14,6 +14,7 @@
 // src/test/routes.test.js asserts the two agree.
 
 import { preload } from './lazyWithRetry.js'
+import { festivals } from './content/festivals.js'
 
 export const ROUTES = [
   {
@@ -38,6 +39,16 @@ export const ROUTES = [
     module: 'src/pages/CalendarPage.jsx',
     props: { year: 2027 },
   },
+  // One page per series on the calendar, at the href content/festivals.js
+  // derives from its name. content/eventPages.js resolves the path to a
+  // hand-built poster where one exists, or to a hero-and-dates page with the
+  // schedule pending where it does not.
+  ...festivals.map((festival) => ({
+    path: festival.href,
+    load: () => import('./pages/EventPage.jsx'),
+    module: 'src/pages/EventPage.jsx',
+    props: { path: festival.href },
+  })),
   // Holding page until the first series' results are in. noindex while it has
   // no standings; drop the flag when the rankings table lands.
   {

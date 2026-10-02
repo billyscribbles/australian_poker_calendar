@@ -1,0 +1,720 @@
+/* Series page: the operator's poster as HTML. Hero on the tour's own colours
+ * (--tour-primary / --tour-secondary set inline from content/tourBrands.js),
+ * the four headline stats, then one schedule table grouped by day. */
+
+.event-page {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding-bottom: 64px;
+}
+
+/* Hero ------------------------------------------------------------------ */
+
+.event-hero {
+  --tour-fill: var(--tour-primary, var(--color-accent));
+  --tour-glow: var(--tour-secondary, var(--tour-fill));
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid color-mix(in srgb, var(--tour-fill) 42%, var(--color-border));
+  background:
+    radial-gradient(
+      80% 140% at 100% 0%,
+      color-mix(in srgb, var(--tour-glow) 30%, transparent) 0%,
+      transparent 60%
+    ),
+    linear-gradient(
+      100deg,
+      var(--color-bg-inset) 0%,
+      color-mix(in srgb, var(--tour-fill) 24%, var(--color-bg-inset)) 100%
+    );
+}
+
+/* The promo shot, faded under the gradient. Decorative; never above 0.3 so
+ * the text column stays on near-black. */
+.event-hero__backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  opacity: 0.22;
+  mask-image: linear-gradient(90deg, transparent 0%, #000 45%, #000 100%);
+  pointer-events: none;
+}
+
+.event-hero__inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    'brand heading'
+    'venue heading';
+  align-items: end;
+  gap: 16px 40px;
+  padding-top: 40px;
+  padding-bottom: 36px;
+}
+
+.event-hero__brand {
+  grid-area: brand;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+/* The wordmark hugs the right edge of its box by default; in the hero it
+ * leads the row, so pin it left. */
+.event-hero__brand .tour-logo--wordmark {
+  max-width: 100%;
+}
+
+.event-hero__brand .tour-logo--wordmark .tour-logo__img {
+  object-position: left center;
+}
+
+.event-hero__presented {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.event-hero__heading {
+  grid-area: heading;
+  text-align: right;
+}
+
+.event-hero__status {
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.event-hero__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(44px, 6vw, 84px);
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: var(--color-text);
+  text-wrap: balance;
+}
+
+.event-hero__dates {
+  margin: 8px 0 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(22px, 2.6vw, 34px);
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.event-hero__venue {
+  grid-area: venue;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 10px;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(22px, 2.4vw, 32px);
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+
+.event-hero__venue svg {
+  align-self: center;
+  color: var(--color-accent);
+}
+
+.event-hero__venue-name {
+  font-weight: 800;
+  color: var(--color-accent);
+}
+
+.event-hero__venue-detail {
+  font-weight: 600;
+}
+
+/* Stats strip ----------------------------------------------------------- */
+
+.event-stats {
+  background: var(--color-bg-inset);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.event-stats__list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 0;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  list-style: none;
+}
+
+.event-stats__item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 6px 24px;
+  border-left: 1px solid var(--color-border);
+}
+
+.event-stats__item:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.event-stats__value {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(32px, 3.2vw, 48px);
+  line-height: 1;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  color: var(--color-accent);
+}
+
+.event-stats__label {
+  max-width: 11em;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.15;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+
+/* Schedule table -------------------------------------------------------- */
+
+.event-schedule .section-heading {
+  margin-bottom: 20px;
+}
+
+.schedule {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  font-family: var(--font-display);
+  font-size: 16px;
+  line-height: 1.2;
+  color: var(--color-text);
+}
+
+.schedule__th {
+  padding: 12px 10px;
+  background: var(--color-bg-raised);
+  border-bottom: 1px solid var(--color-border);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--color-text);
+  vertical-align: bottom;
+}
+
+.schedule__th--event {
+  text-align: left;
+}
+
+.schedule__th-sub {
+  display: block;
+  margin-top: 2px;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--color-accent);
+}
+
+/* One spanning cell per day, in the inset panel colour so the day band reads
+ * as a gutter down the left of the table. */
+.schedule__day {
+  width: 112px;
+  padding: 12px 10px;
+  background: var(--color-bg-inset);
+  border-right: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  text-align: center;
+  vertical-align: middle;
+}
+
+.schedule__day-date {
+  display: block;
+  font-weight: 800;
+  font-size: 26px;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.schedule__day-weekday {
+  display: block;
+  margin-top: 4px;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.schedule__cell {
+  padding: 10px 10px;
+  border-bottom: 1px solid var(--color-border);
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+.schedule__cell--time {
+  width: 84px;
+  font-weight: 700;
+}
+
+.schedule__cell--event {
+  text-align: left;
+  white-space: normal;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+/* The poster's event number, where the operator numbers its championship
+ * events; satellites have none. */
+.schedule__number {
+  display: inline-block;
+  margin-right: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+}
+
+.schedule__gtd {
+  margin-left: 10px;
+  color: var(--color-accent);
+}
+
+.schedule__total {
+  font-weight: 700;
+}
+
+.schedule__split {
+  margin-left: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-accent);
+}
+
+.schedule__cell--buyin .schedule__total + .schedule__split {
+  margin-left: 8px;
+}
+
+.schedule__cell--regoLevel,
+.schedule__cell--regoTime,
+.schedule__cell--room {
+  font-size: 14px;
+  white-space: normal;
+}
+
+/* The poster's gold rows: the series' feature events. */
+.schedule__row--featured .schedule__cell {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+.schedule__row--featured .schedule__gtd,
+.schedule__row--featured .schedule__split,
+.schedule__row--featured .schedule__number {
+  color: var(--color-on-accent);
+}
+
+/* The poster's red rows: satellites into another operator's series. */
+.schedule__row--feeds .schedule__cell {
+  background: var(--color-feeder);
+  color: var(--color-on-feeder);
+}
+
+.schedule__row--feeds .schedule__gtd,
+.schedule__row--feeds .schedule__split,
+.schedule__row--feeds .schedule__number {
+  color: var(--color-on-feeder);
+}
+
+/* Schedule pending ------------------------------------------------------ */
+
+/* Where the table would be, on a series whose operator has not published one.
+ * Same brand variables as the hero so the panel reads as the same poster. */
+.event-pending {
+  --tour-fill: var(--tour-primary, var(--color-accent));
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 20px 28px;
+  padding: 32px 28px;
+  border: 1px dashed color-mix(in srgb, var(--tour-fill) 55%, var(--color-border));
+  border-radius: var(--radius-lg);
+  background: linear-gradient(
+    100deg,
+    var(--color-bg-card) 0%,
+    color-mix(in srgb, var(--tour-fill) 10%, var(--color-bg-card)) 100%
+  );
+}
+
+.event-pending > svg {
+  color: var(--color-accent);
+}
+
+.event-pending__text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.event-pending__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(24px, 2.6vw, 32px);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+
+.event-pending__body {
+  margin: 0;
+  max-width: 56ch;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--color-muted);
+}
+
+/* Notes ----------------------------------------------------------------- */
+
+.event-notes__inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px 48px;
+  align-items: start;
+  padding: 24px 28px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-card);
+}
+
+.event-notes__list {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--color-muted);
+}
+
+.event-notes__list li + li {
+  margin-top: 6px;
+}
+
+.event-notes__aside {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  min-width: 220px;
+}
+
+.event-notes__sponsors {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+
+.event-notes__sponsors-label {
+  color: var(--color-muted);
+}
+
+.event-notes__link {
+  display: inline-block;
+  padding: 10px 18px;
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.event-notes__link:hover,
+.event-notes__link:focus-visible {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+/* Tablet ---------------------------------------------------------------- */
+
+@media (max-width: 1100px) {
+  .schedule {
+    font-size: 15px;
+  }
+
+  .schedule__cell {
+    padding: 10px 8px;
+  }
+
+  .schedule__split {
+    display: block;
+    margin: 2px 0 0;
+  }
+}
+
+@media (max-width: 900px) {
+  /* minmax(0, …): a bare 1fr column refuses to shrink below its content, so
+   * a wide value like "$1.5 Million" pushes the strip past a phone's edge.
+   * Let the column shrink and the value wrap instead. */
+  .event-stats__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 12px;
+  }
+
+  .event-stats__value {
+    white-space: normal;
+  }
+
+  .event-stats__item:nth-child(3) {
+    padding-left: 0;
+    border-left: 0;
+  }
+}
+
+/* Phone: the same table, reflowed to one card per event under a day band.
+ * Column headers are hidden; the small cells carry their label in
+ * data-label and draw it in front of the value. */
+
+@media (max-width: 768px) {
+  .event-hero__inner {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'brand'
+      'heading'
+      'venue';
+    align-items: start;
+    gap: 20px;
+    padding-top: 28px;
+    padding-bottom: 28px;
+  }
+
+  .event-hero__heading {
+    text-align: left;
+  }
+
+  .event-hero__backdrop {
+    mask-image: linear-gradient(180deg, transparent 0%, #000 50%);
+  }
+
+  .event-stats__item {
+    gap: 10px;
+    padding: 4px 14px;
+  }
+
+  .event-pending {
+    grid-template-columns: 1fr;
+    padding: 24px 20px;
+  }
+
+  .event-pending .event-notes__link {
+    justify-self: start;
+  }
+
+  .event-stats__value {
+    font-size: 30px;
+  }
+
+  .event-stats__label {
+    font-size: 12px;
+  }
+
+  .schedule,
+  .schedule tbody,
+  .schedule__row,
+  .schedule__day,
+  .schedule__cell {
+    display: block;
+  }
+
+  .schedule {
+    border: 0;
+    border-radius: 0;
+    overflow: visible;
+  }
+
+  .schedule thead {
+    display: none;
+  }
+
+  /* The day band. It is the first cell of the day's first row, so it lives
+   * inside that row's card; it spans the card's full width and pulls out
+   * through the card's padding onto the page background, so a featured
+   * (gold) or feeder (red) first row never tints the band under it. */
+  /* The day band. It is the first cell of the day's first row, so it lives
+   * inside that row's card: it goes first, spans the card's full width and
+   * pulls out through the card's padding onto the page background, so a
+   * featured (gold) or feeder (red) first row never tints the band under it. */
+  .schedule__day {
+    order: -1;
+    display: flex;
+    /* Basis counts the negative margins back in, so the band's margin box is
+     * exactly the card's border box. */
+    flex: 0 0 calc(100% + 2 * (14px + 1px));
+    align-items: baseline;
+    gap: 10px;
+    width: auto;
+    margin: calc(-12px - 1px) calc(-14px - 1px) 4px;
+    padding: 28px 0 8px;
+    border: 0;
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-bg);
+    text-align: left;
+  }
+
+  .schedule__day-weekday {
+    margin: 0;
+  }
+
+  /* One card per event. Line one is time, name and buy-in — the name cell
+   * grows to take every spare pixel, which is what pushes the six spec cells
+   * onto the lines below, where they wrap as "label value" pairs. (A grid
+   * cannot do this: grid children are blockified, so an inline spec cell
+   * still takes a cell of its own.) */
+  .schedule__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 6px 12px;
+    margin-bottom: 8px;
+    padding: 12px 14px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-card);
+  }
+
+  .schedule__cell {
+    flex: 0 0 auto;
+    padding: 0;
+    border: 0;
+    background: none;
+    text-align: left;
+    white-space: normal;
+  }
+
+  .schedule__cell--time {
+    width: auto;
+    color: var(--color-muted);
+  }
+
+  /* Flex breaks lines on basis, not grown size: a zero basis would let the
+   * first spec cells squeeze onto line one before the name grows. Half the
+   * card as basis leaves no room for them, so they always start line two. */
+  .schedule__cell--event {
+    flex: 1 1 50%;
+    min-width: 0;
+  }
+
+  .schedule__gtd {
+    display: block;
+    margin: 2px 0 0;
+  }
+
+  .schedule__cell--buyin {
+    text-align: right;
+  }
+
+  .schedule__cell--buyin .schedule__split {
+    display: block;
+    margin: 2px 0 0;
+  }
+
+  .schedule__cell--stack,
+  .schedule__cell--blinds,
+  .schedule__cell--shotClock,
+  .schedule__cell--reEntry,
+  .schedule__cell--regoLevel,
+  .schedule__cell--regoTime,
+  .schedule__cell--room {
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .schedule__cell--stack::before,
+  .schedule__cell--blinds::before,
+  .schedule__cell--shotClock::before,
+  .schedule__cell--reEntry::before,
+  .schedule__cell--regoLevel::before,
+  .schedule__cell--regoTime::before,
+  .schedule__cell--room::before {
+    content: attr(data-label) ' ';
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  .schedule__cell:empty {
+    display: none;
+  }
+
+  .schedule__row--featured,
+  .schedule__row--featured .schedule__cell {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+
+  .schedule__row--featured .schedule__cell--time,
+  .schedule__row--featured .schedule__cell::before {
+    color: var(--color-on-accent);
+  }
+
+  .schedule__row--feeds,
+  .schedule__row--feeds .schedule__cell {
+    background: var(--color-feeder);
+    border-color: var(--color-feeder);
+  }
+
+  .schedule__row--feeds .schedule__cell--time,
+  .schedule__row--feeds .schedule__cell::before {
+    color: var(--color-on-feeder);
+  }
+
+  .event-notes__inner {
+    grid-template-columns: 1fr;
+    padding: 18px;
+  }
+}
