@@ -8,7 +8,7 @@
   margin: 0 auto;
   padding: 24px var(--layout-container-pad) 0;
   display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr) 56px;
+  grid-template-columns: minmax(0, 2fr) repeat(3, minmax(0, 1fr));
   gap: 16px;
   align-items: stretch;
 }
@@ -187,8 +187,18 @@
   font-weight: 700;
   font-size: 22px;
   line-height: 1.1;
-  /* Two lines, then clip: with the icon beside it the column is too narrow
-     to keep a series name like "Aurum Sydney Showdown" on one line. */
+  /* Two lines are always reserved so a one-line name ("APLPT Brisbane") keeps
+     its date row level with the cards beside it, and the text is centred in
+     that box so a one-liner sits mid-block rather than hugging the top. */
+  min-height: calc(2 * 1.1em);
+  display: flex;
+  align-items: center;
+}
+
+/* Two lines, then clip: with the icon beside it the column is too narrow to
+   keep a series name like "Aurum Sydney Showdown" on one line. The clamp has
+   to be its own box because -webkit-box cannot also centre. */
+.side-event__name-text {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
@@ -208,48 +218,124 @@
   flex: none;
 }
 
-/* ---- More -------------------------------------------------------------- */
+/* ---- Featured series panel --------------------------------------------- */
 
-.events-more {
-  align-self: center;
+/* The ticker and its header sit in one bordered card inside the container,
+   so the strip reads as "this series' events" rather than a loose row. */
+.ticker-panel {
+  --ticker-pad: 20px;
+  max-width: calc(var(--layout-container-max) - 2 * var(--layout-container-pad));
+  margin: 20px auto 24px;
+  border-radius: var(--radius-2xl);
+  border: 1px solid var(--color-border);
+  background: linear-gradient(180deg, var(--color-bg-card), var(--color-bg-inset));
+  overflow: hidden;
+}
+
+.ticker-series {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 18px var(--ticker-pad) 16px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* The wordmark's own rule sizes it for a timeline bar (hugging the right,
+   capped at a share of the bar); here it sits left in a slot of its own. */
+.ticker-series__brand {
+  flex: none;
+  display: flex;
+  align-items: center;
+  padding-right: 20px;
+  border-right: 1px solid var(--color-border);
+}
+
+.ticker-series__brand .tour-logo--wordmark {
+  max-width: none;
+}
+
+.ticker-series__brand .tour-logo--wordmark .tour-logo__img {
+  object-position: left center;
+  filter: none;
+}
+
+.ticker-series__text {
+  flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 8px;
+  gap: 4px;
+}
+
+.ticker-series__eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.ticker-series__name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 1.1;
+  color: var(--color-text);
+}
+
+.ticker-series__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
   font-size: 13px;
-  font-weight: 600;
   color: var(--color-muted);
-  transition: color var(--transition-fast);
 }
 
-.events-more:hover {
-  color: var(--color-champagne);
+.ticker-series__meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
-.events-more__circle {
-  display: grid;
-  place-items: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
+.ticker-series__meta-item svg {
+  flex: none;
+}
+
+.ticker-series__cta {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 16px;
+  border-radius: var(--radius-full);
   border: 1.5px solid var(--color-accent);
   background: var(--color-bg-card);
+  font-size: 13px;
+  font-weight: 600;
   color: var(--color-champagne);
+  white-space: nowrap;
+  transition:
+    border-color var(--transition-fast),
+    background var(--transition-fast);
+}
+
+.ticker-series__cta:hover {
+  border-color: var(--color-champagne);
+  background: var(--color-bg-selected);
 }
 
 /* ---- Ticker ------------------------------------------------------------ */
 
 .ticker-wrap {
   position: relative;
-  max-width: var(--layout-container-max);
-  margin: 0 auto;
 }
 
 .ticker {
-  padding: 20px var(--layout-container-pad) 24px;
+  padding: 16px var(--ticker-pad) 20px;
   gap: 12px;
   scroll-snap-type: x proximity;
-  scroll-padding-inline: var(--layout-container-pad);
+  scroll-padding-inline: var(--ticker-pad);
 }
 
 /* While there is more row in a direction, that edge dissolves instead of
@@ -297,11 +383,11 @@
 }
 
 .ticker__arrow--prev {
-  left: max(4px, calc(var(--layout-container-pad) - 20px));
+  left: 8px;
 }
 
 .ticker__arrow--next {
-  right: max(4px, calc(var(--layout-container-pad) - 20px));
+  right: 8px;
 }
 
 .ticker__arrow:hover {
@@ -327,8 +413,8 @@
   scroll-snap-align: start;
   display: flex;
   gap: 12px;
-  min-width: 300px;
-  padding: 12px;
+  min-width: 240px;
+  padding: 12px 14px;
   border-radius: var(--radius-lg);
   background: var(--color-bg-card);
   border: 1px solid var(--color-border);
@@ -342,11 +428,6 @@
 
 .ticker-chip:hover {
   border-color: var(--color-accent);
-}
-
-.ticker-chip__logo {
-  flex: none;
-  align-self: center;
 }
 
 .ticker-chip__body {
@@ -418,16 +499,12 @@
 /* ---- Responsive -------------------------------------------------------- */
 
 @media (max-width: 900px) {
+  /* Hero full width, then the three side cards in one row beneath it. */
   .events-banner__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
-  .live-event,
-  .events-more {
+  .live-event {
     grid-column: 1 / -1;
-  }
-  .events-more {
-    flex-direction: row;
-    justify-content: center;
   }
 }
 
@@ -454,7 +531,26 @@
   .side-event {
     min-height: 240px;
   }
-  .ticker {
-    padding: 16px var(--layout-container-pad) 20px;
+  .ticker-panel {
+    --ticker-pad: 14px;
+    margin: 16px var(--layout-container-pad) 20px;
+    border-radius: var(--radius-xl);
+  }
+  /* Wordmark on its own line, then the copy, then the link. */
+  .ticker-series {
+    flex-wrap: wrap;
+    gap: 12px 16px;
+  }
+  .ticker-series__brand {
+    flex-basis: 100%;
+    padding-right: 0;
+    border-right: 0;
+  }
+  .ticker-series__name {
+    font-size: 20px;
+  }
+  .ticker-series__cta {
+    flex-basis: 100%;
+    justify-content: center;
   }
 }

@@ -4,8 +4,8 @@ import { Calendar, Flag, MapPin, ChevronLeft, ChevronRight } from 'lucide-react'
 import {
   heroEvent,
   sideEvents,
-  moreEvents,
   ticker,
+  tickerSeries,
   tickerControls,
   featuredLabel,
 } from '../content/events.js'
@@ -17,6 +17,7 @@ import './EventsBanner.css'
 /** @typedef {import('../content/events.js').HeroEvent} HeroEvent */
 /** @typedef {import('../content/events.js').SideEvent} SideEvent */
 /** @typedef {import('../content/events.js').TickerEvent} TickerEvent */
+/** @typedef {import('../content/events.js').TickerSeries} TickerSeries */
 
 /** @param {{ event: HeroEvent }} props */
 function LiveEventCard({ event }) {
@@ -88,7 +89,9 @@ function SideEventCard({ event }) {
           <TourLogo code={event.tour} variant="icon" size={44} />
         </div>
         <div className="side-event__text">
-          <h3 className="side-event__name">{event.name}</h3>
+          <h3 className="side-event__name">
+            <span className="side-event__name-text">{event.name}</span>
+          </h3>
           <div className="side-event__date">
             <Calendar size={16} strokeWidth={1.5} aria-hidden="true" />
             {event.dates}
@@ -103,9 +106,6 @@ function SideEventCard({ event }) {
 function TickerChip({ event }) {
   return (
     <Link to={event.href} className={`ticker-chip${event.live ? ' ticker-chip--live' : ''}`}>
-      <div className="ticker-chip__logo">
-        <TourLogo code={event.tour} variant="icon" size={56} />
-      </div>
       <div className="ticker-chip__body">
         <div className="ticker-chip__buyin">
           {event.buyIn} <span className="ticker-chip__currency">{event.currency}</span>
@@ -131,6 +131,40 @@ function TickerChip({ event }) {
         </>
       )}
     </Link>
+  )
+}
+
+/**
+ * The strip's header: which series the chips belong to, with the operator's
+ * wordmark, the full name, dates and venue, and a link to the series page.
+ *
+ * @param {{ series: TickerSeries }} props
+ */
+function TickerSeriesHeader({ series }) {
+  return (
+    <div className="ticker-series">
+      <div className="ticker-series__brand">
+        <TourLogo code={series.tour} variant="wordmark" size={40} />
+      </div>
+      <div className="ticker-series__text">
+        <span className="ticker-series__eyebrow">{series.eyebrow}</span>
+        <h3 className="ticker-series__name">{series.name}</h3>
+        <div className="ticker-series__meta">
+          <span className="ticker-series__meta-item">
+            <Calendar size={15} strokeWidth={1.5} aria-hidden="true" />
+            {series.dates}
+          </span>
+          <span className="ticker-series__meta-item">
+            <MapPin size={15} strokeWidth={1.5} aria-hidden="true" />
+            {series.venue}
+          </span>
+        </div>
+      </div>
+      <Link to={series.href} className="ticker-series__cta">
+        {series.cta}
+        <ChevronRight size={16} strokeWidth={2} aria-hidden="true" />
+      </Link>
+    </div>
   )
 }
 
@@ -211,8 +245,9 @@ function Ticker({ events }) {
 }
 
 /**
- * Events banner: live hero event, two side events, a "More" link, and the
- * horizontally scrolling tournament ticker beneath them.
+ * Events banner: live hero event, three side events, a "More" link, and
+ * beneath them a panel for one featured series: its header, then the
+ * horizontally scrolling ticker of its events.
  */
 export default function EventsBanner() {
   return (
@@ -225,15 +260,11 @@ export default function EventsBanner() {
         {sideEvents.map((event) => (
           <SideEventCard key={event.href} event={event} />
         ))}
-        <Link to={moreEvents.href} className="events-more">
-          <span className="events-more__circle" aria-hidden="true">
-            <ChevronRight size={16} strokeWidth={2} />
-          </span>
-          {moreEvents.label}
-          <span className="sr-only"> {moreEvents.srLabel}</span>
-        </Link>
       </div>
-      <Ticker events={ticker} />
+      <div className="ticker-panel">
+        <TickerSeriesHeader series={tickerSeries} />
+        <Ticker events={ticker} />
+      </div>
     </section>
   )
 }

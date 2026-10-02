@@ -1,4 +1,4 @@
-// Events banner: the live hero event, two side events and the tournament
+// Events banner: the live hero event, three side events and the tournament
 // ticker. Series and dates come from the Australian Poker Schedule timeline
 // scrape (data/poker-series-timeline.json); the ticker rows are the featured
 // events on the APT Melbourne Champs II schedule poster
@@ -34,8 +34,19 @@
  */
 
 /**
+ * @typedef {object} TickerSeries
+ * @property {string} tour     tour code from calendarPage.tours; draws the wordmark
+ * @property {string} eyebrow  e.g. "Featured series"
+ * @property {string} name     the full series name
+ * @property {string} dates
+ * @property {string} venue
+ * @property {string} cta      the link to the series page
+ * @property {string} href
+ */
+
+/**
  * @typedef {object} TickerEvent
- * @property {string} tour       tour code from calendarPage.tours; draws the room's icon
+ * @property {string} tour       tour code from calendarPage.tours
  * @property {string} buyIn      formatted amount, e.g. "1,650"
  * @property {string} currency   e.g. "AUD"
  * @property {string} name
@@ -85,11 +96,33 @@ export const sideEvents = [
     // logo clears the status badge.
     imageSrc: '/images/events/aplpt-brisbane.webp',
   },
+  {
+    status: 'upcoming',
+    tour: 'CROWN',
+    name: 'Victorian Poker Championship',
+    dates: 'Oct 12 – Oct 27',
+    href: '/events/victorian-poker-championship-2026',
+    // Crown's 623×533 lockup from the schedule PDF, scaled to 800 wide at the
+    // top of an 800×1000 canvas in the art's own red, so the empty lower half
+    // fades into the name band rather than the headline being cropped.
+    imageSrc: '/images/events/victorian-poker-championship-card.webp',
+  },
 ]
 
-// `srLabel` completes the visible "More" for screen readers and crawlers,
-// which otherwise see a link whose only text is a generic word.
-export const moreEvents = { label: 'More', srLabel: 'events', href: '/poker-calendar/2026' }
+/**
+ * The series the ticker's events belong to. It heads the strip with the
+ * operator's wordmark and the full name, so the chips can stay short.
+ * @type {TickerSeries}
+ */
+export const tickerSeries = {
+  tour: 'APT',
+  eyebrow: 'Featured series',
+  name: 'APT Melbourne Champs II',
+  dates: 'Sep 30 – Oct 11',
+  venue: 'Crown Melbourne',
+  cta: 'Full schedule',
+  href: '/events/apt-melbourne-champs-ii',
+}
 
 /** @type {TickerEvent[]} */
 export const ticker = [

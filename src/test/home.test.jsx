@@ -11,7 +11,7 @@ import FAQ from '../components/FAQ.jsx'
 import EventsBanner from '../components/EventsBanner.jsx'
 import ImagePlaceholder from '../components/ImagePlaceholder.jsx'
 import { faq } from '../content/faq.js'
-import { heroEvent, sideEvents, ticker } from '../content/events.js'
+import { heroEvent, sideEvents, ticker, tickerSeries } from '../content/events.js'
 import { calendarPage } from '../content/calendarPage.js'
 import { featuredNews } from '../content/featuredNews.js'
 import { stories } from '../content/stories.js'
@@ -68,9 +68,10 @@ describe('FAQ accordion — one open item at a time', () => {
 })
 
 describe('EventsBanner — events and ticker from fixtures', () => {
-  it('renders the hero event, both side events and every ticker chip', () => {
+  it('renders the hero event, every side event and every ticker chip', () => {
     withRouter(<EventsBanner />)
-    expect(screen.getByText(heroEvent.name)).toBeInTheDocument()
+    const hero = document.querySelector('.live-event')
+    expect(within(hero).getByText(heroEvent.name)).toBeInTheDocument()
     for (const event of sideEvents) {
       expect(screen.getByRole('heading', { name: event.name })).toBeInTheDocument()
     }
@@ -79,12 +80,26 @@ describe('EventsBanner — events and ticker from fixtures', () => {
     }
   })
 
-  it("shows the poker room's icon on every ticker chip", () => {
+  it('frames the ticker as one series: wordmark, full title, dates, venue and a schedule link', () => {
     withRouter(<EventsBanner />)
+    const header = document.querySelector('.ticker-series')
+    expect(header).not.toBeNull()
+    expect(header.querySelector('.tour-logo--wordmark .tour-logo__img')).not.toBeNull()
+    expect(
+      within(header).getByRole('heading', { level: 3, name: tickerSeries.name }),
+    ).toBeInTheDocument()
+    expect(within(header).getByText(tickerSeries.eyebrow)).toBeInTheDocument()
+    expect(within(header).getByText(tickerSeries.dates)).toBeInTheDocument()
+    expect(within(header).getByText(tickerSeries.venue)).toBeInTheDocument()
+    expect(within(header).getByRole('link', { name: tickerSeries.cta })).toHaveAttribute(
+      'href',
+      tickerSeries.href,
+    )
+    // The header carries the brand, so the chips no longer repeat the icon.
     const chips = document.querySelectorAll('.ticker-chip')
     expect(chips.length).toBe(ticker.length)
     for (const chip of chips) {
-      expect(chip.querySelector('.tour-logo--icon .tour-logo__img')).not.toBeNull()
+      expect(chip.querySelector('.tour-logo')).toBeNull()
     }
   })
 
@@ -92,7 +107,8 @@ describe('EventsBanner — events and ticker from fixtures', () => {
     withRouter(<EventsBanner />)
     const liveSideEvents = sideEvents.filter((event) => event.status === 'live')
     expect(liveSideEvents.length).toBeGreaterThan(0)
-    expect(screen.getByText('Upcoming')).toBeInTheDocument()
+    const upcomingSideEvents = sideEvents.filter((event) => event.status === 'upcoming')
+    expect(screen.getAllByText('Upcoming')).toHaveLength(upcomingSideEvents.length)
     for (const event of ticker) {
       expect(screen.getAllByText(event.entries ?? event.guarantee).length).toBeGreaterThan(0)
     }
@@ -145,14 +161,19 @@ describe('home fixtures — shape each section renders', () => {
     }
   }
 
-  it('events: hero, two side events with a known status, ticker chips with a figure', () => {
+  it('events: hero, three side events with a known status, ticker chips with a figure', () => {
     expect(heroEvent.name && heroEvent.dates && heroEvent.place && heroEvent.venue).toBeTruthy()
-    expect(sideEvents).toHaveLength(2)
+    expect(sideEvents).toHaveLength(3)
     for (const event of sideEvents) expect(['live', 'upcoming']).toContain(event.status)
     const codes = calendarPage.tours.map((t) => t.code)
     for (const event of [heroEvent, ...sideEvents, ...ticker]) {
       expect(codes, event.name).toContain(event.tour)
     }
+    expect(codes).toContain(tickerSeries.tour)
+    expect(
+      tickerSeries.name && tickerSeries.eyebrow && tickerSeries.dates && tickerSeries.venue,
+    ).toBeTruthy()
+    expect(tickerSeries.cta && tickerSeries.href).toBeTruthy()
     hasLinks(ticker)
     for (const event of ticker) {
       expect(event.buyIn && event.currency && event.name && event.date).toBeTruthy()
