@@ -183,16 +183,25 @@
 }
 
 /* "Copyright · Privacy Policy · Terms" — the dots are generated so the list
-   stays data-driven. */
+   stays data-driven. Each item hangs its dot in the gap to its left, and the
+   row clips its own edges, so a dot that lands at the start of a wrapped line
+   (a phone footer) falls outside the row and vanishes instead of dangling. */
 .footer__legal {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  gap: 0 16px;
+  overflow-x: clip;
 }
 
-.footer__legal > * + *::before {
+.footer__legal > * {
+  position: relative;
+}
+
+.footer__legal > *::before {
   content: '·';
-  margin: 0 6px;
+  position: absolute;
+  left: -10px;
   color: var(--color-text-faint);
 }
 
@@ -211,14 +220,21 @@
 .footer__responsible {
   display: flex;
   flex-wrap: wrap;
+  gap: 0 20px;
+  overflow-x: clip;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
-.footer__responsible > * + *::before {
+.footer__responsible > * {
+  position: relative;
+}
+
+.footer__responsible > *::before {
   content: '·';
-  margin: 0 8px;
+  position: absolute;
+  left: -12px;
 }
 
 @media (max-width: 600px) {
