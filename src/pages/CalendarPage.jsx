@@ -15,15 +15,12 @@ import FAQ from '../components/FAQ.jsx'
 import PokerRooms from '../components/PokerRooms.jsx'
 import './CalendarPage.css'
 
-// The box a tour wordmark is contained in inside a tile (see .tour-tile__logo).
-const TILE_LOGO_W = 100
-const TILE_LOGO_H = 40
-
 /**
- * The 1080×135 promo slot under the tour strip. The box keeps the artwork's
- * own proportions (see .calendar-page__banner), and a phone-sized cut swaps in
- * below 600px when the content provides one. The optional tag hangs on the
- * frame's top edge, clear of the artwork at every width.
+ * The 1080×135 promo slot at the top of the page, above the title. The box
+ * keeps the artwork's own proportions (see .calendar-page__banner), and a
+ * phone-sized cut swaps in below 600px when the content provides one. The
+ * optional tag hangs on the frame's top edge, clear of the artwork at every
+ * width.
  */
 function Banner({ banner }) {
   if (!banner.src) {
@@ -42,8 +39,8 @@ function Banner({ banner }) {
         alt={banner.alt}
         width={1080}
         height={135}
-        // Above the fold on a phone and the page's LCP element there, so it
-        // must not be lazy; the hero title above it is text.
+        // The first thing on the page and its LCP element, so it must not be
+        // lazy.
         priority
         className="calendar-page__banner-img"
       />
@@ -69,7 +66,7 @@ function Banner({ banner }) {
  * @param {number} [props.year]  from src/routes.js
  */
 export default function CalendarPage({ year = YEAR }) {
-  const { tours, allTours, banner, years } = calendarPage
+  const { banner, years } = calendarPage
   const seo = calendarPage.seo(year)
   const title = calendarPage.title(year)
   const yearFestivals = festivalsInYear(festivals, year)
@@ -86,7 +83,7 @@ export default function CalendarPage({ year = YEAR }) {
         </Link>
       )}
       {nextYear && (
-        <Link to={calendarPath(nextYear)} className="year-step year-step--next">
+        <Link to={calendarPath(nextYear)} className="year-step">
           {years.next} <strong>{nextYear}</strong>
           <ChevronRight size={16} strokeWidth={2} aria-hidden="true" />
         </Link>
@@ -103,43 +100,11 @@ export default function CalendarPage({ year = YEAR }) {
         jsonLd={eventListLd(yearFestivals, year, seo)}
       />
 
+      <Banner banner={banner} />
+
       <section className="calendar-page__head">
         <h1 className="calendar-page__title">{title}</h1>
-        <nav className="tour-strip scroll-row" aria-label="Tours">
-          {tours.map((tour) => (
-            <Link key={tour.code} to={tour.href} className="tour-tile">
-              {tour.monoSrc ? (
-                // Grey at rest, the operator's colours on hover. Both marks are
-                // decorative: the label is the link's name, read but not shown.
-                <>
-                  <Img
-                    src={tour.monoSrc}
-                    alt=""
-                    width={TILE_LOGO_W}
-                    height={TILE_LOGO_H}
-                    className="tour-tile__logo"
-                  />
-                  <Img
-                    src={tour.logoSrc}
-                    alt=""
-                    width={TILE_LOGO_W}
-                    height={TILE_LOGO_H}
-                    className="tour-tile__logo tour-tile__logo--colour"
-                  />
-                  <span className="sr-only">{tour.label}</span>
-                </>
-              ) : (
-                tour.label
-              )}
-            </Link>
-          ))}
-          <Link to={allTours.href} className="tour-tile tour-tile--all">
-            {allTours.label}
-          </Link>
-        </nav>
       </section>
-
-      <Banner banner={banner} />
 
       <FestivalCalendar festivals={yearFestivals} year={year} foot={yearSteps} />
 

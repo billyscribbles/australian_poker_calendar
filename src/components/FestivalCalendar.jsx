@@ -20,7 +20,8 @@ function defaultMonth(today, year) {
 }
 
 /**
- * Timeline | List toggle, month tabs, and whichever view is selected.
+ * Month tabs, whichever view is selected, and a foot under the grid with the
+ * Timeline | List toggle, the series count and the page's own links.
  *
  * State lives in the URL — `?month=10&view=timelineDays` or `view=list` — so a
  * month can be linked to. The query is only read once hydration has finished:
@@ -30,7 +31,7 @@ function defaultMonth(today, year) {
  * @param {object} props
  * @param {Festival[]} props.festivals
  * @param {number} props.year
- * @param {import('react').ReactNode} [props.foot]  drawn inside the frame, under the grid
+ * @param {import('react').ReactNode} [props.foot]  drawn at the end of the foot, under the grid
  */
 export default function FestivalCalendar({ festivals, year, foot }) {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -55,30 +56,6 @@ export default function FestivalCalendar({ festivals, year, foot }) {
 
   return (
     <section className="festival-calendar" aria-label="Festival calendar">
-      <div className="festival-calendar__controls">
-        <div className="segmented" role="group" aria-label="View">
-          <button
-            type="button"
-            className="segmented__btn"
-            aria-pressed={view === 'timeline'}
-            onClick={() => update({ view: 'timelineDays' })}
-          >
-            {views.timeline}
-          </button>
-          <button
-            type="button"
-            className="segmented__btn"
-            aria-pressed={view === 'list'}
-            onClick={() => update({ view: 'list' })}
-          >
-            {views.list}
-          </button>
-        </div>
-        <p className="festival-calendar__count">
-          <strong>{festivals.length}</strong> {countLabel}
-        </p>
-      </div>
-
       <div className="month-tabs" role="group" aria-label="Month">
         {MONTH_NAMES.map((name, i) => (
           <button
@@ -100,7 +77,30 @@ export default function FestivalCalendar({ festivals, year, foot }) {
         ) : (
           <FestivalList festivals={festivals} year={year} month={month} />
         )}
-        {foot && <div className="festival-calendar__foot">{foot}</div>}
+        <div className="festival-calendar__foot">
+          <div className="segmented" role="group" aria-label="View">
+            <button
+              type="button"
+              className="segmented__btn"
+              aria-pressed={view === 'timeline'}
+              onClick={() => update({ view: 'timelineDays' })}
+            >
+              {views.timeline}
+            </button>
+            <button
+              type="button"
+              className="segmented__btn"
+              aria-pressed={view === 'list'}
+              onClick={() => update({ view: 'list' })}
+            >
+              {views.list}
+            </button>
+          </div>
+          <p className="festival-calendar__count">
+            <strong>{festivals.length}</strong> {countLabel}
+          </p>
+          {foot}
+        </div>
       </div>
     </section>
   )

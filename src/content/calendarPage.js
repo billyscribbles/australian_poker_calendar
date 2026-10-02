@@ -1,5 +1,5 @@
 // Poker Calendar page: everything on the page that is not a festival row
-// (those live in festivals.js). Title, tour strip, promo banner slot,
+// (those live in festivals.js). Title, tours, promo banner slot,
 // Up Next cards and the page's own FAQ items.
 //
 // Tours, Up Next figures and dates come from the Australian Poker Schedule
@@ -8,13 +8,13 @@
 /**
  * @typedef {object} Tour
  * @property {string} code      matches Festival.tour; drawn in the logo box
- * @property {string} label     tile text in the tour strip
+ * @property {string} label     the short name shown where the wordmark is not
  * @property {string} name      the operator's full name, for the Event records' organizer
  * @property {string} href
  * @property {string} website   the operator's own site, as linked from each APS event page
  * @property {string} [logoSrc] the full wordmark, transparent, in the operator's colours
  * @property {string} [iconSrc] 256×256 transparent square mark, drawn in a circle
- * @property {string} [monoSrc] the wordmark in one neutral grey, for the tour strip at rest
+ * @property {string} [monoSrc] the wordmark in one neutral grey, for a logo at rest
  *                              (built by scripts/gen-tour-mono.py — never hand-edit)
  */
 
@@ -219,8 +219,6 @@ export const calendarPage = {
       monoSrc: '/images/tours/checkraise-mono.png',
     },
   ],
-  allTours: { label: 'All tours →', href: '/tours' },
-
   // 1080×135 promo banner (shipped at 2× for retina). Clear `src` to fall
   // back to the striped placeholder. `mobileSrc` is an optional 750×300 cut
   // of the same artwork for phones, where an 8:1 strip is unreadable; without

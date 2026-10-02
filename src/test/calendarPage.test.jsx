@@ -52,12 +52,9 @@ afterEach(() => {
 })
 
 describe('CalendarPage — static content', () => {
-  it('renders the title, every tour tile and the count of series touching the year', () => {
+  it('renders the title and the count of series touching the year', () => {
     renderPage()
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(calendarPage.title(2026))
-    for (const tour of calendarPage.tours) {
-      expect(screen.getByRole('link', { name: tour.label })).toHaveAttribute('href', tour.href)
-    }
     // The season runs past New Year, so the 2026 document counts only the
     // series that touch 2026 — not the whole scrape.
     const inYear = festivalsInYear(festivals, 2026)
