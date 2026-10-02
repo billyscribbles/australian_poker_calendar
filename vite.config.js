@@ -52,7 +52,17 @@ function webfonts() {
           attrs: { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
           injectTo: 'head-prepend',
         },
-        { tag: 'link', attrs: { rel: 'stylesheet', href }, injectTo: 'head' },
+        // Non-blocking: media="print" keeps the sheet off the render path and
+        // /font-swap.js (same-origin, since the CSP forbids inline handlers)
+        // flips it to "all" once it is in. <noscript> keeps no-JS visitors on
+        // the real fonts.
+        {
+          tag: 'link',
+          attrs: { rel: 'stylesheet', href, media: 'print', 'data-font-swap': '' },
+          injectTo: 'head',
+        },
+        { tag: 'noscript', children: [{ tag: 'link', attrs: { rel: 'stylesheet', href } }], injectTo: 'head' },
+        { tag: 'script', attrs: { src: '/font-swap.js', defer: '' }, injectTo: 'head' },
       ]
     },
   }
