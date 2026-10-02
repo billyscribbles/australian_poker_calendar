@@ -1,7 +1,8 @@
 import { Fragment } from 'react'
 import { MapPin, CalendarClock } from 'lucide-react'
 import SEO from '../lib/seo.jsx'
-import { eventLd } from '../lib/structuredData.js'
+import { eventLd, breadcrumbLd } from '../lib/structuredData.js'
+import { calendarPage } from '../content/calendarPage.js'
 import { eventFor, schedulePending } from '../content/eventPages.js'
 import { tourBrandStyle } from '../content/tourBrands.js'
 import TourLogo from '../components/TourLogo.jsx'
@@ -90,6 +91,7 @@ export default function EventPage({ path }) {
     (col) => col.key === 'event' || days.some(({ rows }) => rows.some((row) => row[col.key])),
   ).map((col) => (col.key === 'buyIn' ? { ...col, sub: event.buyInSub } : col))
   const hasNotes = event.notes.length > 0 || event.sponsors.length > 0
+  const calendarYear = `/poker-calendar/${event.start.slice(0, 4)}`
 
   return (
     <main className="event-page">
@@ -97,7 +99,14 @@ export default function EventPage({ path }) {
         title={event.seo.title}
         description={event.seo.description}
         path={event.path}
-        jsonLd={eventLd(event)}
+        jsonLd={[
+          breadcrumbLd([
+            { name: 'Home', path: '/' },
+            { name: calendarPage.title(Number(event.start.slice(0, 4))), path: calendarYear },
+            { name: title, path: event.path },
+          ]),
+          eventLd(event),
+        ]}
       />
 
       <header className="event-hero" style={tourBrandStyle(tour)}>
