@@ -14,6 +14,7 @@
  * @property {string} tour      tour code from calendarPage.tours; draws the circular badge
  * @property {string} href
  * @property {string} [imageSrc] key visual; placeholder when absent
+ * @property {boolean} [featured] the series is featured, not yet live; draws the Featured tag in place of LIVE
  */
 
 /**
@@ -42,7 +43,6 @@
  * @property {string} [entries]  e.g. "109" or "12/1,375" for a live event
  * @property {string} [guarantee] shown in place of entries until results exist
  * @property {string} href
- * @property {boolean} [featured]  a feature event on the series poster; draws the Featured tag
  * @property {boolean} [live]
  * @property {string} [level]            live only, e.g. "Level 32"
  * @property {ChipLeader[]} [leaders]    live only, top three stacks
@@ -52,6 +52,7 @@
 export const heroEvent = {
   tour: 'APT',
   name: 'APT Melbourne Champs II',
+  featured: true,
   dates: 'Sep 30 – Oct 11',
   place: 'Melbourne, Australia',
   venue: 'Crown Melbourne, Metropol – Sky Bar 28',
@@ -96,7 +97,6 @@ export const ticker = [
     tour: 'APT',
     buyIn: '1,650',
     currency: 'AUD',
-    featured: true,
     name: 'Melbourne Champs Main Event',
     date: 'Oct 4 – Oct 11',
     guarantee: '$350K GTD',
@@ -106,7 +106,6 @@ export const ticker = [
     tour: 'APT',
     buyIn: '600',
     currency: 'AUD',
-    featured: true,
     name: 'Hachem Deepstack',
     date: 'Oct 2 – Oct 3',
     guarantee: '$60K GTD',
@@ -116,7 +115,6 @@ export const ticker = [
     tour: 'APT',
     buyIn: '2,000',
     currency: 'AUD',
-    featured: true,
     name: "Van's Vault",
     date: 'Oct 3 – Oct 4',
     guarantee: '$100K GTD',
@@ -126,7 +124,6 @@ export const ticker = [
     tour: 'APT',
     buyIn: '750',
     currency: 'AUD',
-    featured: true,
     name: 'The Whale',
     date: 'Oct 4 – Oct 5',
     guarantee: '$50K GTD',
@@ -136,7 +133,6 @@ export const ticker = [
     tour: 'APT',
     buyIn: '1,250',
     currency: 'AUD',
-    featured: true,
     name: 'The Grind',
     date: 'Oct 6 – Oct 7',
     guarantee: '$100K GTD',
@@ -146,7 +142,6 @@ export const ticker = [
     tour: 'APT',
     buyIn: '2,500',
     currency: 'AUD',
-    featured: true,
     name: 'The Goliath',
     date: 'Oct 7 – Oct 8',
     guarantee: '$150K GTD',
@@ -156,7 +151,6 @@ export const ticker = [
     tour: 'APT',
     buyIn: '2,300',
     currency: 'AUD',
-    featured: true,
     name: 'The Big Flipper',
     date: 'Oct 8 – Oct 9',
     guarantee: '$100K GTD',
@@ -164,9 +158,11 @@ export const ticker = [
   },
 ]
 
-/** The ticker's scroll buttons and the tag on each feature event. */
+/** The ticker's scroll buttons. */
 export const tickerControls = {
   prev: 'Earlier events',
   next: 'Later events',
-  featuredLabel: 'Featured',
 }
+
+/** The tag on the hero tile while its series is featured rather than live. */
+export const featuredLabel = 'Featured'

@@ -103,10 +103,14 @@ describe('EventsBanner — events and ticker from fixtures', () => {
         expect(screen.getByText(leader.stack)).toBeInTheDocument()
       }
     }
-    // Large LIVE badge on the hero and each live side card (with the pulsing dot),
-    // and a small one per live chip.
+    // The hero wears a Featured tag until its series is live, then the large
+    // LIVE badge. Each live side card has the large badge (with the pulsing
+    // dot), each live chip a small one.
+    expect(document.querySelectorAll('.live-event .badge--outline').length).toBe(
+      heroEvent.featured ? 1 : 0,
+    )
     expect(document.querySelectorAll('.live-badge').length).toBe(
-      1 + liveSideEvents.length + liveChips.length,
+      (heroEvent.featured ? 0 : 1) + liveSideEvents.length + liveChips.length,
     )
     expect(document.querySelectorAll('.side-event .live-badge--lg').length).toBe(
       liveSideEvents.length,

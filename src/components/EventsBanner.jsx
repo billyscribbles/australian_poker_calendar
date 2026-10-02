@@ -1,7 +1,14 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Calendar, Flag, MapPin, ChevronLeft, ChevronRight } from 'lucide-react'
-import { heroEvent, sideEvents, moreEvents, ticker, tickerControls } from '../content/events.js'
+import {
+  heroEvent,
+  sideEvents,
+  moreEvents,
+  ticker,
+  tickerControls,
+  featuredLabel,
+} from '../content/events.js'
 import ImagePlaceholder from './ImagePlaceholder.jsx'
 import { Badge, LiveBadge } from './Badge.jsx'
 import TourLogo from './TourLogo.jsx'
@@ -46,7 +53,13 @@ function LiveEventCard({ event }) {
         height={252}
         priority
       />
-      <LiveBadge className="live-event__badge" />
+      {event.featured ? (
+        <Badge variant="outline" className="live-event__badge">
+          {featuredLabel}
+        </Badge>
+      ) : (
+        <LiveBadge className="live-event__badge" />
+      )}
     </Link>
   )
 }
@@ -116,12 +129,6 @@ function TickerChip({ event }) {
           </div>
           <LiveBadge size="sm" className="ticker-chip__live" />
         </>
-      )}
-      {/* The LIVE chip takes the corner when the event is running. */}
-      {event.featured && !event.live && (
-        <Badge variant="outline" className="ticker-chip__featured">
-          {tickerControls.featuredLabel}
-        </Badge>
       )}
     </Link>
   )

@@ -109,6 +109,15 @@
   right: 18px;
 }
 
+/* The Featured tag sits top-left over the text panel, at LIVE's size. */
+.live-event__badge.badge {
+  right: auto;
+  left: 18px;
+  padding: 8px 14px;
+  border-radius: var(--radius-md);
+  font-size: 13px;
+}
+
 /* ---- Side event cards -------------------------------------------------- */
 
 .side-event {
@@ -400,8 +409,7 @@
   color: var(--color-text);
 }
 
-.ticker-chip__live,
-.ticker-chip__featured {
+.ticker-chip__live {
   position: absolute;
   top: 12px;
   right: 12px;
