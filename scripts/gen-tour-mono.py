@@ -19,18 +19,13 @@ For each PNG in TOURS this writes `<name>-mono.png`:
   4. the brightest opaque pixel is scaled to TONE, so every mark shares one
      ceiling and sits at the same weight as the pill text beside it
 
-Nouméa's wordmark is an SVG in a single cream, so it is a colour swap.
-
 NOT part of `yarn build` — run it when a wordmark changes and commit the
 output, so the deploy needs no image tooling:
 
     python3 scripts/gen-tour-mono.py          (needs Pillow: pip install pillow)
 """
 
-import re
 import sys
-from base64 import b64decode, b64encode
-from io import BytesIO
 from pathlib import Path
 
 try:
@@ -55,8 +50,16 @@ PNG_MARKS = {
     "aurum": True,
     "playlive": False,
     "npl": False,
+    "empire": False,
+    "palace": False,
+    "queenbs": False,
+    "wptl": False,
+    "stacked": False,
+    "mga": False,
+    "star": False,
+    "gambier": False,
+    "checkraise": False,
 }
-SVG_MARKS = {"nps": "#F5F2EB"}
 
 
 def to_mono(im: Image.Image, dark: bool) -> tuple[Image.Image, int]:
@@ -84,29 +87,6 @@ def mono_png(name: str, dark: bool) -> None:
     print(f"[gen-tour-mono] {name}-mono.png  peak {peak} -> {TONE}")
 
 
-def mono_svg(name: str, colour: str) -> None:
-    """Swap the vector fill, and grey any raster the SVG embeds (Nouméa's "N"
-    mark is a base64 PNG clipped by a path, and keeps its gradient otherwise)."""
-    src = (TOURS / f"{name}.svg").read_text()
-    grey = f"#{TONE:02X}{TONE:02X}{TONE:02X}"
-    out, n = re.subn(re.escape(colour), grey, src, flags=re.IGNORECASE)
-    if n == 0:
-        sys.exit(f"[gen-tour-mono] {name}.svg no longer uses {colour}; update SVG_MARKS")
-
-    def grey_raster(m: re.Match) -> str:
-        im = Image.open(BytesIO(b64decode(m.group(1)))).convert("RGBA")
-        mono, _ = to_mono(im, dark=False)
-        buf = BytesIO()
-        mono.save(buf, format="PNG", optimize=True)
-        return "data:image/png;base64," + b64encode(buf.getvalue()).decode("ascii")
-
-    out, rasters = re.subn(r"data:image/png;base64,([A-Za-z0-9+/=]+)", grey_raster, out)
-    (TOURS / f"{name}-mono.svg").write_text(out)
-    print(f"[gen-tour-mono] {name}-mono.svg  {n} fills -> {grey}, {rasters} embedded raster(s)")
-
-
 if __name__ == "__main__":
     for name, dark in PNG_MARKS.items():
         mono_png(name, dark)
-    for name, colour in SVG_MARKS.items():
-        mono_svg(name, colour)

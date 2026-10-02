@@ -102,6 +102,88 @@ export const tourBrands = {
     iconBg: '#FFFFFF',
     source: 'https://www.npl.com.au/ — NPL_2D_Logo_500.png, custom.css and unify-globals.css',
   },
+  // Empire Poker (Brisbane): gold phoenix lockup on a black site. The mark's
+  // own gold (#C9A94F) with its pale highlight; "POKER" is white, so dark only.
+  EMPIRE: {
+    primary: '#C9A94F',
+    secondary: '#F0E0A0',
+    logo: 'light',
+    iconBg: '#0A0A0A',
+    source: 'https://empirepoker.com.au/ — phoenix lockup PNG, black page chrome',
+  },
+  // Poker Palace (Western Sydney): red-and-white spade, "POKER" red and
+  // "PALACE" white; the site's accent is a tan gold (#DD9933).
+  PALACE: {
+    primary: '#B0000F',
+    secondary: '#DD9933',
+    logo: 'light',
+    iconBg: '#141414',
+    source: 'https://pokerpalace.com.au/ — Poker-Palace-logo-alt.png, site accent',
+  },
+  // Queen B's Poker (Beenleigh): a single antique gold for bee and lettering,
+  // on the site's near-black navy (#030F27).
+  QUEENBS: {
+    primary: '#C4AC58',
+    secondary: '#E6D28A',
+    logo: 'light',
+    iconBg: '#030F27',
+    source: 'https://www.queenbs.poker/ — QBP Website Header Logo Gold.png, page background',
+  },
+  // WPT League: white wordmark with the WPT card mark in blue and red. The
+  // shipped PNG is the lockup keyed out of the league's share card.
+  WPTL: {
+    primary: '#0080C8',
+    secondary: '#D62828',
+    logo: 'light',
+    iconBg: '#121212',
+    source: 'https://www.wptleague.com/au/ — og.jpg card mark',
+  },
+  // Stacked Poker (Adelaide): navy page chrome (#1B2D42) with an orange
+  // accent (#F58220); the script wordmark ships in white as the site serves it.
+  STACKED: {
+    primary: '#1B2D42',
+    secondary: '#F58220',
+    logo: 'light',
+    iconBg: '#1B2D42',
+    source: 'https://stackedpoker.com.au/ — theme CSS, stacked_poker_logo.png',
+  },
+  // Mixed Games Academy (Melbourne): the gold of the spade-and-mortarboard
+  // mark (#C89A32, highlight #E4CC75) on the site's near-black (#111214).
+  MGA: {
+    primary: '#C89A32',
+    secondary: '#E4CC75',
+    logo: 'light',
+    iconBg: '#111214',
+    source: 'https://mixedgamesacademy.au/ — theme CSS, A4-png.png',
+  },
+  // The Star Poker (Sydney and Gold Coast): the lockup is navy (#102E4E) on
+  // white; star.png is that vector in white so it reads on the dark bars, with
+  // the navy as the backing and the site's link blue as the glow.
+  STAR: {
+    primary: '#102E4E',
+    secondary: '#439DD7',
+    logo: 'light',
+    iconBg: '#102E4E',
+    source: 'https://www.starpoker.com.au/sydney — PokerLogo.svg fill, site link colour',
+  },
+  // Gambier Poker (Mount Gambier): red "GAMBIER" over gold "POKER", keyed out
+  // of the black lockup the site serves.
+  GAMBIER: {
+    primary: '#C81018',
+    secondary: '#D0B838',
+    logo: 'light',
+    iconBg: '#000000',
+    source: 'https://gambierpoker.com.au/ — Gambier Poker / XDL Poker lockup',
+  },
+  // Check Raise Poker (Springfield Lakes): black wordmark on white; shipped in
+  // white for the dark bars. The site's accents are reds.
+  CHECKRAISE: {
+    primary: '#BD0000',
+    secondary: '#E99292',
+    logo: 'light',
+    iconBg: '#0E0E0E',
+    source: 'https://www.checkraisepoker.com.au/ — site CSS accents, CRP Logo Black PNG',
+  },
 }
 
 /**

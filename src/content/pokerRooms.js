@@ -28,6 +28,15 @@ const names = {
   AURUM: 'Aurum Poker Grand',
   PLAYLIVE: 'PlayLive Melbourne',
   NPL: 'National Poker League',
+  EMPIRE: 'Empire Poker Brisbane',
+  PALACE: 'Poker Palace',
+  QUEENBS: 'Queen B’s Poker',
+  WPTL: 'WPT League Illawarra',
+  STACKED: 'Stacked Poker',
+  MGA: 'Mixed Games Academy',
+  STAR: 'The Star Poker',
+  GAMBIER: 'Gambier Poker',
+  CHECKRAISE: 'Check Raise Poker',
 }
 
 // Rooms whose strip tile differs from the calendar's mark. Both shipped
