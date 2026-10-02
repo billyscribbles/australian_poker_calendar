@@ -37,31 +37,31 @@ export const featuredNews = {
   items: [
     {
       category: 'Live Poker',
-      date: '2026.09.30',
+      date: 'Sep 30',
       title: 'WPT Australia 2026 Championship Decided After 527-Entry Field',
       href: '/news/wpt-australia-2026-championship-decided',
     },
     {
       category: 'Live Poker',
-      date: '2026.09.23',
+      date: 'Sep 23',
       title: 'Jeju Poker Festival 2026: Hotels, Transfers and Packages Explained',
       href: '/news/jeju-poker-festival-2026-packages',
     },
     {
       category: 'Live Poker',
-      date: '2026.09.22',
+      date: 'Sep 22',
       title: 'WPT Australia Championship: Final Six Set at The Star Sydney',
       href: '/news/wpt-australia-final-six',
     },
     {
       category: 'Strategy',
-      date: '2026.09.16',
+      date: 'Sep 16',
       title: '[Poker Basics] Target Stack and Timed Tournaments: The Complete Guide',
       href: '/news/poker-basics-target-stack-timed-tournaments',
     },
     {
       category: 'Stories',
-      date: '2026.09.14',
+      date: 'Sep 14',
       title: 'The Psychological Trap: When a Massive Stack Bursts the Bubble',
       href: '/news/psychological-trap-massive-stack-bubble',
     },

@@ -11,6 +11,7 @@ import {
   festivalsInMonth,
   packLanes,
   formatRange,
+  formatRangeWithYear,
   parseMonth,
   todayStamp,
 } from './calendar.js'
@@ -41,8 +42,14 @@ describe('calendar — dates', () => {
     expect(monthDays(2026, 2)).toHaveLength(28)
   })
 
-  it('formatRange prints the dotted year.month.day range', () => {
-    expect(formatRange('2026-01-08', '2026-01-18')).toBe('2026.01.08 - 2026.01.18')
+  it('formatRange prints short month and day, no year', () => {
+    expect(formatRange('2026-01-08', '2026-01-18')).toBe('Jan 8 – Jan 18')
+    expect(formatRange('2026-09-30', '2026-10-11')).toBe('Sep 30 – Oct 11')
+  })
+
+  it('formatRangeWithYear prints the year once, or twice across New Year', () => {
+    expect(formatRangeWithYear('2026-09-30', '2026-10-11')).toBe('Sep 30 – Oct 11, 2026')
+    expect(formatRangeWithYear('2026-12-20', '2027-01-03')).toBe('Dec 20, 2026 – Jan 3, 2027')
   })
 
   it('parseMonth accepts 1–12 and falls back otherwise', () => {

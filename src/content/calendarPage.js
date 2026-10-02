@@ -21,7 +21,7 @@
  * @typedef {object} UpNextItem
  * @property {string} tour
  * @property {string} name
- * @property {string} dates    "10.06 - 10.11"
+ * @property {string} dates    "Oct 6 – Oct 11"
  * @property {string} place
  * @property {string} [prize]  as the operator advertises it, e.g. "$4M+ est."
  * @property {number} [events] published event count, when there is one
@@ -131,14 +131,14 @@ export const calendarPage = {
       {
         tour: 'APLPT',
         name: 'APLPT Brisbane',
-        dates: '10.06 - 10.11',
+        dates: 'Oct 6 – Oct 11',
         place: 'Brisbane',
         href: '/events/aplpt-brisbane',
       },
       {
         tour: 'CROWN',
         name: 'Victorian Poker Championship 2026',
-        dates: '10.12 - 10.27',
+        dates: 'Oct 12 – Oct 27',
         place: 'Melbourne',
         prize: '$2M series in 2025',
         href: '/events/victorian-poker-championship-2026',
@@ -146,14 +146,14 @@ export const calendarPage = {
       {
         tour: 'APL',
         name: 'APL The Ville 600 Townsville',
-        dates: '10.18 - 10.25',
+        dates: 'Oct 18 – Oct 25',
         place: 'Townsville',
         href: '/events/apl-the-ville-600-townsville',
       },
       {
         tour: 'KINGS',
         name: 'Kings Poker Sydney Millions',
-        dates: '10.27 - 11.09',
+        dates: 'Oct 27 – Nov 9',
         place: 'Sydney',
         prize: '$4M+ est.',
         href: '/events/kings-poker-sydney-millions',

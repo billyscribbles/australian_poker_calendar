@@ -61,15 +61,27 @@ export function monthDays(year, month) {
   })
 }
 
-/** "2026.01.08 - 2026.01.18" */
+/** "Jan 8 – Jan 18". The year is implied by the page, so it is left out. */
 export function formatRange(start, end) {
   const fmt = (v) => {
     const d = new Date(toStamp(v))
-    const mm = String(d.getUTCMonth() + 1).padStart(2, '0')
-    const dd = String(d.getUTCDate()).padStart(2, '0')
-    return `${d.getUTCFullYear()}.${mm}.${dd}`
+    return `${MONTH_NAMES[d.getUTCMonth()].slice(0, 3)} ${d.getUTCDate()}`
   }
-  return `${fmt(start)} - ${fmt(end)}`
+  return `${fmt(start)} – ${fmt(end)}`
+}
+
+/**
+ * "Sep 30 – Oct 11, 2026", or "Dec 20, 2026 – Jan 3, 2027" when the range
+ * crosses New Year. The series page hero, where no year is implied.
+ */
+export function formatRangeWithYear(start, end) {
+  const a = new Date(toStamp(start))
+  const b = new Date(toStamp(end))
+  const md = (d) => `${MONTH_NAMES[d.getUTCMonth()].slice(0, 3)} ${d.getUTCDate()}`
+  if (a.getUTCFullYear() === b.getUTCFullYear()) {
+    return `${md(a)} – ${md(b)}, ${a.getUTCFullYear()}`
+  }
+  return `${md(a)}, ${a.getUTCFullYear()} – ${md(b)}, ${b.getUTCFullYear()}`
 }
 
 /** A `?month=` value as 1–12, or `fallback` when it is anything else. */
