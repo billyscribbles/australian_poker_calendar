@@ -3,6 +3,7 @@
 // so a config swap is enough to reskin the chrome.
 import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { renderToString } from 'react-dom/server'
 import { MemoryRouter } from 'react-router-dom'
 import Navbar from '../components/Navbar.jsx'
@@ -39,6 +40,38 @@ describe('Navbar — renders brand + nav from site.config', () => {
     expect(tab.className).toContain('nav-tab--active')
     const other = site.nav.find((item) => item.to !== '/')
     expect(screen.getByRole('link', { name: other.label })).not.toHaveAttribute('aria-current')
+  })
+
+  it('has a hamburger that opens the nav, and closes it on Escape and on navigation', async () => {
+    const user = userEvent.setup()
+    renderNavbar()
+    const nav = screen.getByRole('navigation', { name: site.navMenu.label })
+    const button = screen.getByRole('button', { name: site.navMenu.open })
+    expect(button).toHaveAttribute('aria-expanded', 'false')
+    expect(button).toHaveAttribute('aria-controls', nav.id)
+    expect(nav.className).not.toContain('site-header__tabs--open')
+
+    await user.click(button)
+    expect(screen.getByRole('button', { name: site.navMenu.close })).toHaveAttribute(
+      'aria-expanded',
+      'true',
+    )
+    expect(nav.className).toContain('site-header__tabs--open')
+
+    await user.keyboard('{Escape}')
+    expect(screen.getByRole('button', { name: site.navMenu.open })).toHaveAttribute(
+      'aria-expanded',
+      'false',
+    )
+
+    await user.click(screen.getByRole('button', { name: site.navMenu.open }))
+    const other = site.nav.find((item) => item.to !== '/')
+    await user.click(screen.getByRole('link', { name: other.label }))
+    expect(screen.getByRole('button', { name: site.navMenu.open })).toHaveAttribute(
+      'aria-expanded',
+      'false',
+    )
+    expect(nav.className).not.toContain('site-header__tabs--open')
   })
 })
 

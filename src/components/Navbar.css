@@ -21,9 +21,34 @@
   width: auto;
 }
 
+/* The hamburger: only on a phone, where it stands in for the tab row. */
+.site-header__menu {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  transition:
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.site-header__menu:hover,
+.site-header__menu[aria-expanded='true'] {
+  border-color: var(--color-accent);
+  color: var(--color-champagne);
+}
+
+/* One equal column per tab, however many site.config declares. */
 .site-header__tabs {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
   gap: 12px;
   padding-top: 14px;
   padding-bottom: 18px;
@@ -64,22 +89,38 @@
   opacity: 0.7;
 }
 
-@media (max-width: 900px) {
-  .site-header__tabs {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
 @media (max-width: 600px) {
   .site-header__top {
     gap: 12px;
+    padding-bottom: 16px;
   }
   .site-header__logo,
   .site-header__logo-img {
     height: 48px;
   }
+  .site-header__menu {
+    display: flex;
+  }
+  /* The tabs fold away until the hamburger opens them, then stack. */
+  .site-header__tabs {
+    display: none;
+    grid-auto-flow: row;
+    grid-auto-columns: auto;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+    padding-top: 0;
+  }
+  .site-header__tabs--open {
+    display: grid;
+  }
   .nav-tab {
+    justify-content: flex-start;
+    padding-inline: 18px;
+    height: 52px;
     font-size: 13px;
     letter-spacing: 0.04em;
+  }
+  .nav-tab__chevron {
+    margin-left: auto;
   }
 }

@@ -23,8 +23,13 @@ export const site = {
     { label: 'News', icon: 'news', to: '/' },
     { label: 'Poker Calendar', icon: 'calendar', to: '/poker-calendar/2026' },
     { label: 'Poker Players', icon: 'players', to: '/players' },
-    { label: 'How to Play', icon: 'learn', to: '/how-to-play' },
   ],
+  // The hamburger that stands in for the tabs on a phone (see Navbar.css).
+  navMenu: {
+    label: 'Main navigation',
+    open: 'Open menu',
+    close: 'Close menu',
+  },
 
   footer: {
     about: { label: 'About us', to: '/about' },
