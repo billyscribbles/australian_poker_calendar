@@ -30,8 +30,9 @@ function defaultMonth(today, year) {
  * @param {object} props
  * @param {Festival[]} props.festivals
  * @param {number} props.year
+ * @param {import('react').ReactNode} [props.foot]  drawn inside the frame, under the grid
  */
-export default function FestivalCalendar({ festivals, year }) {
+export default function FestivalCalendar({ festivals, year, foot }) {
   const [searchParams, setSearchParams] = useSearchParams()
   const hydrated = useHydrated()
   const today = useToday()
@@ -93,11 +94,14 @@ export default function FestivalCalendar({ festivals, year }) {
         ))}
       </div>
 
-      {view === 'timeline' ? (
-        <FestivalTimeline festivals={festivals} year={year} month={month} today={today} />
-      ) : (
-        <FestivalList festivals={festivals} year={year} month={month} />
-      )}
+      <div className={`festival-calendar__frame festival-calendar__frame--${view}`}>
+        {view === 'timeline' ? (
+          <FestivalTimeline festivals={festivals} year={year} month={month} today={today} />
+        ) : (
+          <FestivalList festivals={festivals} year={year} month={month} />
+        )}
+        {foot && <div className="festival-calendar__foot">{foot}</div>}
+      </div>
     </section>
   )
 }

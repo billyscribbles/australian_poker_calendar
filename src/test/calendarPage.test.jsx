@@ -82,10 +82,10 @@ describe('CalendarPage — static content', () => {
   it('links to the neighbouring years at the foot of the calendar', () => {
     const { unmount } = renderPage()
     const { footLabel, prev, next } = calendarPage.years
-    let nav = screen.getByRole('navigation', { name: footLabel })
-    // After the calendar, for readers who scrolled past the switcher in the head.
+    // Inside the calendar's frame, under the grid, for readers who scrolled
+    // past the switcher in the head.
     const calendar = screen.getByRole('region', { name: /festival calendar/i })
-    expect(calendar.compareDocumentPosition(nav) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
+    let nav = within(calendar).getByRole('navigation', { name: footLabel })
     const toNext = within(nav).getByRole('link', { name: new RegExp(`${next}.*2027`) })
     expect(toNext).toHaveAttribute('href', '/poker-calendar/2027')
     expect(within(nav).getAllByRole('link')).toHaveLength(1)
@@ -98,7 +98,10 @@ describe('CalendarPage — static content', () => {
         </MemoryRouter>
       </HelmetProvider>,
     )
-    nav = screen.getByRole('navigation', { name: footLabel })
+    nav = within(screen.getByRole('region', { name: /festival calendar/i })).getByRole(
+      'navigation',
+      { name: footLabel },
+    )
     const toPrev = within(nav).getByRole('link', { name: new RegExp(`${prev}.*2026`) })
     expect(toPrev).toHaveAttribute('href', '/poker-calendar/2026')
     expect(within(nav).getAllByRole('link')).toHaveLength(1)

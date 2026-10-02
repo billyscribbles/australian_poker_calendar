@@ -81,3 +81,26 @@
     grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 }
+
+/* The frame round the grid. In the timeline view it is the timeline's own
+ * box, so the foot row joins it as one shape: the timeline gives up its
+ * bottom corners and the foot takes them. The list has no box of its own, so
+ * there the foot stands as a bar beneath the rows. */
+.festival-calendar__frame--timeline .timeline {
+  border-bottom: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.festival-calendar__foot {
+  display: flex;
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+  background: var(--color-bg-inset);
+}
+
+.festival-calendar__frame--list .festival-calendar__foot {
+  margin-top: 10px;
+  border-radius: var(--radius-md);
+}

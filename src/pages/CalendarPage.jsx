@@ -64,6 +64,24 @@ export default function CalendarPage({ year = YEAR }) {
   const yearFestivals = festivalsInYear(festivals, year)
   const prevYear = YEARS[YEARS.indexOf(year) - 1]
   const nextYear = YEARS[YEARS.indexOf(year) + 1]
+  // Small steps to the neighbouring years, drawn inside the calendar's frame
+  // under the grid for readers who scrolled past the switcher in the head.
+  const yearSteps = (prevYear || nextYear) && (
+    <nav className="year-steps" aria-label={years.footLabel}>
+      {prevYear && (
+        <Link to={calendarPath(prevYear)} className="year-step">
+          <ChevronLeft size={16} strokeWidth={2} aria-hidden="true" />
+          {years.prev} <strong>{prevYear}</strong>
+        </Link>
+      )}
+      {nextYear && (
+        <Link to={calendarPath(nextYear)} className="year-step year-step--next">
+          {years.next} <strong>{nextYear}</strong>
+          <ChevronRight size={16} strokeWidth={2} aria-hidden="true" />
+        </Link>
+      )}
+    </nav>
+  )
 
   return (
     <main className="calendar-page container">
@@ -126,30 +144,7 @@ export default function CalendarPage({ year = YEAR }) {
 
       <Banner banner={banner} />
 
-      <FestivalCalendar festivals={yearFestivals} year={year} />
-
-      {(prevYear || nextYear) && (
-        <nav className="year-foot" aria-label={years.footLabel}>
-          {prevYear && (
-            <Link to={calendarPath(prevYear)} className="year-foot__link year-foot__link--prev">
-              <ChevronLeft size={20} strokeWidth={2} aria-hidden="true" />
-              <span className="year-foot__text">
-                <span className="year-foot__eyebrow">{years.prev}</span>
-                <span className="year-foot__title">{calendarPage.title(prevYear)}</span>
-              </span>
-            </Link>
-          )}
-          {nextYear && (
-            <Link to={calendarPath(nextYear)} className="year-foot__link year-foot__link--next">
-              <span className="year-foot__text">
-                <span className="year-foot__eyebrow">{years.next}</span>
-                <span className="year-foot__title">{calendarPage.title(nextYear)}</span>
-              </span>
-              <ChevronRight size={20} strokeWidth={2} aria-hidden="true" />
-            </Link>
-          )}
-        </nav>
-      )}
+      <FestivalCalendar festivals={yearFestivals} year={year} foot={yearSteps} />
 
       {/* A plain wrapper: UpNext is already the "Up Next" region, and a second
           landmark with the same name fails axe's landmark-unique. */}
