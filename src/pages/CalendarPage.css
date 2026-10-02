@@ -158,6 +158,75 @@
   }
 }
 
+/* Foot of the calendar: on to the neighbouring year, for readers who scrolled
+ * past the switcher in the head. Pulled up into the page gap so it reads as
+ * part of the calendar above it, not the Up Next cards below. */
+.year-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: -16px;
+}
+
+.year-foot__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-card);
+  color: var(--color-text);
+  transition:
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.year-foot__link--next {
+  margin-left: auto;
+  text-align: right;
+}
+
+.year-foot__link:hover,
+.year-foot__link:focus-visible {
+  border-color: var(--color-accent);
+  color: var(--color-champagne);
+}
+
+.year-foot__link svg {
+  flex: none;
+  color: var(--color-accent);
+}
+
+.year-foot__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.year-foot__eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.year-foot__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+@media (max-width: 600px) {
+  .year-foot__link {
+    flex: 1 1 100%;
+    justify-content: space-between;
+  }
+}
+
 /* Up Next */
 .calendar-page__up-next {
   padding-top: 16px;

@@ -79,6 +79,31 @@ describe('CalendarPage — static content', () => {
     expect(within(nav).getByRole('link', { name: '2027' })).not.toHaveAttribute('aria-current')
   })
 
+  it('links to the neighbouring years at the foot of the calendar', () => {
+    const { unmount } = renderPage()
+    const { footLabel, prev, next } = calendarPage.years
+    let nav = screen.getByRole('navigation', { name: footLabel })
+    // After the calendar, for readers who scrolled past the switcher in the head.
+    const calendar = screen.getByRole('region', { name: /festival calendar/i })
+    expect(calendar.compareDocumentPosition(nav) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
+    const toNext = within(nav).getByRole('link', { name: new RegExp(`${next}.*2027`) })
+    expect(toNext).toHaveAttribute('href', '/poker-calendar/2027')
+    expect(within(nav).getAllByRole('link')).toHaveLength(1)
+    unmount()
+
+    render(
+      <HelmetProvider>
+        <MemoryRouter initialEntries={['/poker-calendar/2027']}>
+          <CalendarPage year={2027} />
+        </MemoryRouter>
+      </HelmetProvider>,
+    )
+    nav = screen.getByRole('navigation', { name: footLabel })
+    const toPrev = within(nav).getByRole('link', { name: new RegExp(`${prev}.*2026`) })
+    expect(toPrev).toHaveAttribute('href', '/poker-calendar/2026')
+    expect(within(nav).getAllByRole('link')).toHaveLength(1)
+  })
+
   it("renders the 2027 document with its own title and only that year's series", () => {
     render(
       <HelmetProvider>

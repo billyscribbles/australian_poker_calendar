@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import SEO from '../lib/seo.jsx'
 import { eventListLd } from '../lib/structuredData.js'
 import { calendarPage } from '../content/calendarPage.js'
@@ -61,6 +62,8 @@ export default function CalendarPage({ year = YEAR }) {
   const seo = calendarPage.seo(year)
   const title = calendarPage.title(year)
   const yearFestivals = festivalsInYear(festivals, year)
+  const prevYear = YEARS[YEARS.indexOf(year) - 1]
+  const nextYear = YEARS[YEARS.indexOf(year) + 1]
 
   return (
     <main className="calendar-page container">
@@ -124,6 +127,29 @@ export default function CalendarPage({ year = YEAR }) {
       <Banner banner={banner} />
 
       <FestivalCalendar festivals={yearFestivals} year={year} />
+
+      {(prevYear || nextYear) && (
+        <nav className="year-foot" aria-label={years.footLabel}>
+          {prevYear && (
+            <Link to={calendarPath(prevYear)} className="year-foot__link year-foot__link--prev">
+              <ChevronLeft size={20} strokeWidth={2} aria-hidden="true" />
+              <span className="year-foot__text">
+                <span className="year-foot__eyebrow">{years.prev}</span>
+                <span className="year-foot__title">{calendarPage.title(prevYear)}</span>
+              </span>
+            </Link>
+          )}
+          {nextYear && (
+            <Link to={calendarPath(nextYear)} className="year-foot__link year-foot__link--next">
+              <span className="year-foot__text">
+                <span className="year-foot__eyebrow">{years.next}</span>
+                <span className="year-foot__title">{calendarPage.title(nextYear)}</span>
+              </span>
+              <ChevronRight size={20} strokeWidth={2} aria-hidden="true" />
+            </Link>
+          )}
+        </nav>
+      )}
 
       {/* A plain wrapper: UpNext is already the "Up Next" region, and a second
           landmark with the same name fails axe's landmark-unique. */}

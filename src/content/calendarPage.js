@@ -38,7 +38,14 @@ export const calendarPage = {
   /** @param {number} year */
   title: (year) => `${year} Australian Poker Calendar`,
   /** The year switcher beside the title: one link per calendar document. */
-  years: { label: 'Year' },
+  years: {
+    label: 'Year',
+    // The links at the foot of the calendar, on to the neighbouring years, for
+    // readers who scrolled past the switcher in the head.
+    footLabel: 'Other years',
+    prev: 'Previous year',
+    next: 'Next year',
+  },
 
   /** @type {Tour[]} */
   tours: [
