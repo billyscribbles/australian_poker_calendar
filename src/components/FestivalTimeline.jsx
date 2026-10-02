@@ -71,7 +71,13 @@ export default function FestivalTimeline({ festivals, year, month, today }) {
                 d.stamp === today ? ' timeline__day--today' : ''
               }`}
             >
-              <div className="timeline__weekday">{d.weekday}</div>
+              {/* Today's column wears the pill where its weekday label would be,
+                  so the marker never sits on top of a neighbouring day's name. */}
+              {d.stamp === today ? (
+                <div className="timeline__weekday timeline__today-pill">Today</div>
+              ) : (
+                <div className="timeline__weekday">{d.weekday}</div>
+              )}
               <div className="timeline__daynum">{d.day}</div>
             </div>
           ))}
@@ -79,16 +85,11 @@ export default function FestivalTimeline({ festivals, year, month, today }) {
         <div className="timeline__grid" aria-hidden="true" />
 
         {todayIndex >= 0 && (
-          <>
-            <div
-              className="timeline__today-line"
-              style={{ left: todayIndex * DAY + DAY / 2 }}
-              aria-hidden="true"
-            />
-            <span className="timeline__today-pill" style={{ left: todayIndex * DAY + DAY / 2 + 6 }}>
-              Today
-            </span>
-          </>
+          <div
+            className="timeline__today-line"
+            style={{ left: todayIndex * DAY + DAY / 2 }}
+            aria-hidden="true"
+          />
         )}
 
         <ol className="timeline__bars" aria-label={`${label} timeline`}>

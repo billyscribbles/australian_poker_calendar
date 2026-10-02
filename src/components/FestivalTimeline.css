@@ -48,6 +48,19 @@
   color: var(--color-accent);
 }
 
+/* Stands in for the weekday label in today's column (see FestivalTimeline.jsx):
+   same line box as the label it replaces, so the date number keeps its place. */
+.timeline__day--today .timeline__today-pill {
+  display: inline-block;
+  padding: 0 6px;
+  line-height: 15px;
+  border-radius: var(--radius-xs);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
 .timeline__daynum {
   font-family: var(--font-display);
   font-weight: 700;
@@ -76,29 +89,14 @@
   pointer-events: none;
 }
 
-/* Today marker */
+/* Today marker: starts under the day header, where the pill names the day. */
 .timeline__today-line {
   position: absolute;
-  top: 0;
+  top: var(--timeline-head);
   bottom: 0;
   z-index: 3;
   width: 2px;
   background: var(--color-accent);
-  pointer-events: none;
-}
-
-.timeline__today-pill {
-  position: absolute;
-  top: 8px;
-  z-index: 4;
-  padding: 2px 8px;
-  border-radius: var(--radius-xs);
-  background: var(--color-accent);
-  color: var(--color-on-accent);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
   pointer-events: none;
 }
 
