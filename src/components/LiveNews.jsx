@@ -1,5 +1,6 @@
-import { Link } from 'react-router-dom'
+import { useState } from 'react'
 import { liveNews } from '../content/liveNews.js'
+import ArticleLink from './ArticleLink.jsx'
 import ImagePlaceholder from './ImagePlaceholder.jsx'
 import SectionHeading from './SectionHeading.jsx'
 import OutlineButton from './OutlineButton.jsx'
@@ -11,7 +12,7 @@ import './LiveNews.css'
 function LiveNewsRow({ item }) {
   return (
     <li>
-      <Link to={item.href} className="live-news-row">
+      <ArticleLink href={item.href} className="live-news-row">
         <ImagePlaceholder
           variant="fine"
           className="live-news-row__thumb"
@@ -25,22 +26,30 @@ function LiveNewsRow({ item }) {
           </div>
           <h3 className="live-news-row__title">{item.title}</h3>
         </div>
-      </Link>
+      </ArticleLink>
     </li>
   )
 }
 
-/** Live Poker News: tournament reports as a list, with a "read more" button. */
+/**
+ * Live Poker News: tournament reports as a list. It starts at `initialCount`
+ * rows and a button reveals the rest.
+ */
 export default function LiveNews() {
+  const [expanded, setExpanded] = useState(false)
+  const { items, initialCount } = liveNews
+  const shown = expanded ? items : items.slice(0, initialCount)
   return (
     <div className="live-news" aria-labelledby="live-news-heading" role="region">
       <SectionHeading id="live-news-heading">{liveNews.heading}</SectionHeading>
       <ul className="live-news__list">
-        {liveNews.items.map((item) => (
+        {shown.map((item) => (
           <LiveNewsRow key={item.href} item={item} />
         ))}
       </ul>
-      <OutlineButton to={liveNews.cta.to}>{liveNews.cta.label}</OutlineButton>
+      {!expanded && items.length > initialCount && (
+        <OutlineButton onClick={() => setExpanded(true)}>{liveNews.showMore}</OutlineButton>
+      )}
     </div>
   )
 }
