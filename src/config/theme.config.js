@@ -77,7 +77,10 @@ export const theme = {
   // `family=` value; vite.config.js turns these into the preconnect +
   // stylesheet links in <head>, and src/test/config.test.js fails if a family
   // in `fonts` has no source here.
-  googleFonts: ['Barlow:wght@400;500;600;700', 'Barlow+Condensed:wght@500;600;700;800'],
+  // Barlow and Barlow Condensed are self-hosted: the @font-face rules are at
+  // the top of src/index.css and the woff2 files live in public/fonts. Leave
+  // this empty unless a family has to come from Google Fonts again.
+  googleFonts: [],
 
   // Decorative multi-stop fills. Only the gold text gradient needs raw stops;
   // stripes, rules and overlays are composed in CSS from the colours above.

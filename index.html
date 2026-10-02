@@ -13,18 +13,23 @@
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#0E0E0E" />
 
-    <!-- Webfonts are NOT declared here. vite.config.js injects the preconnect
-         and stylesheet links from `googleFonts` in src/config/theme.config.js,
-         so the families the CSS asks for and the families actually fetched come
-         from one place and cannot drift apart.
+    <!-- Webfonts are self-hosted: the @font-face rules are at the top of
+         src/index.css and the files live in public/fonts. These preloads are
+         the weights the first paint uses (body text, labels, headings), so the
+         fallback-to-Barlow swap happens before anyone reads it. Keep them in
+         step with src/index.css; the other weights load on demand.
 
-         Self-hosting instead: drop woff2 files into public/fonts/, write the
-         @font-face rules in src/index.css, set googleFonts to [], and uncomment
-         the preloads below with the real filenames. -->
-    <!--
-    <link rel="preload" href="/fonts/display.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/body.woff2" as="font" type="font/woff2" crossorigin />
-    -->
+         Google Fonts instead: set `googleFonts` in src/config/theme.config.js
+         and vite.config.js injects the preconnect and stylesheet links. -->
+    <link rel="preload" href="/fonts/barlow-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/barlow-600.woff2" as="font" type="font/woff2" crossorigin />
+    <link
+      rel="preload"
+      href="/fonts/barlow-condensed-700.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
 
     <!-- seo:fallback:start -->
     <!-- Fallback SEO for `vite dev`, where nothing prerenders and Helmet only

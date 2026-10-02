@@ -161,7 +161,7 @@ Non-obvious behaviours to know before changing any of this:
 
 ## Derived assets
 
-- **Webfonts** come from `googleFonts` in `theme.config.js`. Do not hand-write font tags in `index.html`.
+- **Webfonts** are self-hosted: woff2 files in `public/fonts/`, `@font-face` rules at the top of `src/index.css`, and three preloads in `index.html`. `googleFonts` in `theme.config.js` is empty; fill it only to fetch a family from Google Fonts again, and `vite.config.js` injects the links. `src/test/config.test.js` fails on a family in `fonts` that neither source loads, or an `@font-face` whose file is missing.
 - **`sitemap.xml` and `robots.txt`** are generated. There is no `public/sitemap.xml`; a test fails if one appears. `VITE_NOINDEX=true` writes a Disallow-all robots and a noindex meta tag.
 - **`seo.ogImage` must be a real raster** at least 1200px wide at about 1.91:1. The build fails on an SVG, a missing file, or on a file named `*.placeholder.*` once `VITE_SITE_URL` is a real domain. The live card is `public/brand/og-image.png`, rendered from `logo-v2-720.png` on the midnight background; regenerate it if the wordmark changes.
 - **`yarn icons`** builds the favicon set from `public/brand/icon-master.png`. Run it when the wordmark changes and commit the output.

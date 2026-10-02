@@ -1,6 +1,8 @@
 // Contract: the two config files carry every field the components and SEO
 // layer read. A swap that forgets a field should fail here, not in the browser.
 import { describe, it, expect } from 'vitest'
+import { existsSync, readFileSync } from 'node:fs'
+import { join } from 'node:path'
 import { site } from '../config/site.config.js'
 import { theme } from '../config/theme.config.js'
 
@@ -89,11 +91,30 @@ describe('theme fonts — every family the CSS asks for is actually fetched', ()
     'blinkmacsystemfont',
   ])
 
-  const sourced = new Set(
-    (theme.googleFonts ?? []).map((spec) =>
+  // A family is loaded either from Google Fonts (vite.config.js injects the
+  // stylesheet from `googleFonts`) or self-hosted through an @font-face rule
+  // in src/index.css pointing at a file that exists in public/fonts. Paths are
+  // read from the project root: under jsdom, import.meta.url is not a file: URL.
+  const indexCss = readFileSync(join(process.cwd(), 'src/index.css'), 'utf8')
+  const selfHosted = [...indexCss.matchAll(/@font-face\s*{([^}]*)}/g)]
+    .map(([, body]) => ({
+      family: body
+        .match(/font-family:\s*['"]?([^'";]+)/)?.[1]
+        .trim()
+        .toLowerCase(),
+      file: body.match(/url\(['"]?([^'")]+)/)?.[1],
+    }))
+    .filter((f) => f.family && f.file)
+  const sourced = new Set([
+    ...(theme.googleFonts ?? []).map((spec) =>
       decodeURIComponent(spec.split(':')[0]).replaceAll('+', ' ').toLowerCase(),
     ),
-  )
+    ...selfHosted.map((f) => f.family),
+  ])
+
+  it.each(selfHosted)('$family $file is shipped in public/', ({ file }) => {
+    expect(existsSync(join(process.cwd(), 'public', file))).toBe(true)
+  })
 
   it.each(Object.entries(theme.fonts))('%s: the first family is loaded', (_token, stack) => {
     // The first entry is the one that actually renders; the rest are fallbacks.
