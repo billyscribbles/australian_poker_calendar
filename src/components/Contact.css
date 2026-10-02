@@ -71,7 +71,7 @@
 .contact__submit {
   align-self: flex-start;
   background: var(--color-accent);
-  color: #fff;
+  color: var(--color-on-accent);
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.02em;
