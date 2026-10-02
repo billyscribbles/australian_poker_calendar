@@ -16,6 +16,7 @@ import { readFile, writeFile, mkdir, rm } from 'node:fs/promises'
 import { existsSync, readFileSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
+import { execFileSync } from 'node:child_process'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const DIST = join(root, 'dist')
@@ -406,18 +407,69 @@ function sitemapPriority(route) {
   return route.out.split('/').filter(Boolean).length > 1 ? '0.6' : '0.8'
 }
 
+// <lastmod>: the date of the last commit that touched the route's page module
+// or any content file it draws on (followed through content -> content
+// imports), so a new series row moves every page that lists it. Google acts on
+// lastmod only while it stays truthful, which is why this is not the build
+// date — that would mark every page changed on every deploy, and Google would
+// learn to ignore it. Omitted entirely when git is not available (a build from
+// a tarball), which is the honest fallback.
+const CONTENT_DIR = join(root, 'src', 'content')
+
+/** The content files a module pulls in, transitively through src/content. */
+function contentDeps(file, seen = new Set()) {
+  if (!existsSync(file) || seen.has(file)) return seen
+  seen.add(file)
+  const source = readFileSync(file, 'utf8')
+  for (const match of source.matchAll(/from\s+'(\.\.?\/[^']*content\/[^']+\.js)'/g)) {
+    contentDeps(join(dirname(file), match[1]), seen)
+  }
+  for (const match of source.matchAll(/from\s+'(\.\/[^']+\.js)'/g)) {
+    const dep = join(dirname(file), match[1])
+    if (dep.startsWith(CONTENT_DIR)) contentDeps(dep, seen)
+  }
+  return seen
+}
+
+const lastmodCache = new Map()
+function lastmodFor(route) {
+  const page = join(root, route.module)
+  const files = [...contentDeps(page)]
+  const key = files.join('|')
+  if (!lastmodCache.has(key)) {
+    let stamp = ''
+    try {
+      stamp = execFileSync('git', ['log', '-1', '--format=%cI', '--', ...files], {
+        cwd: root,
+        encoding: 'utf8',
+        stdio: ['ignore', 'pipe', 'ignore'],
+      }).trim()
+    } catch {
+      stamp = ''
+    }
+    lastmodCache.set(key, stamp ? stamp.slice(0, 10) : '')
+  }
+  return lastmodCache.get(key)
+}
+
 const indexable = PRERENDER_ROUTES.filter((route) => !route.noindex && written.includes(route.out))
 const sitemap = [
   '<?xml version="1.0" encoding="UTF-8"?>',
   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-  ...indexable.map(
-    (route) =>
+  ...indexable.map((route) => {
+    const lastmod = lastmodFor(route)
+    return (
       `  <url><loc>${SITEMAP_PLACEHOLDER}${route.out === '/' ? '/' : route.out}</loc>` +
-      `<priority>${sitemapPriority(route)}</priority></url>`,
-  ),
+      (lastmod ? `<lastmod>${lastmod}</lastmod>` : '') +
+      `<priority>${sitemapPriority(route)}</priority></url>`
+    )
+  }),
   '</urlset>',
   '',
 ].join('\n')
+if (!indexable.some((route) => lastmodFor(route))) {
+  console.warn('[prerender] git history unavailable — sitemap.xml written without <lastmod>.')
+}
 await writeFile(join(DIST, 'sitemap.xml'), sitemap)
 console.log(`[prerender] sitemap.xml — ${indexable.length} indexable URLs`)
 
