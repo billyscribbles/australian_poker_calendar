@@ -25,6 +25,10 @@
   padding: 16px;
 }
 
+.featured-article__visual.image-placeholder__img {
+  padding: 0;
+}
+
 .featured-article__visual .image-placeholder__label {
   font-size: 12px;
   color: var(--color-text-faint);
@@ -39,8 +43,15 @@
 
 .featured-article__badges {
   display: flex;
+  align-items: center;
   gap: 8px;
   margin-bottom: 12px;
+}
+
+.featured-article__date {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-muted);
 }
 
 .featured-article__title {
