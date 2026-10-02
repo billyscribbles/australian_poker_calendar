@@ -65,7 +65,7 @@ export default function CalendarPage({ year = YEAR }) {
   const prevYear = YEARS[YEARS.indexOf(year) - 1]
   const nextYear = YEARS[YEARS.indexOf(year) + 1]
   // Small steps to the neighbouring years, drawn inside the calendar's frame
-  // under the grid for readers who scrolled past the switcher in the head.
+  // under the grid.
   const yearSteps = (prevYear || nextYear) && (
     <nav className="year-steps" aria-label={years.footLabel}>
       {prevYear && (
@@ -93,21 +93,7 @@ export default function CalendarPage({ year = YEAR }) {
       />
 
       <section className="calendar-page__head">
-        <div className="calendar-page__title-row">
-          <h1 className="calendar-page__title">{title}</h1>
-          <nav className="year-nav" aria-label={years.label}>
-            {YEARS.map((y) => (
-              <Link
-                key={y}
-                to={calendarPath(y)}
-                className="year-nav__link"
-                aria-current={y === year ? 'page' : undefined}
-              >
-                {y}
-              </Link>
-            ))}
-          </nav>
-        </div>
+        <h1 className="calendar-page__title">{title}</h1>
         <nav className="tour-strip scroll-row" aria-label="Tours">
           {tours.map((tour) => (
             <Link key={tour.code} to={tour.href} className="tour-tile">

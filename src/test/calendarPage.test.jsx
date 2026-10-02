@@ -66,24 +66,11 @@ describe('CalendarPage — static content', () => {
     expect(festivals.length).toBeGreaterThanOrEqual(19)
   })
 
-  it('links to every calendar year and marks the one on show', () => {
-    renderPage()
-    const nav = screen.getByRole('navigation', { name: calendarPage.years.label })
-    const links = within(nav).getAllByRole('link')
-    expect(YEARS).toContain(2027)
-    expect(links.map((link) => link.textContent)).toEqual(YEARS.map(String))
-    for (const link of links) {
-      expect(link).toHaveAttribute('href', `/poker-calendar/${link.textContent}`)
-    }
-    expect(within(nav).getByRole('link', { name: '2026' })).toHaveAttribute('aria-current', 'page')
-    expect(within(nav).getByRole('link', { name: '2027' })).not.toHaveAttribute('aria-current')
-  })
-
   it('links to the neighbouring years at the foot of the calendar', () => {
     const { unmount } = renderPage()
     const { footLabel, prev, next } = calendarPage.years
-    // Inside the calendar's frame, under the grid, for readers who scrolled
-    // past the switcher in the head.
+    expect(YEARS).toContain(2027)
+    // Inside the calendar's frame, under the grid.
     const calendar = screen.getByRole('region', { name: /festival calendar/i })
     let nav = within(calendar).getByRole('navigation', { name: footLabel })
     const toNext = within(nav).getByRole('link', { name: new RegExp(`${next}.*2027`) })
