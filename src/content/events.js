@@ -8,7 +8,7 @@
 /**
  * @typedef {object} HeroEvent
  * @property {string} name
- * @property {string} dates   e.g. "2026.09.30 - 2026.10.11"
+ * @property {string} dates   e.g. "Sep 30 – Oct 11"
  * @property {string} place   city, country
  * @property {string} venue
  * @property {string} tour      tour code from calendarPage.tours; draws the circular badge
@@ -42,6 +42,7 @@
  * @property {string} [entries]  e.g. "109" or "12/1,375" for a live event
  * @property {string} [guarantee] shown in place of entries until results exist
  * @property {string} href
+ * @property {boolean} [featured]  a feature event on the series poster; draws the Featured tag
  * @property {boolean} [live]
  * @property {string} [level]            live only, e.g. "Level 32"
  * @property {ChipLeader[]} [leaders]    live only, top three stacks
@@ -51,7 +52,7 @@
 export const heroEvent = {
   tour: 'APT',
   name: 'APT Melbourne Champs II',
-  dates: '2026.09.30 - 2026.10.11',
+  dates: 'Sep 30 – Oct 11',
   place: 'Melbourne, Australia',
   venue: 'Crown Melbourne, Metropol – Sky Bar 28',
   href: '/events/apt-melbourne-champs-ii',
@@ -65,7 +66,7 @@ export const sideEvents = [
     status: 'live',
     tour: 'AURUM',
     name: 'Aurum Sydney Showdown',
-    dates: '2026.10.01 - 2026.10.19',
+    dates: 'Oct 1 – Oct 19',
     href: '/events/aurum-sydney-showdown',
     // Aurum's portrait "$1.5 Million in guarantees" key visual (800×1000 webp,
     // from the 768×960 original). Use the portrait cut, not the landscape
@@ -76,7 +77,7 @@ export const sideEvents = [
     status: 'upcoming',
     tour: 'APLPT',
     name: 'APLPT Brisbane',
-    dates: '2026.10.06 - 2026.10.11',
+    dates: 'Oct 6 – Oct 11',
     href: '/events/aplpt-brisbane',
     // APL's "$500,000 in event guarantees" square poster, at 800 wide near the
     // top of an 800×1000 canvas (same treatment as the Aurum card) so the
@@ -95,63 +96,77 @@ export const ticker = [
     tour: 'APT',
     buyIn: '1,650',
     currency: 'AUD',
+    featured: true,
     name: 'Melbourne Champs Main Event',
-    date: '2026.10.04 - 2026.10.11',
+    date: 'Oct 4 – Oct 11',
     guarantee: '$350K GTD',
-    href: '/events/apt-melbourne-champs-ii/melbourne-champs',
+    href: '/events/apt-melbourne-champs-ii',
   },
   {
     tour: 'APT',
     buyIn: '600',
     currency: 'AUD',
+    featured: true,
     name: 'Hachem Deepstack',
-    date: '2026.10.02 - 2026.10.03',
+    date: 'Oct 2 – Oct 3',
     guarantee: '$60K GTD',
-    href: '/events/apt-melbourne-champs-ii/hachem-deepstack',
+    href: '/events/apt-melbourne-champs-ii',
   },
   {
     tour: 'APT',
     buyIn: '2,000',
     currency: 'AUD',
+    featured: true,
     name: "Van's Vault",
-    date: '2026.10.03 - 2026.10.04',
+    date: 'Oct 3 – Oct 4',
     guarantee: '$100K GTD',
-    href: '/events/apt-melbourne-champs-ii/vans-vault',
+    href: '/events/apt-melbourne-champs-ii',
   },
   {
     tour: 'APT',
     buyIn: '750',
     currency: 'AUD',
+    featured: true,
     name: 'The Whale',
-    date: '2026.10.04 - 2026.10.05',
+    date: 'Oct 4 – Oct 5',
     guarantee: '$50K GTD',
-    href: '/events/apt-melbourne-champs-ii/the-whale',
+    href: '/events/apt-melbourne-champs-ii',
   },
   {
     tour: 'APT',
     buyIn: '1,250',
     currency: 'AUD',
+    featured: true,
     name: 'The Grind',
-    date: '2026.10.06 - 2026.10.07',
+    date: 'Oct 6 – Oct 7',
     guarantee: '$100K GTD',
-    href: '/events/apt-melbourne-champs-ii/the-grind',
+    href: '/events/apt-melbourne-champs-ii',
   },
   {
     tour: 'APT',
     buyIn: '2,500',
     currency: 'AUD',
+    featured: true,
     name: 'The Goliath',
-    date: '2026.10.07 - 2026.10.08',
+    date: 'Oct 7 – Oct 8',
     guarantee: '$150K GTD',
-    href: '/events/apt-melbourne-champs-ii/the-goliath',
+    href: '/events/apt-melbourne-champs-ii',
   },
   {
     tour: 'APT',
     buyIn: '2,300',
     currency: 'AUD',
+    featured: true,
     name: 'The Big Flipper',
-    date: '2026.10.08 - 2026.10.09',
+    date: 'Oct 8 – Oct 9',
     guarantee: '$100K GTD',
-    href: '/events/apt-melbourne-champs-ii/the-big-flipper',
+    href: '/events/apt-melbourne-champs-ii',
   },
 ]
+
+/** The ticker's scroll buttons and the tag on each feature event. */
+export const tickerControls = {
+  prev: 'Earlier events',
+  next: 'Later events',
+  featuredLabel: 'Featured',
+}

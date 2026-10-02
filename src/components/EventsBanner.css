@@ -230,16 +230,92 @@
 
 /* ---- Ticker ------------------------------------------------------------ */
 
-.ticker {
+.ticker-wrap {
+  position: relative;
   max-width: var(--layout-container-max);
   margin: 0 auto;
+}
+
+.ticker {
   padding: 20px var(--layout-container-pad) 24px;
   gap: 12px;
+  scroll-snap-type: x proximity;
+  scroll-padding-inline: var(--layout-container-pad);
+}
+
+/* While there is more row in a direction, that edge dissolves instead of
+   cutting a chip in half: the cut-off chip is the cue that this scrolls. */
+.ticker--more-end {
+  mask-image: linear-gradient(90deg, #000 calc(100% - 96px), transparent);
+  -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 96px), transparent);
+}
+
+.ticker--more-start {
+  mask-image: linear-gradient(90deg, transparent, #000 96px);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 96px);
+}
+
+.ticker--more-start.ticker--more-end {
+  mask-image: linear-gradient(90deg, transparent, #000 96px, #000 calc(100% - 96px), transparent);
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 96px,
+    #000 calc(100% - 96px),
+    transparent
+  );
+}
+
+/* Paging buttons, over the faded ends of the row. A button at its end of the
+   row fades out rather than disappearing, so nothing jumps. */
+.ticker__arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--color-accent);
+  background: var(--color-bg-card);
+  color: var(--color-champagne);
+  transform: translateY(-50%);
+  transition:
+    opacity var(--transition-fast),
+    border-color var(--transition-fast),
+    background var(--transition-fast);
+}
+
+.ticker__arrow--prev {
+  left: max(4px, calc(var(--layout-container-pad) - 20px));
+}
+
+.ticker__arrow--next {
+  right: max(4px, calc(var(--layout-container-pad) - 20px));
+}
+
+.ticker__arrow:hover {
+  border-color: var(--color-champagne);
+  background: var(--color-bg-selected);
+}
+
+.ticker__arrow:disabled {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* A finger swipes the row; the buttons would only cover the first chip. */
+@media (hover: none) {
+  .ticker__arrow {
+    display: none;
+  }
 }
 
 .ticker-chip {
   position: relative;
   flex: none;
+  scroll-snap-align: start;
   display: flex;
   gap: 12px;
   min-width: 300px;
@@ -324,7 +400,8 @@
   color: var(--color-text);
 }
 
-.ticker-chip__live {
+.ticker-chip__live,
+.ticker-chip__featured {
   position: absolute;
   top: 12px;
   right: 12px;
@@ -349,7 +426,7 @@
 @media (max-width: 600px) {
   .events-banner__grid {
     grid-template-columns: minmax(0, 1fr);
-    padding: 16px 16px 0;
+    padding: 16px var(--layout-container-pad) 0;
   }
   .live-event {
     grid-template-columns: minmax(0, 1fr);
@@ -370,6 +447,6 @@
     min-height: 240px;
   }
   .ticker {
-    padding: 16px 16px 20px;
+    padding: 16px var(--layout-container-pad) 20px;
   }
 }
