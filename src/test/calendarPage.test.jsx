@@ -16,7 +16,7 @@ import { join } from 'node:path'
 import CalendarPage from '../pages/CalendarPage.jsx'
 import FAQ from '../components/FAQ.jsx'
 import FestivalTimeline from '../components/FestivalTimeline.jsx'
-import { festivals, STATUS_LABELS } from '../content/festivals.js'
+import { festivals, STATUS_LABELS, YEARS } from '../content/festivals.js'
 import { calendarPage } from '../content/calendarPage.js'
 import { DAY, HEAD, ROW, festivalsInYear } from '../lib/calendar.js'
 
@@ -64,6 +64,19 @@ describe('CalendarPage — static content', () => {
     expect(inYear.length).toBeLessThan(festivals.length)
     expect(screen.getByText(String(inYear.length), { selector: 'strong' })).toBeInTheDocument()
     expect(festivals.length).toBeGreaterThanOrEqual(19)
+  })
+
+  it('links to every calendar year and marks the one on show', () => {
+    renderPage()
+    const nav = screen.getByRole('navigation', { name: calendarPage.years.label })
+    const links = within(nav).getAllByRole('link')
+    expect(YEARS).toContain(2027)
+    expect(links.map((link) => link.textContent)).toEqual(YEARS.map(String))
+    for (const link of links) {
+      expect(link).toHaveAttribute('href', `/poker-calendar/${link.textContent}`)
+    }
+    expect(within(nav).getByRole('link', { name: '2026' })).toHaveAttribute('aria-current', 'page')
+    expect(within(nav).getByRole('link', { name: '2027' })).not.toHaveAttribute('aria-current')
   })
 
   it("renders the 2027 document with its own title and only that year's series", () => {

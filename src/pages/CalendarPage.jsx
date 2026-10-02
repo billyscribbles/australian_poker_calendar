@@ -2,7 +2,8 @@ import { Link } from 'react-router-dom'
 import SEO from '../lib/seo.jsx'
 import { eventListLd } from '../lib/structuredData.js'
 import { calendarPage } from '../content/calendarPage.js'
-import { festivals, YEAR } from '../content/festivals.js'
+import { festivals, YEAR, YEARS } from '../content/festivals.js'
+import { calendarPath } from '../routes.js'
 import ImagePlaceholder from '../components/ImagePlaceholder.jsx'
 import Img from '../components/Img.jsx'
 import { festivalsInYear } from '../lib/calendar.js'
@@ -56,7 +57,7 @@ function Banner({ banner }) {
  * @param {number} [props.year]  from src/routes.js
  */
 export default function CalendarPage({ year = YEAR }) {
-  const { tours, allTours, banner } = calendarPage
+  const { tours, allTours, banner, years } = calendarPage
   const seo = calendarPage.seo(year)
   const title = calendarPage.title(year)
   const yearFestivals = festivalsInYear(festivals, year)
@@ -66,12 +67,26 @@ export default function CalendarPage({ year = YEAR }) {
       <SEO
         title={seo.title}
         description={seo.description}
-        path={`/poker-calendar/${year}`}
+        path={calendarPath(year)}
         jsonLd={eventListLd(yearFestivals, year, seo)}
       />
 
       <section className="calendar-page__head">
-        <h1 className="calendar-page__title">{title}</h1>
+        <div className="calendar-page__title-row">
+          <h1 className="calendar-page__title">{title}</h1>
+          <nav className="year-nav" aria-label={years.label}>
+            {YEARS.map((y) => (
+              <Link
+                key={y}
+                to={calendarPath(y)}
+                className="year-nav__link"
+                aria-current={y === year ? 'page' : undefined}
+              >
+                {y}
+              </Link>
+            ))}
+          </nav>
+        </div>
         <nav className="tour-strip scroll-row" aria-label="Tours">
           {tours.map((tour) => (
             <Link key={tour.code} to={tour.href} className="tour-tile">

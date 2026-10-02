@@ -37,6 +37,8 @@ export const calendarPage = {
   }),
   /** @param {number} year */
   title: (year) => `${year} Australian Poker Calendar`,
+  /** The year switcher beside the title: one link per calendar document. */
+  years: { label: 'Year' },
 
   /** @type {Tour[]} */
   tours: [

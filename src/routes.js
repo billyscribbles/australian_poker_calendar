@@ -14,7 +14,11 @@
 // src/test/routes.test.js asserts the two agree.
 
 import { preload } from './lazyWithRetry.js'
-import { festivals } from './content/festivals.js'
+import { festivals, YEARS } from './content/festivals.js'
+
+/** The calendar document for `year`; CalendarPage's year switcher links these. */
+export const calendarPath = (year) => `/poker-calendar/${year}`
+import { venueForm } from './content/contact.js'
 
 export const ROUTES = [
   {
@@ -25,20 +29,14 @@ export const ROUTES = [
     eager: true,
     module: 'src/pages/Home.jsx',
   },
-  // One document per calendar year. Next year is another entry with its own
-  // `year`; the festivals it reads come from src/content/festivals.js.
-  {
-    path: '/poker-calendar/2026',
+  // One document per calendar year, for every year the series rows in
+  // src/content/festivals.js touch; a new season's rows add its year.
+  ...YEARS.map((year) => ({
+    path: calendarPath(year),
     load: () => import('./pages/CalendarPage.jsx'),
     module: 'src/pages/CalendarPage.jsx',
-    props: { year: 2026 },
-  },
-  {
-    path: '/poker-calendar/2027',
-    load: () => import('./pages/CalendarPage.jsx'),
-    module: 'src/pages/CalendarPage.jsx',
-    props: { year: 2027 },
-  },
+    props: { year },
+  })),
   // One page per series on the calendar, at the href content/festivals.js
   // derives from its name. content/eventPages.js resolves the path to a
   // hand-built poster where one exists, or to a hero-and-dates page with the
@@ -66,6 +64,13 @@ export const ROUTES = [
     path: '/contact',
     load: () => import('./pages/ContactPage.jsx'),
     module: 'src/pages/ContactPage.jsx',
+  },
+  // The poker-room listing form. Its path is content/contact.js's to set, since
+  // the footer band on every page links to it from there.
+  {
+    path: venueForm.path,
+    load: () => import('./pages/ListVenuePage.jsx'),
+    module: 'src/pages/ListVenuePage.jsx',
   },
   // Two documents, one template. `type` must match a key in src/content/legal.js.
   {

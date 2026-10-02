@@ -6,7 +6,8 @@
 import { describe, it, expect } from 'vitest'
 import { readFileSync, existsSync } from 'node:fs'
 import { join } from 'node:path'
-import { ROUTES, PRERENDER_ROUTES, matchRoute, routeModules } from '../routes.js'
+import { ROUTES, PRERENDER_ROUTES, matchRoute, routeModules, calendarPath } from '../routes.js'
+import { YEARS } from '../content/festivals.js'
 
 // Read from the project root: under jsdom, import.meta.url is not a file: URL.
 const source = readFileSync(join(process.cwd(), 'src/routes.js'), 'utf8')
@@ -28,6 +29,14 @@ describe('routes — prerender contract', () => {
     const imports = [...source.matchAll(/import\('\.\/(pages\/\w+\.jsx)'\)/g)].map((m) => m[1])
     const declared = ROUTES.filter((r) => r.load).map((r) => r.module.replace(/^src\//, ''))
     expect([...new Set(imports)]).toEqual([...new Set(declared)])
+  })
+
+  it('has one calendar document per year the series touch', () => {
+    expect(YEARS.length).toBeGreaterThanOrEqual(2)
+    for (const year of YEARS) {
+      const route = ROUTES.find((r) => r.path === calendarPath(year))
+      expect(route?.props, String(year)).toEqual({ year })
+    }
   })
 
   it('exactly one catch-all, and it prerenders at a concrete path', () => {
