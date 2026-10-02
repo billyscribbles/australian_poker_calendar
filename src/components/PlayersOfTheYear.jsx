@@ -3,6 +3,7 @@ import { playersOfTheYear } from '../content/playersOfTheYear.js'
 import ImagePlaceholder from './ImagePlaceholder.jsx'
 import SectionHeading from './SectionHeading.jsx'
 import OutlineButton from './OutlineButton.jsx'
+import ComingSoon from './ComingSoon.jsx'
 import './PlayersOfTheYear.css'
 
 /** @typedef {import('../content/playersOfTheYear.js').PlayerStanding} PlayerStanding */
@@ -36,17 +37,22 @@ function StandingRow({ player, indexLabel }) {
   )
 }
 
-/** Players of the Year sidebar: the top three standings. */
+/** Players of the Year sidebar: the top three standings, or the holding card until they exist. */
 export default function PlayersOfTheYear() {
+  const { heading, indexLabel, pending, cta, items } = playersOfTheYear
   return (
     <div className="poy" role="region" aria-labelledby="poy-heading">
-      <SectionHeading id="poy-heading">{playersOfTheYear.heading}</SectionHeading>
-      <ul className="poy__list">
-        {playersOfTheYear.items.map((player) => (
-          <StandingRow key={player.href} player={player} indexLabel={playersOfTheYear.indexLabel} />
-        ))}
-      </ul>
-      <OutlineButton to={playersOfTheYear.cta.to}>{playersOfTheYear.cta.label}</OutlineButton>
+      <SectionHeading id="poy-heading">{heading}</SectionHeading>
+      {items.length ? (
+        <ul className="poy__list">
+          {items.map((player) => (
+            <StandingRow key={player.href} player={player} indexLabel={indexLabel} />
+          ))}
+        </ul>
+      ) : (
+        <ComingSoon title={pending.title} body={pending.body} />
+      )}
+      <OutlineButton to={cta.to}>{cta.label}</OutlineButton>
     </div>
   )
 }

@@ -7,7 +7,7 @@ import Stories from '../components/Stories.jsx'
 import Shorts from '../components/Shorts.jsx'
 import LiveNews from '../components/LiveNews.jsx'
 import PokerCalendar from '../components/PokerCalendar.jsx'
-import PlayerNews from '../components/PlayerNews.jsx'
+import RecentChampions from '../components/RecentChampions.jsx'
 import PlayersOfTheYear from '../components/PlayersOfTheYear.jsx'
 import AsiaTours from '../components/AsiaTours.jsx'
 import FAQ from '../components/FAQ.jsx'
@@ -31,7 +31,7 @@ export default function Home() {
           <PokerCalendar />
         </section>
         <section className="home__two-col" aria-label="Players">
-          <PlayerNews />
+          <RecentChampions />
           <PlayersOfTheYear />
         </section>
         <AsiaTours />

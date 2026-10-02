@@ -44,17 +44,17 @@ Components are dumb. Every string, colour and link comes from one of three layer
 2. **`src/config/site.config.js`** — brand, nav, footer, social, SEO defaults, contact, integrations. `src/config/server.config.js` holds the production server's canonical-host and redirect settings as plain data.
 3. **`src/content/*.js`** — one file per section. The ones that matter most:
 
-| File                                                                         | Feeds                                                         |
-| ---------------------------------------------------------------------------- | ------------------------------------------------------------- |
-| `festivals.js`                                                               | Every series on the calendar, one compact row each            |
-| `calendarPage.js`                                                            | Calendar page chrome: tours, filter labels, SEO copy per year |
-| `calendar.js`                                                                | The "next six series" sidebar on the home page                |
-| `tourBrands.js`                                                              | Each operator's colours and wordmark treatment                |
-| `events.js`                                                                  | The live events banner and ticker                             |
-| `featuredNews.js`, `stories.js`, `shorts.js`, `liveNews.js`, `playerNews.js` | News sections                                                 |
-| `playersOfTheYear.js`, `playersPage.js`                                      | Rankings sidebar and players page                             |
-| `guides.js`, `pokerRooms.js`, `partners.js`, `faq.js`                        | The rest of the home page                                     |
-| `consent.js`, `legal.js`                                                     | Cookie banner copy, privacy and terms                         |
+| File                                                                              | Feeds                                                         |
+| --------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| `festivals.js`                                                                    | Every series on the calendar, one compact row each            |
+| `calendarPage.js`                                                                 | Calendar page chrome: tours, filter labels, SEO copy per year |
+| `calendar.js`                                                                     | The "next six series" sidebar on the home page                |
+| `tourBrands.js`                                                                   | Each operator's colours and wordmark treatment                |
+| `events.js`                                                                       | The live events banner and ticker                             |
+| `featuredNews.js`, `stories.js`, `shorts.js`, `liveNews.js`, `recentChampions.js` | News sections                                                 |
+| `playersOfTheYear.js`, `playersPage.js`                                           | Rankings sidebar and players page                             |
+| `guides.js`, `pokerRooms.js`, `partners.js`, `faq.js`                             | The rest of the home page                                     |
+| `consent.js`, `legal.js`                                                          | Cookie banner copy, privacy and terms                         |
 
 Brand assets are in `public/brand/`: the gold wordmark, favicon set and the
 Open Graph card. Tour logos are in `public/images/tours/`.

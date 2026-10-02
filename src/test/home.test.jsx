@@ -10,6 +10,8 @@ import { MemoryRouter } from 'react-router-dom'
 import FAQ from '../components/FAQ.jsx'
 import EventsBanner from '../components/EventsBanner.jsx'
 import ImagePlaceholder from '../components/ImagePlaceholder.jsx'
+import RecentChampions from '../components/RecentChampions.jsx'
+import PlayersOfTheYear from '../components/PlayersOfTheYear.jsx'
 import { faq } from '../content/faq.js'
 import { heroEvent, sideEvents, ticker, tickerSeries } from '../content/events.js'
 import { calendarPage } from '../content/calendarPage.js'
@@ -18,7 +20,7 @@ import { stories } from '../content/stories.js'
 import { shorts } from '../content/shorts.js'
 import { liveNews } from '../content/liveNews.js'
 import { calendar } from '../content/calendar.js'
-import { playerNews } from '../content/playerNews.js'
+import { recentChampions } from '../content/recentChampions.js'
 import { playersOfTheYear } from '../content/playersOfTheYear.js'
 import { asiaTours } from '../content/asiaTours.js'
 import { partners } from '../content/partners.js'
@@ -187,7 +189,7 @@ describe('home fixtures — shape each section renders', () => {
 
   it('news lists carry a title, a date and a link', () => {
     expect(featuredNews.hero.title && featuredNews.hero.excerpt).toBeTruthy()
-    for (const list of [featuredNews.items, liveNews.items, playerNews.items]) {
+    for (const list of [featuredNews.items, liveNews.items]) {
       hasLinks(list)
       for (const item of list) expect(item.title && item.date).toBeTruthy()
     }
@@ -217,13 +219,49 @@ describe('home fixtures — shape each section renders', () => {
     }
   })
 
+  it('champions carry a name, title, series, date, prize and portrait', () => {
+    // Empty until a result lands; the coming-soon test below pins that.
+    for (const champion of recentChampions.items) {
+      expect(champion.href, champion.name).toBeTruthy()
+      expect(
+        champion.name && champion.event && champion.series && champion.date && champion.prize,
+        champion.name,
+      ).toBeTruthy()
+      if (champion.portraitSrc) {
+        expect(existsSync(join('public', champion.portraitSrc)), champion.portraitSrc).toBe(true)
+      }
+    }
+  })
+
   it('standings are ranked 1..n with points and earnings', () => {
-    hasLinks(playersOfTheYear.items)
     playersOfTheYear.items.forEach((player, i) => {
+      expect(player.href, player.name).toBeTruthy()
       expect(player.rank).toBe(i + 1)
       expect(player.name && player.country && player.points && player.earnings).toBeTruthy()
       expect(typeof player.cashes).toBe('number')
+      if (player.avatarSrc) {
+        expect(existsSync(join('public', player.avatarSrc)), player.avatarSrc).toBe(true)
+      }
     })
+  })
+
+  it('champions and standings say they are coming soon until there is data', () => {
+    for (const [section, Component] of [
+      [recentChampions, RecentChampions],
+      [playersOfTheYear, PlayersOfTheYear],
+    ]) {
+      const { unmount } = withRouter(<Component />)
+      expect(section.items).toHaveLength(0)
+      expect(section.pending.title && section.pending.body).toBeTruthy()
+      expect(screen.getByText(section.pending.title)).toBeInTheDocument()
+      expect(screen.getByText(section.pending.body)).toBeInTheDocument()
+      expect(screen.getByRole('link', { name: section.cta.label })).toHaveAttribute(
+        'href',
+        section.cta.to,
+      )
+      expect(screen.queryByRole('list')).not.toBeInTheDocument()
+      unmount()
+    }
   })
 
   it('Asia tours and partners have what their cards read', () => {

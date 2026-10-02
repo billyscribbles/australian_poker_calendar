@@ -50,7 +50,7 @@ src/
 │                         useToday, useHydrated, consent, analytics, errorReporter
 ├── components/           Navbar, Footer, EventsBanner, FeaturedNews, Stories, Shorts,
 │                         LiveNews, PokerCalendar, FestivalCalendar/List/Timeline,
-│                         PlayerNews, PlayersOfTheYear, Guides, FAQ,
+│                         RecentChampions, PlayersOfTheYear, Guides, FAQ,
 │                         PokerRooms, TourLogo, ConsentBanner, Contact, ...
 ├── pages/                Home, CalendarPage, PlayersPage, AboutPage, ContactPage,
 │                         LegalPage, NotFoundPage
