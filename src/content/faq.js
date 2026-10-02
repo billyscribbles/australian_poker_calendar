@@ -17,8 +17,24 @@ export const faq = {
       a: 'We cover poker news from around the world, with a particular emphasis on the Asia-Pacific scene: live tournament coverage, player interviews and local guides.',
     },
     {
-      q: 'Are there Australian Poker Calendar freerolls?',
-      a: 'Yes. We regularly run exclusive freerolls and ticket giveaways for readers. Announcements are posted in the Promotions section.',
+      q: 'Where do the calendar dates come from, and how often are they updated?',
+      a: 'Every series is taken from the operator’s own published schedule and checked against the venue. We update the calendar as operators confirm new stops, usually within a few days of an announcement.',
+    },
+    {
+      q: 'Can tournament dates change after they are listed?',
+      a: 'Yes. Operators occasionally move a series or add and drop side events, so treat the calendar as a planning guide and confirm with the venue before booking travel.',
+    },
+    {
+      q: 'Is live poker legal in Australia?',
+      a: 'Yes. Poker at licensed casinos and registered clubs is legal in every state and territory, and all of the venues on this site are licensed. You must be 18 or over to enter a poker room.',
+    },
+    {
+      q: 'Do you cover online poker?',
+      a: 'No. Australian Poker Calendar is about the live game: tournament series, poker rooms and the players who travel the circuit. We do not list or promote online poker sites.',
+    },
+    {
+      q: 'Is Australian Poker Calendar affiliated with a casino or tour operator?',
+      a: 'No. We are an independent publisher. Listings are free for operators and our coverage is not tied to any one venue or tour.',
     },
     {
       q: 'How can I advertise with you or have my event covered?',
