@@ -36,7 +36,10 @@ export default function SEO({ title, description, image, path = '', noindex = fa
   const seo = site.seo
   const resolvedTitle = title ? seo.titleTemplate.replace('%s', title) : seo.defaultTitle
   const resolvedDescription = description || seo.description
-  const resolvedImage = image || seo.ogImage
+  // Open Graph and Twitter want an absolute image URL. Facebook, LinkedIn and
+  // iMessage drop a root-relative one and render a blank card.
+  const rawImage = image || seo.ogImage
+  const resolvedImage = /^https?:/i.test(rawImage) ? rawImage : `${seo.siteUrl}${rawImage}`
   const url = `${seo.siteUrl}${path}`
   const blockRobots = noindex || import.meta.env.VITE_NOINDEX === 'true'
 

@@ -53,3 +53,23 @@ describe('SEO — canonical contract', () => {
     })
   })
 })
+
+describe('SEO — social card contract', () => {
+  const ogImage = () => document.head.querySelector('meta[property="og:image"]')
+
+  it('og:image and twitter:image are absolute URLs built from siteUrl', async () => {
+    renderSEO({ title: 'Home' })
+    await waitFor(() => expect(ogImage()).not.toBeNull())
+    expect(ogImage().content).toBe(`${site.seo.siteUrl}${site.seo.ogImage}`)
+    expect(ogImage().content).toMatch(/^https?:\/\//)
+    expect(document.head.querySelector('meta[name="twitter:image"]').content).toBe(
+      ogImage().content,
+    )
+  })
+
+  it('leaves an already-absolute image alone', async () => {
+    renderSEO({ title: 'Event', image: 'https://cdn.example.com/card.png' })
+    await waitFor(() => expect(ogImage()).not.toBeNull())
+    expect(ogImage().content).toBe('https://cdn.example.com/card.png')
+  })
+})
