@@ -114,9 +114,11 @@ export const theme = {
   // The cap lets a 1440px laptop fill its screen while a 1920px+ monitor still
   // gets a bounded line. The gutter is fluid: ~24px on a small tablet, ~36px
   // on a laptop, 40px at the cap — enough breathing room that content never
-  // kisses the bezel. Below 768px `.container` drops to 16px (index.css).
+  // kisses the bezel. On a phone it bottoms out at 16px. The footer, the
+  // events banner and the poker-rooms bleed read this same token, so no
+  // component can disagree with the page gutter at any width.
   layout: {
     'container-max': '1560px',
-    'container-pad': 'clamp(20px, 2.5vw, 40px)',
+    'container-pad': 'clamp(16px, 2.5vw, 40px)',
   },
 }

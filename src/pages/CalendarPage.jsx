@@ -32,6 +32,9 @@ function Banner({ banner }) {
         alt={banner.alt}
         width={1080}
         height={135}
+        // Above the fold on a phone and the page's LCP element there, so it
+        // must not be lazy; the hero title above it is text.
+        priority
         className="calendar-page__banner-img"
       />
     </picture>

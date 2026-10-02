@@ -122,4 +122,12 @@
   .contact__row {
     grid-template-columns: 1fr;
   }
+  .contact__field input,
+  .contact__field textarea {
+    font-size: 16px;
+  }
+  .contact__submit {
+    align-self: stretch;
+    text-align: center;
+  }
 }

@@ -7,11 +7,13 @@ export const site = {
     logoText: 'Australian Poker Calendar',
     tagline:
       'Australian Poker Calendar is your home for Australian and Asia-Pacific poker: live tournament coverage, the full events calendar, player interviews and local venue guides.',
-    // Gold wordmark on a transparent background. Intrinsic 1709×341; the
-    // header shows it at 72px tall, the footer at 52px.
-    logoSrc: '/brand/logo-v2.png',
-    logoWidth: 1709,
-    logoHeight: 341,
+    // Gold wordmark on a transparent background. The header shows it at
+    // 72px tall and the footer at 52px, so this is a 720px (2x) cut of the
+    // 1709×341 master logo-v2.png: 15 KB instead of 283 KB on every page's
+    // critical path, which on a phone was what the hero image queued behind.
+    logoSrc: '/brand/logo-v2-720.png',
+    logoWidth: 720,
+    logoHeight: 144,
   },
 
   // Header tabs. `icon` names an entry in NAV_ICONS (src/components/Navbar.jsx),

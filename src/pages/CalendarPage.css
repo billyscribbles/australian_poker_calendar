@@ -23,6 +23,11 @@
 }
 
 .tour-tile {
+  /* Positioned so the tile's sr-only label is placed relative to the tile.
+     Unpositioned, that absolutely placed span resolves against the page and
+     sits at the tile's static x, outside the scroller, where every off-screen
+     tile adds its width to the document and the whole page pans sideways. */
+  position: relative;
   display: grid;
   flex: none;
   place-items: center;

@@ -128,11 +128,15 @@ select {
 }
 
 @media (max-width: 768px) {
-  .container {
-    padding: 0 16px;
-  }
   .section {
     padding: 64px 0;
+  }
+  /* iOS Safari zooms the page into any field set below 16px. Components may
+     use smaller text on desktop; on a phone every field is at least this. */
+  input,
+  textarea,
+  select {
+    font-size: 16px;
   }
 }
 
@@ -151,6 +155,9 @@ select {
 .scroll-row {
   display: flex;
   overflow-x: auto;
+  /* A swipe that reaches the end of the row stays in the row instead of
+     turning into the browser's back gesture. */
+  overscroll-behavior-x: contain;
   scrollbar-width: thin;
   scrollbar-color: var(--color-border) transparent;
 }

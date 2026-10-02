@@ -43,3 +43,21 @@
   line-height: 1.3;
   text-wrap: pretty;
 }
+
+@media (max-width: 600px) {
+  /* Two across: six 150px cards in one column is most of a phone's scroll
+     before the next section. */
+  .stories__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .story-card__image {
+    height: 110px;
+  }
+  .story-card__body {
+    padding: 0 12px 12px;
+  }
+  .story-card__title {
+    font-size: 14px;
+  }
+}
