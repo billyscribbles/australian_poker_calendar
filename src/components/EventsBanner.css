@@ -221,23 +221,43 @@
 /* ---- Featured series panel --------------------------------------------- */
 
 /* The ticker and its header sit in one bordered card inside the container,
-   so the strip reads as "this series' events" rather than a loose row. */
+   so the strip reads as "this series' events" rather than a loose row.
+   It wears the live hero's cues (gold hairline, warm wash in the corner the
+   eye lands on first) so the two featured things on the band match, and
+   the side cards and chips stay neutral around them. */
 .ticker-panel {
   --ticker-pad: 20px;
   max-width: calc(var(--layout-container-max) - 2 * var(--layout-container-pad));
   margin: 20px auto 24px;
   border-radius: var(--radius-2xl);
-  border: 1px solid var(--color-border);
-  background: linear-gradient(180deg, var(--color-bg-card), var(--color-bg-inset));
+  border: 1.5px solid var(--color-accent);
+  background: radial-gradient(
+    900px 320px at 0% 0%,
+    var(--color-bg-selected),
+    var(--color-bg-hero-end)
+  );
+  box-shadow: 0 0 32px var(--color-accent-glow);
   overflow: hidden;
 }
 
 .ticker-series {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 20px;
   padding: 18px var(--ticker-pad) 16px;
-  border-bottom: 1px solid var(--color-border);
+}
+
+/* The header's rule is gold where the series name is and fades out under
+   the link, the same stroke the hero draws under its name. */
+.ticker-series::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-accent), transparent 70%);
 }
 
 /* The wordmark's own rule sizes it for a timeline bar (hugging the right,
@@ -247,7 +267,7 @@
   display: flex;
   align-items: center;
   padding-right: 20px;
-  border-right: 1px solid var(--color-border);
+  border-right: 1px solid var(--color-control-border);
 }
 
 .ticker-series__brand .tour-logo--wordmark {
@@ -272,7 +292,7 @@
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-accent);
+  color: var(--color-champagne);
 }
 
 .ticker-series__name {
@@ -292,6 +312,10 @@
   color: var(--color-muted);
 }
 
+.ticker-series__meta-item svg {
+  color: var(--color-accent);
+}
+
 .ticker-series__meta-item {
   display: inline-flex;
   align-items: center;
@@ -302,18 +326,20 @@
   flex: none;
 }
 
+/* The one filled control on the band: the series page is where the panel
+   wants you to go, so it gets the gold the chips and arrows only outline. */
 .ticker-series__cta {
   flex: none;
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  padding: 10px 16px;
+  padding: 10px 18px;
   border-radius: var(--radius-full);
   border: 1.5px solid var(--color-accent);
-  background: var(--color-bg-card);
+  background: var(--color-accent);
   font-size: 13px;
-  font-weight: 600;
-  color: var(--color-champagne);
+  font-weight: 700;
+  color: var(--color-on-accent);
   white-space: nowrap;
   transition:
     border-color var(--transition-fast),
@@ -321,8 +347,13 @@
 }
 
 .ticker-series__cta:hover {
-  border-color: var(--color-champagne);
-  background: var(--color-bg-selected);
+  border-color: var(--color-accent-hover);
+  background: var(--color-accent-hover);
+}
+
+.ticker-series__cta:active {
+  border-color: var(--color-accent-pressed);
+  background: var(--color-accent-pressed);
 }
 
 /* ---- Ticker ------------------------------------------------------------ */
@@ -438,9 +469,12 @@
   gap: 4px;
 }
 
+/* The buy-in is the number a player scans the row for, so it is the one
+   thing in gold on each chip. */
 .ticker-chip__buyin {
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 700;
+  color: var(--color-champagne);
   white-space: nowrap;
 }
 
