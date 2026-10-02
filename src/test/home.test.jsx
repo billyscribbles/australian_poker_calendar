@@ -20,7 +20,6 @@ import { liveNews } from '../content/liveNews.js'
 import { calendar } from '../content/calendar.js'
 import { playerNews } from '../content/playerNews.js'
 import { playersOfTheYear } from '../content/playersOfTheYear.js'
-import { promotions } from '../content/promotions.js'
 import { asiaTours } from '../content/asiaTours.js'
 import { partners } from '../content/partners.js'
 
@@ -227,8 +226,7 @@ describe('home fixtures — shape each section renders', () => {
     })
   })
 
-  it('promotions, Asia tours and partners have what their cards read', () => {
-    hasLinks(promotions.items)
+  it('Asia tours and partners have what their cards read', () => {
     expect(asiaTours.items.length).toBeGreaterThan(0)
     for (const tour of asiaTours.items) {
       expect(tour.name && tour.dates && tour.country && tour.logoSrc, tour.name).toBeTruthy()

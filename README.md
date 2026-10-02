@@ -23,15 +23,15 @@ yarn dev                  # http://localhost:5173
 
 ## What is on the site
 
-| Route                  | Page                                                                                                                                                              |
-| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `/`                    | News home: live event banner, featured news, stories, shorts, live news, calendar sidebar, player news, Players of the Year, promotions, guides, FAQ, poker rooms |
-| `/poker-calendar/2026` | Month-by-month timeline of every 2026 series, with a tour filter                                                                                                  |
-| `/poker-calendar/2027` | Same document for 2027                                                                                                                                            |
-| `/players`             | Players holding page (noindex until the first rankings land)                                                                                                      |
-| `/about`, `/contact`   | About and contact (Formspree form)                                                                                                                                |
-| `/privacy`, `/terms`   | Legal, rendered from `src/content/legal.js`                                                                                                                       |
-| anything else          | A real 404 document, served with a 404 status                                                                                                                     |
+| Route                  | Page                                                                                                                                                  |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/`                    | News home: live event banner, featured news, stories, shorts, live news, calendar sidebar, player news, Players of the Year, guides, FAQ, poker rooms |
+| `/poker-calendar/2026` | Month-by-month timeline of every 2026 series, with a tour filter                                                                                      |
+| `/poker-calendar/2027` | Same document for 2027                                                                                                                                |
+| `/players`             | Players holding page (noindex until the first rankings land)                                                                                          |
+| `/about`, `/contact`   | About and contact (Formspree form)                                                                                                                    |
+| `/privacy`, `/terms`   | Legal, rendered from `src/content/legal.js`                                                                                                           |
+| anything else          | A real 404 document, served with a 404 status                                                                                                         |
 
 Routes are declared once in `src/routes.js`. The router, the prerender and the
 sitemap all read that file; a route that is not in it does not exist.
@@ -53,7 +53,7 @@ Components are dumb. Every string, colour and link comes from one of three layer
 | `events.js`                                                                  | The live events banner and ticker                             |
 | `featuredNews.js`, `stories.js`, `shorts.js`, `liveNews.js`, `playerNews.js` | News sections                                                 |
 | `playersOfTheYear.js`, `playersPage.js`                                      | Rankings sidebar and players page                             |
-| `promotions.js`, `guides.js`, `pokerRooms.js`, `partners.js`, `faq.js`       | The rest of the home page                                     |
+| `guides.js`, `pokerRooms.js`, `partners.js`, `faq.js`                        | The rest of the home page                                     |
 | `consent.js`, `legal.js`                                                     | Cookie banner copy, privacy and terms                         |
 
 Brand assets are in `public/brand/`: the gold wordmark, favicon set and the

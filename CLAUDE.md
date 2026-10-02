@@ -44,13 +44,13 @@ src/
 ├── lazyWithRetry.js      lazy pages that render synchronously once loaded
 ├── config/               theme.config.js, site.config.js, server.config.js
 ├── content/              festivals.js (the calendar rows), calendarPage.js, calendar.js,
-│                         tourBrands.js, events.js, news sections, players, promotions,
+│                         tourBrands.js, events.js, news sections, players,
 │                         guides, pokerRooms, partners, faq, consent, legal
 ├── lib/                  applyTheme, seo.jsx, motion, calendar.js (date/layout maths),
 │                         useToday, useHydrated, consent, analytics, errorReporter
 ├── components/           Navbar, Footer, EventsBanner, FeaturedNews, Stories, Shorts,
 │                         LiveNews, PokerCalendar, FestivalCalendar/List/Timeline,
-│                         PlayerNews, PlayersOfTheYear, Promotions, Guides, FAQ,
+│                         PlayerNews, PlayersOfTheYear, Guides, FAQ,
 │                         PokerRooms, TourLogo, ConsentBanner, Contact, ...
 ├── pages/                Home, CalendarPage, PlayersPage, AboutPage, ContactPage,
 │                         LegalPage, NotFoundPage
