@@ -79,7 +79,7 @@ export const site = {
     // A real 1200x630 PNG. The build FAILS on an SVG or a wrong-shaped file, and
     // fails again if this placeholder is still here when VITE_SITE_URL is a real
     // domain — see assertOgImage in scripts/prerender.mjs.
-    ogImage: '/brand/og-image.placeholder.png',
+    ogImage: '/brand/og-image.png',
     locale: 'en_AU',
   },
 

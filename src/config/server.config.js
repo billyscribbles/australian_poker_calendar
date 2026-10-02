@@ -22,7 +22,7 @@
  * host dies. ausflexcaravans.com.au is configured that way at the edge right
  * now, which is how this was found.
  */
-export const canonicalHost = null
+export const canonicalHost = 'apex'
 
 /**
  * 301s for URLs the old site ranked for.

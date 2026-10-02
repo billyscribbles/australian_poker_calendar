@@ -58,10 +58,24 @@ src/
 data/                     scraped series timeline (json/csv), one series schedule, promo HTML
 public/brand/             wordmark, favicon set (yarn icons), og card
 public/images/tours/      operator logos: full colour, icon, and -mono (scripts/gen-tour-mono.py)
-scripts/                  prerender.mjs, gen-seo-files.mjs, gen-icons.mjs, gen-tour-mono.py
+scripts/                  prerender.mjs, gen-seo-files.mjs, gen-icons.mjs, gen-tour-mono.py,
+                          series-status.mjs (the status model behind `yarn status` and admin/)
+admin/                    local ops dashboard: `yarn admin` → http://localhost:4400 (never deployed)
 server/index.mjs          production server: prerendered docs, real 404s, cache headers, CSP
 docs/ENVIRONMENTS.md      main = staging, production branch, Railway envs
 ```
+
+## Series status dashboard
+
+`yarn admin` serves `admin/` on port 4400: a left-nav dashboard of every series
+(phase, schedule up or not, data file, key art, home and calendar placements,
+scrape sync, organiser contact) and the jobs that follow from them (rotate a
+finished hero, chase an operator, refresh Up Next). It runs
+`scripts/series-status.mjs --json` in a fresh process on every refresh, so
+content edits show up without a restart. `yarn status` prints the same jobs in
+the terminal; `--today=YYYY-MM-DD` simulates another day. The job rules live in
+`buildStatus()` and `src/test/seriesStatus.test.js` pins them. Site links point
+at the local preview (`SITE=` to change).
 
 ## Routes
 
@@ -141,7 +155,7 @@ Non-obvious behaviours to know before changing any of this:
 
 - **Webfonts** come from `googleFonts` in `theme.config.js`. Do not hand-write font tags in `index.html`.
 - **`sitemap.xml` and `robots.txt`** are generated. There is no `public/sitemap.xml`; a test fails if one appears. `VITE_NOINDEX=true` writes a Disallow-all robots and a noindex meta tag.
-- **`seo.ogImage` must be a real raster** at least 1200px wide at about 1.91:1. The build fails on an SVG, a missing file, or on `og-image.placeholder.png` still being in place once `VITE_SITE_URL` is a real domain. **The placeholder is still in place.** Replace it before the production domain goes live.
+- **`seo.ogImage` must be a real raster** at least 1200px wide at about 1.91:1. The build fails on an SVG, a missing file, or on a file named `*.placeholder.*` once `VITE_SITE_URL` is a real domain. The live card is `public/brand/og-image.png`, rendered from `logo-v2-720.png` on the midnight background; regenerate it if the wordmark changes.
 - **`yarn icons`** builds the favicon set from `public/brand/icon-master.png`. Run it when the wordmark changes and commit the output.
 - The contact form fires `contact_form_submitted` via `trackConversion()` on an accepted submission. Mark it as a key event in GA4.
 
