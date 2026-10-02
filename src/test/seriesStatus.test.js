@@ -62,7 +62,7 @@ describe('series status', () => {
     const scraped = status.series.filter((s) => s.scraped)
     expect(scraped.length).toBeGreaterThan(10)
     for (const s of scraped) expect(s.scraped.url).toBe(s.source)
-    expect(status.unlisted.map((u) => u.title).join()).toMatch(/Nouméa/)
+    expect(status.unlisted).toEqual([])
   })
 
   it('orders jobs now, soon, later with a series link on each', () => {
