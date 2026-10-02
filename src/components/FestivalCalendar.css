@@ -7,8 +7,12 @@
   margin-bottom: 16px;
 }
 
+/* Equal columns: both segments take the width of the wider label, so the
+ * pair reads as one control rather than two buttons of different size. */
 .segmented {
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
   padding: 3px;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
@@ -17,6 +21,7 @@
 
 .segmented__btn {
   padding: 10px 18px;
+  text-align: center;
   border-radius: var(--radius-sm);
   font-size: 14px;
   font-weight: 600;

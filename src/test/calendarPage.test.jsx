@@ -64,6 +64,10 @@ describe('CalendarPage — static content', () => {
     expect(inYear.length).toBeLessThan(festivals.length)
     expect(screen.getByText(String(inYear.length), { selector: 'strong' })).toBeInTheDocument()
     expect(festivals.length).toBeGreaterThanOrEqual(19)
+    // The promo banner links to the series' own page and carries its tag.
+    const banner = screen.getByRole('img', { name: calendarPage.banner.alt }).closest('a')
+    expect(banner).toHaveAttribute('href', calendarPage.banner.href)
+    expect(within(banner).getByText(calendarPage.banner.tag)).toBeInTheDocument()
   })
 
   it('links to the neighbouring years at the foot of the calendar', () => {

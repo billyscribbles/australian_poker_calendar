@@ -7,6 +7,7 @@ import { festivals, YEAR, YEARS } from '../content/festivals.js'
 import { calendarPath } from '../routes.js'
 import ImagePlaceholder from '../components/ImagePlaceholder.jsx'
 import Img from '../components/Img.jsx'
+import { Badge } from '../components/Badge.jsx'
 import { festivalsInYear } from '../lib/calendar.js'
 import FestivalCalendar from '../components/FestivalCalendar.jsx'
 import UpNext from '../components/UpNext.jsx'
@@ -21,12 +22,18 @@ const TILE_LOGO_H = 40
 /**
  * The 1080×135 promo slot under the tour strip. The box keeps the artwork's
  * own proportions (see .calendar-page__banner), and a phone-sized cut swaps in
- * below 600px when the content provides one.
+ * below 600px when the content provides one. The optional tag hangs on the
+ * frame's top edge, clear of the artwork at every width.
  */
 function Banner({ banner }) {
   if (!banner.src) {
     return <ImagePlaceholder label={banner.label} className="calendar-page__banner" />
   }
+  const tag = banner.tag && (
+    <Badge variant="filled" className="calendar-page__banner-tag">
+      {banner.tag}
+    </Badge>
+  )
   const img = (
     <picture>
       {banner.mobileSrc && <source media="(max-width: 600px)" srcSet={banner.mobileSrc} />}
@@ -45,9 +52,13 @@ function Banner({ banner }) {
   return banner.href ? (
     <Link to={banner.href} className="calendar-page__banner">
       {img}
+      {tag}
     </Link>
   ) : (
-    <div className="calendar-page__banner">{img}</div>
+    <div className="calendar-page__banner">
+      {img}
+      {tag}
+    </div>
   )
 }
 

@@ -226,8 +226,11 @@ export const calendarPage = {
   // of the same artwork for phones, where an 8:1 strip is unreadable; without
   // it the wide image is centre-cropped. `href` is the series' own page on
   // this site (its full schedule), not the operator's; the page links out.
+  // `tag` is the small label stuck half over the frame's top-left corner;
+  // clear it for a plain banner.
   banner: {
     label: 'promo banner 1080×135',
+    tag: 'Featured',
     src: '/images/promos/playlive-summer-championship.webp',
     mobileSrc: '/images/promos/playlive-summer-championship-mobile.webp',
     alt: 'PlayLive Melbourne Summer Championship: $3,000,000 guaranteed, November 26 to December 15',
