@@ -95,6 +95,7 @@ route's chunk before hydrating.
 /                              Home (eager, in the entry chunk)
 /poker-calendar/2026           CalendarPage  props: { year: 2026 }
 /poker-calendar/2027           CalendarPage  props: { year: 2027 }
+/where-to-play                 WhereToPlayPage  venues by state, from content/whereToPlay.js
 /players                       PlayersPage   noindex until rankings exist
 /about  /contact               AboutPage, ContactPage
 /privacy  /terms               LegalPage     props: { type }

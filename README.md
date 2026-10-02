@@ -28,6 +28,7 @@ yarn dev                  # http://localhost:5173
 | `/`                    | News home: live event banner, featured news, stories, shorts, live news, calendar sidebar, player news, Players of the Year, guides, FAQ, poker rooms |
 | `/poker-calendar/2026` | Month-by-month timeline of every 2026 series, with a tour filter                                                                                      |
 | `/poker-calendar/2027` | Same document for 2027                                                                                                                                |
+| `/where-to-play`       | Every venue the series are dealt at, by state, with address, operator marks and a link out (`src/content/whereToPlay.js`)                             |
 | `/players`             | Players holding page (noindex until the first rankings land)                                                                                          |
 | `/about`, `/contact`   | About and contact (Formspree form)                                                                                                                    |
 | `/privacy`, `/terms`   | Legal, rendered from `src/content/legal.js`                                                                                                           |

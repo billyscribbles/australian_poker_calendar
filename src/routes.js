@@ -47,6 +47,12 @@ export const ROUTES = [
     module: 'src/pages/EventPage.jsx',
     props: { path: festival.href },
   })),
+  // Every venue the series are dealt at, by state (content/whereToPlay.js).
+  {
+    path: '/where-to-play',
+    load: () => import('./pages/WhereToPlayPage.jsx'),
+    module: 'src/pages/WhereToPlayPage.jsx',
+  },
   // Holding page until the first series' results are in. noindex while it has
   // no standings; drop the flag when the rankings table lands.
   {

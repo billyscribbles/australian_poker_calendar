@@ -1,0 +1,233 @@
+/* Where to play: hero, a row of state jump links, then one section per state
+ * holding a grid of venue cards. Operator marks are TourLogo circles in the
+ * room's own colours. */
+
+.venues-hero {
+  padding: 112px 0 48px;
+  background: var(--color-bg);
+}
+
+.venues-hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 5.5vw, 72px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+  color: var(--color-text);
+  margin-bottom: 20px;
+  font-optical-sizing: auto;
+}
+
+.venues-hero__sub {
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--color-muted);
+  max-width: 640px;
+}
+
+.venues-jump {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 32px;
+}
+
+.venues-jump__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 44px;
+  padding: 0 18px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-card);
+  color: var(--color-text);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition:
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.venues-jump__link:hover,
+.venues-jump__link:focus-visible {
+  border-color: var(--color-accent);
+  color: var(--color-champagne);
+}
+
+.venues-jump__count {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+/* A state section. The anchor offset keeps the heading clear of the top of
+ * the viewport when a jump link lands on it. */
+.venues-state {
+  padding: 40px 0 56px;
+  scroll-margin-top: 24px;
+  background: var(--color-bg);
+}
+
+.venues-state__head {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding-bottom: 16px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.venues-state__heading {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.4vw, 40px);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.venues-state__count {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.venues-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.venue-card {
+  display: flex;
+  gap: 18px;
+  padding: 22px 22px 20px;
+}
+
+/* One circle per operator that plays at the venue, stacked when there are two. */
+.venue-card__marks {
+  display: flex;
+  flex-direction: column;
+  flex: none;
+  gap: 8px;
+}
+
+.venue-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.venue-card__name {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.venue-card__address {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-style: normal;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--color-muted);
+}
+
+.venue-card__address svg {
+  flex: none;
+  margin-top: 4px;
+  color: var(--color-accent);
+}
+
+.venue-card__operators {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-muted);
+  margin: 0;
+}
+
+.venue-card__operators-label {
+  color: var(--color-muted);
+}
+
+.venue-card__operators a {
+  color: var(--color-text);
+  text-decoration: underline;
+  text-decoration-color: var(--color-border-strong);
+  text-underline-offset: 3px;
+}
+
+.venue-card__operators a:hover,
+.venue-card__operators a:focus-visible {
+  color: var(--color-champagne);
+  text-decoration-color: currentColor;
+}
+
+.venue-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-accent);
+  transition: color var(--transition-fast);
+}
+
+.venue-card__link:hover,
+.venue-card__link:focus-visible {
+  color: var(--color-champagne);
+}
+
+.venue-card__host {
+  font-weight: 400;
+  color: var(--color-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 1024px) {
+  .venues-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .venues-hero {
+    padding: 72px 0 40px;
+  }
+  .venues-state {
+    padding: 32px 0 40px;
+  }
+}
+
+@media (max-width: 600px) {
+  .venues-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .venue-card {
+    gap: 14px;
+    padding: 18px 16px;
+  }
+  .venue-card__host {
+    display: none;
+  }
+}
