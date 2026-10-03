@@ -813,6 +813,7 @@ async function load() {
     if (!res.ok) throw new Error(await res.text())
     state.data = await res.json()
     state.error = ''
+    document.getElementById('logout').hidden = !state.data.auth
   } catch (error) {
     state.error = `Could not load status.\n${error.message}`
   }

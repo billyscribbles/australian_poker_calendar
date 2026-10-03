@@ -891,3 +891,55 @@ tbody th {
     transition: none !important;
   }
 }
+
+/* Sign-in page (admin/handler.mjs renders it when ADMIN_PASSWORD is set). */
+.login-body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px 16px;
+  background:
+    radial-gradient(60% 50% at 50% 0%, rgba(223, 169, 90, 0.12), transparent 70%), var(--bg);
+}
+.login {
+  width: 100%;
+  max-width: 380px;
+}
+.login__card {
+  display: grid;
+  gap: 16px;
+  padding: 28px 24px 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.login__card .brand {
+  padding: 0 0 14px;
+}
+.login__title {
+  font-size: 1.75rem;
+  margin-top: 4px;
+}
+.login__lede {
+  margin: -8px 0 0;
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+.login__card .field input {
+  width: 100%;
+  font-size: 1rem;
+  padding: 10px 12px;
+}
+.login__card .field input[aria-invalid='true'] {
+  border-color: var(--critical);
+}
+.login__error {
+  margin: -6px 0 0;
+  color: var(--critical);
+  font-size: 0.9375rem;
+}
+.login__submit {
+  width: 100%;
+  padding: 11px 16px;
+  font-size: 1rem;
+}

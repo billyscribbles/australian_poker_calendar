@@ -81,8 +81,10 @@ the terminal; `--today=YYYY-MM-DD` simulates another day. The job rules live in
 **Access.** The page lists organiser emails and phones. Without `ADMIN_PASSWORD`
 set, only connections from the machine itself are answered and everyone else
 gets a 404. Set `ADMIN_PASSWORD` on Railway (staging and production) to open it
-there behind HTTP Basic auth; any username, that password. It is never
-prerendered, never in the sitemap, and sends `X-Robots-Tag: noindex`.
+there behind its own sign-in page: the right password sets a 30-day session
+cookie signed under the password (no session store, so a redeploy keeps you in
+and a password change signs everyone out) and the sidebar gains Sign out. It is
+never prerendered, never in the sitemap, and sends `X-Robots-Tag: noindex`.
 
 ## Routes
 
