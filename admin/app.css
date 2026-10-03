@@ -307,6 +307,10 @@ code {
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   align-items: start;
 }
+/* Cards in a row share the tallest one's height. */
+.grid--even {
+  align-items: stretch;
+}
 .grid--cards {
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
 }

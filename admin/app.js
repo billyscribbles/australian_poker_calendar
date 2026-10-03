@@ -1169,7 +1169,7 @@ function contactsView() {
   }
   return `
     ${pageHead('Contacts', "Organisers as listed on the Australian Poker Schedule event pages. Click a logo for the room's full profile.")}
-    <div class="grid grid--3">${d.organisers.map(card).join('')}</div>`
+    <div class="grid grid--3 grid--even">${d.organisers.map(card).join('')}</div>`
 }
 
 // ---------------------------------------------------------------------------
