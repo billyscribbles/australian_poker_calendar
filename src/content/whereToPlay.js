@@ -734,6 +734,22 @@ const leagueRows = [
       iconBg: '#0B0B0B',
     },
   },
+  // From bigboyzgroup.com/mncpoker and its weekly posters (2026-10-04). Big
+  // Boyz Group owns it, but it runs as its own brand on the coast.
+  {
+    name: 'MNC Poker',
+    states: ['NSW'],
+    about:
+      'Mid North Coast poker around Port Macquarie, with a game most nights at Club Lake Cathie, Bonny Hills, Laurieton and Wauchope, and the MNC Poker Open series a few times a year.',
+    website: 'https://www.bigboyzgroup.com/mncpoker',
+    // The round MNC Poker badge from its posters: fanned cards and orange
+    // lettering on black.
+    mark: {
+      iconSrc: '/images/rooms/mnc-poker-icon.webp',
+      primary: '#F05000',
+      iconBg: '#0B0B0B',
+    },
+  },
   {
     name: 'Poker Nation',
     states: ['VIC'],
