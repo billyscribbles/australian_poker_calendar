@@ -52,14 +52,15 @@ export const tourBrands = {
     source:
       'https://www.playapl.com/aplpt — hero CTA, pills, aplpt.png; icon: the same lockup fitted in the circle on black',
   },
-  // Kings Poker: red bars on a black wordmark; the site's accent is a brass gold
-  // (#B8952F) used for prize figures and the active tab.
+  // Kings Poker, in its Kings Room artwork: the white crown-and-KINGS ROOM
+  // lockup, the room's deep red (#B01C2C) and the gold (#D8B461) of its buttons.
   KINGS: {
-    primary: '#C8102E',
-    secondary: '#B8952F',
+    primary: '#B01C2C',
+    secondary: '#D8B461',
     logo: 'light',
-    iconBg: '#FFFFFF',
-    source: 'https://kingspoker.com.au/ — kings.png red bars, site accent gold',
+    iconBg: '#0B0B0B',
+    source:
+      'https://kingsroom.com.au/ — site stylesheet red and gold; Kings-Room-Logo_locked.png for the lockup and the crown icon, on black',
   },
   // Crown Melbourne: near-black (#0E0909), the muted gold of the crown mark in
   // their own logo SVG (#B4A169) and a cream lockup (#FCF8EA). crown.png is
