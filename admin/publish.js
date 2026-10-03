@@ -620,8 +620,163 @@ function bindHero(save) {
   })
 }
 
-// Replaced in the next commit.
-function shortEditor(short) {
-  return `<form class="editor" id="editor">${editorBar('shorts', short, { preview: false })}<p class="muted">The shorts editor is on its way.</p><div id="ed-delete-wrap"><button type="button" id="ed-delete" class="btn btn--ghost btn--sm">Delete short</button></div><input id="ed-title" hidden value="${esc(short.title)}"><span id="ed-saved"></span></form>`
+// ------------------------------------------------------------------ shorts
+
+/**
+ * Read a video file in the browser: its duration, and a poster frame from
+ * half a second in (the first frame is often black), cropped to 540x960.
+ * @returns {Promise<{ duration: number, poster: Blob }>}
+ */
+function readVideo(file) {
+  return new Promise((resolve, reject) => {
+    const url = URL.createObjectURL(file)
+    const video = document.createElement('video')
+    video.muted = true
+    video.playsInline = true
+    video.preload = 'auto'
+    const fail = (message) => {
+      URL.revokeObjectURL(url)
+      reject(new Error(message))
+    }
+    video.addEventListener('error', () =>
+      fail('This video cannot be played in the browser. Use MP4 (H.264) or WebM.'),
+    )
+    video.addEventListener('loadedmetadata', () => {
+      video.currentTime = Math.min(0.5, video.duration / 2)
+    })
+    video.addEventListener(
+      'seeked',
+      () => {
+        const canvas = document.createElement('canvas')
+        ;[canvas.width, canvas.height] = PUB_IMAGE.poster
+        const ratio = Math.max(canvas.width / video.videoWidth, canvas.height / video.videoHeight)
+        const w = video.videoWidth * ratio
+        const h = video.videoHeight * ratio
+        canvas
+          .getContext('2d')
+          .drawImage(video, (canvas.width - w) / 2, (canvas.height - h) / 2, w, h)
+        canvas.toBlob(
+          (blob) => {
+            URL.revokeObjectURL(url)
+            if (blob) resolve({ duration: video.duration, poster: blob })
+            else {
+              reject(
+                new Error(
+                  'A poster frame could not be captured. Drop an image on the poster box instead.',
+                ),
+              )
+            }
+          },
+          'image/webp',
+          PUB_WEBP_QUALITY,
+        )
+      },
+      { once: true },
+    )
+    video.src = url
+  })
 }
-function bindShort() {}
+
+function videoZone(short) {
+  return `${
+    short.video
+      ? `<video src="${esc(short.video)}" poster="${esc(short.poster)}" controls playsinline preload="metadata"></video>`
+      : '<span class="drop__hint">Drop a video here or click to choose.<br><small>Vertical MP4 (H.264) or WebM, up to 300 MB. MP4 plays everywhere.</small></span>'
+  }
+    <input type="file" accept="video/mp4,video/webm" id="ed-video-file" hidden>
+    <div class="progress" hidden><div></div></div>`
+}
+
+function posterZone(short) {
+  return `${
+    short.poster
+      ? `<img src="${esc(short.poster)}" alt="">`
+      : '<span class="drop__hint">Captured from the video.<br><small>Drop an image to use your own.</small></span>'
+  }
+    <input type="file" accept="image/*" id="ed-poster-file" hidden>
+    <div class="progress" hidden><div></div></div>`
+}
+
+function shortEditor(short) {
+  return `<form class="editor" id="editor" novalidate>
+    ${editorBar('shorts', short, { preview: false })}
+    <div class="editor__grid">
+      <div class="editor__main">
+        <label class="field field--title"><span>Title</span><input id="ed-title" value="${esc(short.title)}" placeholder="One line, as it reads on the card" maxlength="200"></label>
+        <section class="card">
+          <h2>Video</h2>
+          <div class="drop drop--video" id="ed-video" tabindex="0" role="button" aria-label="Choose the video">${videoZone(short)}</div>
+          <p class="sub" id="ed-duration">${short.duration ? `Duration ${mmss(short.duration)}` : 'The duration is read from the file.'}</p>
+        </section>
+      </div>
+      <aside class="editor__side">
+        <section class="card">
+          <h2>Poster</h2>
+          <div class="drop drop--poster" id="ed-poster" tabindex="0" role="button" aria-label="Choose the poster image">${posterZone(short)}</div>
+        </section>
+        <section class="card">
+          <h2>Publishing</h2>
+          <p class="sub">${
+            short.status === 'published'
+              ? `Live in the Shorts row on ${external(siteUrl('/'), 'the home page')}.`
+              : 'A draft is visible only here.'
+          }</p>
+          <p class="sub">Added ${esc(fmtWhen(short.createdAt))}</p>
+        </section>
+        ${deleteCard('shorts', 'its video and poster')}
+      </aside>
+    </div>
+  </form>`
+}
+
+/** The video and poster drop zones. */
+function bindShort(save) {
+  const videoEl = document.getElementById('ed-video')
+  const posterEl = document.getElementById('ed-poster')
+
+  const wirePoster = () =>
+    bindDrop(posterEl, document.getElementById('ed-poster-file'), async (file) => {
+      try {
+        setProgress(posterEl, 0)
+        const blob = await resizeImage(file, PUB_IMAGE.poster)
+        const name = `${file.name.replace(/\.[^.]+$/, '')}-poster.webp`
+        const { url } = await upload(blob, 'image', name, (p) => setProgress(posterEl, p))
+        const next = await save({ poster: url })
+        posterEl.innerHTML = posterZone(next)
+        posterEl.classList.remove('is-missing')
+        wirePoster()
+        toast('Poster replaced.')
+      } catch (error) {
+        setProgress(posterEl, null)
+        showError(error)
+      }
+    })
+
+  const wireVideo = () =>
+    bindDrop(videoEl, document.getElementById('ed-video-file'), async (file) => {
+      try {
+        setProgress(videoEl, 0)
+        const { duration, poster } = await readVideo(file)
+        const base = file.name.replace(/\.[^.]+$/, '')
+        const [video, art] = await Promise.all([
+          upload(file, 'video', file.name, (p) => setProgress(videoEl, p)),
+          upload(poster, 'image', `${base}-poster.webp`),
+        ])
+        const next = await save({ video: video.url, poster: art.url, duration })
+        videoEl.innerHTML = videoZone(next)
+        posterEl.innerHTML = posterZone(next)
+        videoEl.classList.remove('is-missing')
+        posterEl.classList.remove('is-missing')
+        document.getElementById('ed-duration').textContent = `Duration ${mmss(next.duration)}`
+        wireVideo()
+        wirePoster()
+        toast('Video uploaded.')
+      } catch (error) {
+        setProgress(videoEl, null)
+        showError(error)
+      }
+    })
+
+  wireVideo()
+  wirePoster()
+}
