@@ -46,11 +46,26 @@ describe('routes — prerender contract', () => {
     expect(catchAll[0].noindex).toBe(true)
   })
 
-  it('every route gets a static document', () => {
-    expect(PRERENDER_ROUTES).toHaveLength(ROUTES.length)
+  it('every route but a dynamic one gets a static document', () => {
+    const prerendered = ROUTES.filter((r) => !r.dynamic)
+    expect(PRERENDER_ROUTES).toHaveLength(prerendered.length)
+    expect(PRERENDER_ROUTES.length).toBeLessThan(ROUTES.length)
     for (const route of PRERENDER_ROUTES) {
       expect(route.out, `${route.path}: out`).toMatch(/^\//)
+      expect(route.dynamic).toBeFalsy()
     }
+  })
+
+  it('the story page is dynamic: matched by pattern, never prerendered', () => {
+    const story = ROUTES.find((r) => r.path === '/stories/:slug')
+    expect(story.dynamic).toBe(true)
+    expect(story.module).toBe('src/pages/StoryPage.jsx')
+    expect(matchRoute('/stories/big-night').path).toBe('/stories/:slug')
+    expect(matchRoute('/stories/big-night/').path).toBe('/stories/:slug')
+    expect(matchRoute('/stories').path).toBe('/stories')
+    expect(matchRoute('/stories/').path).toBe('/stories')
+    expect(matchRoute('/stories/a/b').path).toBe('*')
+    expect(routeModules('/stories/big-night')).toEqual(['src/pages/StoryPage.jsx'])
   })
 
   it('matchRoute ignores a trailing slash and falls back to the catch-all', () => {

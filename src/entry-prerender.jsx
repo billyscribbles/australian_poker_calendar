@@ -27,6 +27,9 @@ import { themeCss } from './lib/applyTheme.js'
 // bundle it renders with, rather than a second copy that could disagree.
 export { PRERENDER_ROUTES, routeModules } from './routes.js'
 
+// server/render.mjs sets the published content before each render.
+export { setRuntimeContent } from './lib/runtimeContent.js'
+
 /**
  * Resolve every lazy page module. Must be awaited before the first render().
  *

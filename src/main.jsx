@@ -4,11 +4,17 @@ import { HelmetProvider } from 'react-helmet-async'
 import { applyTheme } from './lib/applyTheme.js'
 import { initAnalytics } from './lib/analytics.js'
 import { preloadRoute } from './routes.js'
+import { readRuntimeContent, setRuntimeContent } from './lib/runtimeContent.js'
 import './index.css'
 import App from './App.jsx'
 
 applyTheme()
 initAnalytics()
+
+// Published stories and shorts, written into the document by server/render.mjs.
+// Set before the first render so hydration sees what the server saw.
+const runtime = readRuntimeContent()
+if (runtime) setRuntimeContent(runtime)
 
 const container = document.getElementById('root')
 

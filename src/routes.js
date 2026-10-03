@@ -76,6 +76,21 @@ export const ROUTES = [
     module: 'src/pages/TourPage.jsx',
     props: { path: tour.path },
   })),
+  // Stories by Us: the articles the dashboard publishes. The index has a
+  // static document (with the demo cards at build time); each story is
+  // `dynamic`: never prerendered, matched by pattern, and rendered at request
+  // time by server/render.mjs from the data store. See lib/runtimeContent.js.
+  {
+    path: '/stories',
+    load: () => import('./pages/StoriesPage.jsx'),
+    module: 'src/pages/StoriesPage.jsx',
+  },
+  {
+    path: '/stories/:slug',
+    load: () => import('./pages/StoryPage.jsx'),
+    module: 'src/pages/StoryPage.jsx',
+    dynamic: true,
+  },
   // Holding page until the first series' results are in. noindex while it has
   // no standings; drop the flag when the rankings table lands.
   {
@@ -127,15 +142,30 @@ export const ROUTES = [
 ]
 
 /** Concrete paths that get a static HTML document at build time. */
-export const PRERENDER_ROUTES = ROUTES.map((route) => ({
+export const PRERENDER_ROUTES = ROUTES.filter((route) => !route.dynamic).map((route) => ({
   ...route,
   out: route.prerenderAs || route.path,
 }))
 
+/** True when `pattern` ("/stories/:slug" or a literal path) matches `path`. */
+function matches(pattern, path) {
+  if (pattern === path) return true
+  if (!pattern.includes(':')) return false
+  const want = pattern.split('/')
+  const have = path.split('/')
+  return (
+    want.length === have.length &&
+    want.every((segment, i) => (segment.startsWith(':') ? have[i].length > 0 : segment === have[i]))
+  )
+}
+
 /** The ROUTES entry that owns `pathname`, falling back to the catch-all. */
 export function matchRoute(pathname) {
   const path = pathname.length > 1 ? pathname.replace(/\/+$/, '') : '/'
-  return ROUTES.find((route) => route.path === path) ?? ROUTES.find((route) => route.path === '*')
+  return (
+    ROUTES.find((route) => route.path !== '*' && matches(route.path, path)) ??
+    ROUTES.find((route) => route.path === '*')
+  )
 }
 
 /**
