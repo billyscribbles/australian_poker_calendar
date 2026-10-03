@@ -337,15 +337,12 @@
   white-space: normal;
 }
 
-/* Every second day lifts to the card black and its day band to the gold-tinted
- * selected surface, so the eye finds the day boundary without reading the
- * dates. Declared before the gold and red fills so those still win. */
-.schedule__row--alt .schedule__cell {
-  background: var(--color-bg-card);
-}
-
+/* Every second day, band and rows alike, lifts to the card black so the eye
+ * finds the day boundary without reading the dates. Declared before the gold
+ * and red fills so those still win. */
+.schedule__row--alt .schedule__cell,
 .schedule__row--alt .schedule__day {
-  background: var(--color-bg-selected);
+  background: var(--color-bg-card);
 }
 
 /* The poster's gold rows: the series' feature events. */
