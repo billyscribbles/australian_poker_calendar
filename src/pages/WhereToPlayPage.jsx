@@ -7,16 +7,19 @@ import { whereToPlay } from '../content/whereToPlay.js'
 import { cities, cityPage } from '../content/cities.js'
 import VenueCard from '../components/VenueCard.jsx'
 import LeagueCard from '../components/LeagueCard.jsx'
+import MajorCard from '../components/MajorCard.jsx'
 import './WhereToPlayPage.css'
 
 const PATH = '/where-to-play'
 
 /**
- * Where to play, in two tabs: poker rooms (one section per state, a card per
- * room or venue, and the way in to each city's own page) and the pub leagues.
- * Rooms is the default. Both panels are in the static HTML; the hidden one
- * carries `hidden`. `#leagues` in the URL opens the leagues tab, read after
- * hydration so the first client render matches the prerendered document. Everything comes from content/whereToPlay.js and
+ * Where to play, in three tabs: all (the Majors on the calendar, then the
+ * Local Circuit of rooms and leagues), poker rooms (one section per state, a
+ * card per room or venue, and the way in to each city's own page) and the pub
+ * leagues by state. All is the default. Every panel is in the static HTML; the
+ * hidden ones carry `hidden`. `#rooms` or a state's section (`#NSW`) opens the
+ * rooms tab and `#leagues` the leagues tab, read after hydration so the first
+ * client render matches the prerendered document. Everything comes from content/whereToPlay.js and
  * content/cities.js; the operator marks and colours from calendarPage.tours
  * and tourBrands.js through TourLogo.
  */
@@ -32,21 +35,28 @@ export default function WhereToPlayPage() {
     countLabel,
     states,
     leagues,
+    all,
     tabs,
   } = whereToPlay
-  const [tab, setTab] = useState('rooms')
+  const [tab, setTab] = useState('all')
 
   useEffect(() => {
-    // #leagues, or a state's section on it (#leagues-NSW), is the leagues tab.
-    const fromHash = () =>
-      setTab(window.location.hash.startsWith(`#${leagues.id}`) ? 'leagues' : 'rooms')
+    // #leagues, or a state's section on it (#leagues-NSW), is the leagues tab;
+    // #rooms, or a state's section on it (#NSW), is the rooms tab.
+    const fromHash = () => {
+      const hash = window.location.hash.slice(1)
+      if (hash.startsWith(leagues.id)) setTab('leagues')
+      else if (hash === 'rooms' || states.some((state) => state.code === hash)) setTab('rooms')
+      else setTab('all')
+    }
     fromHash()
     window.addEventListener('hashchange', fromHash)
     return () => window.removeEventListener('hashchange', fromHash)
-  }, [leagues.id])
+  }, [leagues.id, states])
 
   const roomCount = states.reduce((sum, state) => sum + state.venues.length, 0)
   const tabList = [
+    { id: 'all', label: tabs.all, count: all.majors.list.length + all.local.list.length },
     { id: 'rooms', label: tabs.rooms, count: roomCount },
     { id: 'leagues', label: tabs.leagues, count: leagues.list.length },
   ]
@@ -54,14 +64,15 @@ export default function WhereToPlayPage() {
   /** @param {string} id */
   const choose = (id) => {
     setTab(id)
-    const hash = id === 'leagues' ? `#${leagues.id}` : ''
+    const hash = { all: '', rooms: '#rooms', leagues: `#${leagues.id}` }[id]
     window.history.replaceState(null, '', `${window.location.pathname}${hash}`)
   }
 
-  /** Left and right arrows move between the two tabs, as the ARIA tabs pattern expects. */
+  /** Left and right arrows move between the tabs, as the ARIA tabs pattern expects. */
   const onKeyDown = (event) => {
     if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return
-    const next = tabList[(tabList.findIndex((t) => t.id === tab) + 1) % tabList.length].id
+    const step = event.key === 'ArrowRight' ? 1 : tabList.length - 1
+    const next = tabList[(tabList.findIndex((t) => t.id === tab) + step) % tabList.length].id
     choose(next)
     document.getElementById(`venues-tab-${next}`)?.focus()
   }
@@ -103,6 +114,42 @@ export default function WhereToPlayPage() {
           </div>
         </div>
       </section>
+
+      <div
+        id="venues-panel-all"
+        role="tabpanel"
+        aria-labelledby="venues-tab-all"
+        hidden={tab !== 'all'}
+      >
+        {[all.majors, all.local].map((group, i) => (
+          <section
+            key={group.heading}
+            className="venues-state"
+            aria-labelledby={`venues-all-${i}-heading`}
+          >
+            <div className="container">
+              <div className="venues-state__head">
+                <h2 id={`venues-all-${i}-heading`} className="venues-state__heading">
+                  {group.heading}
+                </h2>
+                <span className="venues-state__count">{group.countLabel(group.list.length)}</span>
+              </div>
+              <p className="venues-state__intro">{group.intro}</p>
+              <ul className="venues-grid">
+                {group === all.majors
+                  ? all.majors.list.map((major) => <MajorCard key={major.code} major={major} />)
+                  : all.local.list.map((item) =>
+                      item.kind === 'room' ? (
+                        <VenueCard key={item.id} venue={item} />
+                      ) : (
+                        <LeagueCard key={item.id} league={item} />
+                      ),
+                    )}
+              </ul>
+            </div>
+          </section>
+        ))}
+      </div>
 
       <div
         id="venues-panel-rooms"
@@ -215,7 +262,7 @@ export default function WhereToPlayPage() {
                         </span>
                         <span className="venues-states__name">{state.name}</span>
                         <span className="venues-states__count">
-                          {leagues.countLabel(state.leagues.length)}
+                          {leagues.stateCountLabel(state)}
                         </span>
                       </a>
                     </li>
@@ -238,13 +285,14 @@ export default function WhereToPlayPage() {
                 <h2 id={`leagues-${state.code}-heading`} className="venues-state__heading">
                   {leagues.stateHeading(state)}
                 </h2>
-                <span className="venues-state__count">
-                  {leagues.countLabel(state.leagues.length)}
-                </span>
+                <span className="venues-state__count">{leagues.stateCountLabel(state)}</span>
               </div>
               <ul className="venues-grid">
                 {state.leagues.map((league) => (
                   <LeagueCard key={league.id} league={league} />
+                ))}
+                {state.venues.map((venue) => (
+                  <VenueCard key={venue.id} venue={venue} />
                 ))}
               </ul>
             </div>

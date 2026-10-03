@@ -1,7 +1,9 @@
-// Contract: the Where to Play tab lands on a page that lists every venue the
-// series are dealt at, grouped by state, each with its street address, the
-// operators that play there and a link out — readable from the static HTML.
-import { describe, it, expect } from 'vitest'
+// Contract: the Where to Play tab lands on a page that lists every casino and
+// dedicated poker room, grouped by state, each with its street address, the
+// operators that play there and a link out, with the pub leagues and the
+// pubs, clubs and hotels that host series on their own tab — readable from
+// the static HTML.
+import { describe, it, expect, afterEach } from 'vitest'
 import { existsSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { render, screen, within, fireEvent } from '@testing-library/react'
@@ -9,7 +11,7 @@ import { MemoryRouter } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
 import { axe, toHaveNoViolations } from 'jest-axe'
 import WhereToPlayPage from '../pages/WhereToPlayPage.jsx'
-import { whereToPlay, STATES } from '../content/whereToPlay.js'
+import { whereToPlay, STATES, venues } from '../content/whereToPlay.js'
 import { calendarPage } from '../content/calendarPage.js'
 import { ROUTES } from '../routes.js'
 import { site } from '../config/site.config.js'
@@ -27,6 +29,16 @@ const renderPage = () =>
       </MemoryRouter>
     </HelmetProvider>,
   )
+
+// A tab click writes its hash to the URL; start each test from a bare path.
+afterEach(() => window.history.replaceState(null, '', '/'))
+
+/** Render the page and switch to one of its tabs. */
+const renderTab = (label) => {
+  const view = renderPage()
+  fireEvent.click(screen.getByRole('tab', { name: new RegExp(label) }))
+  return view
+}
 
 describe('whereToPlay content', () => {
   it('has venues in every listed state, sorted by name, each with a full address', () => {
@@ -97,7 +109,7 @@ describe('WhereToPlayPage', () => {
   })
 
   it('renders a section per state with every venue, its address and links', () => {
-    renderPage()
+    renderTab(whereToPlay.tabs.rooms)
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(whereToPlay.title)
     const jump = screen.getByRole('navigation', { name: whereToPlay.jumpLabel })
     for (const state of whereToPlay.states) {
@@ -121,7 +133,7 @@ describe('WhereToPlayPage', () => {
   })
 
   it('shows each operator’s mark in its own colours and links to its site', () => {
-    const { container } = renderPage()
+    const { container } = renderTab(whereToPlay.tabs.rooms)
     for (const state of whereToPlay.states) {
       for (const venue of state.venues) {
         for (const operator of venue.operators) {
@@ -140,7 +152,7 @@ describe('WhereToPlayPage', () => {
   })
 
   it('leaves the operators line off a room with no operator on the calendar', () => {
-    renderPage()
+    renderTab(whereToPlay.tabs.rooms)
     const bare = whereToPlay.states
       .flatMap((state) => state.venues)
       .filter((venue) => venue.operators.length === 0)
@@ -151,12 +163,13 @@ describe('WhereToPlayPage', () => {
     }
   })
 
-  it('opens on poker rooms and switches to the leagues with the tab', () => {
+  it('opens on all and switches to the leagues with the tab', () => {
     renderPage()
     const tabs = screen.getByRole('tablist', { name: whereToPlay.tabs.label })
-    const rooms = within(tabs).getByRole('tab', { name: new RegExp(whereToPlay.tabs.rooms) })
+    expect(within(tabs).getAllByRole('tab')).toHaveLength(3)
+    const all = within(tabs).getByRole('tab', { name: new RegExp(whereToPlay.tabs.all) })
     const leagues = within(tabs).getByRole('tab', { name: new RegExp(whereToPlay.tabs.leagues) })
-    expect(rooms).toHaveAttribute('aria-selected', 'true')
+    expect(all).toHaveAttribute('aria-selected', 'true')
     expect(
       screen.queryByRole('heading', { level: 2, name: whereToPlay.leagues.heading }),
     ).toBeNull()
@@ -172,6 +185,35 @@ describe('WhereToPlayPage', () => {
       ).toBeGreaterThan(0)
     }
     expect(document.getElementById('venues-panel-rooms')).toHaveAttribute('hidden')
+    expect(document.getElementById('venues-panel-all')).toHaveAttribute('hidden')
+  })
+
+  it("opens the rooms tab on a state's link", () => {
+    window.history.replaceState(null, '', `/where-to-play#${whereToPlay.states[0].code}`)
+    try {
+      renderPage()
+      expect(screen.getByRole('tab', { name: new RegExp(whereToPlay.tabs.rooms) })).toHaveAttribute(
+        'aria-selected',
+        'true',
+      )
+    } finally {
+      window.history.replaceState(null, '', '/')
+    }
+  })
+
+  it('lists the Majors, each linking to its tour page, then the Local Circuit', () => {
+    renderPage()
+    const { majors, local } = whereToPlay.all
+    const majorsRegion = screen.getByRole('region', { name: majors.heading })
+    for (const major of majors.list) {
+      expect(
+        within(majorsRegion).getByRole('link', { name: `${majors.linkLabel}: ${major.name}` }),
+      ).toHaveAttribute('href', major.href)
+    }
+    const localRegion = screen.getByRole('region', { name: local.heading })
+    for (const item of local.list) {
+      expect(within(localRegion).getByRole('heading', { level: 3, name: item.name })).toBeTruthy()
+    }
   })
 
   it("opens the leagues tab on a state's leagues link, and stays there", () => {
@@ -196,7 +238,8 @@ describe('WhereToPlayPage', () => {
     expect(states.length).toBeGreaterThan(1)
     expect(states.map((s) => s.code)).toEqual(order.filter((c) => states.some((s) => s.code === c)))
     for (const state of states) {
-      expect(state.leagues.length, state.code).toBeGreaterThan(0)
+      expect(state.leagues.length + state.venues.length, state.code).toBeGreaterThan(0)
+      for (const venue of state.venues) expect(venue.state, venue.name).toBe(state.code)
       for (const league of state.leagues) expect(league.states, league.name).toContain(state.code)
       const expected = whereToPlay.leagues.list.filter((l) => l.states.includes(state.code))
       expect(state.leagues.map((l) => l.name)).toEqual(expected.map((l) => l.name))
@@ -221,5 +264,44 @@ describe('WhereToPlayPage', () => {
   it('renders with no axe violations', async () => {
     const { container } = renderPage()
     expect(await axe(container)).toHaveNoViolations()
+  })
+})
+
+describe('Where to Play all tab', () => {
+  it('makes every calendar operator a Major, and only them', () => {
+    const majors = whereToPlay.all.majors.list
+    expect(majors.map((m) => m.code).sort()).toEqual([...tourCodes].sort())
+    for (const major of majors) expect(major.count, major.code).toBeGreaterThan(0)
+  })
+
+  it('puts every room and non-calendar league in the Local Circuit, once', () => {
+    const names = whereToPlay.all.local.list.map((item) => item.name)
+    expect(new Set(names).size).toBe(names.length)
+    expect(names).toEqual([...names].sort((a, b) => a.localeCompare(b, 'en-AU')))
+    for (const league of whereToPlay.leagues.list) {
+      expect(names.includes(league.name), league.name).toBe(!league.code)
+    }
+    expect(names).toContain('Crown Perth')
+  })
+})
+
+describe('Where to Play rooms tab', () => {
+  it('lists only casinos and dedicated poker rooms; pubs, clubs and hotels go with the leagues', () => {
+    const rooms = whereToPlay.states.flatMap((state) => state.venues.map((venue) => venue.name))
+    const others = whereToPlay.leagues.states.flatMap((state) => state.venues.map((v) => v.name))
+    for (const name of ['Crown Melbourne', 'The Star Sydney', 'Club Marconi', 'PlayLive Melbourne'])
+      expect(rooms).toContain(name)
+    for (const name of [
+      'Highways Springvale',
+      'Bexley RSL',
+      'Blackbutt Hotel',
+      'Churchills Sports Bar',
+    ]) {
+      expect(rooms).not.toContain(name)
+      expect(others).toContain(name)
+    }
+    // Every series venue is on exactly one of the two tabs.
+    expect(new Set([...rooms, ...others]).size).toBe(rooms.length + others.length)
+    for (const venue of venues) expect([...rooms, ...others], venue.name).toContain(venue.name)
   })
 })

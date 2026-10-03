@@ -11,6 +11,7 @@
 
 import { calendarPage } from './calendarPage.js'
 import { tourBrands } from './tourBrands.js'
+import { festivals } from './festivals.js'
 
 /**
  * @typedef {object} Venue
@@ -22,6 +23,8 @@ import { tourBrands } from './tourBrands.js'
  * @property {string} postcode
  * @property {string[]} tours   codes in calendarPage.tours, first is the main operator
  * @property {string} [website] the venue's own site; omitted when the listing had none
+ * @property {boolean} [room]   a casino or dedicated poker room; the rest (pubs,
+ *                              clubs and hotels) are listed with the leagues
  */
 
 /** The states that have a venue, in the order the page lists them. */
@@ -94,6 +97,7 @@ const rows = [
     state: 'NSW',
     postcode: '2176',
     tours: ['PALACE'],
+    room: true,
   },
   {
     name: 'Club Willoughby',
@@ -140,6 +144,7 @@ const rows = [
     state: 'NSW',
     postcode: '2217',
     tours: ['KINGS'],
+    room: true,
   },
   {
     name: 'St Johns Park Bowling Club',
@@ -149,6 +154,7 @@ const rows = [
     state: 'NSW',
     postcode: '2176',
     tours: ['AURUM'],
+    room: true,
   },
   {
     name: 'The Star Sydney',
@@ -158,6 +164,7 @@ const rows = [
     state: 'NSW',
     postcode: '2009',
     tours: ['STAR', 'APL'],
+    room: true,
   },
   {
     name: 'Warilla Bowls and Recreation Club',
@@ -216,6 +223,7 @@ const rows = [
     state: 'QLD',
     postcode: '4207',
     tours: ['QUEENBS'],
+    room: true,
     website: 'https://www.queenbs.poker/',
   },
   {
@@ -246,6 +254,7 @@ const rows = [
     state: 'QLD',
     postcode: '4218',
     tours: ['STAR'],
+    room: true,
     website: 'https://www.star.com.au/goldcoast/jupiters-gold-coast',
   },
   {
@@ -256,6 +265,7 @@ const rows = [
     state: 'QLD',
     postcode: '4810',
     tours: ['APL'],
+    room: true,
   },
   {
     name: 'Wantima Country Club',
@@ -296,6 +306,7 @@ const rows = [
     state: 'SA',
     postcode: '5006',
     tours: ['STACKED'],
+    room: true,
     website: 'https://stackedsocial.com.au/',
   },
   {
@@ -329,6 +340,7 @@ const rows = [
     state: 'VIC',
     postcode: '3006',
     tours: ['CROWN', 'APT'],
+    room: true,
   },
   {
     name: 'Crowne Plaza Melbourne Carlton',
@@ -368,6 +380,7 @@ const rows = [
     state: 'VIC',
     postcode: '3205',
     tours: ['PLAYLIVE', 'MGA'],
+    room: true,
     website: 'https://playlive.melbourne/',
   },
 ]
@@ -884,15 +897,16 @@ export const whereToPlay = {
   seo: {
     title: 'Where to Play Poker in Australia: Rooms & Venues by State',
     description:
-      'Where to play poker in Australia, by state: casino poker rooms, card clubs and every venue hosting a series on the calendar, with addresses, operators and links.',
+      'Where to play poker in Australia, by state: casino poker rooms and card clubs with addresses, operators and links, plus the pub and club poker leagues.',
   },
   eyebrow: 'Where to play',
   title: 'Poker rooms and venues across Australia',
   intro:
-    'Casino poker rooms, card clubs and every venue that hosts a series on the calendar, grouped by state, with the address and a link to the venue. Switch to poker leagues for free and low buy-in games in pubs.',
-  /** The switch between the rooms list and the leagues list; rooms shows first. */
+    'The Majors that run the series on our calendar, and the Local Circuit of casino rooms, card clubs and pub leagues. Switch to poker rooms or poker leagues to browse by state.',
+  /** The switch between the three lists; all shows first. */
   tabs: {
-    label: 'Show poker rooms or poker leagues',
+    label: 'Show everyone, poker rooms or poker leagues',
+    all: 'All',
     rooms: 'Poker rooms',
     leagues: 'Poker leagues',
   },
@@ -904,12 +918,12 @@ export const whereToPlay = {
   operatorsLabel: 'Series by',
   visitLabel: 'Visit website',
   /** @param {number} count */
-  countLabel: (count) => `${count} ${count === 1 ? 'venue' : 'venues'}`,
+  countLabel: (count) => `${count} ${count === 1 ? 'room' : 'rooms'}`,
   /** @type {{ code: string, name: string, venues: VenueCard[] }[]} */
   states: STATES.map((state) => ({
     ...state,
     venues: [
-      ...rows.filter((venue) => venue.state === state.code).map(toCard),
+      ...rows.filter((venue) => venue.state === state.code && venue.room).map(toCard),
       ...rooms.filter((room) => room.state === state.code).map(roomCard),
     ].sort((a, b) => a.name.localeCompare(b.name, 'en-AU')),
   })).filter((state) => state.venues.length > 0),
@@ -917,7 +931,7 @@ export const whereToPlay = {
     id: 'leagues',
     heading: 'Poker leagues',
     intro:
-      'Free and low buy-in poker in pubs and clubs, most nights of the week. Leagues move between venues often, so each one links to its own list of where it plays.',
+      'Free and low buy-in poker in pubs and clubs, most nights of the week, and the pubs, clubs and hotels that host series. Leagues move between venues often, so each one links to its own list of where it plays.',
     /** What a league is, for a reader who has only played at a casino or not at all. */
     explainer: {
       heading: 'What is a poker league?',
@@ -931,6 +945,15 @@ export const whereToPlay = {
     findLabel: 'Find a game',
     /** @param {number} count */
     countLabel: (count) => `${count} ${count === 1 ? 'league' : 'leagues'}`,
+    /** A state's count: its leagues, then its pub and club venues if any. */
+    stateCountLabel: (state) =>
+      [
+        `${state.leagues.length} ${state.leagues.length === 1 ? 'league' : 'leagues'}`,
+        state.venues.length > 0 &&
+          `${state.venues.length} ${state.venues.length === 1 ? 'venue' : 'venues'}`,
+      ]
+        .filter(Boolean)
+        .join(', '),
     /** @type {LeagueCard[]} */
     list: leagueRows.map(leagueCard).sort((a, b) => a.name.localeCompare(b.name, 'en-AU')),
     jumpLabel: 'Jump to a state’s leagues',
@@ -939,9 +962,56 @@ export const whereToPlay = {
   },
 }
 
+// The all tab: the Majors, every operator with series on the calendar (and so
+// a tour page and a footer link), then the Local Circuit, every room and
+// league that is not one of them. A Major that also runs pub leagues (Kings,
+// APL) is listed once, as a Major.
+whereToPlay.all = {
+  id: 'all',
+  majors: {
+    heading: 'Majors',
+    intro:
+      'The tours and rooms that run the big festival series. Every one of their stops is on the Australian Poker Calendar.',
+    /** @param {number} count */
+    countLabel: (count) => `${count} ${count === 1 ? 'operator' : 'operators'}`,
+    /** @param {number} count */
+    seriesLabel: (count) => `${count} series on the calendar`,
+    linkLabel: 'See their series',
+    list: calendarPage.tours
+      .map((tour) => {
+        const played = new Set(rows.filter((v) => v.tours.includes(tour.code)).map((v) => v.state))
+        return {
+          code: tour.code,
+          name: tour.name,
+          href: tour.href,
+          count: festivals.filter((festival) => festival.tour === tour.code).length,
+          states: STATES.map((state) => state.code).filter((code) => played.has(code)),
+        }
+      })
+      .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name, 'en-AU')),
+  },
+  local: {
+    heading: 'Local Circuit',
+    intro:
+      'Casino poker rooms, card clubs and pub leagues running regular games, from free league nights to daily tournaments and cash.',
+    /** @param {number} count */
+    countLabel: (count) => `${count} rooms and leagues`,
+    /** Rooms and leagues in one list, by name; `kind` picks the card. */
+    list: [
+      ...rooms.map((room) => ({ kind: 'room', ...roomCard(room) })),
+      ...whereToPlay.leagues.list
+        .filter((league) => !league.code)
+        .map((league) => ({ kind: 'league', ...league })),
+    ].sort((a, b) => a.name.localeCompare(b.name, 'en-AU')),
+  },
+}
+
 // The leagues tab, one section per state in the rooms tab's order: a league
-// is listed under every state it plays in, and a state with none is left out.
+// is listed under every state it plays in, then the pubs, clubs and hotels
+// there that host a series but are not poker rooms. A state with neither is
+// left out.
 whereToPlay.leagues.states = STATES.map((state) => ({
   ...state,
   leagues: whereToPlay.leagues.list.filter((league) => league.states.includes(state.code)),
-})).filter((state) => state.leagues.length > 0)
+  venues: venues.filter((venue) => venue.state === state.code && !venue.room),
+})).filter((state) => state.leagues.length + state.venues.length > 0)

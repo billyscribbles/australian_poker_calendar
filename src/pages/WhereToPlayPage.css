@@ -295,10 +295,11 @@
  * text for screen readers and crawlers. Cities fall into two columns. */
 @media (max-width: 560px) {
   .venues-tabs {
-    gap: 24px;
+    gap: 20px;
   }
   .venues-tabs__tab {
-    font-size: 19px;
+    flex-shrink: 0;
+    font-size: 17px;
   }
   .venues-states__tile {
     padding: 12px;
