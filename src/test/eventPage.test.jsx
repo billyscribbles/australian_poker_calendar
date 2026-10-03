@@ -504,13 +504,15 @@ describe('EventPage — every other series on the calendar', () => {
     )
   })
 
+  // One axe pass per pending series, dozens in a row: well past Vitest's
+  // 5s default once the suite runs in parallel on a two-core CI runner.
   it('renders every derived page with no axe violations', async () => {
     for (const festival of pending) {
       const { container, unmount } = renderPath(festival.href)
       expect(await axe(container)).toHaveNoViolations()
       unmount()
     }
-  })
+  }, 60_000)
 })
 
 describe('EventPage — unknown path', () => {
