@@ -38,49 +38,51 @@
 
 **New**
 
-| file | responsibility |
-| --- | --- |
-| `server/sanitize.mjs` | `sanitizeHtml(html)`: allowlist rebuild of TinyMCE output |
-| `server/content.mjs` | `createContentStore({ dir })`: stories, shorts, media paths, version, `publicContent()` |
-| `server/media.mjs` | `sniff()`, `saveUpload()` (streamed), `createMediaHandler()` (Range) |
-| `server/render.mjs` | `createRenderer()`: live pages, sitemap, preview, version cache |
-| `scripts/lib/document.mjs` | `createDocumentBuilder()`, `withRuntimeContent()`, `stripScripts()`, the two assertions |
-| `src/lib/runtimeContent.js` | module-state holder plus the inline JSON reader |
-| `src/lib/dates.js` | `formatShortDate`, `formatLongDate`, locale-free |
-| `src/components/ShortPlayer.jsx` + `.css` | the `<dialog>` overlay |
-| `src/pages/StoryPage.jsx` + `.css` | one story |
-| `src/pages/StoriesPage.jsx` + `.css` | the index |
-| `admin/publish.js`, `admin/publish.css` | the Publish section's views, editors, uploads |
-| tests: `sanitize.test.js`, `contentStore.test.js`, `media.test.js`, `document.test.js`, `render.test.js`, `storyPage.test.jsx` | |
+| file                                                                                                                           | responsibility                                                                          |
+| ------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- |
+| `server/sanitize.mjs`                                                                                                          | `sanitizeHtml(html)`: allowlist rebuild of TinyMCE output                               |
+| `server/content.mjs`                                                                                                           | `createContentStore({ dir })`: stories, shorts, media paths, version, `publicContent()` |
+| `server/media.mjs`                                                                                                             | `sniff()`, `saveUpload()` (streamed), `createMediaHandler()` (Range)                    |
+| `server/render.mjs`                                                                                                            | `createRenderer()`: live pages, sitemap, preview, version cache                         |
+| `scripts/lib/document.mjs`                                                                                                     | `createDocumentBuilder()`, `withRuntimeContent()`, `stripScripts()`, the two assertions |
+| `src/lib/runtimeContent.js`                                                                                                    | module-state holder plus the inline JSON reader                                         |
+| `src/lib/dates.js`                                                                                                             | `formatShortDate`, `formatLongDate`, locale-free                                        |
+| `src/components/ShortPlayer.jsx` + `.css`                                                                                      | the `<dialog>` overlay                                                                  |
+| `src/pages/StoryPage.jsx` + `.css`                                                                                             | one story                                                                               |
+| `src/pages/StoriesPage.jsx` + `.css`                                                                                           | the index                                                                               |
+| `admin/publish.js`, `admin/publish.css`                                                                                        | the Publish section's views, editors, uploads                                           |
+| tests: `sanitize.test.js`, `contentStore.test.js`, `media.test.js`, `document.test.js`, `render.test.js`, `storyPage.test.jsx` |                                                                                         |
 
 **Modified**
 
-| file | change |
-| --- | --- |
-| `server/store.mjs` | `content: createContentStore({ dir })` on the returned object |
-| `server/index.mjs` | media, live sitemap, live pages, renderer passed to admin |
-| `scripts/prerender.mjs` | use the extracted builder |
-| `admin/handler.mjs` | publishing API, media upload, preview, TinyMCE files, `publishing` in status |
-| `admin/index.html`, `admin/app.js` | load `publish.js`/`publish.css`; Publish nav group; view dispatch; editor-safe refresh |
-| `src/routes.js` | `/stories`, `/stories/:slug` (`dynamic`), param matching |
-| `src/entry-prerender.jsx`, `src/main.jsx` | export / read runtime content |
-| `src/lib/seo.jsx` | `type` prop for `og:type` |
-| `src/lib/structuredData.js` | `articleLd()` |
-| `src/content/stories.js`, `src/content/shorts.js` | strings; `items` → `demo` |
-| `src/components/Stories.jsx`, `Stories.css`, `Shorts.jsx`, `Shorts.css` | published cards |
-| `vite.config.js` | dev: inject runtime JSON, serve `/media` |
-| `src/test/home.test.jsx`, `routes.test.js`, `admin.test.js` | updated contracts |
-| `CLAUDE.md`, `docs/ENVIRONMENTS.md`, `package.json` | docs; dependency |
+| file                                                                    | change                                                                                 |
+| ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `server/store.mjs`                                                      | `content: createContentStore({ dir })` on the returned object                          |
+| `server/index.mjs`                                                      | media, live sitemap, live pages, renderer passed to admin                              |
+| `scripts/prerender.mjs`                                                 | use the extracted builder                                                              |
+| `admin/handler.mjs`                                                     | publishing API, media upload, preview, TinyMCE files, `publishing` in status           |
+| `admin/index.html`, `admin/app.js`                                      | load `publish.js`/`publish.css`; Publish nav group; view dispatch; editor-safe refresh |
+| `src/routes.js`                                                         | `/stories`, `/stories/:slug` (`dynamic`), param matching                               |
+| `src/entry-prerender.jsx`, `src/main.jsx`                               | export / read runtime content                                                          |
+| `src/lib/seo.jsx`                                                       | `type` prop for `og:type`                                                              |
+| `src/lib/structuredData.js`                                             | `articleLd()`                                                                          |
+| `src/content/stories.js`, `src/content/shorts.js`                       | strings; `items` → `demo`                                                              |
+| `src/components/Stories.jsx`, `Stories.css`, `Shorts.jsx`, `Shorts.css` | published cards                                                                        |
+| `vite.config.js`                                                        | dev: inject runtime JSON, serve `/media`                                               |
+| `src/test/home.test.jsx`, `routes.test.js`, `admin.test.js`             | updated contracts                                                                      |
+| `CLAUDE.md`, `docs/ENVIRONMENTS.md`, `package.json`                     | docs; dependency                                                                       |
 
 ---
 
 ### Task 1: HTML sanitiser
 
 **Files:**
+
 - Create: `server/sanitize.mjs`
 - Test: `src/test/sanitize.test.js`
 
 **Interfaces:**
+
 - Produces: `sanitizeHtml(html: string): string`. Pure, synchronous, never throws on any string input.
 
 - [ ] **Step 1: Write the failing tests**
@@ -135,7 +137,9 @@ describe('sanitizeHtml', () => {
   })
 
   it('keeps style only when it is a text-align rule, and numbers only in size attributes', () => {
-    expect(sanitizeHtml('<p style="text-align: center;">x</p>')).toBe('<p style="text-align: center;">x</p>')
+    expect(sanitizeHtml('<p style="text-align: center;">x</p>')).toBe(
+      '<p style="text-align: center;">x</p>',
+    )
     expect(sanitizeHtml('<p style="text-align:center;color:red">x</p>')).toBe('<p>x</p>')
     expect(sanitizeHtml('<img src="/media/a1.webp" alt="" width="12px" height="7" />')).toBe(
       '<img src="/media/a1.webp" alt="" height="7" />',
@@ -182,14 +186,49 @@ Expected: FAIL, "Failed to load url ../../server/sanitize.mjs".
 //   - output is balanced: open tags are closed at the end, stray closers go
 
 const ALLOWED = new Set([
-  'p', 'h2', 'h3', 'h4', 'strong', 'em', 'u', 's', 'a', 'ul', 'ol', 'li', 'blockquote',
-  'img', 'figure', 'figcaption', 'br', 'hr', 'table', 'thead', 'tbody', 'tr', 'th', 'td',
-  'pre', 'code', 'sub', 'sup',
+  'p',
+  'h2',
+  'h3',
+  'h4',
+  'strong',
+  'em',
+  'u',
+  's',
+  'a',
+  'ul',
+  'ol',
+  'li',
+  'blockquote',
+  'img',
+  'figure',
+  'figcaption',
+  'br',
+  'hr',
+  'table',
+  'thead',
+  'tbody',
+  'tr',
+  'th',
+  'td',
+  'pre',
+  'code',
+  'sub',
+  'sup',
 ])
 const VOID = new Set(['br', 'hr', 'img'])
 // Their contents are not text to keep.
 const DROP_WITH_CONTENT = new Set([
-  'script', 'style', 'iframe', 'object', 'embed', 'noscript', 'template', 'svg', 'math', 'title', 'head',
+  'script',
+  'style',
+  'iframe',
+  'object',
+  'embed',
+  'noscript',
+  'template',
+  'svg',
+  'math',
+  'title',
+  'head',
 ])
 
 const ATTRS = {
@@ -206,7 +245,8 @@ const HREF_OK = /^(https?:\/\/[^\s"'<>]+|mailto:[^\s"'<>]+|\/(?!\/)[^\s"'<>]*|#[
 const TEXT_ALIGN = /^\s*text-align\s*:\s*(left|right|center|justify)\s*;?\s*$/i
 const DIGITS = /^\d+$/
 
-const TOKEN = /<!--[\s\S]*?-->|<!\[CDATA\[[\s\S]*?\]\]>|<\/?[a-zA-Z][^>]*>|<[^a-zA-Z/!][^<]*|[^<]+|</g
+const TOKEN =
+  /<!--[\s\S]*?-->|<!\[CDATA\[[\s\S]*?\]\]>|<\/?[a-zA-Z][^>]*>|<[^a-zA-Z/!][^<]*|[^<]+|</g
 const ATTR = /([a-zA-Z_:][-a-zA-Z0-9_:.]*)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'>]+)))?/g
 
 function escapeText(text) {
@@ -324,11 +364,13 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
 ### Task 2: Content store
 
 **Files:**
+
 - Create: `server/content.mjs`
 - Modify: `server/store.mjs` (the header comment and the returned object)
 - Test: `src/test/contentStore.test.js`
 
 **Interfaces:**
+
 - Consumes: `sanitizeHtml` from Task 1.
 - Produces: `createContentStore({ dir })` returning:
   - `dir`, `mediaDir` (strings), `version` (getter, number, starts at 1 and increments on every write)
@@ -384,7 +426,11 @@ describe('slugify', () => {
 describe('stories', () => {
   it('creates a draft with a slug from the title, and suffixes a clash', () => {
     const a = content.addStory({ title: 'Big Night at Crown' })
-    expect(a).toMatchObject({ slug: 'big-night-at-crown', status: 'draft', title: 'Big Night at Crown' })
+    expect(a).toMatchObject({
+      slug: 'big-night-at-crown',
+      status: 'draft',
+      title: 'Big Night at Crown',
+    })
     expect(a.date).toMatch(/^\d{4}-\d{2}-\d{2}$/)
     expect(a.id).toMatch(/^[a-z0-9]+$/)
     const b = content.addStory({ title: 'Big Night at Crown' })
@@ -433,7 +479,11 @@ describe('stories', () => {
   it('refuses to publish without a title and hero, then publishes and locks the slug', () => {
     const { id } = content.addStory({})
     expect(content.publishStory(id)).toEqual({ missing: ['title', 'heroImage'] })
-    content.updateStory(id, { title: 'Ready', heroImage: media('a.webp'), heroThumb: media('b.webp') })
+    content.updateStory(id, {
+      title: 'Ready',
+      heroImage: media('a.webp'),
+      heroThumb: media('b.webp'),
+    })
     const { record } = content.publishStory(id)
     expect(record.status).toBe('published')
     expect(record.publishedAt).toBeTruthy()
@@ -491,7 +541,12 @@ describe('publicContent', () => {
     content.addStory({ title: 'Draft', date: '2026-12-01', heroImage: media('3.webp') })
     content.publishStory(s1.id)
     content.publishStory(s2.id)
-    const sh = content.addShort({ title: 'Clip', video: media('v.webm'), poster: media('p.webp'), duration: 12 })
+    const sh = content.addShort({
+      title: 'Clip',
+      video: media('v.webm'),
+      poster: media('p.webp'),
+      duration: 12,
+    })
     content.publishShort(sh.id)
     const pub = content.publicContent()
     expect(pub.stories.map((s) => s.title)).toEqual(['Newer', 'Older'])
@@ -527,7 +582,10 @@ describe('store wiring', () => {
     expect(store.content.mediaDir).toBe(join(dir, 'media'))
     expect(store.content.listStories()).toEqual([])
     const draft = store.content.addStory({ title: 'Draft' })
-    expect(store.content.toPublicStory(draft)).toMatchObject({ slug: 'draft', href: '/stories/draft' })
+    expect(store.content.toPublicStory(draft)).toMatchObject({
+      slug: 'draft',
+      href: '/stories/draft',
+    })
   })
 })
 ```
@@ -617,7 +675,9 @@ const newId = () => `${Date.now().toString(36)}${randomBytes(3).toString('hex')}
  * @param {object} [options]
  * @param {string} [options.dir]  DATA_DIR; defaults like server/store.mjs
  */
-export function createContentStore({ dir = process.env.DATA_DIR || join(process.cwd(), '.data') } = {}) {
+export function createContentStore({
+  dir = process.env.DATA_DIR || join(process.cwd(), '.data'),
+} = {}) {
   const mediaDir = join(dir, 'media')
   let version = 1
 
@@ -656,7 +716,8 @@ export function createContentStore({ dir = process.env.DATA_DIR || join(process.
         if (typeof fields[key] === 'string') record[key] = fields[key].trim().slice(0, max)
       }
       for (const key of spec.media) {
-        if (typeof fields[key] === 'string') record[key] = MEDIA_URL.test(fields[key]) ? fields[key] : ''
+        if (typeof fields[key] === 'string')
+          record[key] = MEDIA_URL.test(fields[key]) ? fields[key] : ''
       }
       if (kind === 'story') {
         if (typeof fields.body === 'string') record.body = sanitizeHtml(fields.body)
@@ -837,8 +898,8 @@ Header comment tree becomes:
 And the return line at the bottom:
 
 ```js
-  const content = createContentStore({ dir })
-  return { dir, content, addEnquiry, listEnquiries, updateEnquiry, recordView, traffic, flush }
+const content = createContentStore({ dir })
+return { dir, content, addEnquiry, listEnquiries, updateEnquiry, recordView, traffic, flush }
 ```
 
 - [ ] **Step 5: Run the tests**
@@ -861,10 +922,12 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
 ### Task 3: Media: streamed uploads and Range serving
 
 **Files:**
+
 - Create: `server/media.mjs`
 - Test: `src/test/media.test.js`
 
 **Interfaces:**
+
 - Produces:
   - `LIMITS = { image: 10485760, video: 314572800 }`
   - `sniff(buffer): { kind: 'image'|'video', ext: string, type: string } | null` (needs 12 bytes)
@@ -887,8 +950,15 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { createMediaHandler, saveUpload, sniff, LIMITS } from '../../server/media.mjs'
 
-const PNG = Buffer.concat([Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]), Buffer.alloc(40, 1)])
-const MP4 = Buffer.concat([Buffer.from([0, 0, 0, 0x18]), Buffer.from('ftypmp42'), Buffer.alloc(40, 2)])
+const PNG = Buffer.concat([
+  Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]),
+  Buffer.alloc(40, 1),
+])
+const MP4 = Buffer.concat([
+  Buffer.from([0, 0, 0, 0x18]),
+  Buffer.from('ftypmp42'),
+  Buffer.alloc(40, 2),
+])
 const WEBM = Buffer.concat([Buffer.from([0x1a, 0x45, 0xdf, 0xa3]), Buffer.alloc(40, 3)])
 
 let dir, server, base
@@ -931,7 +1001,9 @@ describe('sniff', () => {
     expect(sniff(MP4)).toMatchObject({ kind: 'video', ext: 'mp4' })
     expect(sniff(WEBM)).toMatchObject({ kind: 'video', ext: 'webm' })
     expect(sniff(Buffer.from('RIFF....WEBPVP8 '))).toMatchObject({ ext: 'webp' })
-    expect(sniff(Buffer.from([0xff, 0xd8, 0xff, 0xe0, 0, 0, 0, 0, 0, 0, 0, 0]))).toMatchObject({ ext: 'jpg' })
+    expect(sniff(Buffer.from([0xff, 0xd8, 0xff, 0xe0, 0, 0, 0, 0, 0, 0, 0, 0]))).toMatchObject({
+      ext: 'jpg',
+    })
     expect(sniff(Buffer.from('hello world!'))).toBeNull()
     expect(sniff(Buffer.from('ab'))).toBeNull()
   })
@@ -1044,23 +1116,56 @@ Expected: FAIL, cannot load `server/media.mjs`.
 // without this every short is a blank player on iPhone.
 
 import { randomBytes } from 'node:crypto'
-import { createReadStream, createWriteStream, existsSync, mkdirSync, renameSync, statSync, unlinkSync } from 'node:fs'
+import {
+  createReadStream,
+  createWriteStream,
+  existsSync,
+  mkdirSync,
+  renameSync,
+  statSync,
+  unlinkSync,
+} from 'node:fs'
 import { extname, join } from 'node:path'
 
 export const LIMITS = { image: 10 * 1024 * 1024, video: 300 * 1024 * 1024 }
 
 const TYPES = [
-  { kind: 'image', ext: 'png', type: 'image/png', test: (b) => b[0] === 0x89 && b[1] === 0x50 && b[2] === 0x4e && b[3] === 0x47 },
-  { kind: 'image', ext: 'jpg', type: 'image/jpeg', test: (b) => b[0] === 0xff && b[1] === 0xd8 && b[2] === 0xff },
-  { kind: 'image', ext: 'gif', type: 'image/gif', test: (b) => b.toString('ascii', 0, 4) === 'GIF8' },
+  {
+    kind: 'image',
+    ext: 'png',
+    type: 'image/png',
+    test: (b) => b[0] === 0x89 && b[1] === 0x50 && b[2] === 0x4e && b[3] === 0x47,
+  },
+  {
+    kind: 'image',
+    ext: 'jpg',
+    type: 'image/jpeg',
+    test: (b) => b[0] === 0xff && b[1] === 0xd8 && b[2] === 0xff,
+  },
+  {
+    kind: 'image',
+    ext: 'gif',
+    type: 'image/gif',
+    test: (b) => b.toString('ascii', 0, 4) === 'GIF8',
+  },
   {
     kind: 'image',
     ext: 'webp',
     type: 'image/webp',
     test: (b) => b.toString('ascii', 0, 4) === 'RIFF' && b.toString('ascii', 8, 12) === 'WEBP',
   },
-  { kind: 'video', ext: 'mp4', type: 'video/mp4', test: (b) => b.toString('ascii', 4, 8) === 'ftyp' },
-  { kind: 'video', ext: 'webm', type: 'video/webm', test: (b) => b[0] === 0x1a && b[1] === 0x45 && b[2] === 0xdf && b[3] === 0xa3 },
+  {
+    kind: 'video',
+    ext: 'mp4',
+    type: 'video/mp4',
+    test: (b) => b.toString('ascii', 4, 8) === 'ftyp',
+  },
+  {
+    kind: 'video',
+    ext: 'webm',
+    type: 'video/webm',
+    test: (b) => b[0] === 0x1a && b[1] === 0x45 && b[2] === 0xdf && b[3] === 0xa3,
+  },
 ]
 const SNIFF_BYTES = 12
 
@@ -1192,7 +1297,10 @@ export function createMediaHandler({ dir }) {
     }
     const file = join(dir, m[1])
     if (!existsSync(file) || !statSync(file).isFile()) {
-      res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8', 'Cache-Control': 'no-store' })
+      res.writeHead(404, {
+        'Content-Type': 'text/plain; charset=utf-8',
+        'Cache-Control': 'no-store',
+      })
       res.end('Not found')
       return true
     }
@@ -1254,10 +1362,12 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
 ### Task 4: Publishing API in the dashboard handler
 
 **Files:**
+
 - Modify: `admin/handler.mjs`
 - Test: `src/test/admin.test.js` (append a describe block)
 
 **Interfaces:**
+
 - Consumes: `store.content` (Task 2), `saveUpload` (Task 3).
 - Produces, all under `<prefix>/` and behind the existing gate:
 
@@ -1272,88 +1382,104 @@ POST   api/stories/<id>/unpublish  Story | 404
                                    the same for api/shorts
 PUT    api/media?kind=image|video  201 { url, bytes, type } | 400 | 413 | 415
 ```
-  and `api/status` gains `"publishing": { stories: { total, published }, shorts: { total, published } }`.
+
+and `api/status` gains `"publishing": { stories: { total, published }, shorts: { total, published } }`.
 
 - [ ] **Step 1: Write the failing tests**
 
 Append to `src/test/admin.test.js`, inside the top-level `describe('admin handler')` after the existing tests (it uses `open`, `locked`, `store`):
 
 ```js
-  describe('publishing API', () => {
-    const PNG = Buffer.concat([
-      Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]),
-      Buffer.alloc(40, 1),
-    ])
-    const json = (method, path, body) =>
-      fetch(`${open.base}/admin/${path}`, {
-        method,
-        headers: { 'Content-Type': 'application/json' },
-        body: body === undefined ? undefined : JSON.stringify(body),
-      })
-
-    it('is behind the sign-in like the rest of the API', async () => {
-      expect((await fetch(`${locked.base}/admin/api/stories`)).status).toBe(401)
-      expect((await fetch(`${locked.base}/admin/api/media?kind=image`, { method: 'PUT', body: PNG })).status).toBe(401)
+describe('publishing API', () => {
+  const PNG = Buffer.concat([
+    Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]),
+    Buffer.alloc(40, 1),
+  ])
+  const json = (method, path, body) =>
+    fetch(`${open.base}/admin/${path}`, {
+      method,
+      headers: { 'Content-Type': 'application/json' },
+      body: body === undefined ? undefined : JSON.stringify(body),
     })
 
-    it('creates, edits, publishes, unpublishes and deletes a story', async () => {
-      const created = await json('POST', 'api/stories', { title: 'First story' })
-      expect(created.status).toBe(201)
-      const story = await created.json()
-      expect(story).toMatchObject({ slug: 'first-story', status: 'draft' })
-
-      const upload = await fetch(`${open.base}/admin/api/media?kind=image`, { method: 'PUT', body: PNG })
-      expect(upload.status).toBe(201)
-      const { url } = await upload.json()
-
-      const refused = await json('POST', `api/stories/${story.id}/publish`)
-      expect(refused.status).toBe(422)
-      expect((await refused.json()).missing).toEqual(['heroImage'])
-
-      const edited = await json('PUT', `api/stories/${story.id}`, {
-        heroImage: url,
-        body: '<p>Hello</p><script>x</script>',
-      })
-      expect(edited.status).toBe(200)
-      expect((await edited.json()).body).toBe('<p>Hello</p>')
-
-      const published = await json('POST', `api/stories/${story.id}/publish`)
-      expect(published.status).toBe(200)
-      expect((await published.json()).status).toBe('published')
-      expect((await (await fetch(`${open.base}/admin/api/stories`)).json()).items[0].id).toBe(story.id)
-      expect((await (await fetch(`${open.base}/admin/api/stories/${story.id}`)).json()).id).toBe(story.id)
-
-      const status = await (await fetch(`${open.base}/admin/api/status`)).json()
-      expect(status.publishing.stories).toEqual({ total: 1, published: 1 })
-
-      expect((await json('POST', `api/stories/${story.id}/unpublish`)).status).toBe(200)
-      expect((await json('DELETE', `api/stories/${story.id}`)).status).toBe(204)
-      expect((await json('DELETE', `api/stories/${story.id}`)).status).toBe(404)
-      expect((await json('GET', `api/stories/${story.id}`)).status).toBe(404)
-      expect((await json('POST', `api/stories/nope/publish`)).status).toBe(404)
-    })
-
-    it('does the same for shorts and refuses bad uploads and bodies', async () => {
-      const short = await (await json('POST', 'api/shorts', { title: 'Clip', duration: 20 })).json()
-      expect(short.slug).toBe('clip')
-      expect((await json('POST', `api/shorts/${short.id}/publish`)).status).toBe(422)
-      expect((await json('PATCH', `api/shorts/${short.id}`)).status).toBe(405)
-      expect((await json('DELETE', `api/shorts/${short.id}`)).status).toBe(204)
-
-      expect((await fetch(`${open.base}/admin/api/media?kind=image`, { method: 'PUT', body: 'text' })).status).toBe(415)
-      expect((await fetch(`${open.base}/admin/api/media?kind=zip`, { method: 'PUT', body: PNG })).status).toBe(400)
-      expect((await fetch(`${open.base}/admin/api/media`, { method: 'GET' })).status).toBe(405)
-
-      const notJson = await fetch(`${open.base}/admin/api/stories`, { method: 'POST', body: '{nope' })
-      expect(notJson.status).toBe(400)
-      const huge = await fetch(`${open.base}/admin/api/stories`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title: 'x'.repeat(3 * 1024 * 1024) }),
-      })
-      expect(huge.status).toBe(413)
-    })
+  it('is behind the sign-in like the rest of the API', async () => {
+    expect((await fetch(`${locked.base}/admin/api/stories`)).status).toBe(401)
+    expect(
+      (await fetch(`${locked.base}/admin/api/media?kind=image`, { method: 'PUT', body: PNG }))
+        .status,
+    ).toBe(401)
   })
+
+  it('creates, edits, publishes, unpublishes and deletes a story', async () => {
+    const created = await json('POST', 'api/stories', { title: 'First story' })
+    expect(created.status).toBe(201)
+    const story = await created.json()
+    expect(story).toMatchObject({ slug: 'first-story', status: 'draft' })
+
+    const upload = await fetch(`${open.base}/admin/api/media?kind=image`, {
+      method: 'PUT',
+      body: PNG,
+    })
+    expect(upload.status).toBe(201)
+    const { url } = await upload.json()
+
+    const refused = await json('POST', `api/stories/${story.id}/publish`)
+    expect(refused.status).toBe(422)
+    expect((await refused.json()).missing).toEqual(['heroImage'])
+
+    const edited = await json('PUT', `api/stories/${story.id}`, {
+      heroImage: url,
+      body: '<p>Hello</p><script>x</script>',
+    })
+    expect(edited.status).toBe(200)
+    expect((await edited.json()).body).toBe('<p>Hello</p>')
+
+    const published = await json('POST', `api/stories/${story.id}/publish`)
+    expect(published.status).toBe(200)
+    expect((await published.json()).status).toBe('published')
+    expect((await (await fetch(`${open.base}/admin/api/stories`)).json()).items[0].id).toBe(
+      story.id,
+    )
+    expect((await (await fetch(`${open.base}/admin/api/stories/${story.id}`)).json()).id).toBe(
+      story.id,
+    )
+
+    const status = await (await fetch(`${open.base}/admin/api/status`)).json()
+    expect(status.publishing.stories).toEqual({ total: 1, published: 1 })
+
+    expect((await json('POST', `api/stories/${story.id}/unpublish`)).status).toBe(200)
+    expect((await json('DELETE', `api/stories/${story.id}`)).status).toBe(204)
+    expect((await json('DELETE', `api/stories/${story.id}`)).status).toBe(404)
+    expect((await json('GET', `api/stories/${story.id}`)).status).toBe(404)
+    expect((await json('POST', `api/stories/nope/publish`)).status).toBe(404)
+  })
+
+  it('does the same for shorts and refuses bad uploads and bodies', async () => {
+    const short = await (await json('POST', 'api/shorts', { title: 'Clip', duration: 20 })).json()
+    expect(short.slug).toBe('clip')
+    expect((await json('POST', `api/shorts/${short.id}/publish`)).status).toBe(422)
+    expect((await json('PATCH', `api/shorts/${short.id}`)).status).toBe(405)
+    expect((await json('DELETE', `api/shorts/${short.id}`)).status).toBe(204)
+
+    expect(
+      (await fetch(`${open.base}/admin/api/media?kind=image`, { method: 'PUT', body: 'text' }))
+        .status,
+    ).toBe(415)
+    expect(
+      (await fetch(`${open.base}/admin/api/media?kind=zip`, { method: 'PUT', body: PNG })).status,
+    ).toBe(400)
+    expect((await fetch(`${open.base}/admin/api/media`, { method: 'GET' })).status).toBe(405)
+
+    const notJson = await fetch(`${open.base}/admin/api/stories`, { method: 'POST', body: '{nope' })
+    expect(notJson.status).toBe(400)
+    const huge = await fetch(`${open.base}/admin/api/stories`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title: 'x'.repeat(3 * 1024 * 1024) }),
+    })
+    expect(huge.status).toBe(413)
+  })
+})
 ```
 
 - [ ] **Step 2: Run the tests to see them fail**
@@ -1400,7 +1526,8 @@ async function readJson(req) {
   const raw = await readRaw(req, MAX_JSON_BYTES)
   try {
     const value = JSON.parse(raw.toString('utf8') || '{}')
-    if (!value || typeof value !== 'object' || Array.isArray(value)) throw new Error('not an object')
+    if (!value || typeof value !== 'object' || Array.isArray(value))
+      throw new Error('not an object')
     return value
   } catch {
     throw Object.assign(new Error('bad json'), { status: 400 })
@@ -1416,118 +1543,118 @@ function readForm(req) {
 }
 ```
 
-   and change the two `() => send(res, 413, 'Form too large')` rejections to `(error) => send(res, error.status || 500, error.status === 413 ? 'Form too large' : 'Bad request')`.
+and change the two `() => send(res, 413, 'Form too large')` rejections to `(error) => send(res, error.status || 500, error.status === 413 ? 'Form too large' : 'Bad request')`.
 
 5. Inside `createAdminHandler`, after `hasSession`/`passwordMatches` and before `return function handleAdmin`, add the publishing routes:
 
 ```js
-  const COLLECTION = /^api\/(stories|shorts)(?:\/([a-z0-9]+)(?:\/(publish|unpublish))?)?$/
+const COLLECTION = /^api\/(stories|shorts)(?:\/([a-z0-9]+)(?:\/(publish|unpublish))?)?$/
 
-  function collectionApi(name) {
-    const c = store.content
-    return name === 'stories'
-      ? {
-          list: c.listStories,
-          get: c.getStory,
-          add: c.addStory,
-          update: c.updateStory,
-          publish: c.publishStory,
-          unpublish: c.unpublishStory,
-          remove: c.deleteStory,
-        }
-      : {
-          list: c.listShorts,
-          get: c.getShort,
-          add: c.addShort,
-          update: c.updateShort,
-          publish: c.publishShort,
-          unpublish: c.unpublishShort,
-          remove: c.deleteShort,
-        }
-  }
-
-  const onBodyError = (res) => (error) =>
-    json(res, error.status || 500, { error: error.status === 413 ? 'too-large' : 'bad-body' })
-
-  /** The stories, shorts and media endpoints. True when answered. */
-  function publishing(req, res, rest, url) {
-    if (rest === 'api/media') {
-      if (req.method !== 'PUT') {
-        send(res, 405, 'Method Not Allowed')
-        return true
+function collectionApi(name) {
+  const c = store.content
+  return name === 'stories'
+    ? {
+        list: c.listStories,
+        get: c.getStory,
+        add: c.addStory,
+        update: c.updateStory,
+        publish: c.publishStory,
+        unpublish: c.unpublishStory,
+        remove: c.deleteStory,
       }
-      if (!store?.content) {
-        json(res, 503, { error: 'no-store' })
-        return true
+    : {
+        list: c.listShorts,
+        get: c.getShort,
+        add: c.addShort,
+        update: c.updateShort,
+        publish: c.publishShort,
+        unpublish: c.unpublishShort,
+        remove: c.deleteShort,
       }
-      saveUpload(req, { dir: store.content.mediaDir, kind: url.searchParams.get('kind') }).then(
-        (saved) => json(res, 201, { url: saved.url, bytes: saved.bytes, type: saved.type }),
-        (error) => json(res, error.status || 500, { error: error.code || 'upload-failed' }),
-      )
+}
+
+const onBodyError = (res) => (error) =>
+  json(res, error.status || 500, { error: error.status === 413 ? 'too-large' : 'bad-body' })
+
+/** The stories, shorts and media endpoints. True when answered. */
+function publishing(req, res, rest, url) {
+  if (rest === 'api/media') {
+    if (req.method !== 'PUT') {
+      send(res, 405, 'Method Not Allowed')
       return true
     }
-    const match = COLLECTION.exec(rest)
-    if (!match) return false
     if (!store?.content) {
       json(res, 503, { error: 'no-store' })
       return true
     }
-    const [, name, id, action] = match
-    const api = collectionApi(name)
+    saveUpload(req, { dir: store.content.mediaDir, kind: url.searchParams.get('kind') }).then(
+      (saved) => json(res, 201, { url: saved.url, bytes: saved.bytes, type: saved.type }),
+      (error) => json(res, error.status || 500, { error: error.code || 'upload-failed' }),
+    )
+    return true
+  }
+  const match = COLLECTION.exec(rest)
+  if (!match) return false
+  if (!store?.content) {
+    json(res, 503, { error: 'no-store' })
+    return true
+  }
+  const [, name, id, action] = match
+  const api = collectionApi(name)
 
-    if (action) {
-      if (req.method !== 'POST') {
-        send(res, 405, 'Method Not Allowed')
-        return true
-      }
-      const result = api[action](id)
-      if (!result) json(res, 404, { error: 'not-found' })
-      else if (result.missing) json(res, 422, { error: 'missing', missing: result.missing })
-      else json(res, 200, result.record ?? result)
+  if (action) {
+    if (req.method !== 'POST') {
+      send(res, 405, 'Method Not Allowed')
       return true
     }
-    if (!id) {
-      if (req.method === 'GET' || req.method === 'HEAD') json(res, 200, { items: api.list() })
-      else if (req.method === 'POST') {
-        readJson(req).then((fields) => json(res, 201, api.add(fields)), onBodyError(res))
-      } else send(res, 405, 'Method Not Allowed')
-      return true
-    }
-    if (req.method === 'GET' || req.method === 'HEAD') {
-      const record = api.get(id)
-      if (record) json(res, 200, record)
-      else json(res, 404, { error: 'not-found' })
-    } else if (req.method === 'PUT') {
-      readJson(req).then((fields) => {
-        const record = api.update(id, fields)
-        if (record) json(res, 200, record)
-        else json(res, 404, { error: 'not-found' })
-      }, onBodyError(res))
-    } else if (req.method === 'DELETE') {
-      if (api.remove(id)) {
-        res.writeHead(204, { 'Cache-Control': 'no-store' })
-        res.end()
-      } else json(res, 404, { error: 'not-found' })
+    const result = api[action](id)
+    if (!result) json(res, 404, { error: 'not-found' })
+    else if (result.missing) json(res, 422, { error: 'missing', missing: result.missing })
+    else json(res, 200, result.record ?? result)
+    return true
+  }
+  if (!id) {
+    if (req.method === 'GET' || req.method === 'HEAD') json(res, 200, { items: api.list() })
+    else if (req.method === 'POST') {
+      readJson(req).then((fields) => json(res, 201, api.add(fields)), onBodyError(res))
     } else send(res, 405, 'Method Not Allowed')
     return true
   }
+  if (req.method === 'GET' || req.method === 'HEAD') {
+    const record = api.get(id)
+    if (record) json(res, 200, record)
+    else json(res, 404, { error: 'not-found' })
+  } else if (req.method === 'PUT') {
+    readJson(req).then((fields) => {
+      const record = api.update(id, fields)
+      if (record) json(res, 200, record)
+      else json(res, 404, { error: 'not-found' })
+    }, onBodyError(res))
+  } else if (req.method === 'DELETE') {
+    if (api.remove(id)) {
+      res.writeHead(204, { 'Cache-Control': 'no-store' })
+      res.end()
+    } else json(res, 404, { error: 'not-found' })
+  } else send(res, 405, 'Method Not Allowed')
+  return true
+}
 
-  function publishingStatus() {
-    const c = store?.content
-    const count = (list) => ({
-      total: list.length,
-      published: list.filter((r) => r.status === 'published').length,
-    })
-    return c
-      ? { stories: count(c.listStories()), shorts: count(c.listShorts()) }
-      : { stories: { total: 0, published: 0 }, shorts: { total: 0, published: 0 } }
-  }
+function publishingStatus() {
+  const c = store?.content
+  const count = (list) => ({
+    total: list.length,
+    published: list.filter((r) => r.status === 'published').length,
+  })
+  return c
+    ? { stories: count(c.listStories()), shorts: count(c.listShorts()) }
+    : { stories: { total: 0, published: 0 }, shorts: { total: 0, published: 0 } }
+}
 ```
 
 6. In `handleAdmin`, right after `if (gate(req, res, rest)) return true`, add:
 
 ```js
-    if (publishing(req, res, rest, url)) return true
+if (publishing(req, res, rest, url)) return true
 ```
 
 7. In the `api/status` branch, extend the injected prefix:
@@ -1561,11 +1688,13 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
 ### Task 5: Runtime content, dates, and the two routes
 
 **Files:**
+
 - Create: `src/lib/runtimeContent.js`, `src/lib/dates.js`
 - Modify: `src/routes.js`, `src/entry-prerender.jsx`, `src/main.jsx`
 - Test: `src/test/runtimeContent.test.js`, `src/test/routes.test.js`
 
 **Interfaces:**
+
 - Produces:
   - `src/lib/runtimeContent.js`: `setRuntimeContent(next)`, `getRuntimeContent(): { stories, shorts }`, `RUNTIME_SCRIPT_ID = 'apc-runtime'`, `readRuntimeContent(doc = document): object | null`
   - `src/lib/dates.js`: `formatShortDate('2026-10-02') → '2 Oct'`, `formatLongDate('2026-10-02') → '2 October 2026'`, `formatDuration(95) → '1:35'`; invalid input → `''`
@@ -1634,27 +1763,27 @@ describe('dates', () => {
 Then in `src/test/routes.test.js`, replace the `'every route gets a static document'` test and add one:
 
 ```js
-  it('every route but a dynamic one gets a static document', () => {
-    const prerendered = ROUTES.filter((r) => !r.dynamic)
-    expect(PRERENDER_ROUTES).toHaveLength(prerendered.length)
-    expect(PRERENDER_ROUTES.length).toBeLessThan(ROUTES.length)
-    for (const route of PRERENDER_ROUTES) {
-      expect(route.out, `${route.path}: out`).toMatch(/^\//)
-      expect(route.dynamic).toBeFalsy()
-    }
-  })
+it('every route but a dynamic one gets a static document', () => {
+  const prerendered = ROUTES.filter((r) => !r.dynamic)
+  expect(PRERENDER_ROUTES).toHaveLength(prerendered.length)
+  expect(PRERENDER_ROUTES.length).toBeLessThan(ROUTES.length)
+  for (const route of PRERENDER_ROUTES) {
+    expect(route.out, `${route.path}: out`).toMatch(/^\//)
+    expect(route.dynamic).toBeFalsy()
+  }
+})
 
-  it('the story page is dynamic: matched by pattern, never prerendered', () => {
-    const story = ROUTES.find((r) => r.path === '/stories/:slug')
-    expect(story.dynamic).toBe(true)
-    expect(story.module).toBe('src/pages/StoryPage.jsx')
-    expect(matchRoute('/stories/big-night').path).toBe('/stories/:slug')
-    expect(matchRoute('/stories/big-night/').path).toBe('/stories/:slug')
-    expect(matchRoute('/stories').path).toBe('/stories')
-    expect(matchRoute('/stories/').path).toBe('/stories')
-    expect(matchRoute('/stories/a/b').path).toBe('*')
-    expect(routeModules('/stories/big-night')).toEqual(['src/pages/StoryPage.jsx'])
-  })
+it('the story page is dynamic: matched by pattern, never prerendered', () => {
+  const story = ROUTES.find((r) => r.path === '/stories/:slug')
+  expect(story.dynamic).toBe(true)
+  expect(story.module).toBe('src/pages/StoryPage.jsx')
+  expect(matchRoute('/stories/big-night').path).toBe('/stories/:slug')
+  expect(matchRoute('/stories/big-night/').path).toBe('/stories/:slug')
+  expect(matchRoute('/stories').path).toBe('/stories')
+  expect(matchRoute('/stories/').path).toBe('/stories')
+  expect(matchRoute('/stories/a/b').path).toBe('*')
+  expect(routeModules('/stories/big-night')).toEqual(['src/pages/StoryPage.jsx'])
+})
 ```
 
 - [ ] **Step 2: Run the tests to see them fail**
@@ -1710,8 +1839,18 @@ export function readRuntimeContent(doc = typeof document === 'undefined' ? null 
 // which React treats as a mismatch and answers by throwing the markup away.
 
 const MONTHS = [
-  'January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December',
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
 ]
 
 function parts(iso) {
@@ -1837,11 +1976,13 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
 ### Task 6: Stories and Shorts on the home page
 
 **Files:**
+
 - Modify: `src/content/stories.js`, `src/content/shorts.js`, `src/components/Stories.jsx`, `src/components/Stories.css`, `src/components/Shorts.jsx`, `src/components/Shorts.css`
 - Create: `src/components/ShortPlayer.jsx`, `src/components/ShortPlayer.css`
 - Test: `src/test/home.test.jsx`
 
 **Interfaces:**
+
 - Consumes: `getRuntimeContent`, `formatShortDate`, `formatDuration` (Task 5); PublicStory and PublicShort shapes (Task 2).
 - Produces:
   - `stories` content: `{ heading, allLink, homeLimit, path, index: { title, description, intro, empty }, page: { eyebrow, more, back }, demo: Story[] }`
@@ -1929,7 +2070,10 @@ describe('Stories and Shorts — published content replaces the demo cards', () 
     expect(within(cards[0]).getByText('2 Oct')).toBeInTheDocument()
     // alt="" gives the picture no img role, so query the element itself.
     expect(cards[0].querySelector('img')).toHaveAttribute('src', '/media/t1.webp')
-    expect(screen.getByRole('link', { name: stories.allLink })).toHaveAttribute('href', stories.path)
+    expect(screen.getByRole('link', { name: stories.allLink })).toHaveAttribute(
+      'href',
+      stories.path,
+    )
     expect(screen.queryByText(stories.demo[0].title)).toBeNull()
   })
 
@@ -2292,7 +2436,8 @@ export default function ShortPlayer({ short, onClose }) {
     // The backdrop is part of the dialog element; a click on the frame is not.
     const onClick = (e) => {
       if (e.target !== dialog) return
-      if (typeof dialog.close === 'function') dialog.close() // fires `close`
+      if (typeof dialog.close === 'function')
+        dialog.close() // fires `close`
       else closeRef.current()
     }
     dialog.addEventListener('close', onDialogClose)
@@ -2320,7 +2465,12 @@ export default function ShortPlayer({ short, onClose }) {
           playsInline
         />
         <p className="short-player__title">{short.title}</p>
-        <button type="button" className="short-player__close" onClick={onClose} aria-label={shorts.close}>
+        <button
+          type="button"
+          className="short-player__close"
+          onClick={onClose}
+          aria-label={shorts.close}
+        >
           <X size={20} strokeWidth={2} aria-hidden="true" />
         </button>
       </div>
@@ -2414,11 +2564,13 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
 ### Task 7: The story page and the stories index
 
 **Files:**
+
 - Create: `src/pages/StoryPage.jsx`, `src/pages/StoryPage.css`, `src/pages/StoriesPage.jsx`, `src/pages/StoriesPage.css`
 - Modify: `src/lib/seo.jsx` (a `type` prop), `src/lib/structuredData.js` (`articleLd`)
 - Test: `src/test/storyPage.test.jsx`
 
 **Interfaces:**
+
 - Consumes: `StoryCard` (Task 6), `stories` content (Task 6), `getRuntimeContent`, `formatLongDate` (Task 5).
 - Produces: `articleLd(story)` (schema.org `NewsArticle`); `SEO` accepts `type` (default `'website'`) for `og:type`; `StoryPage` renders `NotFoundPage` for an unknown slug.
 
@@ -2523,7 +2675,9 @@ describe('StoriesPage', () => {
     setRuntimeContent({ stories: [1, 2, 3].map(story) })
     const { container, unmount } = renderAt('/stories')
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(stories.index.title)
-    expect(screen.getAllByRole('link').filter((a) => a.getAttribute('href').startsWith('/stories/'))).toHaveLength(3)
+    expect(
+      screen.getAllByRole('link').filter((a) => a.getAttribute('href').startsWith('/stories/')),
+    ).toHaveLength(3)
     expect(await axe(container)).toHaveNoViolations()
     unmount()
     setRuntimeContent(null)
@@ -2543,7 +2697,7 @@ Expected: FAIL on the missing page modules.
 In `src/lib/seo.jsx`, add `type = 'website'` to the destructured props and change the og:type line to:
 
 ```jsx
-      <meta property="og:type" content={type} />
+<meta property="og:type" content={type} />
 ```
 
 Document it in the comment above the component: "`type` is the og:type: 'website' by default, 'article' for a story."
@@ -3005,11 +3159,13 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
 ### Task 8: Shared document builder
 
 **Files:**
+
 - Create: `scripts/lib/document.mjs`
 - Modify: `scripts/prerender.mjs`
 - Test: `src/test/document.test.js`
 
 **Interfaces:**
+
 - Produces, from `scripts/lib/document.mjs`:
   - `createDocumentBuilder({ template, manifest, themeStyles })` → `{ assetsFor(moduleId), build(result, moduleId) }` where `result` is `{ html, head, complete }` from `render()`. The constructor throws if the template lacks the `seo:fallback` markers or the exact `<div id="root"></div>`.
   - `assertStudioCredit(html)`, `assertNoHiddenContent(html)` (throw on failure)
@@ -3060,13 +3216,22 @@ const MANIFEST = {
   '_shared-222.js': { file: 'assets/shared-222.js', css: ['assets/index-abc.css'] },
   'index.html': { file: 'assets/index-abc.js', isEntry: true, css: ['assets/index-abc.css'] },
 }
-const CREDIT = '<a href="https://onraistudio.com/" target="_blank" rel="noopener noreferrer">Site by Onrai Studio</a>'
-const result = (html, head = '<title>Story</title>') => ({ html: `${html}${CREDIT}`, head, complete: true })
+const CREDIT =
+  '<a href="https://onraistudio.com/" target="_blank" rel="noopener noreferrer">Site by Onrai Studio</a>'
+const result = (html, head = '<title>Story</title>') => ({
+  html: `${html}${CREDIT}`,
+  head,
+  complete: true,
+})
 
 describe('createDocumentBuilder', () => {
-  const builder = createDocumentBuilder({ template: TEMPLATE, manifest: MANIFEST, themeStyles: ':root{--x:1}' })
+  const builder = createDocumentBuilder({
+    template: TEMPLATE,
+    manifest: MANIFEST,
+    themeStyles: ':root{--x:1}',
+  })
 
-  it('walks the manifest for a route\'s CSS and chunks, skipping what the template has', () => {
+  it("walks the manifest for a route's CSS and chunks, skipping what the template has", () => {
     expect(builder.assetsFor('src/pages/StoryPage.jsx')).toEqual({
       css: ['assets/StoryPage-111.css', 'assets/index-abc.css'],
       js: ['assets/StoryPage-111.js', 'assets/shared-222.js'],
@@ -3080,7 +3245,9 @@ describe('createDocumentBuilder', () => {
     expect(doc).not.toContain('Fallback')
     expect(doc).toContain('<link rel="stylesheet" crossorigin href="/assets/StoryPage-111.css" />')
     expect(doc.match(/index-abc\.css/g)).toHaveLength(1) // the entry sheet is not linked twice
-    expect(doc).toContain('<link rel="modulepreload" crossorigin href="/assets/StoryPage-111.js" />')
+    expect(doc).toContain(
+      '<link rel="modulepreload" crossorigin href="/assets/StoryPage-111.js" />',
+    )
     expect(doc).toContain('<style id="theme-tokens">:root{--x:1}</style>')
     expect(doc).toContain(`<div id="root" data-prerender="full"><main>hi</main>${CREDIT}</div>`)
     const partial = builder.build({ ...result('<main>x</main>'), complete: false }, undefined)
@@ -3092,22 +3259,44 @@ describe('createDocumentBuilder', () => {
   })
 
   it('refuses a document without the credit or with hidden content', () => {
-    expect(() => builder.build({ html: '<main>no credit</main>', head: '', complete: true })).toThrow(/studio credit/)
-    expect(() => builder.build(result('<section style="opacity:0">x</section>'))).toThrow(/opacity 0/)
-    expect(() => assertStudioCredit(`${CREDIT.replace('>Site by', ' rel="nofollow">Site by')}`)).toThrow(/nofollow/)
-    expect(() => assertNoHiddenContent('<i aria-hidden="true" style="opacity:0"></i>')).not.toThrow()
+    expect(() =>
+      builder.build({ html: '<main>no credit</main>', head: '', complete: true }),
+    ).toThrow(/studio credit/)
+    expect(() => builder.build(result('<section style="opacity:0">x</section>'))).toThrow(
+      /opacity 0/,
+    )
+    expect(() =>
+      assertStudioCredit(`${CREDIT.replace('>Site by', ' rel="nofollow">Site by')}`),
+    ).toThrow(/nofollow/)
+    expect(() =>
+      assertNoHiddenContent('<i aria-hidden="true" style="opacity:0"></i>'),
+    ).not.toThrow()
   })
 
   it('refuses a template without the markers or the exact root placeholder', () => {
-    expect(() => createDocumentBuilder({ template: '<html><head></head><body><div id="root"></div></body></html>', manifest: {}, themeStyles: '' })).toThrow(/seo:fallback/)
-    expect(() => createDocumentBuilder({ template: TEMPLATE.replace('<div id="root"></div>', '<div id="root">x</div>'), manifest: {}, themeStyles: '' })).toThrow(/root/)
+    expect(() =>
+      createDocumentBuilder({
+        template: '<html><head></head><body><div id="root"></div></body></html>',
+        manifest: {},
+        themeStyles: '',
+      }),
+    ).toThrow(/seo:fallback/)
+    expect(() =>
+      createDocumentBuilder({
+        template: TEMPLATE.replace('<div id="root"></div>', '<div id="root">x</div>'),
+        manifest: {},
+        themeStyles: '',
+      }),
+    ).toThrow(/root/)
   })
 })
 
 describe('withRuntimeContent and stripScripts', () => {
   it('writes the content as an inert JSON block that cannot close itself', () => {
     const doc = withRuntimeContent(TEMPLATE, { stories: [{ title: '</script><b>' }], shorts: [] })
-    const block = doc.match(/<script id="apc-runtime" type="application\/json">(.*)<\/script>\n {2}<\/head>/)
+    const block = doc.match(
+      /<script id="apc-runtime" type="application\/json">(.*)<\/script>\n {2}<\/head>/,
+    )
     expect(block).not.toBeNull()
     expect(block[1]).not.toContain('</script>')
     expect(JSON.parse(block[1]).stories[0].title).toBe('</script><b>')
@@ -3290,7 +3479,8 @@ export function withRuntimeContent(doc, content) {
   const json = JSON.stringify(content).replace(/</g, '\\u003c')
   return doc.replace(
     /[ \t]*<\/head>/,
-    () => `    <script id="${RUNTIME_SCRIPT_ID}" type="application/json">${json}</script>\n  </head>`,
+    () =>
+      `    <script id="${RUNTIME_SCRIPT_ID}" type="application/json">${json}</script>\n  </head>`,
   )
 }
 
@@ -3352,10 +3542,12 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
 ### Task 9: Live renderer
 
 **Files:**
+
 - Create: `server/render.mjs`
 - Test: `src/test/render.test.js`
 
 **Interfaces:**
+
 - Consumes: `createDocumentBuilder`, `withRuntimeContent`, `stripScripts` (Task 8); `store.content.publicContent()`, `.version`, `.toPublicStory()` (Task 2); the SSR entry's `prepare`, `render`, `themeStyles`, `routeModules`, `setRuntimeContent` (Task 5).
 - Produces: `createRenderer({ dist, entry, store, importEntry })` →
   - `ready: Promise<boolean>`; `error: string` (empty while fine)
@@ -3386,7 +3578,8 @@ const TEMPLATE = `<!doctype html><html><head>
   <body>
     <div id="root"></div>
   </body></html>`
-const CREDIT = '<a href="https://onraistudio.com/" target="_blank" rel="noopener noreferrer">Site by Onrai Studio</a>'
+const CREDIT =
+  '<a href="https://onraistudio.com/" target="_blank" rel="noopener noreferrer">Site by Onrai Studio</a>'
 const SITEMAP = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
@@ -3420,7 +3613,12 @@ beforeEach(() => {
 afterEach(() => rmSync(dir, { recursive: true, force: true }))
 
 const renderer = () =>
-  createRenderer({ dist: join(dir, 'dist'), entry: join(dir, 'entry.js'), store, importEntry: async () => entry })
+  createRenderer({
+    dist: join(dir, 'dist'),
+    entry: join(dir, 'entry.js'),
+    store,
+    importEntry: async () => entry,
+  })
 
 const publish = (title) => {
   const s = store.content.addStory({ title, heroImage: '/media/a1.webp' })
@@ -3438,7 +3636,9 @@ describe('createRenderer', () => {
 
     const home = await r.page('/')
     expect(home).toContain('<main data-url="/"></main>')
-    expect(home).toContain('<script id="apc-runtime" type="application/json">{"stories":[],"shorts":[]}</script>')
+    expect(home).toContain(
+      '<script id="apc-runtime" type="application/json">{"stories":[],"shorts":[]}</script>',
+    )
     expect(home).toContain('<title>/</title>')
 
     const story = publish('Big <Night>')
@@ -3539,7 +3739,11 @@ Expected: FAIL, module not found.
 import { existsSync, readFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
-import { createDocumentBuilder, stripScripts, withRuntimeContent } from '../scripts/lib/document.mjs'
+import {
+  createDocumentBuilder,
+  stripScripts,
+  withRuntimeContent,
+} from '../scripts/lib/document.mjs'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 // Static routes that re-render with the published content.
@@ -3679,10 +3883,12 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
 ### Task 10: Wire the production server and the dev server
 
 **Files:**
+
 - Modify: `server/index.mjs`, `vite.config.js`, `admin/server.mjs`
 - Test: manual, with curl (below)
 
 **Interfaces:**
+
 - Consumes: `createMediaHandler` (Task 3), `createRenderer` (Task 9), `withRuntimeContent` (Task 8).
 - Produces: `GET /media/<file>` served; `GET /sitemap.xml` with stories; live documents for `/`, `/stories`, `/stories/<slug>`; `renderer` passed to `createAdminHandler` (used by Task 11). `yarn dev` injects the runtime block and serves `/media`.
 
@@ -3761,36 +3967,37 @@ const server = createServer((req, res) => {
 Inside `handle`, after the method check (`if (req.method !== 'GET' && req.method !== 'HEAD') {...}`), add:
 
 ```js
-  // Uploaded media. Before the trailing-slash rule and the dist lookup: the
-  // files are not in dist, and they take Range requests.
-  if (media(req, res)) return
+// Uploaded media. Before the trailing-slash rule and the dist lookup: the
+// files are not in dist, and they take Range requests.
+if (media(req, res)) return
 ```
 
 Before the `// A real file on disk` block, add:
 
 ```js
-  // The sitemap, with the published stories added. dist/sitemap.xml is a real
-  // file, so this has to come before the file lookup.
-  if (pathname === '/sitemap.xml') {
-    const xml = await renderer.sitemap()
-    if (xml) return sendDocument(req, res, xml, { type: MIME['.xml'], cacheControl: 'public, max-age=3600' })
-  }
+// The sitemap, with the published stories added. dist/sitemap.xml is a real
+// file, so this has to come before the file lookup.
+if (pathname === '/sitemap.xml') {
+  const xml = await renderer.sitemap()
+  if (xml)
+    return sendDocument(req, res, xml, { type: MIME['.xml'], cacheControl: 'public, max-age=3600' })
+}
 ```
 
 Before the `// A prerendered page` block, add:
 
 ```js
-  // A live route: the home page and the stories, rendered with the published
-  // content. Ahead of the prerendered lookup, which holds the build-time
-  // versions of "/" and "/stories" (demo content) as the fallback.
-  const live = await renderer.page(pathname)
-  if (live) {
-    if (req.method === 'GET') recordView(req, pathname)
-    return sendDocument(req, res, live, {
-      type: MIME['.html'],
-      cacheControl: 'public, max-age=0, must-revalidate',
-    })
-  }
+// A live route: the home page and the stories, rendered with the published
+// content. Ahead of the prerendered lookup, which holds the build-time
+// versions of "/" and "/stories" (demo content) as the fallback.
+const live = await renderer.page(pathname)
+if (live) {
+  if (req.method === 'GET') recordView(req, pathname)
+  return sendDocument(req, res, live, {
+    type: MIME['.html'],
+    cacheControl: 'public, max-age=0, must-revalidate',
+  })
+}
 ```
 
 Update the file header comment: add a paragraph that the server also serves `/media`, renders the live routes through `server/render.mjs`, and that `vite preview` would not do any of it.
@@ -3885,10 +4092,12 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
 ### Task 11: Preview, TinyMCE files and the renderer's status
 
 **Files:**
+
 - Modify: `admin/handler.mjs`, `package.json` (dependency), `yarn.lock`
 - Test: `src/test/admin.test.js`
 
 **Interfaces:**
+
 - Consumes: `renderer.preview(record)`, `renderer.error` (Task 9).
 - Produces, behind the gate:
   - `GET preview/stories/<id>` → the static preview HTML; 404 unknown id; 503 `{ error: 'no-renderer' }` when the handler has no renderer (dev server, `yarn admin`)
@@ -3925,50 +4134,54 @@ Expected: a path under `.yarn/unplugged/tinymce-npm-6.8.6-…/node_modules/tinym
 Append inside `describe('admin handler')` in `src/test/admin.test.js`:
 
 ```js
-  describe('preview and the editor files', () => {
-    it('serves TinyMCE from the package and nothing outside it', async () => {
-      const js = await fetch(`${open.base}/admin/vendor/tinymce/tinymce.min.js`)
-      expect(js.status).toBe(200)
-      expect(js.headers.get('content-type')).toMatch(/javascript/)
-      expect(js.headers.get('cache-control')).toContain('max-age')
-      expect((await js.text()).length).toBeGreaterThan(10000)
-      const css = await fetch(`${open.base}/admin/vendor/tinymce/skins/ui/oxide-dark/skin.min.css`)
-      expect(css.status).toBe(200)
-      expect(css.headers.get('content-type')).toMatch(/css/)
-      expect((await fetch(`${open.base}/admin/vendor/tinymce/nope.js`)).status).toBe(404)
-      // A raw path with ".." that fetch() would otherwise normalise away.
-      const raw = await new Promise((resolve) => {
-        request(`${open.base}/admin/vendor/tinymce/../../package.json`, (res) => resolve(res.statusCode)).end()
-      })
-      expect(raw).toBe(404)
-      expect((await fetch(`${locked.base}/admin/vendor/tinymce/tinymce.min.js`)).status).toBe(401)
+describe('preview and the editor files', () => {
+  it('serves TinyMCE from the package and nothing outside it', async () => {
+    const js = await fetch(`${open.base}/admin/vendor/tinymce/tinymce.min.js`)
+    expect(js.status).toBe(200)
+    expect(js.headers.get('content-type')).toMatch(/javascript/)
+    expect(js.headers.get('cache-control')).toContain('max-age')
+    expect((await js.text()).length).toBeGreaterThan(10000)
+    const css = await fetch(`${open.base}/admin/vendor/tinymce/skins/ui/oxide-dark/skin.min.css`)
+    expect(css.status).toBe(200)
+    expect(css.headers.get('content-type')).toMatch(/css/)
+    expect((await fetch(`${open.base}/admin/vendor/tinymce/nope.js`)).status).toBe(404)
+    // A raw path with ".." that fetch() would otherwise normalise away.
+    const raw = await new Promise((resolve) => {
+      request(`${open.base}/admin/vendor/tinymce/../../package.json`, (res) =>
+        resolve(res.statusCode),
+      ).end()
     })
-
-    it('previews a story through the renderer, and says so when there is none', async () => {
-      const draft = store.content.addStory({ title: 'Preview me' })
-      const renderer = {
-        error: '',
-        preview: async (record) => `<html><body>${record.title}</body></html>`,
-      }
-      const withRenderer = await serve(createAdminHandler({ password: '', store, renderer }))
-      try {
-        const res = await fetch(`${withRenderer.base}/admin/preview/stories/${draft.id}`)
-        expect(res.status).toBe(200)
-        expect(res.headers.get('content-type')).toMatch(/text\/html/)
-        expect(res.headers.get('x-robots-tag')).toMatch(/noindex/)
-        expect(await res.text()).toContain('Preview me')
-        expect((await fetch(`${withRenderer.base}/admin/preview/stories/nope`)).status).toBe(404)
-        const status = await (await fetch(`${withRenderer.base}/admin/api/status`)).json()
-        expect(status.publishing.renderer).toBe('ready')
-      } finally {
-        withRenderer.server.close()
-      }
-      const none = await fetch(`${open.base}/admin/preview/stories/${draft.id}`)
-      expect(none.status).toBe(503)
-      expect((await (await fetch(`${open.base}/admin/api/status`)).json()).publishing.renderer).toBe('none')
-      store.content.deleteStory(draft.id)
-    })
+    expect(raw).toBe(404)
+    expect((await fetch(`${locked.base}/admin/vendor/tinymce/tinymce.min.js`)).status).toBe(401)
   })
+
+  it('previews a story through the renderer, and says so when there is none', async () => {
+    const draft = store.content.addStory({ title: 'Preview me' })
+    const renderer = {
+      error: '',
+      preview: async (record) => `<html><body>${record.title}</body></html>`,
+    }
+    const withRenderer = await serve(createAdminHandler({ password: '', store, renderer }))
+    try {
+      const res = await fetch(`${withRenderer.base}/admin/preview/stories/${draft.id}`)
+      expect(res.status).toBe(200)
+      expect(res.headers.get('content-type')).toMatch(/text\/html/)
+      expect(res.headers.get('x-robots-tag')).toMatch(/noindex/)
+      expect(await res.text()).toContain('Preview me')
+      expect((await fetch(`${withRenderer.base}/admin/preview/stories/nope`)).status).toBe(404)
+      const status = await (await fetch(`${withRenderer.base}/admin/api/status`)).json()
+      expect(status.publishing.renderer).toBe('ready')
+    } finally {
+      withRenderer.server.close()
+    }
+    const none = await fetch(`${open.base}/admin/preview/stories/${draft.id}`)
+    expect(none.status).toBe(503)
+    expect((await (await fetch(`${open.base}/admin/api/status`)).json()).publishing.renderer).toBe(
+      'none',
+    )
+    store.content.deleteStory(draft.id)
+  })
+})
 ```
 
 At the top of `admin.test.js` extend the http import to `import { createServer, request } from 'node:http'`.
@@ -4015,59 +4228,64 @@ Add `renderer` to the options (`{ prefix = '/admin', site = '', password, store,
 Inside `createAdminHandler`, before `return function handleAdmin`:
 
 ```js
-  function vendor(req, res, rest) {
-    if (!rest.startsWith('vendor/tinymce/')) return false
-    if (req.method !== 'GET' && req.method !== 'HEAD') {
-      send(res, 405, 'Method Not Allowed')
-      return true
-    }
-    const file = TINYMCE_DIR && normalize(join(TINYMCE_DIR, rest.slice('vendor/tinymce/'.length)))
-    if (!file || !file.startsWith(TINYMCE_DIR + sep) || !existsSync(file) || !statSync(file).isFile()) {
-      send(res, 404, 'Not found')
-      return true
-    }
-    res.setHeader('Content-Type', VENDOR_MIME[extname(file)] || 'application/octet-stream')
-    res.setHeader('Cache-Control', 'private, max-age=86400')
-    res.setHeader('X-Content-Type-Options', 'nosniff')
-    res.setHeader('Content-Length', String(statSync(file).size))
-    res.statusCode = 200
-    if (req.method === 'HEAD') res.end()
-    else createReadStream(file).pipe(res)
+function vendor(req, res, rest) {
+  if (!rest.startsWith('vendor/tinymce/')) return false
+  if (req.method !== 'GET' && req.method !== 'HEAD') {
+    send(res, 405, 'Method Not Allowed')
     return true
   }
+  const file = TINYMCE_DIR && normalize(join(TINYMCE_DIR, rest.slice('vendor/tinymce/'.length)))
+  if (
+    !file ||
+    !file.startsWith(TINYMCE_DIR + sep) ||
+    !existsSync(file) ||
+    !statSync(file).isFile()
+  ) {
+    send(res, 404, 'Not found')
+    return true
+  }
+  res.setHeader('Content-Type', VENDOR_MIME[extname(file)] || 'application/octet-stream')
+  res.setHeader('Cache-Control', 'private, max-age=86400')
+  res.setHeader('X-Content-Type-Options', 'nosniff')
+  res.setHeader('Content-Length', String(statSync(file).size))
+  res.statusCode = 200
+  if (req.method === 'HEAD') res.end()
+  else createReadStream(file).pipe(res)
+  return true
+}
 
-  function preview(req, res, rest) {
-    const match = /^preview\/stories\/([a-z0-9]+)$/.exec(rest)
-    if (!match) return false
-    if (req.method !== 'GET' && req.method !== 'HEAD') {
-      send(res, 405, 'Method Not Allowed')
-      return true
-    }
-    const record = store?.content?.getStory(match[1])
-    if (!record) {
-      send(res, 404, 'No such story')
-      return true
-    }
-    if (!renderer) {
-      json(res, 503, { error: 'no-renderer' })
-      return true
-    }
-    renderer.preview(record).then(
-      (html) => {
-        if (html) send(res, 200, html, 'text/html; charset=utf-8')
-        else json(res, 503, { error: 'renderer', message: renderer.error })
-      },
-      (error) => send(res, 500, `preview failed:\n${error.message}`),
-    )
+function preview(req, res, rest) {
+  const match = /^preview\/stories\/([a-z0-9]+)$/.exec(rest)
+  if (!match) return false
+  if (req.method !== 'GET' && req.method !== 'HEAD') {
+    send(res, 405, 'Method Not Allowed')
     return true
   }
+  const record = store?.content?.getStory(match[1])
+  if (!record) {
+    send(res, 404, 'No such story')
+    return true
+  }
+  if (!renderer) {
+    json(res, 503, { error: 'no-renderer' })
+    return true
+  }
+  renderer.preview(record).then(
+    (html) => {
+      if (html) send(res, 200, html, 'text/html; charset=utf-8')
+      else json(res, 503, { error: 'renderer', message: renderer.error })
+    },
+    (error) => send(res, 500, `preview failed:\n${error.message}`),
+  )
+  return true
+}
 ```
 
 In `handleAdmin`, after the `publishing(...)` line:
 
 ```js
-    if (vendor(req, res, rest)) return true
-    if (preview(req, res, rest)) return true
+if (vendor(req, res, rest)) return true
+if (preview(req, res, rest)) return true
 ```
 
 In `publishingStatus()`, add to the returned object (both branches):
@@ -4101,11 +4319,13 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
 ### Task 12: The Publish section: lists and the story editor
 
 **Files:**
+
 - Create: `admin/publish.js`, `admin/publish.css`
 - Modify: `admin/index.html`, `admin/app.js`, `admin/handler.mjs` (the `FILES` table)
 - Test: manual, in Chrome (steps below). The dashboard is a plain DOM app with no unit tests today; the API it talks to is covered by Tasks 4 and 11.
 
 **Interfaces:**
+
 - Consumes: the API from Tasks 4 and 11; `app.js` globals `state`, `esc`, `pill`, `pageHead`, `opt`, `fmtDate`, `fmtWhen`, `ago`, `siteUrl`, `external`, `getJson`, `render`, `route`.
 - Produces, in `publish.js`: `publishView(kind, param)`, `bindPublish(kind, param)`, `loadPublish()`, `leaveEditor()`, and the helpers `upload()`, `resizeImage()`, `sendJson()`, `toast()` that Task 13 reuses. `state.stories`, `state.shorts`, `state.publish`, `state.editing`.
 
@@ -4139,29 +4359,29 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
 3. In `render()`, right after `const { page, param } = route()`, before `const views`:
 
 ```js
-  // An open editor owns the page: the minute refresh must not redraw it
-  // under the editor's hands (TinyMCE state, unsaved fields).
-  if (
-    state.editing &&
-    state.editing.kind === page &&
-    state.editing.id === param &&
-    document.getElementById('editor')
-  ) {
-    return
-  }
+// An open editor owns the page: the minute refresh must not redraw it
+// under the editor's hands (TinyMCE state, unsaved fields).
+if (
+  state.editing &&
+  state.editing.kind === page &&
+  state.editing.id === param &&
+  document.getElementById('editor')
+) {
+  return
+}
 ```
 
-   and add to `views`:
+and add to `views`:
 
 ```js
     stories: () => publishView('stories', param),
     shorts: () => publishView('shorts', param),
 ```
 
-   and after the `bindTraffic` line:
+and after the `bindTraffic` line:
 
 ```js
-  if (page === 'stories' || page === 'shorts') bindPublish(page, param)
+if (page === 'stories' || page === 'shorts') bindPublish(page, param)
 ```
 
 4. In `load()`, add `loadPublish()` to the `Promise.all` array (after `loadTraffic()`).
@@ -4214,7 +4434,8 @@ const PUBLISH = {
     title: 'Shorts',
     one: 'short',
     api: 'api/shorts',
-    intro: 'Vertical videos for the Shorts row on the home page. A published short plays in an overlay.',
+    intro:
+      'Vertical videos for the Shorts row on the home page. A published short plays in an overlay.',
     firstHint: 'Upload the first clip: a vertical video and a title.',
   },
 }
@@ -4225,8 +4446,18 @@ const UPLOAD_ERRORS = {
   type: 'That is not a format the site can use. Images: JPG, PNG, GIF or WebP. Video: MP4 or WebM.',
   kind: 'That is the wrong kind of file for this slot.',
 }
-const FIELD_LABELS = { title: 'a title', heroImage: 'a hero image', video: 'a video', poster: 'a poster' }
-const FIELD_IDS = { title: 'ed-title', heroImage: 'ed-hero', video: 'ed-video', poster: 'ed-poster' }
+const FIELD_LABELS = {
+  title: 'a title',
+  heroImage: 'a hero image',
+  video: 'a video',
+  poster: 'a poster',
+}
+const FIELD_IDS = {
+  title: 'ed-title',
+  heroImage: 'ed-hero',
+  video: 'ed-video',
+  poster: 'ed-poster',
+}
 
 state.stories = []
 state.shorts = []
@@ -4260,7 +4491,8 @@ async function sendJson(method, url, body) {
   }
   if (res.status === 204) return null
   const data = await res.json().catch(() => ({}))
-  if (!res.ok) throw Object.assign(new Error(data.error || res.statusText), { status: res.status, data })
+  if (!res.ok)
+    throw Object.assign(new Error(data.error || res.statusText), { status: res.status, data })
   return data
 }
 
@@ -4284,7 +4516,9 @@ function upload(blob, kind, name, onProgress) {
       if (xhr.status === 201) resolve(data)
       else reject(new Error(UPLOAD_ERRORS[data.error] || `The upload failed (${xhr.status}).`))
     })
-    xhr.addEventListener('error', () => reject(new Error('The upload failed. Check the connection and try again.')))
+    xhr.addEventListener('error', () =>
+      reject(new Error('The upload failed. Check the connection and try again.')),
+    )
     xhr.send(blob)
   })
 }
@@ -4452,7 +4686,9 @@ function publishList(kind) {
           <td>${kind === 'stories' ? esc(fmtDate(r.date)) : r.duration ? mmss(r.duration) : '<span class="na">–</span>'}</td>
           <td><span title="${esc(fmtWhen(r.updatedAt))}">${esc(ago(r.updatedAt))}</span></td>
           <td class="nowrap">${
-            kind === 'stories' && r.status === 'published' ? external(siteUrl(storyUrl(r)), 'View on site') : ''
+            kind === 'stories' && r.status === 'published'
+              ? external(siteUrl(storyUrl(r)), 'View on site')
+              : ''
           }</td>
         </tr>`,
           )
@@ -4663,12 +4899,20 @@ function bindEditor(kind, record) {
       replaceRecord(kind, result)
       leaveEditor()
       render()
-      toast(action === 'publish' ? `Published. The ${spec.one} is live on the site.` : 'Unpublished. It is a draft again.')
+      toast(
+        action === 'publish'
+          ? `Published. The ${spec.one} is live on the site.`
+          : 'Unpublished. It is a draft again.',
+      )
     } catch (error) {
       if (error.status === 422) {
         const missing = error.data.missing || []
-        for (const key of missing) $(FIELD_IDS[key])?.closest('.field, .drop')?.classList.add('is-missing')
-        toast(`Add ${missing.map((k) => FIELD_LABELS[k] || k).join(' and ')} before publishing.`, 'critical')
+        for (const key of missing)
+          $(FIELD_IDS[key])?.closest('.field, .drop')?.classList.add('is-missing')
+        toast(
+          `Add ${missing.map((k) => FIELD_LABELS[k] || k).join(' and ')} before publishing.`,
+          'critical',
+        )
       } else showError(error)
     }
   })
@@ -4714,7 +4958,10 @@ function bindHero(story, save) {
     bindDrop(zone, document.getElementById('ed-hero-file'), async (file) => {
       try {
         setProgress(zone, 0)
-        const [hero, thumb] = await Promise.all([resizeImage(file, IMAGE.hero), resizeImage(file, IMAGE.thumb)])
+        const [hero, thumb] = await Promise.all([
+          resizeImage(file, IMAGE.hero),
+          resizeImage(file, IMAGE.thumb),
+        ])
         const base = file.name.replace(/\.[^.]+$/, '')
         const [big, small] = await Promise.all([
           upload(hero, 'image', `${base}.webp`, (p) => setProgress(zone, p)),
@@ -5032,10 +5279,12 @@ and at the top of `app.js`:
 ### Task 13: The shorts editor
 
 **Files:**
+
 - Modify: `admin/publish.js` (replace the two stubs)
 - Test: manual, in Chrome
 
 **Interfaces:**
+
 - Consumes: `editorBar`, `deleteCard`, `bindDrop`, `setProgress`, `upload`, `resizeImage`, `sendJson`, `toast`, `showError`, `leaveEditor`, `render`, `replaceRecord` (Task 12).
 - Produces: `shortEditor(short)`, `bindShort(short, save)`, `readVideo(file)`.
 
@@ -5072,12 +5321,19 @@ function readVideo(file) {
         const ratio = Math.max(canvas.width / video.videoWidth, canvas.height / video.videoHeight)
         const w = video.videoWidth * ratio
         const h = video.videoHeight * ratio
-        canvas.getContext('2d').drawImage(video, (canvas.width - w) / 2, (canvas.height - h) / 2, w, h)
+        canvas
+          .getContext('2d')
+          .drawImage(video, (canvas.width - w) / 2, (canvas.height - h) / 2, w, h)
         canvas.toBlob(
           (blob) => {
             URL.revokeObjectURL(url)
             if (blob) resolve({ duration: video.duration, poster: blob })
-            else reject(new Error('A poster frame could not be captured. Drop an image on the poster box instead.'))
+            else
+              reject(
+                new Error(
+                  'A poster frame could not be captured. Drop an image on the poster box instead.',
+                ),
+              )
           },
           'image/webp',
           WEBP_QUALITY,
@@ -5151,8 +5407,11 @@ function bindShort(short, save) {
       try {
         setProgress(posterEl, 0)
         const blob = await resizeImage(file, IMAGE.poster)
-        const { url } = await upload(blob, 'image', `${file.name.replace(/\.[^.]+$/, '')}-poster.webp`, (p) =>
-          setProgress(posterEl, p),
+        const { url } = await upload(
+          blob,
+          'image',
+          `${file.name.replace(/\.[^.]+$/, '')}-poster.webp`,
+          (p) => setProgress(posterEl, p),
         )
         const next = await save({ poster: url })
         posterEl.innerHTML = posterZone(next)
@@ -5221,6 +5480,7 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
 ### Task 14: Overview warning and the docs
 
 **Files:**
+
 - Modify: `admin/app.js` (Overview), `CLAUDE.md`, `docs/ENVIRONMENTS.md`, `server/store.mjs` (comment only if Task 2 did not already)
 
 - [ ] **Step 1: Warn on the Overview when live rendering is off**

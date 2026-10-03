@@ -52,28 +52,28 @@ object around.
 
 ### Story record
 
-| field          | notes                                                              |
-| -------------- | ------------------------------------------------------------------ |
-| `id`           | random, stable; the dashboard's handle                             |
-| `slug`         | from the title; editable while a draft; locked once published      |
-| `title`        | required to publish                                                |
-| `date`         | `YYYY-MM-DD`, shown on the card and page; defaults to today        |
-| `standfirst`   | one or two sentences; the page's intro and meta description        |
-| `heroImage`    | `/media/<file>`, 1600px wide WebP; required to publish             |
-| `heroThumb`    | `/media/<file>`, 800px wide WebP, for the card                     |
-| `heroAlt`      | alt text; defaults to the title                                    |
-| `body`         | sanitised HTML from TinyMCE                                        |
-| `status`       | `draft` or `published`                                             |
-| `createdAt`, `updatedAt`, `publishedAt` | ISO timestamps                                   |
+| field                                   | notes                                                         |
+| --------------------------------------- | ------------------------------------------------------------- |
+| `id`                                    | random, stable; the dashboard's handle                        |
+| `slug`                                  | from the title; editable while a draft; locked once published |
+| `title`                                 | required to publish                                           |
+| `date`                                  | `YYYY-MM-DD`, shown on the card and page; defaults to today   |
+| `standfirst`                            | one or two sentences; the page's intro and meta description   |
+| `heroImage`                             | `/media/<file>`, 1600px wide WebP; required to publish        |
+| `heroThumb`                             | `/media/<file>`, 800px wide WebP, for the card                |
+| `heroAlt`                               | alt text; defaults to the title                               |
+| `body`                                  | sanitised HTML from TinyMCE                                   |
+| `status`                                | `draft` or `published`                                        |
+| `createdAt`, `updatedAt`, `publishedAt` | ISO timestamps                                                |
 
 ### Short record
 
-| field       | notes                                                            |
-| ----------- | ---------------------------------------------------------------- |
-| `id`, `slug`, `title`, `status`, timestamps | as for a story                                |
-| `video`     | `/media/<file>`, MP4 or WebM, up to 300 MB; required to publish  |
-| `poster`    | `/media/<file>`, 540×960 WebP; required to publish               |
-| `duration`  | seconds, read from the file in the browser; card shows `m:ss`    |
+| field                                       | notes                                                           |
+| ------------------------------------------- | --------------------------------------------------------------- |
+| `id`, `slug`, `title`, `status`, timestamps | as for a story                                                  |
+| `video`                                     | `/media/<file>`, MP4 or WebM, up to 300 MB; required to publish |
+| `poster`                                    | `/media/<file>`, 540×960 WebP; required to publish              |
+| `duration`                                  | seconds, read from the file in the browser; card shows `m:ss`   |
 
 ### Rules
 
@@ -132,10 +132,10 @@ for `dist/`.
 
 Two entries join `src/routes.js`:
 
-| path             | page             | notes                                             |
-| ---------------- | ---------------- | ------------------------------------------------- |
-| `/stories`       | `StoriesPage`    | prerendered at build (with the demo cards), rendered live in production |
-| `/stories/:slug` | `StoryPage`      | `dynamic: true`: never prerendered, no sitemap entry at build; the server renders it |
+| path             | page          | notes                                                                                |
+| ---------------- | ------------- | ------------------------------------------------------------------------------------ |
+| `/stories`       | `StoriesPage` | prerendered at build (with the demo cards), rendered live in production              |
+| `/stories/:slug` | `StoryPage`   | `dynamic: true`: never prerendered, no sitemap entry at build; the server renders it |
 
 `matchRoute()` learns to match a `:param` segment so `preloadRoute()` and
 `routeModules()` resolve the story page's chunk, and `PRERENDER_ROUTES`
@@ -226,7 +226,7 @@ its sitemap writing and calls the builder. Behaviour at build is unchanged.
 `createRenderer({ dist, store })`:
 
 - At boot, imports `.prerender/entry-prerender.js` (the SSR bundle `yarn
-  build` already writes; Railway builds in the same container so it is
+build` already writes; Railway builds in the same container so it is
   present), awaits `prepare()`, reads `dist/app-shell.html` as the template
   and `dist/.vite/manifest.json`, and creates the document builder.
 - `page(path)` returns the HTML for `/`, `/stories` or a published
