@@ -418,6 +418,22 @@ const rows = [
 /** @type {Room[]} */
 const rooms = [
   {
+    // A pub, not a card room: "Home of Anzac Cup Poker and weekly tournaments"
+    // (newmarkethotel.com.au, 2026-10-04).
+    name: 'Newmarket Hotel',
+    street: 'Corner Gardeners Road and Botany Road',
+    suburb: 'Mascot',
+    state: 'NSW',
+    postcode: '2020',
+    website: 'https://newmarkethotel.com.au/',
+    // Initials tile: its logo is a wordmark with no square form.
+    mark: {
+      iconSrc: '/images/rooms/newmarket-hotel-icon.webp',
+      primary: '#F5F2EB',
+      iconBg: '#0E0E0E',
+    },
+  },
+  {
     name: 'Casino Canberra',
     street: '21 Binara Street',
     suburb: 'Canberra',
@@ -583,6 +599,80 @@ const rooms = [
 
 /** @type {League[]} */
 const leagueRows = [
+  // From each league's own site (Bullets: its Facebook page) on 2026-10-04.
+  // World Pro Poker and Gambier Poker also run series on the calendar.
+  {
+    name: 'World Pro Poker',
+    code: 'WPP',
+    states: ['VIC'],
+    about:
+      'Weekly $35 to $55 games at Melbourne pubs and clubs, from Darebin and Fawkner RSLs to Sunbury and Rosebud, where 1 in 10 qualify for its $80,000 finals.',
+    website:
+      'https://www.worldpropoker.com.au/index.php?option=com_content&view=article&id=3:venue-details-and-location&catid=22&Itemid=113',
+  },
+  {
+    name: 'Gambier Poker',
+    code: 'GAMBIER',
+    states: ['SA'],
+    about:
+      'Wednesday and monthly Sunday games at the Globe Hotel, Mount Gambier, Thursdays at the Western Tavern and the Prince of Wales Hotel in Penola, and three series a year.',
+    website: 'https://gambierpoker.com.au/',
+  },
+  {
+    name: 'Australian Poker Series (APS)',
+    states: ['NSW'],
+    about:
+      'League nights around Newcastle: Mondays at Kahibah Sports Club, Wednesday to Saturday at Valentine Bowling Club, and a $75 Mega Game on the third Sunday of each month.',
+    website: 'https://apsnewcastle.com/',
+    // Its gold APS frame on black, from apsnewcastle.com/assets/aps-logo.png.
+    mark: {
+      iconSrc: '/images/rooms/australian-poker-series-icon.webp',
+      primary: '#E2B236',
+      iconBg: '#000000',
+    },
+  },
+  {
+    name: 'Deep Stack Poker',
+    states: ['QLD'],
+    about:
+      'Weekly $10 to $27 games at pubs and clubs across north Brisbane, Moreton Bay, the Sunshine Coast and Kingaroy, in seasons that feed a ladder and state finals.',
+    website: 'https://www.deepstackpoker.com.au/deep-stack-poker-venues',
+    // Initials tile: its only logo file is a 324px script wordmark, unreadable
+    // in a circle. Red is the suits on its wristbands. Replace with a real mark.
+    mark: {
+      iconSrc: '/images/rooms/deep-stack-poker-icon.webp',
+      primary: '#E8263A',
+      iconBg: '#0E0E0E',
+    },
+  },
+  {
+    name: 'Bullets Poker League',
+    states: ['TAS'],
+    about:
+      'Tournaments most nights across north and north-west Tasmania, including Burnie RSL and Devonport Football Club, in hold’em, Omaha and team formats.',
+    // No working website (bulletspoker.com.au does not resolve).
+    website: 'https://www.facebook.com/Bulletpokerleague/',
+    // Its bullet-and-aces badge, from its Facebook profile picture.
+    mark: {
+      iconSrc: '/images/rooms/bullets-poker-league-icon.webp',
+      primary: '#C9A13B',
+      iconBg: '#000000',
+    },
+  },
+  {
+    name: 'Jacks Poker League (JPL)',
+    states: ['NSW'],
+    about:
+      'Tuesday nights in the lounge bar at the Central Hotel Shellharbour, with a $1,000 guaranteed prize pool.',
+    // No site or page of its own found; this is the venue's listing.
+    website: 'https://www.centralhotelshellharbour.com.au/whats-on/jpl-jacks-poker-league-.html',
+    // Initials tile: no league logo found. Replace with a real mark.
+    mark: {
+      iconSrc: '/images/rooms/jacks-poker-league-icon.webp',
+      primary: '#DFA95A',
+      iconBg: '#0E0E0E',
+    },
+  },
   // APL's own site states no figures; these are from its owner's page,
   // fullhousevenues.com.au/products/apl. States are those its venues and
   // series are in on this calendar and playapl.com's venue pages.
