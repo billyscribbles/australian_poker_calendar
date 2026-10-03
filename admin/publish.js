@@ -462,10 +462,11 @@ function bindEditor(kind, record) {
           selector: '#ed-body',
           base_url: new URL('vendor/tinymce', location.href).pathname,
           suffix: '.min',
-          skin: 'oxide-dark',
-          content_css: 'dark',
+          // White editing area with dark text, and text from the left edge.
+          skin: 'oxide',
+          content_css: 'default',
           content_style:
-            'body{font-family:Barlow,system-ui,sans-serif;font-size:17px;line-height:1.7;max-width:760px;margin:16px auto;padding:0 8px} img{max-width:100%;height:auto} blockquote{border-left:3px solid #DFA95A;margin-left:0;padding-left:16px;color:#aaa}',
+            'body{font-family:Barlow,system-ui,sans-serif;font-size:17px;line-height:1.7;color:#1a1a1a;background:#fff;margin:16px 20px} img{max-width:100%;height:auto} blockquote{border-left:3px solid #DFA95A;margin-left:0;padding-left:16px;color:#555}',
           plugins: 'lists link image table code autolink autoresize',
           toolbar:
             'blocks | bold italic underline strikethrough | link image | bullist numlist blockquote table | alignleft aligncenter alignright | removeformat code',
