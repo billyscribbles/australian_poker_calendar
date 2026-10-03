@@ -1,17 +1,21 @@
 // POST /api/enquiry: where the contact and venue forms send their submission.
 //
-// The record is saved to the store first, so the admin dashboard has it even
-// if nothing else works, then forwarded to Formspree (which emails it) when a
-// form id is configured. Mounted by server/index.mjs and the dev server.
+// The record, and any files sent with it, are saved to the store, where the
+// admin dashboard's Enquiries section reads them. Nothing is emailed yet: an
+// email server can be hooked in here later, after the save, and flip the
+// record's `emailed` flag with store.updateEnquiry. Mounted by
+// server/index.mjs and the dev server.
 //
 // The browser posts multipart/form-data (a FormData body, with the venue
 // form's PDF and image uploads in it), so this parses that and urlencoded
-// bodies itself; no dependencies. The files are not kept: the body is passed
-// to Formspree as it came, so they land in the inbox, and the record keeps
-// their names.
+// bodies itself; no dependencies. An upload is kept only when its first bytes
+// say it is a PDF or a PNG, JPEG, GIF or WebP image; anything else keeps just
+// its name.
+
+import { sniff } from './media.mjs'
 
 const MAX_BODY = 48 * 1024 * 1024 // the form allows 10 MB a file
-const FORMSPREE = 'https://formspree.io/f/'
+const MAX_FILE = 10 * 1024 * 1024 // the form's own cap
 
 function readBody(req) {
   return new Promise((resolve, reject) => {
@@ -31,7 +35,15 @@ function readBody(req) {
   })
 }
 
-/** Text fields of a multipart body, plus the names of any files in it. */
+/** What an upload really is, by its bytes: { ext, type } or null. */
+function attachmentType(data) {
+  if (!data.length || data.length > MAX_FILE) return null
+  if (data.toString('latin1', 0, 5) === '%PDF-') return { ext: 'pdf', type: 'application/pdf' }
+  const hit = sniff(data)
+  return hit?.kind === 'image' ? { ext: hit.ext, type: hit.type } : null
+}
+
+/** Text fields of a multipart body, plus the files in it. */
 function parseMultipart(body, boundary) {
   const fields = {}
   const files = []
@@ -44,7 +56,14 @@ function parseMultipart(body, boundary) {
     if (!name) continue
     const filename = head.match(/filename="([^"]*)"/)?.[1]
     if (filename !== undefined) {
-      if (filename) files.push(Buffer.from(filename, 'latin1').toString('utf8'))
+      if (!filename) continue
+      const data = Buffer.from(part.slice(split + 4).replace(/\r\n$/, ''), 'latin1')
+      const kind = attachmentType(data)
+      files.push({
+        name: Buffer.from(filename, 'latin1').toString('utf8'),
+        field: name,
+        ...(kind && { ...kind, data }),
+      })
       continue
     }
     const value = part.slice(split + 4).replace(/\r\n$/, '')
@@ -78,28 +97,9 @@ function json(res, code, value) {
 /**
  * @param {object} options
  * @param {ReturnType<typeof import('./store.mjs').createStore>} options.store
- * @param {string} [options.formspreeId]  overrides VITE_FORMSPREE_ID
- * @param {typeof fetch} [options.fetch]   for tests
  * @returns {(req, res) => boolean} true when the request was for the API and has been answered
  */
-export function createApiHandler({ store, formspreeId, fetch: doFetch = globalThis.fetch }) {
-  const id = formspreeId ?? process.env.VITE_FORMSPREE_ID ?? ''
-
-  /** The body as it arrived, so uploads travel with it. */
-  async function forward(req, body) {
-    if (!id) return false
-    try {
-      const res = await doFetch(`${FORMSPREE}${id}`, {
-        method: 'POST',
-        headers: { Accept: 'application/json', 'Content-Type': req.headers['content-type'] },
-        body,
-      })
-      return res.ok
-    } catch {
-      return false
-    }
-  }
-
+export function createApiHandler({ store }) {
   return function handleApi(req, res) {
     const pathname = new URL(req.url, 'http://localhost').pathname
     if (pathname !== '/api/enquiry') return false
@@ -109,7 +109,7 @@ export function createApiHandler({ store, formspreeId, fetch: doFetch = globalTh
       return true
     }
     readBody(req).then(
-      async (body) => {
+      (body) => {
         let fields, files
         try {
           ;({ fields, files } = parseBody(req, body))
@@ -121,9 +121,7 @@ export function createApiHandler({ store, formspreeId, fetch: doFetch = globalTh
         const form = fields.form === 'venue' ? 'venue' : 'contact'
         const record = store.addEnquiry({ form, fields, files, page: req.headers.referer || '' })
         if (!record) return json(res, 400, { error: 'empty' })
-        const emailed = await forward(req, body)
-        if (emailed) store.updateEnquiry(record.id, { emailed: true })
-        json(res, 200, { ok: true, id: record.id, emailed })
+        json(res, 200, { ok: true, id: record.id })
       },
       () => json(res, 413, { error: 'too-large' }),
     )

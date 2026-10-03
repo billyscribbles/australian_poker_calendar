@@ -114,7 +114,6 @@ export const site = {
   },
 
   integrations: {
-    formspreeId: import.meta.env.VITE_FORMSPREE_ID || '',
     gaId: import.meta.env.VITE_GA_ID || '',
 
     // Site-ownership proofs for Google Search Console and Bing Webmaster

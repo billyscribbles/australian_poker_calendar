@@ -43,7 +43,7 @@ export const venueForm = {
     message: 'What would you like featured?',
   },
   // The upload sections under the fields. Each `name` is the field the file
-  // lands in on the Formspree submission. Files are checked in the browser
+  // lands in on the submission, kept with the enquiry in the dashboard. Files are checked in the browser
   // before they leave it — see src/lib/uploadCheck.js.
   uploads: {
     heading: 'Artwork and files',

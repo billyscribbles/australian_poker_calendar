@@ -10,6 +10,7 @@
 //                         so content edits show up on refresh
 //   api/enquiries         every form submission in the store, newest first
 //   api/enquiries/<id>    POST {handled: true|false} to tick one off
+//   api/enquiries/<id>/files/<file>   a file sent with that enquiry
 //   api/traffic?days=30   the daily page-view tally
 //
 // and the Publish section's endpoints (server/content.mjs, server/media.mjs):
@@ -523,6 +524,26 @@ export function createAdminHandler({
 
     if (req.method !== 'GET' && req.method !== 'HEAD') {
       send(res, 405, 'Method Not Allowed')
+      return true
+    }
+
+    const sent = rest.match(/^api\/enquiries\/([a-z0-9]+)\/files\/([0-9]+\.[a-z]+)$/)
+    if (sent) {
+      const file = store?.attachment(sent[1], sent[2])
+      if (!file) {
+        send(res, 404, 'No such file')
+        return true
+      }
+      // Served as the sender's own file: never sniffed, never run as a page.
+      res.writeHead(200, {
+        'Content-Type': file.type,
+        'Content-Disposition': `inline; filename*=UTF-8''${encodeURIComponent(file.name)}`,
+        'X-Content-Type-Options': 'nosniff',
+        'Content-Security-Policy': "default-src 'none'; img-src 'self'; style-src 'unsafe-inline'",
+        'Cache-Control': 'private, no-store',
+      })
+      if (req.method === 'HEAD') res.end()
+      else createReadStream(file.path).pipe(res)
       return true
     }
 

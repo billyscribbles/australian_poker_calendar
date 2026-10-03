@@ -10,7 +10,7 @@ export const ENQUIRY_ENDPOINT = '/api/enquiry'
  * Returns the form status and an onSubmit handler. The handler drops
  * submissions whose honeypot (`_gotcha`) is filled, posts the form's own
  * fields to the site's own /api/enquiry (which saves the enquiry for the
- * admin dashboard and emails it on through Formspree), and counts the
+ * admin dashboard, files and all), and counts the
  * conversion only once the server accepts it.
  *
  * @param {'contact'|'venue'} form  which form this is; the dashboard files it under that

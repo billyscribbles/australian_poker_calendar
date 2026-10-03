@@ -5,7 +5,7 @@ import UploadField from './UploadField.jsx'
 import './VenueForm.css'
 
 // The poker-room listing form, rendered by the page at venueForm.path. Same
-// Formspree inbox as the contact page; the hidden topic and subject fields
+// dashboard inbox as the contact page; the hidden topic and subject fields
 // mark it as a listing request so it is easy to triage.
 export default function VenueForm() {
   const { status, handleSubmit } = useEnquiry('venue', 'venue-form')
@@ -40,7 +40,7 @@ export default function VenueForm() {
         </div>
       </fieldset>
 
-      {/* Honeypot — visually hidden, labelled for AT, ignored by Formspree
+      {/* Honeypot — visually hidden, labelled for AT, dropped by the server
           when filled. Bots that fill every field get caught here. */}
       <label className="venue-form__honeypot">
         Leave this field empty

@@ -126,24 +126,21 @@ Google sees two complete copies of the site.
 All `VITE_*` vars are **build-time** — Vite inlines them into the bundle. Changing
 one has no effect until the next build, so always redeploy after editing.
 
-| Variable            | Staging                                          | Production                            |
-| ------------------- | ------------------------------------------------ | ------------------------------------- |
-| `VITE_SITE_URL`     | the staging `*.up.railway.app` URL               | `https://australianpokercalendar.com` |
-| `VITE_FORMSPREE_ID` | a **separate** Formspree form, or blank          | the real form                         |
-| `VITE_GA_ID`        | **blank** — never pollute real analytics         | the real `G-XXXXXXXXXX`               |
-| `VITE_SENTRY_DSN`   | optional; useful for catching errors pre-release | the DSN if used                       |
-| `VITE_NOINDEX`      | `true` — keeps staging out of search             | **never set**                         |
+| Variable          | Staging                                          | Production                            |
+| ----------------- | ------------------------------------------------ | ------------------------------------- |
+| `VITE_SITE_URL`   | the staging `*.up.railway.app` URL               | `https://australianpokercalendar.com` |
+| `VITE_GA_ID`      | **blank** — never pollute real analytics         | the real `G-XXXXXXXXXX`               |
+| `VITE_SENTRY_DSN` | optional; useful for catching errors pre-release | the DSN if used                       |
+| `VITE_NOINDEX`    | `true` — keeps staging out of search             | **never set**                         |
 
 `VITE_SITE_URL` drives canonical/OG tags and the post-build rewrite of
 `sitemap.xml` / `robots.txt` (`scripts/gen-seo-files.mjs`). Pointing staging at
 the production domain would publish canonicals claiming to _be_ production — set
 it to the staging URL.
 
-Give staging its own Formspree form (or leave it blank) so test submissions never
-hit the real inbox. The browser never talks to Formspree: both forms post to the
-site's own `/api/enquiry`, which saves the enquiry for the dashboard and then
-emails it on through Formspree, so `VITE_FORMSPREE_ID` is also read by the
-server at run time.
+Both forms post to the site's own `/api/enquiry`, which saves the enquiry and
+any files sent with it under `DATA_DIR` for the dashboard's Enquiries section.
+Nothing is emailed yet; staging and production each keep their own.
 
 ### Run-time variables and the data volume
 
@@ -157,7 +154,7 @@ volume** (service → Settings → Volumes) mounted at `/data`, with
 `DATA_DIR=/data`. This is required, not advisable: the volume holds every story
 and short published from the dashboard and every image and video uploaded for
 them. Without one, a push erases all of it, along with the enquiries and the
-traffic tally (the email copy of each enquiry still arrives via Formspree).
+traffic tally. Enquiries are not emailed anywhere, so the volume is their only copy.
 
 ```bash
 railway volume add -m /data -e staging

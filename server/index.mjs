@@ -44,7 +44,7 @@ const PORT = Number(process.env.PORT) || 4173
 // Enquiries and the traffic tally, as files under DATA_DIR (a Railway volume
 // in production; .data/ locally). See server/store.mjs.
 const store = createStore()
-// The forms post here; the record is saved, then emailed via Formspree.
+// The forms post here; the record and its files are saved for the dashboard.
 const api = createApiHandler({ store })
 // The dashboard at /admin. Local connections only unless ADMIN_PASSWORD is
 // set; see admin/handler.mjs.

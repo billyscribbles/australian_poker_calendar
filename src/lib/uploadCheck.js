@@ -1,11 +1,12 @@
 // Client-side gate for the listing form's uploads.
 //
-// The site is static and the files go straight from the browser to Formspree,
-// so nothing here can run a real virus scan. What it can do is refuse the
+// The files go to the site's own /api/enquiry, which keeps only a real PDF or
+// image (by its bytes) for the dashboard. Nothing runs a virus scan, so this
+// refuses the
 // easy cases before they leave the browser: a file that is not really a PDF or
 // an image whatever its name says, a PDF carrying JavaScript or launch
 // actions, an SVG carrying a script, and anything over the size cap. Whoever
-// opens the attachments in the inbox still relies on their own scanner.
+// opens the attachments in the dashboard still relies on their own scanner.
 
 export const MAX_UPLOAD_BYTES = 10 * 1024 * 1024
 

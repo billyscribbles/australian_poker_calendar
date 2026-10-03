@@ -1,5 +1,5 @@
 /// <reference types="vitest/config" />
-import { defineConfig, loadEnv } from 'vite'
+import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { visualizer } from 'rollup-plugin-visualizer'
 import { theme } from './src/config/theme.config.js'
@@ -69,12 +69,10 @@ function webfonts() {
  * the page as the production server writes them, so `yarn dev` shows them
  * (client-rendered, as everything is in dev) instead of the demo cards.
  */
-function admin(mode) {
+function admin() {
   const store = createStore()
-  // Vite keeps .env out of process.env; the forms' Formspree id lives there.
-  const { VITE_FORMSPREE_ID: formspreeId = '' } = loadEnv(mode, process.cwd(), 'VITE_')
   const handlers = [
-    createApiHandler({ store, formspreeId }),
+    createApiHandler({ store }),
     createAdminHandler({ store }),
     createMediaHandler({ dir: store.content.mediaDir }),
   ]
@@ -104,11 +102,11 @@ const analyze = process.env.ANALYZE === 'true'
 // with --ssr for src/entry-prerender.jsx, whose output scripts/prerender.mjs
 // imports to render every route to static HTML. The two passes want different
 // rollup output, so the config is a function of the build kind.
-export default defineConfig(({ isSsrBuild, mode }) => ({
+export default defineConfig(({ isSsrBuild }) => ({
   plugins: [
     react(),
     webfonts(),
-    admin(mode),
+    admin(),
     analyze && visualizer({ filename: 'dist/bundle-stats.html', gzipSize: true }),
   ].filter(Boolean),
   preview: {

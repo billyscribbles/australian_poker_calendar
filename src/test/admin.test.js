@@ -63,6 +63,30 @@ describe('admin handler', () => {
     expect(traffic.totals.views).toBeGreaterThanOrEqual(1)
   })
 
+  it('serves a file sent with an enquiry, only behind the sign-in', async () => {
+    const { id } = store.addEnquiry({
+      form: 'venue',
+      fields: { email: 'a@b.c', message: 'poster' },
+      files: [
+        {
+          name: 'poster.pdf',
+          field: 'poster',
+          ext: 'pdf',
+          type: 'application/pdf',
+          data: Buffer.from('%PDF-1.4 x'),
+        },
+      ],
+    })
+    const res = await fetch(`${open.base}/admin/api/enquiries/${id}/files/1.pdf`)
+    expect(res.status).toBe(200)
+    expect(res.headers.get('content-type')).toBe('application/pdf')
+    expect(res.headers.get('x-content-type-options')).toBe('nosniff')
+    expect(res.headers.get('content-disposition')).toContain('poster.pdf')
+    expect(await res.text()).toBe('%PDF-1.4 x')
+    expect((await fetch(`${open.base}/admin/api/enquiries/${id}/files/2.pdf`)).status).toBe(404)
+    expect((await fetch(`${locked.base}/admin/api/enquiries/${id}/files/1.pdf`)).status).toBe(401)
+  })
+
   it('reads empty enquiries and no traffic without a store', async () => {
     const bare = await serve(createAdminHandler({ password: '' }))
     try {

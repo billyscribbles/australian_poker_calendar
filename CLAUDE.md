@@ -19,7 +19,7 @@ are load-bearing. Break them and the site silently stops being crawlable.
 - Plain CSS with CSS variables, **no Tailwind** or CSS-in-JS
 - Framer Motion 11, Lucide React icons
 - Yarn 4 with `.pnp` caching, Node 22 (`.nvmrc`)
-- `react-helmet-async` for per-page SEO; the forms post to the site's own `/api/enquiry`, which saves them and emails them on through Formspree
+- `react-helmet-async` for per-page SEO; the forms post to the site's own `/api/enquiry`, which saves them (and their uploaded files) for the dashboard; nothing is emailed yet
 - Railway deployment: `yarn start` runs `server/index.mjs`, a dependency-free Node static server (NOT `vite preview`). It also answers the forms, counts page views, serves the dashboard and renders the published stories live; `server/store.mjs` keeps enquiries, the daily traffic tally, and the dashboard's stories, shorts and uploaded media under `DATA_DIR` (`.data/` locally, a volume on Railway, required: without it a redeploy erases every published story)
 - `tinymce@6.8.6` (MIT; never 7 or later, which is GPL or paid) is the dashboard's article editor, served from the package by `admin/handler.mjs` and marked `unplugged` in `package.json` so PnP leaves real files on disk
 - ESLint flat config + Prettier; Vitest contract suite with axe
@@ -66,8 +66,8 @@ scripts/                  prerender.mjs, gen-seo-files.mjs, gen-icons.mjs, gen-t
 admin/                    the dashboard at /admin (handler.mjs, mounted by the site and dev servers;
                           publish.js + publish.css are the Publish section's editors)
 server/index.mjs          production server: prerendered docs, live pages, media, real 404s, CSP
-server/api.mjs            POST /api/enquiry: saves the form submission, forwards it to Formspree
-server/store.mjs          enquiries.json and traffic/<day>.json under DATA_DIR
+server/api.mjs            POST /api/enquiry: saves the form submission and its PDF/image uploads
+server/store.mjs          enquiries.json, attachments/<id>/ and traffic/<day>.json under DATA_DIR
 server/content.mjs        stories.json, shorts.json and media/ under DATA_DIR
 server/media.mjs          streamed uploads (type by bytes, size caps) and /media with Range
 server/render.mjs         renders /, /stories and /stories/<slug> at request time
@@ -96,8 +96,8 @@ non-technical editor, with a Back to website link at the top. Sections:
   real item in that section is published. A story's address follows its title
   while it is a draft and locks once published. Delete removes the record's
   own hero, thumb, video and poster, never images inside a body.
-- **Enquiries**: everything the contact and venue forms received, with Reply and
-  Mark handled. **Traffic**: page views, visitors, top pages and referrers,
+- **Enquiries**: everything the contact and venue forms received, with the
+  uploaded files to open, Reply and Mark handled. **Traffic**: page views, visitors, top pages and referrers,
   counted by the server (no cookies, no consent needed).
 - **Website**: what the home page and calendar page currently show, the data
   files, and organiser contacts.

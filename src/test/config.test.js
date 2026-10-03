@@ -37,7 +37,6 @@ describe('site.config — brand identity contract', () => {
   })
 
   it('integrations keys exist (values may be empty until env is set)', () => {
-    expect(site.integrations).toHaveProperty('formspreeId')
     expect(site.integrations).toHaveProperty('gaId')
   })
 })

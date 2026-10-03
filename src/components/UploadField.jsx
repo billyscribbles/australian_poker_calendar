@@ -35,7 +35,7 @@ export default function UploadField({ section }) {
   const [errors, setErrors] = useState([])
   const [dragging, setDragging] = useState(false)
 
-  // The form resets itself after Formspree accepts it; follow suit.
+  // The form resets itself after the server accepts it; follow suit.
   useEffect(() => {
     const form = inputRef.current?.form
     if (!form) return

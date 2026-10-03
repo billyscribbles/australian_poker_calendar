@@ -31,7 +31,7 @@ export default function Contact() {
             <textarea name="message" rows="5" required />
           </label>
 
-          {/* Honeypot — visually hidden, labelled for AT, ignored by Formspree
+          {/* Honeypot — visually hidden, labelled for AT, dropped by the server
               when filled. Bots that fill every field get caught here. */}
           <label className="contact__honeypot">
             Leave this field empty

@@ -839,6 +839,18 @@ function roomDetail(code) {
 
 const FORM_LABEL = { contact: 'Contact form', venue: 'Venue listing' }
 
+/** One file sent with an enquiry: a link to open it, or its name if it was not kept. */
+function attachmentLink(e, f) {
+  // Records saved before attachments were kept hold just the file name.
+  if (typeof f === 'string' || !f.file) {
+    const why = typeof f === 'string' ? 'not kept' : 'not kept: not a PDF or image'
+    return `<span class="tag" title="${why}">${esc(f.name ?? f)}</span>`
+  }
+  const href = `api/enquiries/${encodeURIComponent(e.id)}/files/${encodeURIComponent(f.file)}`
+  const kb = Math.max(1, Math.round(f.size / 1024))
+  return `<a class="tag" href="${href}" target="_blank" rel="noopener">${esc(f.name)} <span class="muted">${kb < 1024 ? `${kb} KB` : `${(kb / 1024).toFixed(1)} MB`}</span></a>`
+}
+
 function enquiryCard(e) {
   return `<article class="card enquiry ${e.handled ? 'is-handled' : ''}" data-id="${esc(e.id)}">
     <div class="enquiry__head">
@@ -851,10 +863,9 @@ function enquiryCard(e) {
     <div class="enquiry__meta">
       ${pill(e.form === 'venue' ? 'neutral' : 'muted', FORM_LABEL[e.form] || e.form)}
       ${e.handled ? pill('good', 'handled') : pill('warning', 'new')}
-      ${e.emailed ? '' : '<span class="tag" title="Formspree did not accept it; it is only here">not emailed</span>'}
     </div>
     <p class="enquiry__message">${esc(e.message)}</p>
-    ${e.files?.length ? `<p class="sub">Attached: ${e.files.map((f) => `<span class="tag">${esc(f)}</span>`).join(' ')} <span class="muted">(in the email)</span></p>` : ''}
+    ${e.files?.length ? `<p class="sub">Attached: ${e.files.map((f) => attachmentLink(e, f)).join(' ')}</p>` : ''}
     <div class="enquiry__foot">
       <span class="meta">${esc(fmtWhen(e.receivedAt))}${e.page ? ` · from ${esc(e.page.replace(/^https?:\/\/[^/]+/, '') || '/')}` : ''}</span>
       <span class="enquiry__actions">
@@ -877,7 +888,7 @@ function enquiriesView() {
   })
   const open = openEnquiries().length
   return `
-    ${pageHead('Enquiries', `Everything sent through the contact form and the venue listing form. ${open ? `<strong>${open} waiting for a reply.</strong>` : 'Nothing waiting.'} Each one is also emailed to the inbox.`)}
+    ${pageHead('Enquiries', `Everything sent through the contact form and the venue listing form. ${open ? `<strong>${open} waiting for a reply.</strong>` : 'Nothing waiting.'} They are saved here; nothing is emailed yet.`)}
     <div class="filters">
       <label class="field"><span>Search</span><input type="search" id="e-q" value="${esc(f.q)}" placeholder="name, email or words in the message"></label>
       <label class="field"><span>Show</span><select id="e-show">${opt('open', 'New', f.show)}${opt('handled', 'Handled', f.show)}${opt('', 'Everything', f.show)}</select></label>

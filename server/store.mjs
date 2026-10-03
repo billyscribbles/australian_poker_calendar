@@ -10,6 +10,7 @@
 //   .data/
 //   ├── salt                  random, generated once, keys the visitor hashes
 //   ├── enquiries.json        every submission, newest last
+//   ├── attachments/<id>/     the files sent with a submission (venue form uploads)
 //   ├── traffic/2026-10-03.json   one tally per Melbourne day
 //   ├── stories.json, shorts.json   the dashboard's published content (server/content.mjs)
 //   └── media/                uploaded images and video (server/media.mjs)
@@ -31,6 +32,8 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 
 const FORMS = new Set(['contact', 'venue'])
 const MAX_FIELD = 4000
+const MAX_FILES = 20
+const ATTACHMENT = /^[0-9]+\.(pdf|png|jpg|gif|webp)$/
 const MAX_ENQUIRIES = 5000
 const CRAWLER =
   /bot|crawl|spider|slurp|lighthouse|headless|preview|fetch|monitor|curl|wget|python|java|go-http|facebookexternalhit|whatsapp|telegram|discord|skype|slack/i
@@ -70,6 +73,7 @@ const clip = (s) => String(s ?? '').slice(0, MAX_FIELD)
  */
 export function createStore({ dir = process.env.DATA_DIR || join(ROOT, '.data') } = {}) {
   const enquiriesFile = join(dir, 'enquiries.json')
+  const attachmentsDir = join(dir, 'attachments')
   const trafficDir = join(dir, 'traffic')
   const saltFile = join(dir, 'salt')
 
@@ -93,8 +97,10 @@ export function createStore({ dir = process.env.DATA_DIR || join(ROOT, '.data') 
   }
 
   /**
-   * Saves one form submission.
-   * @param {{form: string, fields: Record<string, string>, files?: string[], page?: string}} input
+   * Saves one form submission and the files sent with it.
+   * @param {{form: string, fields: Record<string, string>, files?: Array<{name: string, field?: string, type?: string, ext?: string, data?: Buffer}>, page?: string}} input
+   *   A file with `data` and `ext` is written under attachments/<id>/; one
+   *   without (a type the server refused) keeps only its name.
    * @returns {object|null} the saved record, or null when the form is unknown
    *   or has nothing to say
    */
@@ -103,8 +109,20 @@ export function createStore({ dir = process.env.DATA_DIR || join(ROOT, '.data') 
     const message = clip(fields.message).trim()
     const email = clip(fields.email).trim()
     if (!message && !email) return null
+    const id = `${Date.now().toString(36)}${randomBytes(3).toString('hex')}`
+    const kept = files.slice(0, MAX_FILES).map((f, i) => {
+      const entry = {
+        name: clip(f.name).slice(0, 200),
+        field: clip(f.field).slice(0, 40),
+      }
+      if (!f.data || !f.ext) return { ...entry, refused: true }
+      const file = `${i + 1}.${f.ext}`
+      mkdirSync(join(attachmentsDir, id), { recursive: true })
+      writeFileSync(join(attachmentsDir, id, file), f.data)
+      return { ...entry, file, type: f.type, size: f.data.length }
+    })
     const record = {
-      id: `${Date.now().toString(36)}${randomBytes(3).toString('hex')}`,
+      id,
       receivedAt: new Date().toISOString(),
       form,
       name: clip(fields.name || fields.venue).trim(),
@@ -112,7 +130,7 @@ export function createStore({ dir = process.env.DATA_DIR || join(ROOT, '.data') 
       message,
       subject: clip(fields._subject).trim(),
       topic: clip(fields.topic).trim(),
-      files: files.slice(0, 20).map((f) => clip(f).slice(0, 200)),
+      files: kept,
       page: clip(page).slice(0, 300),
       emailed: false,
       handled: false,
@@ -121,6 +139,16 @@ export function createStore({ dir = process.env.DATA_DIR || join(ROOT, '.data') 
     list.push(record)
     writeJson(enquiriesFile, list.slice(-MAX_ENQUIRIES))
     return record
+  }
+
+  /** One saved attachment: its path on disk and type, or null. */
+  function attachment(id, file) {
+    if (!/^[a-z0-9]+$/.test(id) || !ATTACHMENT.test(file)) return null
+    const entry = readEnquiries()
+      .find((e) => e.id === id)
+      ?.files?.find((f) => f.file === file)
+    const path = join(attachmentsDir, id, file)
+    return entry && existsSync(path) ? { path, type: entry.type, name: entry.name } : null
   }
 
   /** Newest first. */
@@ -277,5 +305,15 @@ export function createStore({ dir = process.env.DATA_DIR || join(ROOT, '.data') 
   // Stories, shorts and their media: the dashboard's publishing records.
   const content = createContentStore({ dir })
 
-  return { dir, content, addEnquiry, listEnquiries, updateEnquiry, recordView, traffic, flush }
+  return {
+    dir,
+    content,
+    addEnquiry,
+    listEnquiries,
+    updateEnquiry,
+    attachment,
+    recordView,
+    traffic,
+    flush,
+  }
 }

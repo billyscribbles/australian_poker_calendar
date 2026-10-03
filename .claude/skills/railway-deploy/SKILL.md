@@ -35,7 +35,6 @@ first — production is never the default target.
    the service Railway provisions.
 5. **Set environment variables** with `mcp__railway__set-variables` — mirror the
    site's `.env`:
-   - `VITE_FORMSPREE_ID` — required for the contact form
    - `VITE_SITE_URL` — required; the build templates `sitemap.xml`/`robots.txt`
      from it via `scripts/gen-seo-files.mjs`
    - `VITE_GA_ID` — only if analytics is wanted
@@ -63,7 +62,7 @@ first — production is never the default target.
 
 1. Every route loads: `/`, `/services`, `/about`, `/contact`, `/privacy`,
    `/terms`, and a 404 path.
-2. The contact form submits against the real Formspree endpoint.
+2. A test contact form submission appears under Enquiries in `/admin`.
 3. `sitemap.xml` and `robots.txt` show the real domain (not `example.com`).
 4. Re-run a Lighthouse check on the live URL.
 

@@ -71,7 +71,7 @@ export const legacyRedirects = {
  * Extra Content-Security-Policy sources, per directive.
  *
  * The baseline in server/index.mjs covers what the template itself loads —
- * Google Fonts, GA4 and Formspree. A page that adds an embed (a booking
+ * Google Fonts and GA4. A page that adds an embed (a booking
  * widget, a map, a video player) has to name its origins here or the browser
  * blocks them, silently, in production only.
  *

@@ -30,7 +30,7 @@ yarn dev                  # http://localhost:5173
 | `/poker-calendar/2027` | Same document for 2027                                                                                                                                |
 | `/where-to-play`       | Every venue the series are dealt at, by state, with address, operator marks and a link out (`src/content/whereToPlay.js`)                             |
 | `/players`             | Players holding page (noindex until the first rankings land)                                                                                          |
-| `/about`, `/contact`   | About and contact (Formspree form)                                                                                                                    |
+| `/about`, `/contact`   | About and contact (saved to /admin)                                                                                                                   |
 | `/privacy`, `/terms`   | Legal, rendered from `src/content/legal.js`                                                                                                           |
 | anything else          | A real 404 document, served with a 404 status                                                                                                         |
 
@@ -105,13 +105,12 @@ when it is.
 
 All `VITE_*` variables are inlined at build time. Change one, rebuild.
 
-| Variable            | Purpose                                                          |
-| ------------------- | ---------------------------------------------------------------- |
-| `VITE_SITE_URL`     | Canonical origin for meta tags, sitemap and robots               |
-| `VITE_FORMSPREE_ID` | Where the server emails form submissions on to (optional)        |
-| `VITE_GA_ID`        | GA4 measurement ID. Loads only after cookie consent              |
-| `VITE_SENTRY_DSN`   | Optional error reporting                                         |
-| `VITE_NOINDEX`      | `true` on staging only. Writes a Disallow-all robots and noindex |
+| Variable          | Purpose                                                          |
+| ----------------- | ---------------------------------------------------------------- |
+| `VITE_SITE_URL`   | Canonical origin for meta tags, sitemap and robots               |
+| `VITE_GA_ID`      | GA4 measurement ID. Loads only after cookie consent              |
+| `VITE_SENTRY_DSN` | Optional error reporting                                         |
+| `VITE_NOINDEX`    | `true` on staging only. Writes a Disallow-all robots and noindex |
 
 Two more are read by the server at run time, not the build: `ADMIN_PASSWORD`
 opens the `/admin` dashboard, and `DATA_DIR` is where it keeps enquiries and

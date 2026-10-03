@@ -1,9 +1,9 @@
-// Contract: POST /api/enquiry saves the submission before anything else,
-// forwards it to Formspree when an id is set, drops the honeypot, and leaves
-// every other path alone.
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+// Contract: POST /api/enquiry saves the submission and its PDF or image
+// uploads for the dashboard, keeps only the name of any other file, drops the
+// honeypot, and leaves every other path alone. Nothing is sent anywhere else.
+import { describe, it, expect, beforeEach, afterEach } from 'vitest'
 import { createServer } from 'node:http'
-import { mkdtempSync, rmSync } from 'node:fs'
+import { mkdtempSync, readFileSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { createStore } from '../../server/store.mjs'
@@ -22,30 +22,44 @@ function serve(handler) {
   })
 }
 
+// What the browser sends for a FormData with files in it.
+const boundary = '----apcTestBoundary'
+const part = (name, value, filename, type = 'application/pdf') =>
+  Buffer.concat([
+    Buffer.from(
+      `--${boundary}\r\nContent-Disposition: form-data; name="${name}"${filename ? `; filename="${filename}"\r\nContent-Type: ${type}` : ''}\r\n\r\n`,
+    ),
+    Buffer.isBuffer(value) ? value : Buffer.from(value),
+    Buffer.from('\r\n'),
+  ])
+
 describe('enquiry API', () => {
-  let dir, store, fetchMock, open
+  let dir, store, open
   beforeEach(async () => {
     dir = mkdtempSync(join(tmpdir(), 'apc-api-'))
     store = createStore({ dir })
-    fetchMock = vi.fn().mockResolvedValue({ ok: true })
-    open = await serve(createApiHandler({ store, formspreeId: 'abc123', fetch: fetchMock }))
+    open = await serve(createApiHandler({ store }))
   })
   afterEach(() => {
     open.server.close()
     rmSync(dir, { recursive: true, force: true })
   })
 
-  it('saves a FormData submission and forwards it to Formspree', async () => {
-    // What the browser sends for a FormData with one file in it.
-    const boundary = '----apcTestBoundary'
-    const part = (name, value, filename) =>
-      `--${boundary}\r\nContent-Disposition: form-data; name="${name}"${filename ? `; filename="${filename}"\r\nContent-Type: application/pdf` : ''}\r\n\r\n${value}\r\n`
-    const body =
-      part('name', 'Ada') +
-      part('email', 'ada@example.com') +
-      part('message', 'Hello there') +
-      part('schedule', '%PDF-1.4 fake', 'schedule.pdf') +
-      `--${boundary}--\r\n`
+  it('saves a FormData submission and keeps its PDF and image byte for byte', async () => {
+    // A PNG header plus bytes that are not valid UTF-8, to prove they survive.
+    const png = Buffer.from([
+      0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0, 0xff, 0xfe, 0x80, 1, 2,
+    ])
+    const body = Buffer.concat([
+      part('form', 'venue'),
+      part('venue', 'Crown'),
+      part('email', 'ada@example.com'),
+      part('message', 'Hello there'),
+      part('schedule', '%PDF-1.4 fake schedule', 'schedule.pdf'),
+      part('poster', png, 'poster.png', 'image/png'),
+      part('logos', 'MZ not an image', 'evil.png', 'image/png'),
+      Buffer.from(`--${boundary}--\r\n`),
+    ])
     const res = await fetch(`${open.base}/api/enquiry`, {
       method: 'POST',
       body,
@@ -55,52 +69,42 @@ describe('enquiry API', () => {
       },
     })
     expect(res.status).toBe(200)
-    expect(await res.json()).toMatchObject({ ok: true, emailed: true })
+    expect(await res.json()).toMatchObject({ ok: true })
     const [saved] = store.listEnquiries()
     expect(saved).toMatchObject({
-      form: 'contact',
-      name: 'Ada',
+      form: 'venue',
+      name: 'Crown',
       email: 'ada@example.com',
       message: 'Hello there',
       page: 'https://example.com/contact',
-      files: ['schedule.pdf'],
-      emailed: true,
+      files: [
+        { name: 'schedule.pdf', field: 'schedule', file: '1.pdf', type: 'application/pdf' },
+        { name: 'poster.png', field: 'poster', file: '2.png', type: 'image/png', size: png.length },
+        { name: 'evil.png', field: 'logos', refused: true },
+      ],
     })
-    // Forwarded as it arrived, so the upload reaches the inbox.
-    expect(fetchMock).toHaveBeenCalledTimes(1)
-    const [url, init] = fetchMock.mock.calls[0]
-    expect(url).toBe('https://formspree.io/f/abc123')
-    expect(init.headers['Content-Type']).toMatch(/^multipart\/form-data; boundary=/)
-    const raw = init.body.toString()
-    expect(raw).toContain('Hello there')
-    expect(raw).toContain('%PDF-1.4 fake')
+    expect(saved.files[2]).not.toHaveProperty('file')
+    const pdf = store.attachment(saved.id, '1.pdf')
+    expect(readFileSync(pdf.path, 'utf8')).toBe('%PDF-1.4 fake schedule')
+    expect(readFileSync(store.attachment(saved.id, '2.png').path).equals(png)).toBe(true)
+    expect(store.attachment(saved.id, '3.png')).toBeNull()
+    expect(store.attachment(saved.id, '../enquiries.json')).toBeNull()
   })
 
-  it('reads the venue form by its form field and keeps the record when email fails', async () => {
-    fetchMock.mockRejectedValue(new Error('offline'))
-    const res = await fetch(`${open.base}/api/enquiry`, {
+  it('saves a urlencoded or JSON submission', async () => {
+    await fetch(`${open.base}/api/enquiry`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: 'form=venue&venue=Crown&email=c@e.com&message=List+us&topic=venue-listing',
     })
-    expect(await res.json()).toMatchObject({ ok: true, emailed: false })
-    expect(store.listEnquiries()[0]).toMatchObject({ form: 'venue', name: 'Crown', emailed: false })
-  })
-
-  it('still saves when no Formspree id is set', async () => {
-    const quiet = await serve(createApiHandler({ store, formspreeId: '', fetch: fetchMock }))
-    try {
-      const res = await fetch(`${quiet.base}/api/enquiry`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: 'a@b.c', message: 'hi' }),
-      })
-      expect(await res.json()).toMatchObject({ ok: true, emailed: false })
-      expect(fetchMock).not.toHaveBeenCalled()
-      expect(store.listEnquiries()).toHaveLength(1)
-    } finally {
-      quiet.server.close()
-    }
+    await fetch(`${open.base}/api/enquiry`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: 'a@b.c', message: 'hi' }),
+    })
+    const [json, form] = store.listEnquiries()
+    expect(form).toMatchObject({ form: 'venue', name: 'Crown', files: [] })
+    expect(json).toMatchObject({ form: 'contact', email: 'a@b.c', message: 'hi' })
   })
 
   it('swallows the honeypot and rejects an empty body', async () => {
@@ -117,7 +121,6 @@ describe('enquiry API', () => {
     })
     expect(empty.status).toBe(400)
     expect(store.listEnquiries()).toEqual([])
-    expect(fetchMock).not.toHaveBeenCalled()
   })
 
   it('answers GET with 405 and leaves other paths alone', async () => {
