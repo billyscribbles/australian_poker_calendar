@@ -18,7 +18,7 @@ are load-bearing. Break them and the site silently stops being crawlable.
 - **Build-time prerender**: every route ships as a real HTML document that React hydrates
 - Plain CSS with CSS variables, **no Tailwind** or CSS-in-JS
 - Framer Motion 11, Lucide React icons
-- Yarn 4 with `.pnp` caching, Node 20 (`.nvmrc`)
+- Yarn 4 with `.pnp` caching, Node 22 (`.nvmrc`)
 - `react-helmet-async` for per-page SEO; the forms post to the site's own `/api/enquiry`, which saves them and emails them on through Formspree
 - Railway deployment: `yarn start` runs `server/index.mjs`, a dependency-free Node static server (NOT `vite preview`). It also answers the forms, counts page views and serves the dashboard; `server/store.mjs` keeps enquiries and the daily traffic tally as JSON under `DATA_DIR` (`.data/` locally, a volume on Railway)
 - ESLint flat config + Prettier; Vitest contract suite with axe

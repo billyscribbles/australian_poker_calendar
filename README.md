@@ -12,7 +12,7 @@ rules). Read `docs/ENVIRONMENTS.md` for how staging and production are released.
 
 ## Quick start
 
-Requires Node 20 (pinned in `.nvmrc`) and Yarn 4 via Corepack.
+Requires Node 22 (pinned in `.nvmrc`) and Yarn 4 via Corepack.
 
 ```bash
 corepack enable
