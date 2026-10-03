@@ -23,3 +23,6 @@ dist-ssr
 .claude/settings.local.json
 # Lighthouse CI's working directory from a local `lhci autorun`
 .lighthouseci/
+
+# Claude Code worktrees (EnterWorktree)
+.claude/worktrees/
