@@ -2389,17 +2389,17 @@
       "slug": "kings-poker-sydney-millions-kogarah-sydney-nsw",
       "tour_brand": "Kings Poker",
       "region": "NSW",
-      "start_date": "2026-10-27",
+      "start_date": "2026-10-26",
       "end_date": "2026-11-09",
-      "duration_days": 14,
-      "date_text": "October 27 - November 9",
+      "duration_days": 15,
+      "date_text": "October 26 - November 9",
       "listing_date_text": "27October2026 October 27 - November 9",
       "month_label": "Oct 2026",
       "organiser": {
         "name": "Kings Poker Sydney",
         "phone": "",
         "email": "",
-        "website": "https://kingspoker.com.au/"
+        "website": "https://kingsroom.com.au/"
       },
       "venue": {
         "name": "St. George Leagues Club",
@@ -2419,15 +2419,20 @@
       },
       "description": "",
       "details": {
-        "start": "October 27",
+        "start": "October 26",
         "end": "November 9",
-        "website": "https://kingspoker.com.au/"
+        "website": "https://kingsroom.com.au/series-schedule/"
       },
       "outlook_location": "St. George Leagues Club, 124 Princes Hwy, Kogarah, NSW, 2217, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {
-        "guarantee": "$4 Million+ series estimate",
-        "room": "Kings Room at St. George Leagues Club"
+        "guarantee": "$4 Million+ series estimate (over $1.5 Million guaranteed)",
+        "room": "Kings Room at St. George Leagues Club",
+        "buy_ins": "$220 – $3,500",
+        "main_event": "Main Event $2,000 (Flights B–G, $750K GTD)",
+        "colossus": "Colossus $750 (Flights A–F, $400K GTD)",
+        "source": "https://kingsroom.com.au/series-schedule/ (four schedule posters, 2026-10-04)",
+        "schedule_file": "data/kings-poker-sydney-millions-2026-schedule.json"
       }
     },
     {

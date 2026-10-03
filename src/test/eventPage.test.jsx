@@ -292,6 +292,14 @@ describeSeriesPage({
 })
 
 describeSeriesPage({
+  key: 'kingsSydneyMillions2026',
+  path: '/events/kings-poker-sydney-millions',
+  rows: 76,
+  days: 15,
+  sample: ['Main Event – Flight B', 'The Closing Event'],
+})
+
+describeSeriesPage({
   key: 'nplSuperSeries2026',
   path: '/events/npl-super-series-2026',
   rows: 4,
@@ -487,8 +495,8 @@ describe('EventPage — every other series on the calendar', () => {
     expect(event.city).toBe('Melbourne')
     expect(event.venue).toBe('Crown Melbourne')
     expect(eventFor('/events/apt-melbourne-champs-ii').venueDetail).toBe('Metropol, Sky Bar 28')
-    const seasoned = eventFor('/events/kings-poker-sydney-millions')
-    expect(seasoned.venue).toBe('St. George Leagues Club')
+    const seasoned = eventFor('/events/kings-cup-series-december-2026')
+    expect(seasoned.venue).toBe('Churchills Sports Bar')
     expect(seasoned.venueDetail).toBe('Sydney')
   })
 

@@ -504,10 +504,10 @@ const rows = [
   [
     'KINGS',
     'Kings Poker Sydney Millions',
-    '2026-10-27',
+    '2026-10-26',
     '2026-11-09',
     'Sydney, St. George Leagues Club',
-    'https://kingspoker.com.au/',
+    'https://kingsroom.com.au/series-schedule/',
   ],
   [
     'MATCHROOM',

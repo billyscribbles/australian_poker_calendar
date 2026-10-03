@@ -287,7 +287,7 @@ export const calendarPage = {
       {
         tour: 'KINGS',
         name: 'Kings Poker Sydney Millions',
-        dates: 'Oct 27 – Nov 9',
+        dates: 'Oct 26 – Nov 9',
         place: 'Sydney',
         prize: '$4M+ est.',
         href: '/events/kings-poker-sydney-millions',

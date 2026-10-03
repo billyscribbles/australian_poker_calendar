@@ -57,10 +57,10 @@ export const calendar = {
       href: '/events/apl-the-ville-600-townsville',
     },
     {
-      day: '27',
+      day: '26',
       month: 'OCT',
       name: 'Kings Poker Sydney Millions',
-      range: 'Oct 27 – Nov 9',
+      range: 'Oct 26 – Nov 9',
       venue: 'Sydney, St. George Leagues Club',
       href: '/events/kings-poker-sydney-millions',
     },
