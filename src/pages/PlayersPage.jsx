@@ -5,6 +5,7 @@ import { playersPage } from '../content/playersPage.js'
 import OutlineButton from '../components/OutlineButton.jsx'
 import GpiCredit from '../components/GpiCredit.jsx'
 import GpiBoardTabs from '../components/GpiBoardTabs.jsx'
+import PokerRooms from '../components/PokerRooms.jsx'
 import './PlayersPage.css'
 
 /** @typedef {import('../content/gpiRankings.js').GpiStanding} GpiStanding */
@@ -225,6 +226,12 @@ export default function PlayersPage() {
           </div>
         </div>
       </section>
+
+      {/* The marquee bleeds past its container's padding to the page edge, so
+          it needs a padded container to bleed out of. */}
+      <div className="container">
+        <PokerRooms />
+      </div>
     </main>
   )
 }
