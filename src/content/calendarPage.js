@@ -278,6 +278,13 @@ export const calendarPage = {
         href: '/events/victorian-poker-championship-2026',
       },
       {
+        tour: 'QUEENBS',
+        name: "Queen B's Wacky Week",
+        dates: 'Oct 13 – Oct 18',
+        place: 'Beenleigh',
+        href: '/events/queen-b-s-wacky-week',
+      },
+      {
         tour: 'APL',
         name: 'APL The Ville 600 Townsville',
         dates: 'Oct 18 – Oct 25',
