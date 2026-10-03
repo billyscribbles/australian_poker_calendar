@@ -321,27 +321,6 @@ const rows = [
     room: true,
     website: 'https://stackedsocial.com.au/',
   },
-  {
-    // Gambier Poker's home room: its weekly and monthly games, and (by its
-    // past festivals) the October Pokerfest.
-    name: 'The Globe Hotel',
-    street: '6 Ferrers Street',
-    suburb: 'Mount Gambier',
-    city: 'mount-gambier',
-    state: 'SA',
-    postcode: '5290',
-    tours: ['GAMBIER'],
-  },
-  {
-    name: 'The Junction',
-    street: '470 Anzac Highway',
-    suburb: 'Camden Park',
-    city: 'adelaide',
-    state: 'SA',
-    postcode: '5038',
-    tours: ['APLPT'],
-    website: 'https://www.mville.co/thejunction/',
-  },
 
   // Victoria
   {
