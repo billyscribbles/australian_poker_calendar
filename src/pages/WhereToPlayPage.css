@@ -69,14 +69,13 @@
   margin: -8px 0 24px;
 }
 
-/* "What is a poker league?": a full-width band above the league cards, the
+/* "What is a poker league?": a full-width band below the league cards, the
  * heading on the left and its points side by side. */
 .venues-explainer {
   display: grid;
   grid-template-columns: minmax(180px, 1fr) repeat(3, minmax(0, 2fr));
   gap: 32px;
   padding: 28px 32px;
-  margin-bottom: 32px;
   border: 1px solid var(--color-border);
   border-top: 2px solid var(--color-accent);
   border-radius: var(--radius-lg);

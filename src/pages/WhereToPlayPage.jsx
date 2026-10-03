@@ -257,14 +257,6 @@ export default function WhereToPlayPage() {
               <span className="venues-state__count">{leagues.countLabel(leagues.list.length)}</span>
             </div>
             <p className="venues-state__intro">{leagues.intro}</p>
-            <div className="venues-explainer">
-              <h3 className="venues-explainer__heading">{leagues.explainer.heading}</h3>
-              {leagues.explainer.points.map((point) => (
-                <p key={point} className="venues-explainer__text">
-                  {point}
-                </p>
-              ))}
-            </div>
           </div>
         </section>
 
@@ -294,6 +286,22 @@ export default function WhereToPlayPage() {
             </div>
           </section>
         ))}
+
+        {/* What a league is, after the listings, for a reader new to them. */}
+        <section className="venues-state" aria-labelledby="venues-explainer-heading">
+          <div className="container">
+            <div className="venues-explainer">
+              <h2 id="venues-explainer-heading" className="venues-explainer__heading">
+                {leagues.explainer.heading}
+              </h2>
+              {leagues.explainer.points.map((point) => (
+                <p key={point} className="venues-explainer__text">
+                  {point}
+                </p>
+              ))}
+            </div>
+          </div>
+        </section>
       </div>
     </main>
   )

@@ -258,6 +258,15 @@ describe('WhereToPlayPage', () => {
     }
   })
 
+  it('explains what a poker league is below the league listings', () => {
+    renderTab(whereToPlay.tabs.leagues)
+    const explainer = screen.getByRole('region', { name: whereToPlay.leagues.explainer.heading })
+    const last = screen.getByRole('region', {
+      name: whereToPlay.leagues.stateHeading(whereToPlay.leagues.states.at(-1)),
+    })
+    expect(last.compareDocumentPosition(explainer) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
+  })
+
   it('filters every tab by any number of states, above the tabs', () => {
     renderPage()
     const { filter } = whereToPlay
