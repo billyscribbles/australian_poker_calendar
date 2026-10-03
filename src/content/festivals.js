@@ -494,6 +494,14 @@ const rows = [
     'https://www.crownmelbourne.com.au/casino/table-games/poker',
   ],
   [
+    'GAMBIER',
+    'Gambier & Yole Poker October Pokerfest 2026',
+    '2026-10-14',
+    '2026-10-18',
+    'Mount Gambier, The Globe Hotel',
+    'https://gambierpoker.com.au/upcoming-events/',
+  ],
+  [
     'APL',
     'APL The Ville 600 Townsville',
     '2026-10-18',

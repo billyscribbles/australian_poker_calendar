@@ -128,7 +128,8 @@ export const CITY_ROWS = [
     state: 'SA',
     stateName: 'South Australia',
     places: ['Mount Gambier'],
-    blurb: 'Gambier Poker runs its series at the Mount Gambier Civic Centre.',
+    blurb:
+      'Gambier Poker deals its weekly games at the Globe Hotel and its series there and at the Mount Gambier Civic Centre.',
   },
 ]
 

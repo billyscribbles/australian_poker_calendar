@@ -5,7 +5,7 @@
     "from": "2026-01-01",
     "to": "2027-12-31"
   },
-  "event_count": 73,
+  "event_count": 74,
   "events": [
     {
       "href": "/events/empire-poker-festival-january-2026",
@@ -2341,6 +2341,45 @@
       }
     },
     {
+      "href": "/events/gambier-yole-poker-october-pokerfest-2026",
+      "title": "Gambier & Yole Poker – October Pokerfest – Mount Gambier (SA)",
+      "slug": "gambier-yole-poker-october-pokerfest-mount-gambier-sa",
+      "tour_brand": "Gambier Poker",
+      "region": "SA",
+      "start_date": "2026-10-14",
+      "end_date": "2026-10-18",
+      "duration_days": 5,
+      "date_text": "October 14 - October 18",
+      "month_label": "Oct 2026",
+      "organiser": {
+        "name": "Gambier Poker",
+        "phone": "0409 097 057",
+        "email": "xdlpoker@gmail.com",
+        "website": "https://gambierpoker.com.au"
+      },
+      "venue": {
+        "name": "The Globe Hotel",
+        "street": "6 Ferrers Street",
+        "google_maps_search_url": "https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=6+Ferrers+Street+Mount+Gambier+SA+5290+Australia",
+        "address_query": "6 Ferrers Street Mount Gambier SA 5290 Australia",
+        "full_address": "6 Ferrers Street, Mount Gambier SA 5290, Australia",
+        "city": "Mount Gambier",
+        "state": "SA",
+        "postcode": "5290",
+        "country": "Australia",
+        "website": ""
+      },
+      "description": "Gambier Poker and Yole Poker's October series, one of Gambier Poker's three majors (with the March Showdown and June Classic). Blind structures are pinned on Gambier Poker's Facebook page. Venue inferred: the event page names none; Gambier Poker is based at the Globe Hotel and its October festivals have been dealt there.",
+      "details": {
+        "start": "October 14",
+        "end": "October 18",
+        "website": "https://gambierpoker.com.au/upcoming-events/"
+      },
+      "outlook_location": "The Globe Hotel, 6 Ferrers Street, Mount Gambier, SA, 5290, Australia",
+      "source_scraped": "2026-10-04",
+      "poster_facts": {}
+    },
+    {
       "href": "/events/apl-the-ville-600-townsville",
       "title": "APL – The Ville 600 – Townsville (QLD)",
       "slug": "apl-the-ville-600-townsville-qld-3",
@@ -3703,12 +3742,23 @@
       "organiser_names": ["Gambier Poker"],
       "phone": ["0409 097 057"],
       "email": ["xdlpoker@gmail.com"],
-      "websites": ["https://gambierpoker.com.au", "http://www.mountgambier.sa.gov.au/"],
+      "websites": [
+        "https://gambierpoker.com.au",
+        "http://www.mountgambier.sa.gov.au/",
+        "https://gambierpoker.com.au/upcoming-events/"
+      ],
       "series": [
         {
           "title": "Gambier & Yole Poker State Showdown (SA)",
           "dates": "2026-03-11 to 2026-03-15",
           "venue": "Mount Gambier Civic Centre",
+          "city": "Mount Gambier",
+          "state": "SA"
+        },
+        {
+          "title": "Gambier & Yole Poker – October Pokerfest – Mount Gambier (SA)",
+          "dates": "2026-10-14 to 2026-10-18",
+          "venue": "The Globe Hotel",
           "city": "Mount Gambier",
           "state": "SA"
         }

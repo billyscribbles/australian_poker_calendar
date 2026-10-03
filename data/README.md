@@ -65,6 +65,7 @@ Every 2026–27 series on the calendar, with organiser contacts and venues. The 
 | 2026-10-04 | 2026-10-04 | 1    | [World Pro Poker – Super Mega Stack Series Final – Sunshine (VIC)](/events/world-pro-poker-super-mega-stack-series-final-2026) | World Pro Poker                                                                               | Westend Market Hotel                           | Sunshine, VIC, 3020                |                                                                          |
 | 2026-10-06 | 2026-10-11 | 6    | [APLPT – Brisbane – Broncos Club (QLD)](/events/aplpt-brisbane)                                                                | Australian Poker League                                                                       | Broncos Club                                   | Red Hill, QLD, 4059                |                                                                          |
 | 2026-10-12 | 2026-10-27 | 16   | [Crown Poker – Victorian Poker Champs, Melbourne (VIC)](/events/victorian-poker-championship-2026)                             | Crown Poker                                                                                   | Crown Melbourne                                | Southbank, Melbourne, VIC, 3006    |                                                                          |
+| 2026-10-14 | 2026-10-18 | 5    | [Gambier & Yole Poker – October Pokerfest – Mount Gambier (SA)](/events/gambier-yole-poker-october-pokerfest-2026)             | Gambier Poker                                                                                 | The Globe Hotel (venue inferred)               | Mount Gambier, SA, 5290            |                                                                          |
 | 2026-10-18 | 2026-10-25 | 8    | [APL – The Ville 600 – Townsville (QLD)](/events/apl-the-ville-600-townsville)                                                 | Australian Poker League (inferred from event website playapl.com; no organiser block on page) | The Ville Resort Casino                        | Townsville, QLD, 4810              |                                                                          |
 | 2026-10-27 | 2026-11-09 | 14   | [Kings Poker – Sydney Millions – Kogarah/Sydney (NSW)](/events/kings-poker-sydney-millions)                                    | Kings Poker Sydney                                                                            | St. George Leagues Club                        | Kogarah, NSW, 2217                 | $4 Million+ series estimate                                              |
 | 2026-11-05 | 2026-11-15 | 11   | [Australian Poker Tour – Sydney Champs (NSW)](/events/apt-sydney-champs)                                                       | Australian Poker Tour                                                                         | Revesby Workers’ Club                          | Revesby, NSW, 2212                 |                                                                          |
@@ -269,8 +270,9 @@ Every 2026–27 series on the calendar, with organiser contacts and venues. The 
 - Phone: 0409 097 057
 - Email: xdlpoker@gmail.com
 - Websites: https://gambierpoker.com.au, http://www.mountgambier.sa.gov.au/
-- Series on the calendar (1):
+- Series on the calendar (2):
   - 2026-03-11 to 2026-03-15 — Gambier & Yole Poker State Showdown (SA) — Mount Gambier Civic Centre, Mount Gambier SA
+  - 2026-10-14 to 2026-10-18 — Gambier & Yole Poker – October Pokerfest – Mount Gambier (SA) — The Globe Hotel, Mount Gambier SA (venue inferred)
 
 ### Check Raise Poker
 
@@ -837,6 +839,16 @@ Every 2026–27 series on the calendar, with organiser contacts and venues. The 
 - Prior year: $2 Million series in 2025
 - Status: Full schedule and satellite details coming soon
 - Description: 𝗧𝗛𝗘 𝗩𝗜𝗖𝗧𝗢𝗥𝗜𝗔𝗡 𝗣𝗢𝗞𝗘𝗥 𝗖𝗛𝗔𝗠𝗣𝗜𝗢𝗡𝗦𝗛𝗜𝗣 𝗥𝗘𝗧𝗨𝗥𝗡𝗦 𝗜𝗡 𝟮𝟬𝟮𝟲! After delivering a massive $2 Million Series in 2025, the Victorian Poker Championship is set to return to the iconic Crown Poker Room from 12-27 October 2026. Fresh off the hugely successful return of the Aussie Millions, Crown Melbourne is once again preparing to welcome players from across Australia and around the world for two weeks of championship poker action. With major events, packed side schedules, industry-leading tournament operations, and one of the most prestigious poker rooms in the Asia-P
+
+### Gambier & Yole Poker – October Pokerfest – Mount Gambier (SA)
+
+- Page: /events/gambier-yole-poker-october-pokerfest-2026
+- Dates: 2026-10-14 to 2026-10-18 (5 days) — listed as “Wed 14th Oct - Sun 18th Oct, 2026”
+- Tour / brand: Gambier Poker
+- Organiser: Gambier Poker · 0409 097 057 · xdlpoker@gmail.com · https://gambierpoker.com.au
+- Event website: https://gambierpoker.com.au/upcoming-events/
+- Venue: The Globe Hotel, 6 Ferrers Street, Mount Gambier SA 5290, Australia (inferred; see below)
+- Gambier Poker and Yole Poker's October series, one of Gambier Poker's three majors (with the March Showdown and June Classic). Blind structures are pinned on Gambier Poker's Facebook page. Venue inferred: the event page names none; Gambier Poker is based at the Globe Hotel and its October festivals have been dealt there.
 
 ### APL – The Ville 600 – Townsville (QLD)
 
