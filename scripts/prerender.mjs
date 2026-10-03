@@ -17,6 +17,7 @@ import { existsSync, readFileSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { execFileSync } from 'node:child_process'
+import { createDocumentBuilder } from './lib/document.mjs'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const DIST = join(root, 'dist')
@@ -162,158 +163,11 @@ const template = await readFile(TEMPLATE, 'utf8')
 
 assertOgImage()
 
-// --- Route assets ------------------------------------------------------------
-// Vite code-splits each page's CSS into its own file, which the browser only
-// requests once the route's JS chunk has run. A prerendered document would
-// therefore paint against the entry stylesheet and restyle when its own CSS
-// lands. Linking it from the document instead lets the preload scanner start it
-// with the HTML.
-
-/** CSS and JS a route needs, walked transitively through the import graph. */
-function assetsFor(moduleId) {
-  const css = new Set()
-  const js = new Set()
-  const seen = new Set()
-
-  const walk = (id) => {
-    if (!id || seen.has(id)) return
-    seen.add(id)
-    const entry = viteManifest[id]
-    if (!entry) return
-    for (const file of entry.css || []) css.add(file)
-    // The entry chunk is already in the template's script tag; only the route's
-    // own chunk and its shared dependencies need preloading.
-    if (entry.file && !entry.isEntry) js.add(entry.file)
-    for (const dep of entry.imports || []) walk(dep)
-  }
-
-  walk(moduleId)
-  return { css: [...css], js: [...js] }
-}
-
-/**
- * Assets index.html already references.
- *
- * Vite writes the entry's stylesheet and its modulepreloads into the template,
- * so anything matched here is emitted already and must not be repeated.
- */
-const templateAssets = new Set(
-  [...template.matchAll(/(?:href|src)="(\/assets\/[^"]+)"/g)].map((m) => m[1]),
-)
-
-// index.html carries a fallback <title>/description/OG block for `vite dev`,
-// where nothing prerenders. In a built document Helmet supplies the real tags,
-// so the fallback is stripped rather than left to duplicate them — two <title>
-// elements in one document is a genuine SEO fault, not a cosmetic one.
-const FALLBACK = /<!--\s*seo:fallback:start\s*-->[\s\S]*?<!--\s*seo:fallback:end\s*-->/
-
-// The studio credit is the reason the footer has to be in the static HTML at
-// all: it only counts as a backlink if a crawler that skips JS can see it.
-// Plain https://onraistudio.com/ (no www) lands without a redirect; an ordinary
-// link, never rel="nofollow". Checked on every document so a footer restyle
-// that drops or rewrites it fails the build instead of shipping silently.
-const CREDIT_HREF = 'https://onraistudio.com/'
-const CREDIT_TEXT = 'Site by Onrai Studio'
-
-function assertStudioCredit(html) {
-  const link = html.match(/<a\s[^>]*href="https:\/\/onraistudio\.com\/"[^>]*>[^<]*<\/a>/)?.[0]
-  if (!link) throw new Error(`the studio credit <a href="${CREDIT_HREF}"> is not in the markup.`)
-  if (!link.includes(`>${CREDIT_TEXT}<`)) {
-    throw new Error(`the studio credit must read "${CREDIT_TEXT}", got: ${link}`)
-  }
-  if (/nofollow/i.test(link)) throw new Error('the studio credit must not carry rel="nofollow".')
-}
-
-// A prerendered document must be readable with JavaScript switched off, and
-// `style="opacity:0"` is how that quietly stops being true. framer-motion
-// renders a motion element's `initial` styles during renderToString, so one
-// entrance written `initial={{ opacity: 0 }}` ships the section it wraps
-// invisible — hidden text to a crawler, and a section that blanks and fades
-// back in under the visitor's scroll once React hydrates over the static
-// paint. src/lib/motion.js keeps entrances inert to prevent it; this is the
-// guard that stops a new one being added without anyone noticing.
-//
-// aria-hidden elements are exempt: a decorative layer is meant to be invisible
-// and carries no content a crawler should read.
-function assertNoHiddenContent(html) {
-  const hidden = [...html.matchAll(/<[a-z][^>]*style="[^"]*opacity: ?0(?![.\d])[^"]*"[^>]*>/gi)]
-    .map((m) => m[0])
-    .filter((tag) => !/aria-hidden="true"/i.test(tag))
-
-  if (hidden.length) {
-    throw new Error(
-      `${hidden.length} element(s) prerender at opacity 0, so this page ships ` +
-        'partly invisible. An entrance animation is rendering its `initial` ' +
-        'state into the static HTML — see src/lib/motion.js. First: ' +
-        `${hidden[0].slice(0, 120)}`,
-    )
-  }
-}
-
-function buildDocument({ html, head, complete }, assets) {
-  assertStudioCredit(html)
-  assertNoHiddenContent(html)
-  let doc = template
-
-  if (!FALLBACK.test(doc)) {
-    throw new Error(
-      'the seo:fallback markers are missing from index.html — without them the ' +
-        'fallback tags duplicate the per-page ones.',
-    )
-  }
-  // Swap the fallback block for this route's own tags — but only if there are
-  // any. A site whose pages set their title imperatively (a useEffect, not
-  // Helmet) renders no head during renderToString, and replacing the block with
-  // an empty string would ship documents with no <title> at all: worse than the
-  // shared fallback it removed. Keeping the fallback means every page carries
-  // the site-level title until per-page tags exist.
-  doc = head.trim() ? doc.replace(FALLBACK, () => head) : doc
-
-  // This route's own stylesheets, render-blocking on purpose: the document must
-  // not paint before the CSS that lays it out.
-  const links = assets.css
-    .filter((file) => !templateAssets.has(`/${file}`))
-    .map((file) => `    <link rel="stylesheet" crossorigin href="/${file}" />`)
-
-  // Its JS chunk, preloaded so main.jsx is not waiting on the entry bundle to
-  // run before the browser discovers what to fetch next.
-  const preloads = assets.js
-    .filter((file) => !templateAssets.has(`/${file}`))
-    .map((file) => `    <link rel="modulepreload" crossorigin href="/${file}" />`)
-
-  // Design tokens as a real stylesheet. applyTheme() sets these from JS at
-  // runtime; inlining them means the static document paints correctly before
-  // the bundle has run, instead of flashing unstyled.
-  const injected = [...links, ...preloads, `    <style id="theme-tokens">${themeStyles}</style>`]
-
-  // Match the leading whitespace too, so the injected block controls its own
-  // indentation rather than inheriting the closing tag's.
-  doc = doc.replace(/[ \t]*<\/head>/, () => `${injected.join('\n')}\n  </head>`)
-
-  // data-prerender tells src/main.jsx whether this markup is hydratable.
-  // "full" — the whole tree rendered, so React adopts the DOM. Anything else
-  // means a page module was missing, and React must not try to adopt a body
-  // that does not match what it is about to render.
-  // An exact placeholder, and its absence is a hard failure rather than a
-  // no-op. A String.replace that matches nothing returns the string unchanged,
-  // so a document with anything inside #root — say a hand-written fallback
-  // footer left over from before this pipeline existed — would quietly ship
-  // with no page body at all, looking like a successful build. That happened.
-  const PLACEHOLDER = '<div id="root"></div>'
-  if (!doc.includes(PLACEHOLDER)) {
-    throw new Error(
-      `index.html has no exact ${PLACEHOLDER} for the rendered body to replace. ` +
-        'Empty it — the prerender is what puts real content (and the studio ' +
-        'credit) in the page now, and anything left inside #root is markup the ' +
-        'visitor sees before React wipes it.',
-    )
-  }
-  doc = doc.replace(
-    PLACEHOLDER,
-    () => `<div id="root" data-prerender="${complete ? 'full' : 'partial'}">${html}</div>`,
-  )
-  return doc
-}
+// Document assembly (the route's head tags, its split CSS and chunk, the
+// theme tokens, the studio-credit and hidden-content guards) is shared with
+// server/render.mjs, which renders the live routes the same way at request
+// time. See scripts/lib/document.mjs.
+const builder = createDocumentBuilder({ template, manifest: viteManifest, themeStyles })
 
 // The untouched shell, kept for routes that deliberately have no static
 // document (a catalogue page whose data only exists at runtime, an auth-gated
@@ -351,7 +205,7 @@ for (const route of PRERENDER_ROUTES) {
     }
     const result = render(location)
     if (!result.complete) incomplete.push(route.out)
-    const doc = buildDocument(result, assetsFor(routeModules(location)[0]))
+    const doc = builder.build(result, routeModules(location)[0])
 
     const outDir = route.out === '/' ? DIST : join(DIST, route.out.slice(1))
     await mkdir(outDir, { recursive: true })
