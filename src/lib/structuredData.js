@@ -190,3 +190,33 @@ export function seriesListLd(festivals, page) {
     })),
   }
 }
+
+/**
+ * A published story as a schema.org NewsArticle: the fields Google's article
+ * rich result reads. Takes the public story shape from server/content.mjs.
+ *
+ * @param {{ title: string, href: string, date: string, standfirst?: string, heroImage?: string, updatedAt?: string }} story
+ */
+export function articleLd(story) {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'NewsArticle',
+    headline: story.title,
+    datePublished: story.date,
+    dateModified: (story.updatedAt || '').slice(0, 10) || story.date,
+    mainEntityOfPage: absolute(story.href),
+    url: absolute(story.href),
+    inLanguage: 'en-AU',
+    author: { '@type': 'Organization', name: site.brand.name, url: site.seo.siteUrl },
+    publisher: {
+      '@type': 'Organization',
+      name: site.brand.name,
+      ...(site.brand.logoSrc && {
+        logo: { '@type': 'ImageObject', url: absolute(site.brand.logoSrc) },
+      }),
+    },
+  }
+  if (story.standfirst) schema.description = story.standfirst
+  if (story.heroImage) schema.image = [absolute(story.heroImage)]
+  return schema
+}

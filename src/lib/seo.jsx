@@ -40,6 +40,8 @@ const organizationLd = (() => {
 // `jsonLd` is the page's own structured data (one object or an array; see
 // lib/structuredData.js), emitted alongside the Organization record every
 // page carries.
+//
+// `type` is the og:type: 'website' by default, 'article' for a story.
 export default function SEO({
   title,
   description,
@@ -47,6 +49,7 @@ export default function SEO({
   path = '',
   noindex = false,
   jsonLd = null,
+  type = 'website',
 }) {
   const seo = site.seo
   const resolvedTitle = title ? seo.titleTemplate.replace('%s', title) : seo.defaultTitle
@@ -69,7 +72,7 @@ export default function SEO({
       <meta name="description" content={resolvedDescription} />
       {blockRobots && <meta name="robots" content="noindex, nofollow" />}
       <link rel="canonical" href={url} />
-      <meta property="og:type" content="website" />
+      <meta property="og:type" content={type} />
       <meta property="og:url" content={url} />
       <meta property="og:title" content={resolvedTitle} />
       <meta property="og:description" content={resolvedDescription} />

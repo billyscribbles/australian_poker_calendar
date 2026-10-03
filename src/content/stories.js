@@ -25,6 +25,8 @@ export const stories = {
       'Features, hands and reads from the Australian poker scene, written by the Australian Poker Calendar team.',
     intro: 'Features, hands and reads from the Australian poker scene, written by us.',
     empty: 'The first story is on its way.',
+    /** Screen-reader heading over the grid, so the cards' h3s sit under an h2. */
+    listHeading: 'Latest stories',
   },
   page: {
     eyebrow: 'Stories by Us',

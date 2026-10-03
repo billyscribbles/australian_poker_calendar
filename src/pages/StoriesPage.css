@@ -1,0 +1,39 @@
+.stories-page {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 40px 0 64px;
+}
+
+.stories-page__head {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.stories-page__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(40px, 5.5vw, 72px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+  color: var(--color-text);
+}
+
+.stories-page__intro {
+  margin: 0;
+  max-width: 720px;
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--color-muted);
+}
+
+.stories-page__empty {
+  margin: 0;
+  padding: 32px;
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-xl);
+  color: var(--color-muted);
+  text-align: center;
+}
