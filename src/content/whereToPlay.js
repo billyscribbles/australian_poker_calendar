@@ -763,6 +763,20 @@ const leagueRows = [
       iconBg: '#082838',
     },
   },
+  // From bellarinepokerleague.com (2026-10-04).
+  {
+    name: 'Bellarine Poker League',
+    states: ['VIC'],
+    about:
+      'Geelong and Bellarine league since 2021: a $60 bounty on Mondays and $25 tournaments on Tuesdays at Clifton Springs Golf Club, and $100 Sunday deep stacks at The Deck Geelong.',
+    website: 'https://bellarinepokerleague.com/weekly-tournaments',
+    // Its white BPL crossed-arrows badge, on black.
+    mark: {
+      iconSrc: '/images/rooms/bellarine-poker-league-icon.webp',
+      primary: '#FFFFFF',
+      iconBg: '#000000',
+    },
+  },
   {
     name: 'Perth Poker League',
     states: ['WA'],
