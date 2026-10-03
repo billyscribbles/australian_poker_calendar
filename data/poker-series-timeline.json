@@ -5,7 +5,7 @@
     "from": "2026-01-01",
     "to": "2027-12-31"
   },
-  "event_count": 71,
+  "event_count": 79,
   "events": [
     {
       "href": "/events/empire-poker-festival-january-2026",
@@ -44,6 +44,45 @@
       },
       "outlook_location": "Wantima Country Club, 530 S Pine Rd, Brendale, QLD, 4500, Australia",
       "source_scraped": "2026-10-02",
+      "poster_facts": {}
+    },
+    {
+      "href": "/events/mixed-games-academy-new-year-mixed-games",
+      "title": "Mixed Games Academy New Year Mixed Games (VIC)",
+      "slug": "mixed-games-academy-new-year-mixed-games-vic",
+      "tour_brand": "Mixed Games Academy",
+      "region": "VIC",
+      "start_date": "2026-01-02",
+      "end_date": "2026-01-03",
+      "duration_days": 2,
+      "date_text": "January 2 - January 3",
+      "month_label": "Jan 2026",
+      "organiser": {
+        "name": "Mixed Games Academy",
+        "phone": "0433 208 446",
+        "email": "td@mixedgamesacademy.au",
+        "website": "https://mixedgamesacademy.au"
+      },
+      "venue": {
+        "name": "PlayLive Melbourne – Melbourne Poker Room",
+        "street": "129 York Street",
+        "google_maps_search_url": "https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=129+York+Street+South+Melbourne+VIC+3205+Australia",
+        "address_query": "129 York Street South Melbourne VIC 3205 Australia",
+        "full_address": "129 York Street, South Melbourne VIC 3205, Australia",
+        "city": "South Melbourne",
+        "state": "VIC",
+        "postcode": "3205",
+        "country": "Australia",
+        "website": "https://playlive.melbourne"
+      },
+      "description": "",
+      "details": {
+        "start": "January 2",
+        "end": "January 3",
+        "website": "https://mixedgamesacademy.au/"
+      },
+      "outlook_location": "PlayLive Melbourne – Melbourne Poker Room, 129 York Street, South Melbourne, VIC, 3205, Australia",
+      "source_scraped": "2026-10-04",
       "poster_facts": {}
     },
     {
@@ -512,6 +551,45 @@
       },
       "outlook_location": "The Star, Gold Coast, 1 Casino Drive, Broadbeach, QLD, 4218, Australia",
       "source_scraped": "2026-10-02",
+      "poster_facts": {}
+    },
+    {
+      "href": "/events/npl-sydney-poker-open-february-2026",
+      "title": "NPL Sydney Poker Open February 2026 (NSW)",
+      "slug": "npl-sydney-poker-open-february-2026-nsw",
+      "tour_brand": "National Poker League (NPL)",
+      "region": "NSW",
+      "start_date": "2026-02-19",
+      "end_date": "2026-02-22",
+      "duration_days": 4,
+      "date_text": "February 19 - February 22",
+      "month_label": "Feb 2026",
+      "organiser": {
+        "name": "National Poker League (NPL)",
+        "phone": "",
+        "email": "",
+        "website": "https://www.npl.com.au/"
+      },
+      "venue": {
+        "name": "Wests Ashfield Leagues Club",
+        "street": "115 Liverpool Rd",
+        "city": "Ashfield",
+        "state": "NSW",
+        "postcode": "2131",
+        "country": "Australia",
+        "website": "https://www.npl.com.au/SydneyPokerOpen",
+        "full_address": "115 Liverpool Rd, Ashfield NSW 2131, Australia",
+        "address_query": "115 Liverpool Rd Ashfield NSW 2131 Australia",
+        "google_maps_search_url": "https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=115+Liverpool+Rd+Ashfield+NSW+2131+Australia"
+      },
+      "description": "",
+      "details": {
+        "start": "February 19",
+        "end": "February 22",
+        "website": "https://www.npl.com.au/SydneyPokerOpen"
+      },
+      "outlook_location": "Wests Ashfield Leagues Club, 115 Liverpool Rd, Ashfield, NSW, 2131, Australia",
+      "source_scraped": "2026-10-04",
       "poster_facts": {}
     },
     {
@@ -992,6 +1070,45 @@
       "poster_facts": {}
     },
     {
+      "href": "/events/matchroom-adelaide-poker-showdown",
+      "title": "Matchroom Adelaide Poker Showdown (SA)",
+      "slug": "matchroom-adelaide-poker-showdown-sa",
+      "tour_brand": "Matchroom Poker",
+      "region": "SA",
+      "start_date": "2026-04-10",
+      "end_date": "2026-04-24",
+      "duration_days": 15,
+      "date_text": "April 10 - April 24",
+      "month_label": "Apr 2026",
+      "organiser": {
+        "name": "Matchroom Poker",
+        "phone": "0433 326 060",
+        "email": "info@matchroompoker.com.au",
+        "website": "https://thematchroom.com.au/"
+      },
+      "venue": {
+        "name": "Matchroom Poker",
+        "street": "33 Shannon Place",
+        "city": "Adelaide",
+        "state": "SA",
+        "postcode": "5000",
+        "country": "Australia",
+        "website": "https://thematchroom.com.au/",
+        "full_address": "33 Shannon Place, Adelaide SA 5000, Australia",
+        "address_query": "33 Shannon Place Adelaide SA 5000 Australia",
+        "google_maps_search_url": "https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=33+Shannon+Place+Adelaide+SA+5000+Australia"
+      },
+      "description": "",
+      "details": {
+        "start": "April 10",
+        "end": "April 24",
+        "website": "https://thematchroom.com.au/series/"
+      },
+      "outlook_location": "Matchroom Poker, 33 Shannon Place, Adelaide, SA, 5000, Australia",
+      "source_scraped": "2026-10-04",
+      "poster_facts": {}
+    },
+    {
       "href": "/events/apt-brisbane-champs",
       "title": "Australian Poker Tour – Brisbane Champs – Eatons Hill/Brisbane (QLD)",
       "slug": "australian-poker-tour-save-the-date-eatons-hill-brisbane-qld",
@@ -1106,6 +1223,45 @@
       },
       "outlook_location": "Crown Melbourne, 8 Whiteman St, Southbank, Melbourne, VIC, 3006, Australia",
       "source_scraped": "2026-10-02",
+      "poster_facts": {}
+    },
+    {
+      "href": "/events/mixed-games-academy-festivus-for-the-best-of-us",
+      "title": "Mixed Games Academy Festivus for the Best of Us (VIC)",
+      "slug": "mixed-games-academy-festivus-for-the-best-of-us-vic",
+      "tour_brand": "Mixed Games Academy",
+      "region": "VIC",
+      "start_date": "2026-04-27",
+      "end_date": "2026-05-10",
+      "duration_days": 14,
+      "date_text": "April 27 - May 10",
+      "month_label": "Apr 2026",
+      "organiser": {
+        "name": "Mixed Games Academy",
+        "phone": "0433 208 446",
+        "email": "td@mixedgamesacademy.au",
+        "website": "https://mixedgamesacademy.au"
+      },
+      "venue": {
+        "name": "PlayLive Melbourne – Melbourne Poker Room",
+        "street": "129 York Street",
+        "google_maps_search_url": "https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=129+York+Street+South+Melbourne+VIC+3205+Australia",
+        "address_query": "129 York Street South Melbourne VIC 3205 Australia",
+        "full_address": "129 York Street, South Melbourne VIC 3205, Australia",
+        "city": "South Melbourne",
+        "state": "VIC",
+        "postcode": "3205",
+        "country": "Australia",
+        "website": "https://playlive.melbourne"
+      },
+      "description": "",
+      "details": {
+        "start": "April 27",
+        "end": "May 10",
+        "website": "https://mixedgamesacademy.au/"
+      },
+      "outlook_location": "PlayLive Melbourne – Melbourne Poker Room, 129 York Street, South Melbourne, VIC, 3205, Australia",
+      "source_scraped": "2026-10-04",
       "poster_facts": {}
     },
     {
@@ -1304,6 +1460,45 @@
       "poster_facts": {}
     },
     {
+      "href": "/events/gambier-yole-poker-june-poker-classic",
+      "title": "Gambier & Yole Poker June Poker Classic (SA)",
+      "slug": "gambier-yole-poker-june-poker-classic-sa",
+      "tour_brand": "Gambier Poker",
+      "region": "SA",
+      "start_date": "2026-06-03",
+      "end_date": "2026-06-08",
+      "duration_days": 6,
+      "date_text": "June 3 - June 8",
+      "month_label": "Jun 2026",
+      "organiser": {
+        "name": "Gambier Poker",
+        "phone": "0409 097 057",
+        "email": "xdlpoker@gmail.com",
+        "website": "https://gambierpoker.com.au"
+      },
+      "venue": {
+        "name": "The Globe Hotel",
+        "street": "6 Ferrers Street",
+        "google_maps_search_url": "https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=6+Ferrers+Street+Mount+Gambier+SA+5290+Australia",
+        "address_query": "6 Ferrers Street Mount Gambier SA 5290 Australia",
+        "full_address": "6 Ferrers Street, Mount Gambier SA 5290, Australia",
+        "city": "Mount Gambier",
+        "state": "SA",
+        "postcode": "5290",
+        "country": "Australia",
+        "website": ""
+      },
+      "description": "Gambier Poker's June Classic, one of its three majors (with the March Showdown and October Pokerfest). Venue inferred: Gambier Poker is based at the Globe Hotel.",
+      "details": {
+        "start": "June 3",
+        "end": "June 8",
+        "website": "https://gambierpoker.com.au/"
+      },
+      "outlook_location": "The Globe Hotel, 6 Ferrers Street, Mount Gambier, SA, 5290, Australia",
+      "source_scraped": "2026-10-04",
+      "poster_facts": {}
+    },
+    {
       "href": "/events/playlive-melbourne-winter-champs",
       "title": "PlayLive Melbourne – Winter Champs (VIC)",
       "slug": "playlive-melbourne-save-the-dates-winter-champs-vic",
@@ -1463,6 +1658,45 @@
       },
       "outlook_location": "Aurum Poker Grand, St. Johns Park Bowling Club, 93 Edensor Rd, St Johns park, NSW, 2176, Australia",
       "source_scraped": "2026-10-02",
+      "poster_facts": {}
+    },
+    {
+      "href": "/events/matchroom-poker-challenge",
+      "title": "Matchroom Poker Challenge (SA)",
+      "slug": "matchroom-poker-challenge-sa",
+      "tour_brand": "Matchroom Poker",
+      "region": "SA",
+      "start_date": "2026-06-22",
+      "end_date": "2026-07-06",
+      "duration_days": 15,
+      "date_text": "June 22 - July 6",
+      "month_label": "Jun 2026",
+      "organiser": {
+        "name": "Matchroom Poker",
+        "phone": "0433 326 060",
+        "email": "info@matchroompoker.com.au",
+        "website": "https://thematchroom.com.au/"
+      },
+      "venue": {
+        "name": "Matchroom Poker",
+        "street": "33 Shannon Place",
+        "city": "Adelaide",
+        "state": "SA",
+        "postcode": "5000",
+        "country": "Australia",
+        "website": "https://thematchroom.com.au/",
+        "full_address": "33 Shannon Place, Adelaide SA 5000, Australia",
+        "address_query": "33 Shannon Place Adelaide SA 5000 Australia",
+        "google_maps_search_url": "https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=33+Shannon+Place+Adelaide+SA+5000+Australia"
+      },
+      "description": "",
+      "details": {
+        "start": "June 22",
+        "end": "July 6",
+        "website": "https://thematchroom.com.au/series/"
+      },
+      "outlook_location": "Matchroom Poker, 33 Shannon Place, Adelaide, SA, 5000, Australia",
+      "source_scraped": "2026-10-04",
       "poster_facts": {}
     },
     {
@@ -1820,6 +2054,45 @@
       },
       "outlook_location": "St. George Leagues Club, 124 Princes Hwy, Kogarah, NSW, 2217, Australia",
       "source_scraped": "2026-10-02",
+      "poster_facts": {}
+    },
+    {
+      "href": "/events/queen-b-s-winter-warm-up-bankroll-builder-series",
+      "title": "Queen B's Winter Warm-Up Bankroll Builder Series (QLD)",
+      "slug": "queen-b-s-winter-warm-up-bankroll-builder-series-qld",
+      "tour_brand": "Queen B’s Poker",
+      "region": "QLD",
+      "start_date": "2026-08-03",
+      "end_date": "2026-08-09",
+      "duration_days": 7,
+      "date_text": "August 3 - August 9",
+      "month_label": "Aug 2026",
+      "organiser": {
+        "name": "Queen B’s Poker",
+        "phone": "",
+        "email": "play@queenbs.poker",
+        "website": "https://www.queenbs.poker"
+      },
+      "venue": {
+        "name": "Queen B’s Poker",
+        "street": "100 York St",
+        "google_maps_search_url": "https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=100+York+St+Beenleigh+QLD+4207+Australia",
+        "address_query": "100 York St Beenleigh QLD 4207 Australia",
+        "full_address": "100 York St, Beenleigh QLD 4207, Australia",
+        "city": "Beenleigh",
+        "state": "QLD",
+        "postcode": "4207",
+        "country": "Australia",
+        "website": "https://www.queenbs.poker"
+      },
+      "description": "",
+      "details": {
+        "start": "August 3",
+        "end": "August 9",
+        "website": "https://www.queenbs.poker/"
+      },
+      "outlook_location": "Queen B’s Poker, 100 York St, Beenleigh, QLD, 4207, Australia",
+      "source_scraped": "2026-10-04",
       "poster_facts": {}
     },
     {
@@ -2300,6 +2573,45 @@
         "prior_year": "$2 Million series in 2025",
         "status": "Full schedule and satellite details coming soon"
       }
+    },
+    {
+      "href": "/events/queen-b-s-wacky-week",
+      "title": "Queen B's Wacky Week (QLD)",
+      "slug": "queen-b-s-wacky-week-qld",
+      "tour_brand": "Queen B’s Poker",
+      "region": "QLD",
+      "start_date": "2026-10-13",
+      "end_date": "2026-10-18",
+      "duration_days": 6,
+      "date_text": "October 13 - October 18",
+      "month_label": "Oct 2026",
+      "organiser": {
+        "name": "Queen B’s Poker",
+        "phone": "",
+        "email": "play@queenbs.poker",
+        "website": "https://www.queenbs.poker"
+      },
+      "venue": {
+        "name": "Queen B’s Poker",
+        "street": "100 York St",
+        "google_maps_search_url": "https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=100+York+St+Beenleigh+QLD+4207+Australia",
+        "address_query": "100 York St Beenleigh QLD 4207 Australia",
+        "full_address": "100 York St, Beenleigh QLD 4207, Australia",
+        "city": "Beenleigh",
+        "state": "QLD",
+        "postcode": "4207",
+        "country": "Australia",
+        "website": "https://www.queenbs.poker"
+      },
+      "description": "",
+      "details": {
+        "start": "October 13",
+        "end": "October 18",
+        "website": "https://www.queenbs.poker/tournaments/wacky-week"
+      },
+      "outlook_location": "Queen B’s Poker, 100 York St, Beenleigh, QLD, 4207, Australia",
+      "source_scraped": "2026-10-04",
+      "poster_facts": {}
     },
     {
       "href": "/events/gambier-yole-poker-october-pokerfest-2026",

@@ -38,6 +38,14 @@ const rows = [
     'https://empirepoker.com.au/',
   ],
   [
+    'MGA',
+    'Mixed Games Academy New Year Mixed Games',
+    '2026-01-02',
+    '2026-01-03',
+    'South Melbourne, PlayLive Melbourne',
+    'https://mixedgamesacademy.au/',
+  ],
+  [
     'PALACE',
     'Poker Palace Lucky 8 Series',
     '2026-01-05',
@@ -134,6 +142,14 @@ const rows = [
     'https://www.star.com.au/goldcoast',
   ],
   [
+    'NPL',
+    'NPL Sydney Poker Open February 2026',
+    '2026-02-19',
+    '2026-02-22',
+    'Sydney, Wests Ashfield Leagues Club',
+    'https://www.npl.com.au/SydneyPokerOpen',
+  ],
+  [
     'APLPT',
     'APLPT Albury February 2026',
     '2026-02-24',
@@ -222,6 +238,14 @@ const rows = [
     'https://www.australianpokeropen.com.au/',
   ],
   [
+    'MATCHROOM',
+    'Matchroom Adelaide Poker Showdown',
+    '2026-04-10',
+    '2026-04-24',
+    'Adelaide, Matchroom Poker',
+    'https://thematchroom.com.au/series/',
+  ],
+  [
     'APT',
     'APT Brisbane Champs',
     '2026-04-12',
@@ -244,6 +268,14 @@ const rows = [
     '2026-05-10',
     'Melbourne, Crown Melbourne',
     'https://www.crownmelbourne.com.au/casino/table-games/poker',
+  ],
+  [
+    'MGA',
+    'Mixed Games Academy Festivus for the Best of Us',
+    '2026-04-27',
+    '2026-05-10',
+    'South Melbourne, PlayLive Melbourne',
+    'https://mixedgamesacademy.au/',
   ],
   [
     'APLPT',
@@ -286,6 +318,14 @@ const rows = [
     'https://pokerpalace.com.au/',
   ],
   [
+    'GAMBIER',
+    'Gambier & Yole Poker June Poker Classic',
+    '2026-06-03',
+    '2026-06-08',
+    'Mount Gambier, The Globe Hotel',
+    'https://gambierpoker.com.au/',
+  ],
+  [
     'QUEENBS',
     "Queen B's Coronation Cup",
     '2026-06-04',
@@ -316,6 +356,14 @@ const rows = [
     '2026-06-22',
     'Sydney, St Johns Park Bowling Club',
     'https://aurumpoker.com.au/',
+  ],
+  [
+    'MATCHROOM',
+    'Matchroom Poker Challenge',
+    '2026-06-22',
+    '2026-07-06',
+    'Adelaide, Matchroom Poker',
+    'https://thematchroom.com.au/series/',
   ],
   [
     'APT',
@@ -388,6 +436,14 @@ const rows = [
     '2026-08-10',
     'Sydney, St. George Leagues Club',
     'https://kingspoker.com.au/',
+  ],
+  [
+    'QUEENBS',
+    "Queen B's Winter Warm-Up Bankroll Builder Series",
+    '2026-08-03',
+    '2026-08-09',
+    "Beenleigh, Queen B's Poker",
+    'https://www.queenbs.poker/',
   ],
   [
     'MGA',
@@ -484,6 +540,14 @@ const rows = [
     '2026-10-27',
     'Melbourne, Crown Poker Room',
     'https://www.crownmelbourne.com.au/casino/table-games/poker',
+  ],
+  [
+    'QUEENBS',
+    "Queen B's Wacky Week",
+    '2026-10-13',
+    '2026-10-18',
+    "Beenleigh, Queen B's Poker",
+    'https://www.queenbs.poker/tournaments/wacky-week',
   ],
   [
     'GAMBIER',
