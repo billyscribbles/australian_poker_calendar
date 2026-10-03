@@ -1267,3 +1267,25 @@ tbody th {
 .table-wrap--flat td {
   padding-left: 0;
 }
+
+/* Contacts */
+.contact-card__logo {
+  display: grid;
+  place-items: center;
+  height: 84px;
+  margin: -14px -16px 12px;
+  border-radius: 10px 10px 0 0;
+  border-bottom: 1px solid var(--border);
+}
+.contact-card__logo img {
+  max-height: 56px;
+  max-width: 70%;
+  object-fit: contain;
+}
+.contact-card__logo--none {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--faint);
+  background: var(--bg-raised);
+}

@@ -348,6 +348,9 @@ export function buildStatus(today = melbourneToday()) {
       name: page.name,
       fullName: tile?.name || page.name,
       slug: page.slug,
+      // The organiser brands the scrape filed this room's series under, so the
+      // dashboard's Contacts page can put the room's logo on each organiser.
+      brands: [...brands],
       path: page.path,
       website: page.website,
       brand,

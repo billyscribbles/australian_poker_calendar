@@ -1147,27 +1147,29 @@ function dataView() {
 
 function contactsView() {
   const d = state.data
+  const roomFor = (o) => d.rooms.find((r) => r.brands?.includes(o.brand))
+  const card = (o) => {
+    const r = roomFor(o)
+    // The scrape lists every page it saw; one link per site is enough here.
+    const sites = [...new Map((o.websites || []).map((w) => [host(w), w])).values()]
+    const logo = r?.logo.tile.ok
+      ? `<a class="contact-card__logo" href="#rooms/${esc(r.code)}" style="background:${esc(r.brand?.iconBg || '#0a0a0a')}"><img src="${esc(r.logo.tile.src)}" alt=""></a>`
+      : `<div class="contact-card__logo contact-card__logo--none">${esc(o.brand)}</div>`
+    return `<section class="card contact-card">
+      ${logo}
+      <h3>${r ? `<a href="#rooms/${esc(r.code)}">${esc(r.name)}</a>` : esc(o.brand)}</h3>
+      <dl class="kv">
+        ${r && r.name !== o.brand ? `<dt>Brand</dt><dd>${esc(o.brand)}</dd>` : ''}
+        <dt>Listed as</dt><dd>${esc((o.organiser_names || []).join(', '))}</dd>
+        ${o.email?.length ? `<dt>Email</dt><dd>${o.email.map((e) => `<a href="mailto:${esc(e)}">${esc(e)}</a>`).join('<br>')}</dd>` : ''}
+        ${o.phone?.length ? `<dt>Phone</dt><dd>${esc(o.phone.join(' · '))}</dd>` : ''}
+        ${sites.length ? `<dt>Web</dt><dd>${sites.map((w) => external(w, host(w))).join('<br>')}</dd>` : ''}
+      </dl>
+    </section>`
+  }
   return `
-    ${pageHead('Contacts', 'Organisers as listed on the Australian Poker Schedule event pages.')}
-    <div class="grid grid--2">${d.organisers
-      .map(
-        (o) => `<section class="card">
-        <h3>${esc(o.brand)}</h3>
-        <dl class="kv">
-          <dt>Listed as</dt><dd>${esc((o.organiser_names || []).join(', '))}</dd>
-          ${o.email?.length ? `<dt>Email</dt><dd>${o.email.map((e) => `<a href="mailto:${esc(e)}">${esc(e)}</a>`).join('<br>')}</dd>` : ''}
-          ${o.phone?.length ? `<dt>Phone</dt><dd>${esc(o.phone.join(' · '))}</dd>` : ''}
-          ${o.websites?.length ? `<dt>Web</dt><dd>${o.websites.map((w) => external(w, w.replace(/^https?:\/\//, ''))).join('<br>')}</dd>` : ''}
-        </dl>
-        <ul style="margin-top:10px" class="plain">${(o.series || [])
-          .map((sr) => {
-            const s = d.series.find((x) => x.scraped?.title === sr.title)
-            return `<li class="muted">${esc(sr.dates)} · ${s ? seriesLink(s) : esc(sr.title)}</li>`
-          })
-          .join('')}</ul>
-      </section>`,
-      )
-      .join('')}</div>`
+    ${pageHead('Contacts', "Organisers as listed on the Australian Poker Schedule event pages. Click a logo for the room's full profile.")}
+    <div class="grid grid--3">${d.organisers.map(card).join('')}</div>`
 }
 
 // ---------------------------------------------------------------------------
