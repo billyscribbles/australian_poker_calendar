@@ -75,7 +75,7 @@ describe('series status', () => {
     const codes = status.rooms.map((r) => r.code)
     expect(codes).toEqual(status.calendar.tours.map((t) => t.code))
     for (const room of status.rooms) {
-      expect(room.path).toBe(`/tours/${room.slug}`)
+      expect(room.path).toBe(`/series/${room.slug}`)
       expect(room.website).toMatch(/^https?:\/\//)
       expect(room.brand, room.code).not.toBeNull()
       expect(room.logo.wordmark.ok, `${room.code} wordmark`).toBe(true)

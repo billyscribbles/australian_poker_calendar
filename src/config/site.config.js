@@ -22,7 +22,7 @@ export const site = {
   nav: [
     { label: 'News', icon: 'news', to: '/' },
     { label: 'Poker Calendar', icon: 'calendar', to: '/poker-calendar/2026' },
-    { label: 'Series', icon: 'tours', to: '/tours' },
+    { label: 'Series', icon: 'tours', to: '/series' },
     { label: 'Where to Play', icon: 'map', to: '/where-to-play' },
     { label: 'Poker Players', icon: 'players', to: '/players' },
   ],
@@ -43,7 +43,7 @@ export const site = {
     followHeading: 'Follow Us',
     // Every link here must have a route in src/routes.js: a footer link to a
     // 404 is on every page, so it is the first broken link a crawler finds.
-    // The "Poker by city" and "Poker tours" columns are generated in
+    // The "Poker by city" and "Poker series" columns are generated in
     // Footer.jsx from content/cities.js and content/tourPages.js.
     columns: [
       {
@@ -51,7 +51,7 @@ export const site = {
         links: [
           { label: 'Poker Calendar 2026', to: '/poker-calendar/2026' },
           { label: 'Poker Calendar 2027', to: '/poker-calendar/2027' },
-          { label: 'Poker Tours', to: '/tours' },
+          { label: 'Poker Series', to: '/series' },
           { label: 'Where to Play', to: '/where-to-play' },
           { label: 'Poker Players', to: '/players' },
           { label: 'Why Trust Us', to: '/about' },
@@ -60,7 +60,7 @@ export const site = {
       },
     ],
     cityColumn: 'Poker by city',
-    tourColumn: 'Poker tours',
+    tourColumn: 'Poker series',
     copyright: 'Copyright © 2026 All Rights Reserved',
     legal: [
       { label: 'Privacy Policy', to: '/privacy' },

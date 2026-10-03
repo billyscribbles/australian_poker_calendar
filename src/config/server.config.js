@@ -45,6 +45,26 @@ export const legacyRedirects = {
   '/events/world-pro-poker-super-mega-stack-series-final-2026': '/where-to-play',
   '/events/world-pro-poker-high-rollers-main-event-2026': '/where-to-play',
   '/events/world-pro-poker-chockys-wargames-grand-final-2026': '/where-to-play',
+  // The operator pages moved from /tours to /series (2026-10-04).
+  '/tours': '/series',
+  '/tours/australian-poker-tour': '/series/australian-poker-tour',
+  '/tours/apl': '/series/apl',
+  '/tours/aplpt': '/series/aplpt',
+  '/tours/kings-poker': '/series/kings-poker',
+  '/tours/crown-poker': '/series/crown-poker',
+  '/tours/aurum-poker': '/series/aurum-poker',
+  '/tours/playlive-melbourne': '/series/playlive-melbourne',
+  '/tours/national-poker-league': '/series/national-poker-league',
+  '/tours/empire-poker': '/series/empire-poker',
+  '/tours/poker-palace': '/series/poker-palace',
+  '/tours/queen-bs-poker': '/series/queen-bs-poker',
+  '/tours/wpt-league': '/series/wpt-league',
+  '/tours/stacked-poker': '/series/stacked-poker',
+  '/tours/mixed-games-academy': '/series/mixed-games-academy',
+  '/tours/the-star-poker': '/series/the-star-poker',
+  '/tours/gambier-poker': '/series/gambier-poker',
+  '/tours/check-raise-poker': '/series/check-raise-poker',
+  '/tours/matchroom-poker': '/series/matchroom-poker',
 }
 
 /**

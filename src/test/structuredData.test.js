@@ -110,7 +110,7 @@ describe('tourLd and seriesListLd', () => {
   it('describes an operator and lists its series as Events', async () => {
     const { tourLd, seriesListLd } = await import('../lib/structuredData.js')
     const { tourFor } = await import('../content/tourPages.js')
-    const apl = tourFor('/tours/apl')
+    const apl = tourFor('/series/apl')
     const org = tourLd(apl)
     expect(org['@type']).toBe('Organization')
     expect(org.name).toBe('APL')
@@ -118,7 +118,7 @@ describe('tourLd and seriesListLd', () => {
     expect(org.logo).toMatch(/^https?:\/\/.+\.webp$/)
     const list = seriesListLd(apl.series, apl)
     expect(list['@type']).toBe('ItemList')
-    expect(list.url).toBe(`${site.seo.siteUrl}/tours/apl`)
+    expect(list.url).toBe(`${site.seo.siteUrl}/series/apl`)
     expect(list.numberOfItems).toBe(apl.series.length)
     expect(list.itemListElement.every((li) => li.item['@type'] === 'Event')).toBe(true)
   })

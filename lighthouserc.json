@@ -10,8 +10,8 @@
         "http://localhost:4173/where-to-play",
         "http://localhost:4173/about",
         "http://localhost:4173/contact",
-        "http://localhost:4173/tours",
-        "http://localhost:4173/tours/apl",
+        "http://localhost:4173/series",
+        "http://localhost:4173/series/apl",
         "http://localhost:4173/poker/sydney"
       ],
       "numberOfRuns": 3

@@ -14,7 +14,7 @@ import TourLogo from '../components/TourLogo.jsx'
 import './HubPage.css'
 
 /**
- * /tours/<slug>: an operator's series on the calendar, upcoming then past,
+ * /series/<slug>: an operator's series on the calendar, upcoming then past,
  * the rooms it deals at, the cities it visits and the other tours. `path` is
  * the route's own path; content/tourPages.js resolves it.
  */

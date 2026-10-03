@@ -1,5 +1,5 @@
 // Poker tours: one page per operator in calendarPage.tours, at the href that
-// list already carries (/tours/<slug>), plus the index at /tours. A page is
+// list already carries (/series/<slug>), plus the index at /series. A page is
 // the operator's series on the calendar, the rooms it deals at and the
 // cities it visits, all drawn from content/festivals.js and
 // content/whereToPlay.js — so a new stop shows on the operator's page with no
@@ -15,7 +15,7 @@ import { cities, placeCity, listNames } from './cities.js'
 /** @typedef {import('./whereToPlay.js').VenueCard} VenueCard */
 /** @typedef {import('./cities.js').CityPage} CityPage */
 
-export const toursPath = '/tours'
+export const toursPath = '/series'
 
 /** "APL" → "APL Poker"; "Kings Poker" stays. The name a search starts with. */
 export function brandName(tour) {

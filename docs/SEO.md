@@ -18,7 +18,7 @@ and how to tell whether it is working. The engineering behind it is in
   page; `Event` on each series page; `ItemList` of events on the calendar,
   city and tour pages; `BreadcrumbList` on every inner page; the operator as
   an `Organization` on its tour page (`src/lib/structuredData.js`).
-- **Landing pages for what people search**: `/tours/<operator>` for the
+- **Landing pages for what people search**: `/series/<operator>` for the
   operator names (by far the largest demand: "apl poker", "npl poker", "kings
   poker", "crown poker"), `/poker/<city>` for "poker in Sydney" and the like,
   `/events/<series>` for each series, `/where-to-play` for venues. All are
@@ -44,7 +44,7 @@ record below. The sitemap has not been submitted.
    only; use it if the DNS route is blocked.
 2. **Submit the sitemap**: Sitemaps → `https://australianpokercalendar.com/sitemap.xml`.
 3. **Request indexing for the hubs** with URL Inspection, in this order: `/`,
-   `/poker-calendar/2026`, `/tours`, `/tours/apl`, `/poker/sydney`,
+   `/poker-calendar/2026`, `/series`, `/series/apl`, `/poker/sydney`,
    `/poker/melbourne`, `/where-to-play`. The rest follow the links.
 4. After a week, read **Pages** (indexed vs not), **Enhancements → Events and
    Breadcrumbs** (the rich results), and **Performance → Queries**.

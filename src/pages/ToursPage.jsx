@@ -8,7 +8,7 @@ import Breadcrumbs from '../components/Breadcrumbs.jsx'
 import TourLogo from '../components/TourLogo.jsx'
 import './HubPage.css'
 
-/** /tours: every operator on the calendar, one card each, through to its page. */
+/** /series: every operator on the calendar, one card each, through to its page. */
 export default function ToursPage() {
   const { index } = tourPage
   const trail = [

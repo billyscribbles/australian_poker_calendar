@@ -1,5 +1,5 @@
 // Contract: every operator in calendarPage.tours has a page at the href that
-// list carries (/tours/<slug>) — the page "APL poker" lands on — and /tours
+// list carries (/series/<slug>) — the page "APL poker" lands on — and /series
 // indexes them. A page is the operator's series on the calendar, the rooms it
 // deals at, the cities it visits and a link to its own site, built from rows
 // already on the site.
@@ -15,6 +15,7 @@ import { calendarPage } from '../content/calendarPage.js'
 import { festivals } from '../content/festivals.js'
 import { ROUTES } from '../routes.js'
 import { site } from '../config/site.config.js'
+import { legacyRedirects } from '../config/server.config.js'
 
 expect.extend(toHaveNoViolations)
 
@@ -29,7 +30,7 @@ describe('tourPages content', () => {
   it('builds one page per tour at its href, carrying every series with that code', () => {
     expect(tourPages).toHaveLength(calendarPage.tours.length)
     for (const tour of tourPages) {
-      expect(tour.path).toMatch(/^\/tours\/[a-z0-9-]+$/)
+      expect(tour.path).toMatch(/^\/series\/[a-z0-9-]+$/)
       expect(tour.path).toBe(`${toursPath}/${tour.slug}`)
       expect(tour.series).toEqual(
         festivals
@@ -41,8 +42,8 @@ describe('tourPages content', () => {
       expect(tour.seo.description.length, `${tour.name}: description`).toBeLessThanOrEqual(200)
       expect(tour.heading).toContain(brandName(tour))
     }
-    expect(tourFor('/tours/apl')?.code).toBe('APL')
-    expect(tourFor('/tours/nope')).toBeUndefined()
+    expect(tourFor('/series/apl')?.code).toBe('APL')
+    expect(tourFor('/series/nope')).toBeUndefined()
   })
 
   it('puts "Poker" in the name a search starts with', () => {
@@ -64,8 +65,17 @@ describe('tourPages content', () => {
   })
 })
 
+describe('the old /tours addresses', () => {
+  it('301 to the same page under /series', () => {
+    expect(legacyRedirects['/tours']).toBe(toursPath)
+    for (const tour of tourPages) {
+      expect(legacyRedirects[`/tours/${tour.slug}`], tour.code).toBe(tour.path)
+    }
+  })
+})
+
 describe('TourPage', () => {
-  const apl = tourFor('/tours/apl')
+  const apl = tourFor('/series/apl')
 
   it('renders the heading, intro, official site, every series and venue, and the other tours', () => {
     wrap(apl.path, <TourPage path={apl.path} />)

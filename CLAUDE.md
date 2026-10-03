@@ -145,7 +145,7 @@ imports; that string is how the build finds the route's stylesheet. Nothing
 else needs editing, and the sitemap follows.
 
 The nav and footer currently link to `/how-to-play`, `/guides`,
-`/responsible-gambling`, `/rss` and `/tours/*`, none of which have routes yet.
+`/responsible-gambling` and `/rss`, none of which have routes yet.
 They 404 until added.
 
 ## The calendar data
