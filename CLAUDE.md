@@ -19,8 +19,8 @@ are load-bearing. Break them and the site silently stops being crawlable.
 - Plain CSS with CSS variables, **no Tailwind** or CSS-in-JS
 - Framer Motion 11, Lucide React icons
 - Yarn 4 with `.pnp` caching, Node 20 (`.nvmrc`)
-- `react-helmet-async` for per-page SEO; Formspree for the contact form
-- Railway deployment: `yarn start` runs `server/index.mjs`, a dependency-free Node static server (NOT `vite preview`)
+- `react-helmet-async` for per-page SEO; the forms post to the site's own `/api/enquiry`, which saves them and emails them on through Formspree
+- Railway deployment: `yarn start` runs `server/index.mjs`, a dependency-free Node static server (NOT `vite preview`). It also answers the forms, counts page views and serves the dashboard; `server/store.mjs` keeps enquiries and the daily traffic tally as JSON under `DATA_DIR` (`.data/` locally, a volume on Railway)
 - ESLint flat config + Prettier; Vitest contract suite with axe
 - GitHub Actions CI: lint, format check, test, build, Lighthouse gate
 - Opt-in GA4 behind a consent banner (`integrations.consent: true`) and opt-in Sentry; both no-op until env keys are set
@@ -60,23 +60,40 @@ public/brand/             wordmark, favicon set (yarn icons), og card
 public/images/tours/      operator logos: full colour, icon, and -mono (scripts/gen-tour-mono.py)
 scripts/                  prerender.mjs, gen-seo-files.mjs, gen-icons.mjs, gen-tour-mono.py,
                           series-status.mjs (the status model behind `yarn status` and admin/)
-admin/                    the series dashboard at /admin (handler.mjs, mounted by the site and dev servers)
+admin/                    the dashboard at /admin (handler.mjs, mounted by the site and dev servers)
 server/index.mjs          production server: prerendered docs, real 404s, cache headers, CSP
+server/api.mjs            POST /api/enquiry: saves the form submission, forwards it to Formspree
+server/store.mjs          enquiries.json and traffic/<day>.json under DATA_DIR
 docs/ENVIRONMENTS.md      main = staging, production branch, Railway envs
 ```
 
-## Series status dashboard
+## Dashboard
 
 `/admin` on any of the servers (`yarn dev`, `yarn preview`, `yarn start`, and
-`yarn admin` on its own at port 4400) is a left-nav dashboard of every series:
-phase, schedule up or not, data file, key art, home and calendar placements,
-scrape sync, organiser contact, and the jobs that follow (rotate a finished
-hero, chase an operator, refresh Up Next). `admin/handler.mjs` answers it and
-runs `scripts/series-status.mjs --json` in a fresh process on every refresh, so
-content edits show up without a restart. `yarn status` prints the same jobs in
-the terminal; `--today=YYYY-MM-DD` simulates another day. The job rules live in
-`buildStatus()`; `src/test/seriesStatus.test.js` pins them and
-`src/test/admin.test.js` pins the gate.
+`yarn admin` on its own at port 4400) is a left-nav dashboard written for a
+non-technical editor, with a Back to website link at the top. Sections:
+
+- **Overview, To do**: every series' phase, schedule up or not, data file, key
+  art, home and calendar placements, scrape sync, and the jobs that follow
+  (rotate a finished hero, chase an operator, refresh Up Next).
+- **Calendar**: one full month grid per month with every series as a bar in its
+  room's colour, filterable by room, for reading clashes and gaps.
+- **Series, Poker rooms**: searchable, filterable lists; each row or card opens
+  a profile page.
+- **Enquiries**: everything the contact and venue forms received, with Reply and
+  Mark handled. **Traffic**: page views, visitors, top pages and referrers,
+  counted by the server (no cookies, no consent needed).
+- **Website**: what the home page and calendar page currently show, the data
+  files, and organiser contacts.
+
+`admin/handler.mjs` answers it: `api/status` runs `scripts/series-status.mjs
+--json` in a fresh process on every refresh, so content edits show up without a
+restart; `api/enquiries` and `api/traffic` read `server/store.mjs`. `yarn status`
+prints the jobs in the terminal; `--today=YYYY-MM-DD` simulates another day (the
+API takes the same parameter; the page has no date picker). The job rules live
+in `buildStatus()`; `src/test/seriesStatus.test.js` pins them,
+`src/test/admin.test.js` pins the gate and the API, `src/test/store.test.js` and
+`src/test/api.test.js` the store and the forms' endpoint.
 
 **Access.** The page lists organiser emails and phones. Without `ADMIN_PASSWORD`
 set, only connections from the machine itself are answered and everyone else

@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex" />
-    <title>Series Dashboard · Australian Poker Calendar</title>
+    <title>Dashboard · Australian Poker Calendar</title>
     <link rel="icon" href="../brand/favicon.ico" />
     <link
       rel="stylesheet"
@@ -17,18 +17,12 @@
       <aside class="sidebar">
         <div class="brand">
           <span class="brand__mark">APC</span>
-          <span class="brand__name">Series Dashboard</span>
+          <span class="brand__name">Dashboard</span>
         </div>
+        <a class="site-link" id="site-link" href="/">← Back to website</a>
         <nav class="nav" id="nav" aria-label="Sections"></nav>
         <div class="sidebar__foot">
-          <label class="field">
-            <span>View as of</span>
-            <input type="date" id="today" />
-          </label>
-          <button type="button" class="btn btn--ghost" id="reset-today" hidden>
-            Back to today
-          </button>
-          <button type="button" class="btn" id="refresh">Refresh</button>
+          <button type="button" class="btn btn--ghost" id="refresh">Refresh</button>
           <p class="meta" id="meta"></p>
           <form method="post" action="logout" id="logout" hidden>
             <button type="submit" class="btn btn--ghost btn--sm">Sign out</button>
