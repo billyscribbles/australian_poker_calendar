@@ -10,7 +10,9 @@
 //   .data/
 //   ├── salt                  random, generated once, keys the visitor hashes
 //   ├── enquiries.json        every submission, newest last
-//   └── traffic/2026-10-03.json   one tally per Melbourne day
+//   ├── traffic/2026-10-03.json   one tally per Melbourne day
+//   ├── stories.json, shorts.json   the dashboard's published content (server/content.mjs)
+//   └── media/                uploaded images and video (server/media.mjs)
 
 import { createHash, randomBytes } from 'node:crypto'
 import {
@@ -23,6 +25,7 @@ import {
 } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { createContentStore } from './content.mjs'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 
@@ -271,5 +274,8 @@ export function createStore({ dir = process.env.DATA_DIR || join(ROOT, '.data') 
     }
   }
 
-  return { dir, addEnquiry, listEnquiries, updateEnquiry, recordView, traffic, flush }
+  // Stories, shorts and their media: the dashboard's publishing records.
+  const content = createContentStore({ dir })
+
+  return { dir, content, addEnquiry, listEnquiries, updateEnquiry, recordView, traffic, flush }
 }
