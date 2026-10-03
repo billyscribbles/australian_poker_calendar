@@ -30,7 +30,11 @@ describe('gpiRankings data', () => {
     expect(gpiRankings.boards.map((b) => b.id)).toEqual(['gpi', 'poy'])
   })
 
-  it.each(gpiRankings.boards.map((b) => [b.id, b]))(
+  it('has the same two boards for women only, in the same order', () => {
+    expect(gpiRankings.womenBoards.map((b) => b.id)).toEqual(['gpi', 'poy'])
+  })
+
+  it.each([...gpiRankings.boards, ...gpiRankings.womenBoards].map((b) => [b.title, b]))(
     '%s is ranked 1..n with points, a global rank and a GPI profile',
     (_, board) => {
       expect(board.label && board.title && board.globalRankLabel).toBeTruthy()
@@ -107,6 +111,40 @@ describe('PlayersPage', () => {
 
   it('renders with no axe violations', async () => {
     const { container } = renderPage()
+    expect(await axe(container)).toHaveNoViolations()
+  })
+})
+
+describe('PlayersPage Female only toggle', () => {
+  const toggle = () => screen.getByRole('switch', { name: playersPage.womenOnly.label })
+
+  it('swaps both boards to the women’s standings, keeping the tab, and back', () => {
+    renderPage()
+    expect(toggle()).toHaveAttribute('aria-checked', 'false')
+    fireEvent.click(screen.getByRole('tab', { name: 'PoY 2026' }))
+    fireEvent.click(toggle())
+    expect(toggle()).toHaveAttribute('aria-checked', 'true')
+    expect(screen.getByRole('tab', { name: 'PoY 2026' })).toHaveAttribute('aria-selected', 'true')
+    const [gpi, poy] = gpiRankings.womenBoards
+    const table = within(screen.getByRole('tabpanel')).getByRole('table')
+    expect(within(table).getAllByRole('row')).toHaveLength(poy.standings.length + 1)
+    fireEvent.click(screen.getByRole('tab', { name: 'GPI' }))
+    const gpiTable = within(screen.getByRole('tabpanel')).getByRole('table')
+    expect(within(gpiTable).getAllByRole('row')).toHaveLength(gpi.standings.length + 1)
+    expect(within(gpiTable).getByRole('link', { name: gpi.standings[0].name })).toHaveAttribute(
+      'href',
+      gpi.standings[0].href,
+    )
+    fireEvent.click(toggle())
+    const back = within(screen.getByRole('tabpanel')).getByRole('table')
+    expect(within(back).getAllByRole('row')).toHaveLength(
+      gpiRankings.boards[0].standings.length + 1,
+    )
+  })
+
+  it('renders switched on with no axe violations', async () => {
+    const { container } = renderPage()
+    fireEvent.click(toggle())
     expect(await axe(container)).toHaveNoViolations()
   })
 })

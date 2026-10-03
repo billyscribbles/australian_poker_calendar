@@ -4,7 +4,7 @@
 
 import { gpiRankings } from './gpiRankings.js'
 
-const { season, boards } = gpiRankings
+const { season, boards, womenBoards } = gpiRankings
 const count = boards[0].standings.length
 const board = (/** @type {string} */ id) => boards.find((b) => b.id === id) ?? boards[0]
 const poyLeader = board('poy').standings[0]
@@ -51,6 +51,9 @@ export const playersPage = {
       shown === total ? `${total} players` : `${shown} of ${total} players`,
     empty: (/** @type {string} */ query) => `No ranked player matches “${query}”.`,
   },
+  womenOnly: {
+    label: 'Female only',
+  },
   podium: {
     label: (/** @type {string} */ title) => `${title}: top three`,
     points: 'pts',
@@ -59,7 +62,7 @@ export const playersPage = {
     caption: (/** @type {string} */ title) => `Australian ${title} standings`,
     columns: { rank: 'Rank', player: 'Player', points: 'Points' },
     otherRank: (/** @type {string} */ label) => `${label} rank`,
-    unranked: `Outside the top ${count}`,
+    unranked: (/** @type {string} */ label) => `Not ranked on ${label}`,
   },
 
   how: {
@@ -84,6 +87,7 @@ export const playersPage = {
   updated: gpiRankings.updated,
   updatedText: gpiRankings.updatedLabel,
   boards,
+  womenBoards,
 
   cta: { label: 'See the poker calendar', to: '/poker-calendar/2026' },
 }

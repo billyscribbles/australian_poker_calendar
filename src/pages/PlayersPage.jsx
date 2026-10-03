@@ -14,9 +14,10 @@ const fold = (/** @type {string} */ s) =>
   s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim()
 
 /** Each board's rank by player, so a row can show where the player sits on the other board. */
-const rankOn = Object.fromEntries(
-  playersPage.boards.map((b) => [b.id, new Map(b.standings.map((p) => [p.href, p.rank]))]),
-)
+const ranksOf = (/** @type {import('../content/gpiRankings.js').GpiBoard[]} */ boards) =>
+  Object.fromEntries(boards.map((b) => [b.id, new Map(b.standings.map((p) => [p.href, p.rank]))]))
+const allRanks = ranksOf(playersPage.boards)
+const womenRanks = ranksOf(playersPage.womenBoards)
 
 /** The Australian GPI standings, the GPI ranking and PoY 2026, with their source and last update. */
 export default function PlayersPage() {
@@ -32,11 +33,14 @@ export default function PlayersPage() {
     podium,
     table,
     how,
-    boards,
+    womenOnly: womenToggle,
     cta,
   } = playersPage
   const { source, updated, updatedText } = playersPage
   const [query, setQuery] = useState('')
+  const [womenOnly, setWomenOnly] = useState(false)
+  const boards = womenOnly ? playersPage.womenBoards : playersPage.boards
+  const rankOn = womenOnly ? womenRanks : allRanks
   const needle = fold(useDeferredValue(query))
 
   return (
@@ -78,18 +82,32 @@ export default function PlayersPage() {
               idPrefix="players"
               label={tabsLabel}
               toolbar={
-                <label className="players-search">
-                  <span className="sr-only">{search.label}</span>
-                  <Search className="players-search__icon" size={16} aria-hidden="true" />
-                  <input
-                    type="search"
-                    className="players-search__input"
-                    placeholder={search.placeholder}
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                    autoComplete="off"
-                  />
-                </label>
+                <>
+                  <button
+                    type="button"
+                    role="switch"
+                    aria-checked={womenOnly}
+                    className="players-toggle"
+                    onClick={() => setWomenOnly((on) => !on)}
+                  >
+                    <span className="players-toggle__track" aria-hidden="true">
+                      <span className="players-toggle__thumb" />
+                    </span>
+                    {womenToggle.label}
+                  </button>
+                  <label className="players-search">
+                    <span className="sr-only">{search.label}</span>
+                    <Search className="players-search__icon" size={16} aria-hidden="true" />
+                    <input
+                      type="search"
+                      className="players-search__input"
+                      placeholder={search.placeholder}
+                      value={query}
+                      onChange={(e) => setQuery(e.target.value)}
+                      autoComplete="off"
+                    />
+                  </label>
+                </>
               }
             >
               {(board) => {
@@ -167,7 +185,7 @@ export default function PlayersPage() {
                                 ) : (
                                   <>
                                     <span aria-hidden="true">—</span>
-                                    <span className="sr-only">{table.unranked}</span>
+                                    <span className="sr-only">{table.unranked(other.label)}</span>
                                   </>
                                 )}
                               </td>
