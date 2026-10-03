@@ -219,18 +219,6 @@ export const calendarPage = {
       iconSrc: '/images/tours/checkraise-icon.webp',
       monoSrc: '/images/tours/checkraise-mono.png',
     },
-    {
-      code: 'WPP',
-      label: 'WPP',
-      name: 'World Pro Poker',
-      href: '/tours/world-pro-poker',
-      website: 'https://www.worldpropoker.com.au/',
-      // The largest wordmark the site has is 87×43 inside a photo banner; this
-      // is that, keyed off its black and scaled. Drawn at 64px high at most.
-      logoSrc: '/images/tours/wpp.webp',
-      iconSrc: '/images/tours/wpp-icon.webp',
-      monoSrc: '/images/tours/wpp-mono.png',
-    },
   ],
   // 1080×135 promo banner (shipped at 2× for retina). Clear `src` to fall
   // back to the striped placeholder. `mobileSrc` is an optional 750×300 cut

@@ -37,7 +37,6 @@ const names = {
   STAR: 'The Star Poker',
   GAMBIER: 'Gambier Poker',
   CHECKRAISE: 'Check Raise Poker',
-  WPP: 'World Pro Poker',
 }
 
 // Rooms whose strip tile differs from the calendar's mark. Both shipped

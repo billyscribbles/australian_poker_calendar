@@ -59,7 +59,6 @@ PNG_MARKS = {
     "star": False,
     "gambier": False,
     "checkraise": False,
-    "wpp": False,
 }
 
 

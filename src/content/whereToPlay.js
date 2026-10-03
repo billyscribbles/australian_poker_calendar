@@ -565,15 +565,21 @@ const rooms = [
 /** @type {League[]} */
 const leagueRows = [
   // From each league's own site (Bullets: its Facebook page) on 2026-10-04.
-  // World Pro Poker and Gambier Poker also run series on the calendar.
+  // Gambier Poker also runs series on the calendar; World Pro Poker's finals
+  // are league nights, so it is listed here only.
   {
     name: 'World Pro Poker',
-    code: 'WPP',
     states: ['VIC'],
     about:
       'Weekly $35 to $55 games at Melbourne pubs and clubs, from Darebin and Fawkner RSLs to Sunbury and Rosebud, where 1 in 10 qualify for its $80,000 finals.',
     website:
       'https://www.worldpropoker.com.au/index.php?option=com_content&view=article&id=3:venue-details-and-location&catid=22&Itemid=113',
+    // Red and black suits on black, from its square logo (images/img/Logo175x175.jpg).
+    mark: {
+      iconSrc: '/images/rooms/world-pro-poker-icon.webp',
+      primary: '#D80808',
+      iconBg: '#000000',
+    },
   },
   // A pub, not a card room: "Home of Anzac Cup Poker and weekly tournaments"
   // (newmarkethotel.com.au, 2026-10-04).

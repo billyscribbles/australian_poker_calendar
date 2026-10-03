@@ -39,6 +39,12 @@ export const canonicalHost = 'apex'
 export const legacyRedirects = {
   // '/series-timeline/': '/poker-calendar/2026',
   // '/about-us/': '/about',
+  // World Pro Poker was on the calendar for a day (2026-10-03); it is a league
+  // now, listed on Where to Play, so its tour and finals pages point there.
+  '/tours/world-pro-poker': '/where-to-play',
+  '/events/world-pro-poker-super-mega-stack-series-final-2026': '/where-to-play',
+  '/events/world-pro-poker-high-rollers-main-event-2026': '/where-to-play',
+  '/events/world-pro-poker-chockys-wargames-grand-final-2026': '/where-to-play',
 }
 
 /**

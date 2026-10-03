@@ -187,16 +187,6 @@ export const tourBrands = {
     iconBg: '#0E0E0E',
     source: 'https://www.checkraisepoker.com.au/ — site CSS accents, CRP Logo Black PNG',
   },
-  // World Pro Poker (Melbourne league): white wordmark over red and black card
-  // suits on black. The site's CSS is a stock Joomla template, so both come from the logo.
-  WPP: {
-    primary: '#D80808',
-    secondary: '#080808',
-    logo: 'light',
-    iconBg: '#000000',
-    source:
-      'https://www.worldpropoker.com.au/ — images/img/Logo175x175.jpg (suits, red and black) and templates/ijoomla06/images/logo.png (wordmark)',
-  },
 }
 
 /**
