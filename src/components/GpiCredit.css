@@ -1,0 +1,36 @@
+.gpi-credit {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  margin: 0;
+  font-size: 12px;
+  color: var(--color-muted);
+}
+
+.gpi-credit__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--color-muted);
+  text-decoration: none;
+}
+
+.gpi-credit__link:hover .gpi-credit__name {
+  color: var(--color-accent);
+}
+
+.gpi-credit__logo {
+  width: 56px;
+  height: auto;
+  border-radius: var(--radius-sm);
+}
+
+.gpi-credit__name {
+  color: var(--color-text);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--transition-fast);
+}

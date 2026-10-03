@@ -1,30 +1,25 @@
-// Players of the Year standings sidebar.
-//
-// The rankings are not live yet (see content/playersPage.js for why), so
-// `items` is empty and the sidebar shows `pending` instead. Fill `items` with
-// the top three once the first series of the season scores and the card list
-// takes over.
+// GPI standings sidebar on the home page: the top five Australians on each GPI
+// board, the GPI ranking first. The standings live in content/gpiRankings.js, shared
+// with the full tables on /players.
 
-/**
- * @typedef {object} PlayerStanding
- * @property {number} rank
- * @property {string} name
- * @property {string} country
- * @property {number} cashes
- * @property {string} points    formatted APC Index points
- * @property {string} earnings  formatted
- * @property {string} href
- * @property {string} [avatarSrc]
- */
+import { gpiRankings } from './gpiRankings.js'
 
 export const playersOfTheYear = {
-  heading: 'Players of the Year: 2026',
-  indexLabel: 'APC Index',
+  heading: 'GPI Rankings: Australia',
+  tabsLabel: 'GPI rankings',
+  pointsLabel: 'Points',
+  sourceLabel: 'Rankings by',
+  updatedLabel: 'Updated',
+  source: gpiRankings.source,
+  updated: gpiRankings.updated,
+  updatedText: gpiRankings.updatedLabel,
   pending: {
     title: 'Coming soon',
-    body: 'The 2026 leaderboard goes live once the first series of the season closes out and its results are on The Hendon Mob.',
+    body: 'The standings return once GPI publishes its first weekly update of the season.',
   },
-  cta: { label: 'How the rankings will work', to: '/players' },
-  /** @type {PlayerStanding[]} */
-  items: [],
+  cta: { label: 'Full Australian standings', to: '/players' },
+  /** Each board cut to its first five; the page has the rest. */
+  boards: gpiRankings.boards
+    .filter((board) => board.standings.length)
+    .map((board) => ({ ...board, standings: board.standings.slice(0, 5) })),
 }

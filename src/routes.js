@@ -91,13 +91,10 @@ export const ROUTES = [
     module: 'src/pages/StoryPage.jsx',
     dynamic: true,
   },
-  // Holding page until the first series' results are in. noindex while it has
-  // no standings; drop the flag when the rankings table lands.
   {
     path: '/players',
     load: () => import('./pages/PlayersPage.jsx'),
     module: 'src/pages/PlayersPage.jsx',
-    noindex: true,
   },
   {
     path: '/about',

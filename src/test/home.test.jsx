@@ -273,35 +273,49 @@ describe('home fixtures — shape each section renders', () => {
     }
   })
 
-  it('standings are ranked 1..n with points and earnings', () => {
-    playersOfTheYear.items.forEach((player, i) => {
-      expect(player.href, player.name).toBeTruthy()
-      expect(player.rank).toBe(i + 1)
-      expect(player.name && player.country && player.points && player.earnings).toBeTruthy()
-      expect(typeof player.cashes).toBe('number')
-      if (player.avatarSrc) {
-        expect(existsSync(join('public', player.avatarSrc)), player.avatarSrc).toBe(true)
-      }
-    })
+  it('standings show the top five of each GPI board, ranked with points', () => {
+    expect(playersOfTheYear.boards.map((b) => b.id)).toEqual(['gpi', 'poy'])
+    for (const board of playersOfTheYear.boards) {
+      expect(board.standings).toHaveLength(5)
+      board.standings.forEach((player, i) => {
+        expect(player.rank).toBe(i + 1)
+        expect(player.name && player.points, player.name).toBeTruthy()
+        expect(player.href).toMatch(/^https:\/\/www\.globalpokerindex\.com\/poker-players\//)
+      })
+    }
   })
 
-  it('champions and standings say they are coming soon until there is data', () => {
-    for (const [section, Component] of [
-      [recentChampions, RecentChampions],
-      [playersOfTheYear, PlayersOfTheYear],
-    ]) {
-      const { unmount } = withRouter(<Component />)
-      expect(section.items).toHaveLength(0)
-      expect(section.pending.title && section.pending.body).toBeTruthy()
-      expect(screen.getByText(section.pending.title)).toBeInTheDocument()
-      expect(screen.getByText(section.pending.body)).toBeInTheDocument()
-      expect(screen.getByRole('link', { name: section.cta.label })).toHaveAttribute(
+  it('the standings switch boards, link each player to GPI and credit GPI', () => {
+    withRouter(<PlayersOfTheYear />)
+    for (const board of playersOfTheYear.boards) {
+      fireEvent.click(screen.getByRole('tab', { name: board.label }))
+      const first = board.standings[0]
+      expect(screen.getByRole('link', { name: new RegExp(first.name) })).toHaveAttribute(
         'href',
-        section.cta.to,
+        first.href,
       )
-      expect(screen.queryByRole('list')).not.toBeInTheDocument()
-      unmount()
     }
+    expect(
+      screen.getByRole('link', { name: new RegExp(playersOfTheYear.source.name) }),
+    ).toHaveAttribute('href', playersOfTheYear.source.href)
+    expect(existsSync(join('public', playersOfTheYear.source.logoSrc))).toBe(true)
+    expect(screen.getByText(playersOfTheYear.updatedText)).toHaveAttribute(
+      'datetime',
+      playersOfTheYear.updated,
+    )
+  })
+
+  it('champions say they are coming soon until there is data', () => {
+    const { unmount } = withRouter(<RecentChampions />)
+    expect(recentChampions.items).toHaveLength(0)
+    expect(screen.getByText(recentChampions.pending.title)).toBeInTheDocument()
+    expect(screen.getByText(recentChampions.pending.body)).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: recentChampions.cta.label })).toHaveAttribute(
+      'href',
+      recentChampions.cta.to,
+    )
+    expect(screen.queryByRole('list')).not.toBeInTheDocument()
+    unmount()
   })
 
   it('Asia tours and partners have what their cards read', () => {

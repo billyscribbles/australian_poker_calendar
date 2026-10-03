@@ -1,54 +1,64 @@
-import { Link } from 'react-router-dom'
 import { playersOfTheYear } from '../content/playersOfTheYear.js'
-import ImagePlaceholder from './ImagePlaceholder.jsx'
 import SectionHeading from './SectionHeading.jsx'
 import OutlineButton from './OutlineButton.jsx'
 import ComingSoon from './ComingSoon.jsx'
+import GpiCredit from './GpiCredit.jsx'
+import GpiBoardTabs from './GpiBoardTabs.jsx'
 import './PlayersOfTheYear.css'
 
-/** @typedef {import('../content/playersOfTheYear.js').PlayerStanding} PlayerStanding */
+/** @typedef {import('../content/gpiRankings.js').GpiStanding} GpiStanding */
 
-/** @param {{ player: PlayerStanding, indexLabel: string }} props */
-function StandingRow({ player, indexLabel }) {
+/** @param {{ player: GpiStanding, globalRankLabel: string }} props */
+function StandingRow({ player, globalRankLabel }) {
   return (
     <li>
-      <Link to={player.href} className="standing">
+      <a href={player.href} className="standing" target="_blank" rel="noopener noreferrer">
         <div className="standing__rank">#{player.rank}</div>
-        <ImagePlaceholder
-          variant="fine"
-          className="standing__avatar"
-          src={player.avatarSrc}
-          width={56}
-          height={56}
-        />
         <div className="standing__body">
           <h3 className="standing__name">{player.name}</h3>
           <div className="standing__sub">
-            {player.country} · {player.cashes} cashes
+            {globalRankLabel} #{player.globalRank}
           </div>
         </div>
         <div className="standing__index">
-          <div className="standing__index-label">{indexLabel}</div>
+          <div className="standing__index-label">{playersOfTheYear.pointsLabel}</div>
           <div className="standing__points">{player.points}</div>
-          <div className="standing__earnings">{player.earnings}</div>
         </div>
-      </Link>
+      </a>
     </li>
   )
 }
 
-/** Players of the Year sidebar: the top three standings, or the holding card until they exist. */
+/** GPI standings sidebar: the top Australians on the GPI ranking and PoY 2026, or the holding card. */
 export default function PlayersOfTheYear() {
-  const { heading, indexLabel, pending, cta, items } = playersOfTheYear
+  const { heading, tabsLabel, pending, cta, boards } = playersOfTheYear
+  const { source, sourceLabel, updatedLabel, updated, updatedText } = playersOfTheYear
   return (
     <div className="poy" role="region" aria-labelledby="poy-heading">
       <SectionHeading id="poy-heading">{heading}</SectionHeading>
-      {items.length ? (
-        <ul className="poy__list">
-          {items.map((player) => (
-            <StandingRow key={player.href} player={player} indexLabel={indexLabel} />
-          ))}
-        </ul>
+      {boards.length ? (
+        <>
+          <GpiBoardTabs boards={boards} idPrefix="poy" label={tabsLabel}>
+            {(board) => (
+              <ul className="poy__list">
+                {board.standings.map((player) => (
+                  <StandingRow
+                    key={player.href}
+                    player={player}
+                    globalRankLabel={board.globalRankLabel}
+                  />
+                ))}
+              </ul>
+            )}
+          </GpiBoardTabs>
+          <GpiCredit
+            source={source}
+            sourceLabel={sourceLabel}
+            updatedLabel={updatedLabel}
+            updated={updated}
+            updatedText={updatedText}
+          />
+        </>
       ) : (
         <ComingSoon title={pending.title} body={pending.body} />
       )}
