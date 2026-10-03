@@ -58,6 +58,19 @@
   color: var(--color-accent);
 }
 
+/* A league card's two lines: the states it plays in, then how it runs. */
+.venue-card__states,
+.venue-card__about {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-muted);
+  margin: 0;
+}
+
+.venue-card__states {
+  color: var(--color-text);
+}
+
 .venue-card__operators {
   font-size: 14px;
   line-height: 1.5;
