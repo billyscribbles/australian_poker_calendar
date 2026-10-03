@@ -150,6 +150,11 @@ select {
 
 /* Utility classes — all section components reach for these. */
 .container {
+  /* width: 100% matters inside a flex column (every page wrapper is one):
+   * a flex item with auto margins stops stretching and shrinks to its
+   * content, so a container holding only a table would centre at the
+   * table's width instead of filling the page gutter to gutter. */
+  width: 100%;
   max-width: var(--layout-container-max);
   margin: 0 auto;
   padding: 0 var(--layout-container-pad);

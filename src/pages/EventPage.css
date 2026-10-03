@@ -161,7 +161,6 @@
 .event-stats__list {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  margin: 0;
   padding-top: 20px;
   padding-bottom: 20px;
   list-style: none;
