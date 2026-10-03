@@ -37,11 +37,11 @@ describe('sanitizeHtml', () => {
     expect(sanitizeHtml('<a href="//evil.example/x">x</a>')).toBe('<a>x</a>')
   })
 
-  it('allows images from the media folder or https only, never data: URLs', () => {
+  it('allows images from the media folder only, never data: or external URLs', () => {
     expect(sanitizeHtml('<img src="data:image/png;base64,AAAA" alt="x" />')).toBe('<img alt="x" />')
-    expect(sanitizeHtml('<img src="https://cdn.example/a.jpg" alt="" />')).toBe(
-      '<img src="https://cdn.example/a.jpg" alt="" />',
-    )
+    // The site's CSP (img-src 'self') would block an external image on the live
+    // page while it looked fine in the editor, so it is dropped here instead.
+    expect(sanitizeHtml('<img src="https://cdn.example/a.jpg" alt="" />')).toBe('<img alt="" />')
     expect(sanitizeHtml('<img src="/media/../secret" alt="" />')).toBe('<img alt="" />')
   })
 

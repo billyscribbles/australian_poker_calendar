@@ -9,7 +9,7 @@
 //     script, style, iframe and the like are removed with their contents
 //   - href: http(s), mailto, same-site path or fragment; external links open
 //     in a new tab with rel="noopener noreferrer"
-//   - src: a /media/ file or https
+//   - src: a /media/ file only (the CSP's img-src 'self' would block anything else)
 //   - style: exactly one text-align rule, nothing else
 //   - width/height/colspan/rowspan: digits only
 //   - output is balanced: open tags are closed at the end, stray closers go
@@ -69,7 +69,6 @@ const ATTRS = {
 const STYLE_OK = ['p', 'h2', 'h3', 'h4', 'figure', 'th', 'td', 'li', 'blockquote']
 
 const MEDIA_SRC = /^\/media\/[a-z0-9]+\.[a-z0-9]+$/
-const HTTPS = /^https:\/\/[^\s"'<>]+$/
 const HREF_OK = /^(https?:\/\/[^\s"'<>]+|mailto:[^\s"'<>]+|\/(?!\/)[^\s"'<>]*|#[^\s"'<>]*)$/
 const TEXT_ALIGN = /^\s*text-align\s*:\s*(left|right|center|justify)\s*;?\s*$/i
 const DIGITS = /^\d+$/
@@ -111,7 +110,7 @@ function cleanAttrs(name, attrs) {
       out.push(`href="${escapeAttr(value)}"`)
       if (/^https?:\/\//.test(value)) out.push('target="_blank"', 'rel="noopener noreferrer"')
     } else if (key === 'src') {
-      if (MEDIA_SRC.test(value) || HTTPS.test(value)) out.push(`src="${escapeAttr(value)}"`)
+      if (MEDIA_SRC.test(value)) out.push(`src="${escapeAttr(value)}"`)
     } else if (key === 'alt') {
       out.push(`alt="${escapeAttr(attrs[key])}"`)
     } else if (DIGITS.test(value)) {
