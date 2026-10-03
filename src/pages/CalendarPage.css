@@ -37,8 +37,10 @@
   height: 100%;
   object-fit: cover;
   /* The image rounds itself (the box no longer clips) so the tag can hang
-     over the frame. */
-  border-radius: inherit;
+     over the frame. Its parent is the <picture>, not the box, so `inherit`
+     would read 0 there; name the box's radius instead, minus the 1px border
+     so the two curves nest with no sliver of background at the corners. */
+  border-radius: calc(var(--radius-xl) - 1px);
 }
 
 /* The Featured tag sits on the frame's top-left corner like a half-stuck
