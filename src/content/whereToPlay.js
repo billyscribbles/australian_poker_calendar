@@ -299,6 +299,18 @@ const rows = [
     tours: ['GAMBIER'],
   },
   {
+    // Matchroom's own room: its weekly games and the Super Series.
+    name: 'Matchroom Poker',
+    street: '33 Shannon Place',
+    suburb: 'Adelaide',
+    city: 'adelaide',
+    state: 'SA',
+    postcode: '5000',
+    tours: ['MATCHROOM'],
+    room: true,
+    website: 'https://thematchroom.com.au/',
+  },
+  {
     name: 'Stacked Social',
     street: '106 O’Connell Street',
     suburb: 'North Adelaide',
@@ -488,20 +500,6 @@ const rooms = [
       iconSrc: '/images/rooms/lasseters-icon.svg',
       primary: '#A39161',
       iconBg: '#2E2E2E',
-    },
-  },
-  {
-    name: 'Matchroom Poker',
-    street: '33 Shannon Place',
-    suburb: 'Adelaide',
-    state: 'SA',
-    postcode: '5000',
-    website: 'https://thematchroom.com.au/',
-    // The pair of threes from the logo, on black; ring is the site's red.
-    mark: {
-      iconSrc: '/images/rooms/matchroom-poker-icon.webp',
-      primary: '#E02633',
-      iconBg: '#000000',
     },
   },
   {

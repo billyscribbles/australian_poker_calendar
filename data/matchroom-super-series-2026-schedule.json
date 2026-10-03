@@ -1,0 +1,380 @@
+{
+  "series": "Matchroom Super Series 2026",
+  "source_url": "https://thematchroom.com.au/series/",
+  "source_document": "Matchroom's two-page series schedule (\"Matchroom Super Series, Oct 30 - Nov 9\") and the Mini Main Flight A structure sheet, posted on the series page",
+  "transcribed_from_poster": true,
+  "transcribed_on": "2026-10-04",
+  "organiser": "Matchroom Poker",
+  "organiser_contact": {
+    "phone": "0433 326 060",
+    "email": "info@matchroompoker.com.au",
+    "website": "https://thematchroom.com.au/"
+  },
+  "venue": "Matchroom Poker, 33 Shannon Place, Adelaide SA 5000",
+  "dates": "2026-10-30 to 2026-11-09",
+  "headline_stats": {
+    "main_event_guarantee": "$100,000",
+    "main_event_buy_in": "$1,150",
+    "mini_main_guarantee": "$40,000",
+    "mini_main_entry": "$400 (340+60)"
+  },
+  "notes": [
+    "The schedule prints the Main Event Day 2 buy-in as $1,150; it is recorded as printed. Mini Main Day 2 and Deep Stack Day 2 are qualifiers only.",
+    "2.5% of the total prize pool is reserved for Player of the Series; 1% of NLH prize pools goes to the Royal Flush jackpot.",
+    "Mini Main: $50,000 starting stack, 30-minute levels, late registration to the end of level 10, best stack forward."
+  ],
+  "events": [
+    {
+      "date": "2026-10-30",
+      "day": "Friday",
+      "time": "5:00pm",
+      "event": "Mini Main Satellite",
+      "buy_in": 70,
+      "featured": false
+    },
+    {
+      "date": "2026-10-30",
+      "day": "Friday",
+      "time": "6:00pm",
+      "event": "$40K GTD Mini Main – Flight A",
+      "guarantee": "$40,000 GTD",
+      "guarantee_amount": 40000,
+      "buy_in": 400,
+      "featured": false
+    },
+    {
+      "date": "2026-10-30",
+      "day": "Friday",
+      "time": "8:30pm",
+      "event": "NLH Joker Jackpot",
+      "buy_in": 100,
+      "featured": false
+    },
+    {
+      "date": "2026-10-31",
+      "day": "Saturday",
+      "time": "1:00pm",
+      "event": "Mini Main Satellite",
+      "buy_in": 70,
+      "featured": false
+    },
+    {
+      "date": "2026-10-31",
+      "day": "Saturday",
+      "time": "2:00pm",
+      "event": "$40K GTD Mini Main – Flight B",
+      "guarantee": "$40,000 GTD",
+      "guarantee_amount": 40000,
+      "buy_in": 400,
+      "featured": false
+    },
+    {
+      "date": "2026-10-31",
+      "day": "Saturday",
+      "time": "6:00pm",
+      "event": "PLO Double Board Bomb Pot",
+      "buy_in": 250,
+      "featured": false
+    },
+    {
+      "date": "2026-10-31",
+      "day": "Saturday",
+      "time": "8:30pm",
+      "event": "NLH Joker Jackpot",
+      "buy_in": 100,
+      "featured": false
+    },
+    {
+      "date": "2026-11-01",
+      "day": "Sunday",
+      "time": "1:00pm",
+      "event": "Mini Main Satellite",
+      "buy_in": 70,
+      "featured": false
+    },
+    {
+      "date": "2026-11-01",
+      "day": "Sunday",
+      "time": "2:00pm",
+      "event": "$40K GTD Mini Main – Flight C",
+      "guarantee": "$40,000 GTD",
+      "guarantee_amount": 40000,
+      "buy_in": 400,
+      "featured": false
+    },
+    {
+      "date": "2026-11-01",
+      "day": "Sunday",
+      "time": "6:00pm",
+      "event": "Crazy Pineapple",
+      "buy_in": 200,
+      "featured": false
+    },
+    {
+      "date": "2026-11-01",
+      "day": "Sunday",
+      "time": "7:30pm",
+      "event": "Main Event Satellite",
+      "buy_in": 200,
+      "featured": false
+    },
+    {
+      "date": "2026-11-02",
+      "day": "Monday",
+      "time": "6:00pm",
+      "event": "$40K GTD Mini Main – Day 2",
+      "guarantee": "$40,000 GTD",
+      "guarantee_amount": 40000,
+      "buy_in": null,
+      "entry_note": "Qualifiers",
+      "featured": false
+    },
+    {
+      "date": "2026-11-02",
+      "day": "Monday",
+      "time": "6:30pm",
+      "event": "$10K 8-Max NLH Event",
+      "guarantee": "$10,000 GTD",
+      "guarantee_amount": 10000,
+      "buy_in": 350,
+      "featured": false
+    },
+    {
+      "date": "2026-11-02",
+      "day": "Monday",
+      "time": "8:30pm",
+      "event": "NLH Joker Jackpot",
+      "buy_in": 100,
+      "featured": false
+    },
+    {
+      "date": "2026-11-03",
+      "day": "Tuesday",
+      "time": "5:00pm",
+      "event": "PLO Mini Satellite",
+      "buy_in": 70,
+      "featured": false
+    },
+    {
+      "date": "2026-11-03",
+      "day": "Tuesday",
+      "time": "6:00pm",
+      "event": "$10K 8-Max PLO Event",
+      "guarantee": "$10,000 GTD",
+      "guarantee_amount": 10000,
+      "buy_in": 400,
+      "featured": false
+    },
+    {
+      "date": "2026-11-03",
+      "day": "Tuesday",
+      "time": "7:30pm",
+      "event": "$5K Deep Stack – Flight A",
+      "guarantee": "$5,000 GTD",
+      "guarantee_amount": 5000,
+      "buy_in": 120,
+      "featured": false
+    },
+    {
+      "date": "2026-11-03",
+      "day": "Tuesday",
+      "time": "8:30pm",
+      "event": "Main Event Satellite",
+      "buy_in": 200,
+      "featured": false
+    },
+    {
+      "date": "2026-11-04",
+      "day": "Wednesday",
+      "time": "5:00pm",
+      "event": "NLH Monster Stack Satellite",
+      "buy_in": 80,
+      "featured": false
+    },
+    {
+      "date": "2026-11-04",
+      "day": "Wednesday",
+      "time": "6:00pm",
+      "event": "$15K NLH Monster Stack",
+      "guarantee": "$15,000 GTD",
+      "guarantee_amount": 15000,
+      "buy_in": 450,
+      "featured": false
+    },
+    {
+      "date": "2026-11-04",
+      "day": "Wednesday",
+      "time": "7:30pm",
+      "event": "$5K Deep Stack – Flight B",
+      "guarantee": "$5,000 GTD",
+      "guarantee_amount": 5000,
+      "buy_in": 120,
+      "featured": false
+    },
+    {
+      "date": "2026-11-04",
+      "day": "Wednesday",
+      "time": "8:30pm",
+      "event": "NLH Joker Jackpot",
+      "buy_in": 100,
+      "featured": false
+    },
+    {
+      "date": "2026-11-05",
+      "day": "Thursday",
+      "time": "5:00pm",
+      "event": "Main Event Satellite",
+      "buy_in": 200,
+      "featured": false
+    },
+    {
+      "date": "2026-11-05",
+      "day": "Thursday",
+      "time": "6:00pm",
+      "event": "$100K NLH Main Event – Flight A",
+      "guarantee": "$100,000 GTD",
+      "guarantee_amount": 100000,
+      "buy_in": 1150,
+      "featured": true
+    },
+    {
+      "date": "2026-11-05",
+      "day": "Thursday",
+      "time": "7:30pm",
+      "event": "$5K Deep Stack – Flight C",
+      "guarantee": "$5,000 GTD",
+      "guarantee_amount": 5000,
+      "buy_in": 120,
+      "featured": false
+    },
+    {
+      "date": "2026-11-05",
+      "day": "Thursday",
+      "time": "8:30pm",
+      "event": "Main Event Satellite",
+      "buy_in": 200,
+      "featured": false
+    },
+    {
+      "date": "2026-11-06",
+      "day": "Friday",
+      "time": "5:00pm",
+      "event": "Main Event Satellite",
+      "buy_in": 200,
+      "featured": false
+    },
+    {
+      "date": "2026-11-06",
+      "day": "Friday",
+      "time": "6:00pm",
+      "event": "$100K NLH Main Event – Flight B",
+      "guarantee": "$100,000 GTD",
+      "guarantee_amount": 100000,
+      "buy_in": 1150,
+      "featured": true
+    },
+    {
+      "date": "2026-11-06",
+      "day": "Friday",
+      "time": "7:30pm",
+      "event": "$5K Deep Stack – Day 2",
+      "guarantee": "$5,000 GTD",
+      "guarantee_amount": 5000,
+      "buy_in": null,
+      "entry_note": "Qualifiers",
+      "featured": false
+    },
+    {
+      "date": "2026-11-06",
+      "day": "Friday",
+      "time": "8:30pm",
+      "event": "Main Event Satellite",
+      "buy_in": 200,
+      "featured": false
+    },
+    {
+      "date": "2026-11-07",
+      "day": "Saturday",
+      "time": "1:00pm",
+      "event": "Main Event Satellite",
+      "buy_in": 200,
+      "featured": false
+    },
+    {
+      "date": "2026-11-07",
+      "day": "Saturday",
+      "time": "2:00pm",
+      "event": "$100K NLH Main Event – Flight C",
+      "guarantee": "$100,000 GTD",
+      "guarantee_amount": 100000,
+      "buy_in": 1150,
+      "featured": true
+    },
+    {
+      "date": "2026-11-07",
+      "day": "Saturday",
+      "time": "6:00pm",
+      "event": "NLH Terminator",
+      "buy_in": 250,
+      "featured": false
+    },
+    {
+      "date": "2026-11-07",
+      "day": "Saturday",
+      "time": "8:30pm",
+      "event": "Last Chance Main Event Satellite",
+      "buy_in": 200,
+      "featured": false
+    },
+    {
+      "date": "2026-11-08",
+      "day": "Sunday",
+      "time": "1:00pm",
+      "event": "$100K NLH Main Event – Day 2",
+      "guarantee": "$100,000 GTD",
+      "guarantee_amount": 100000,
+      "buy_in": 1150,
+      "featured": true
+    },
+    {
+      "date": "2026-11-08",
+      "day": "Sunday",
+      "time": "5:00pm",
+      "event": "NLH Series Saver",
+      "buy_in": 300,
+      "featured": false
+    },
+    {
+      "date": "2026-11-08",
+      "day": "Sunday",
+      "time": "8:30pm",
+      "event": "NLH Joker Jackpot",
+      "buy_in": 100,
+      "featured": false
+    },
+    {
+      "date": "2026-11-09",
+      "day": "Monday",
+      "time": "5:00pm",
+      "event": "NLH Closing Event Satellite",
+      "buy_in": 50,
+      "featured": false
+    },
+    {
+      "date": "2026-11-09",
+      "day": "Monday",
+      "time": "6:00pm",
+      "event": "NLH Closing Event",
+      "buy_in": 250,
+      "featured": false
+    },
+    {
+      "date": "2026-11-09",
+      "day": "Monday",
+      "time": "8:30pm",
+      "event": "NLH Joker Jackpot",
+      "buy_in": 100,
+      "featured": false
+    }
+  ]
+}

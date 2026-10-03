@@ -510,6 +510,14 @@ const rows = [
     'https://kingspoker.com.au/',
   ],
   [
+    'MATCHROOM',
+    'Matchroom Super Series',
+    '2026-10-30',
+    '2026-11-09',
+    'Adelaide, Matchroom Poker',
+    'https://thematchroom.com.au/series/',
+  ],
+  [
     'APT',
     'APT Sydney Champs',
     '2026-11-05',

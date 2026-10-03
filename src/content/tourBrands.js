@@ -187,6 +187,15 @@ export const tourBrands = {
     iconBg: '#0E0E0E',
     source: 'https://www.checkraisepoker.com.au/ — site CSS accents, CRP Logo Black PNG',
   },
+  // Matchroom Poker (Adelaide): white wordmark over a pair of threes with red
+  // pips; the site's accent red (#E02633) on its near-black (#2A2A2A).
+  MATCHROOM: {
+    primary: '#E02633',
+    secondary: '#F80808',
+    logo: 'light',
+    iconBg: '#000000',
+    source: 'https://thematchroom.com.au/ — theme CSS accent, matchroom-new-logo.png pips',
+  },
 }
 
 /**

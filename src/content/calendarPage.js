@@ -219,6 +219,16 @@ export const calendarPage = {
       iconSrc: '/images/tours/checkraise-icon.webp',
       monoSrc: '/images/tours/checkraise-mono.png',
     },
+    {
+      code: 'MATCHROOM',
+      label: 'MATCHROOM',
+      name: 'Matchroom Poker',
+      href: '/tours/matchroom-poker',
+      website: 'https://thematchroom.com.au/',
+      logoSrc: '/images/tours/matchroom.webp',
+      iconSrc: '/images/tours/matchroom-icon.webp',
+      monoSrc: '/images/tours/matchroom-mono.png',
+    },
   ],
   // 1080×135 promo banner (shipped at 2× for retina). Clear `src` to fall
   // back to the striped placeholder. `mobileSrc` is an optional 750×300 cut
