@@ -1,11 +1,18 @@
 import { useRef } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { asiaTours } from '../content/asiaTours.js'
+import { roughAud } from '../lib/currency.js'
 import Img from './Img.jsx'
 import SectionHeading from './SectionHeading.jsx'
 import './AsiaTours.css'
 
 /** @typedef {import('../content/asiaTours.js').AsiaTour} AsiaTour */
+
+/** "5B KRW (~$5.3m)": the local guarantee with a rough AUD figure beside it */
+function withAud(prize) {
+  const aud = roughAud(prize, asiaTours.audRates)
+  return aud ? `${prize} (~${aud})` : prize
+}
 
 /** @param {{ tour: AsiaTour, rows: { key: string, label: string }[] }} props */
 function TourCard({ tour, rows }) {
@@ -31,7 +38,7 @@ function TourCard({ tour, rows }) {
           .map((row) => (
             <div key={row.key} className="asia-tour__fact">
               <dt>{row.label}</dt>
-              <dd>{tour[row.key]}</dd>
+              <dd>{row.key === 'prize' ? withAud(tour.prize) : tour[row.key]}</dd>
             </div>
           ))}
       </dl>

@@ -11,7 +11,8 @@
  * @property {string} dates    "Oct 8 – Oct 19"
  * @property {string} country
  * @property {string} [place]  "City, Venue", when the listing gives one
- * @property {string} [prize]  the advertised guarantee, in the local currency
+ * @property {string} [prize]  the advertised guarantee, in the local currency;
+ *   the card adds a rough AUD figure from `audRates`
  * @property {string} logoSrc  the series mark, 300×300
  */
 
@@ -28,6 +29,24 @@ export const asiaTours = {
     Vietnam: '/images/flags/vn.svg',
     Taiwan: '/images/flags/tw.svg',
     Macau: '/images/flags/mo.svg',
+  },
+  /**
+   * Units of each currency per 1 AUD, for the rough "(~$5.3m)" beside a prize
+   * pool. From open.er-api.com (free, no key) on 2026-10-03; the figures are
+   * shorthand, so refresh only when a rate has moved a lot. A prize in a
+   * currency missing here shows without the AUD figure.
+   */
+  audRates: {
+    KRW: 936,
+    MYR: 2.84,
+    PHP: 43.5,
+    TWD: 22.2,
+    NTD: 22.2,
+    VND: 18046,
+    JPY: 110,
+    HKD: 5.45,
+    MOP: 5.62,
+    USD: 0.695,
   },
   rows: [
     { key: 'dates', label: 'Dates' },

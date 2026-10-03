@@ -25,6 +25,7 @@ import { calendar } from '../content/calendar.js'
 import { recentChampions } from '../content/recentChampions.js'
 import { playersOfTheYear } from '../content/playersOfTheYear.js'
 import { asiaTours } from '../content/asiaTours.js'
+import { roughAud } from '../lib/currency.js'
 import { partners } from '../content/partners.js'
 import { fireEvent } from '@testing-library/react'
 import Stories from '../components/Stories.jsx'
@@ -325,6 +326,7 @@ describe('home fixtures — shape each section renders', () => {
       expect(asiaTours.flags[tour.country], tour.country).toBeTruthy()
       expect(existsSync(join('public', tour.logoSrc)), tour.logoSrc).toBe(true)
       expect(existsSync(join('public', asiaTours.flags[tour.country])), tour.country).toBe(true)
+      if (tour.prize) expect(roughAud(tour.prize, asiaTours.audRates), tour.prize).toBeTruthy()
     }
     expect(partners.items.length).toBeGreaterThan(0)
     for (const partner of partners.items) expect(partner.name).toBeTruthy()
