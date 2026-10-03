@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Newspaper, CalendarDays, MapPin, Users, BookOpen, Menu, X } from 'lucide-react'
+import { Newspaper, CalendarDays, Trophy, MapPin, Users, BookOpen, Menu, X } from 'lucide-react'
 import { site } from '../config/site.config.js'
 import Img from './Img.jsx'
 import './Navbar.css'
@@ -10,6 +10,7 @@ import './Navbar.css'
 const NAV_ICONS = {
   news: Newspaper,
   calendar: CalendarDays,
+  tours: Trophy,
   map: MapPin,
   players: Users,
   learn: BookOpen,
