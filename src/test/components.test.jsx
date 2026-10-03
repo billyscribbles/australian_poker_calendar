@@ -169,10 +169,14 @@ describe('Footer contact', () => {
       </MemoryRouter>,
     )
 
+  // Scoped to the contact block: the responsible-gambling line carries its
+  // own tel: link to the national helpline.
+  const contactTel = () => document.querySelector('.footer__contact a[href^="tel:"]')
+
   it('renders no phone link when no number is configured', () => {
     expect(site.contact.phone).toBe('') // the template ships without one
     renderFooter()
-    expect(document.querySelector('a[href^="tel:"]')).toBeNull()
+    expect(contactTel()).toBeNull()
   })
 
   it('dials a clean number when one is set, whatever the label formatting', () => {
@@ -180,7 +184,7 @@ describe('Footer contact', () => {
     try {
       site.contact.phone = '+61 400 123 456'
       renderFooter()
-      const link = document.querySelector('a[href^="tel:"]')
+      const link = contactTel()
       expect(link).not.toBeNull()
       // Label keeps the spacing a human reads; the href must not.
       expect(link.getAttribute('href')).toBe('tel:+61400123456')

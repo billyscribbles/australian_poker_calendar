@@ -157,9 +157,22 @@ export default function Footer() {
             </a>
           </div>
           <div className="footer__responsible">
-            {footer.responsible.map((item) => (
-              <span key={item}>{item}</span>
-            ))}
+            {footer.responsible.map((item) =>
+              item.href ? (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  className="footer__responsible-link"
+                  {...(item.href.startsWith('http')
+                    ? { target: '_blank', rel: 'noopener noreferrer' }
+                    : {})}
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <span key={item.label}>{item.label}</span>
+              ),
+            )}
           </div>
         </div>
       </div>

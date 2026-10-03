@@ -257,6 +257,15 @@
   left: -12px;
 }
 
+.footer__responsible-link {
+  color: inherit;
+  transition: color var(--transition-fast);
+}
+
+.footer__responsible-link:hover {
+  color: var(--color-accent);
+}
+
 /* Tablet: two by two, the brand beside the first group, the city and tour
    lists on the row below. The lists become two equal columns that may wrap
    a long label, since half a tablet is narrower than two content-width

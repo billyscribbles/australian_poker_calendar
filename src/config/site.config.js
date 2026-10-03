@@ -65,7 +65,14 @@ export const site = {
       { label: 'Privacy Policy', to: '/privacy' },
       { label: 'Terms & Conditions', to: '/terms' },
     ],
-    responsible: ['18+', 'Gamble responsibly', 'Gambling Help Online 1800 858 858'],
+    // Items with an href render as links; web links open in a new tab, a
+    // tel: link dials on a phone.
+    responsible: [
+      { label: '18+' },
+      { label: 'Gamble responsibly' },
+      { label: 'Gambling Help Online', href: 'https://www.gamblinghelponline.org.au/' },
+      { label: '1800 858 858', href: 'tel:1800858858' },
+    ],
   },
 
   // Rendered as circular icon buttons in the footer, in this order.
