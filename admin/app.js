@@ -1,7 +1,10 @@
-// The dashboard. Three fetches (api/status, api/enquiries, api/traffic),
-// rendered by hash route:
+/* global publishView, bindPublish, loadPublish, leaveEditor, editorOpen, draftBadge */
+// The dashboard. Fetches api/status, api/enquiries, api/traffic and (through
+// publish.js, loaded before this file) api/stories and api/shorts, rendered
+// by hash route:
 //
 //   #overview  #todo  #calendar  #series  #series/<slug>  #rooms  #rooms/<code>
+//   #stories  #stories/<id>  #shorts  #shorts/<id>
 //   #enquiries  #traffic  #home  #calendar-page  #data  #contacts
 //
 // Plain DOM and template strings; nothing to build. Each view is one function
@@ -31,6 +34,13 @@ const NAV = [
       ['calendar', 'Calendar'],
       ['series', 'Series'],
       ['rooms', 'Poker rooms'],
+    ],
+  },
+  {
+    title: 'Publish',
+    items: [
+      ['stories', 'Stories'],
+      ['shorts', 'Shorts'],
     ],
   },
   {
@@ -1191,6 +1201,8 @@ function renderNav() {
       `<span class="badge ${c.jobs.now ? 'badge--critical' : ''}">${c.jobs.now + c.jobs.soon + c.jobs.later}</span>`,
     series: c && `<span class="badge">${c.series}</span>`,
     rooms: c && `<span class="badge">${state.data.rooms.length}</span>`,
+    stories: draftBadge('stories'),
+    shorts: draftBadge('shorts'),
     enquiries: (() => {
       const open = openEnquiries().length
       return open ? `<span class="badge badge--warning">${open}</span>` : ''
@@ -1219,6 +1231,9 @@ function render() {
     return
   }
   const { page, param } = route()
+  // An open editor owns the page: the minute refresh must not redraw it under
+  // the editor's hands (TinyMCE state, unsaved fields).
+  if (editorOpen(page, param)) return
   const views = {
     overview,
     todo: todoView,
@@ -1231,6 +1246,8 @@ function render() {
     'calendar-page': calendarPageView,
     data: dataView,
     contacts: contactsView,
+    stories: () => publishView('stories', param),
+    shorts: () => publishView('shorts', param),
   }
   main.innerHTML = (views[page] || overview)()
   if (page !== 'calendar') main.scrollTop = 0
@@ -1239,6 +1256,7 @@ function render() {
   if (page === 'calendar') bindMonths()
   if (page === 'enquiries') bindEnquiries()
   if (page === 'traffic') bindTraffic()
+  if (page === 'stories' || page === 'shorts') bindPublish(page, param)
   document.getElementById('meta').textContent =
     `Refreshed ${new Date(state.data.generatedAt).toLocaleTimeString('en-AU', { hour: '2-digit', minute: '2-digit' })}`
 }
@@ -1281,6 +1299,7 @@ async function load() {
       getJson('api/status'),
       getJson('api/enquiries'),
       loadTraffic(),
+      loadPublish(),
     ])
     state.data = data
     state.inbox = inbox.enquiries
@@ -1307,6 +1326,7 @@ document.getElementById('main').addEventListener('click', (e) => {
 document.getElementById('refresh').addEventListener('click', load)
 window.addEventListener('hashchange', () => {
   state.months.scrolled = false
+  leaveEditor()
   render()
 })
 

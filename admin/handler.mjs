@@ -54,6 +54,8 @@ const FILES = {
   '': { file: 'index.html', type: 'text/html; charset=utf-8' },
   'app.js': { file: 'app.js', type: 'text/javascript; charset=utf-8' },
   'app.css': { file: 'app.css', type: 'text/css; charset=utf-8' },
+  'publish.js': { file: 'publish.js', type: 'text/javascript; charset=utf-8' },
+  'publish.css': { file: 'publish.css', type: 'text/css; charset=utf-8' },
 }
 
 // TinyMCE, served from the package so the editor needs no cloud key. Yarn PnP
