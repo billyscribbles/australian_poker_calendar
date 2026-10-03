@@ -543,24 +543,54 @@
 }
 
 @media (max-width: 600px) {
+  /* The hero and the three posters swipe sideways as one row instead of
+     stacking into a wall of cards: each shows most of the viewport so the
+     next one's edge peeks in as the cue that the row scrolls. The row bleeds
+     to the screen edges and pads itself back so the first card lines up
+     with the page. A swipe that reaches the end stays in the row instead of
+     turning into the browser's back gesture. */
   .events-banner__grid {
-    grid-template-columns: minmax(0, 1fr);
-    padding: 16px var(--layout-container-pad) 0;
+    display: flex;
+    gap: 12px;
+    padding: 16px var(--layout-container-pad) 8px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--layout-container-pad);
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border) transparent;
+  }
+  .events-banner__grid::-webkit-scrollbar {
+    height: 6px;
+  }
+  .events-banner__grid::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 3px;
+  }
+  .live-event,
+  .side-event {
+    flex: none;
+    width: min(280px, 78vw);
+    scroll-snap-align: start;
   }
   .live-event {
     grid-template-columns: minmax(0, 1fr);
+    min-height: 0;
   }
   .live-event__body {
     padding: 24px 20px 20px;
   }
   .live-event__name {
-    font-size: 32px;
+    font-size: 26px;
   }
   /* Photo on top, copy beneath, like the side cards: it keeps the LIVE chip
      on the image instead of across the wrapped title. */
   .live-event__visual {
     order: -1;
-    height: 220px;
+    height: 200px;
+  }
+  .live-event__meta {
+    font-size: 14px;
   }
   .side-event {
     min-height: 240px;
