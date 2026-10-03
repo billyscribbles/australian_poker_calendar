@@ -17,7 +17,7 @@ import { existsSync, readFileSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { execFileSync } from 'node:child_process'
-import { createDocumentBuilder } from './lib/document.mjs'
+import { createDocumentBuilder, readEntryStyles } from './lib/document.mjs'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const DIST = join(root, 'dist')
@@ -167,7 +167,14 @@ assertOgImage()
 // theme tokens, the studio-credit and hidden-content guards) is shared with
 // server/render.mjs, which renders the live routes the same way at request
 // time. See scripts/lib/document.mjs.
-const builder = createDocumentBuilder({ template, manifest: viteManifest, themeStyles })
+// The entry stylesheet is inlined into every document (see entryStyles in
+// that file): it was the one render-blocking request before first paint.
+const builder = createDocumentBuilder({
+  template,
+  manifest: viteManifest,
+  themeStyles,
+  entryStyles: readEntryStyles(viteManifest, DIST),
+})
 
 // The untouched shell, kept for routes that deliberately have no static
 // document (a catalogue page whose data only exists at runtime, an auth-gated

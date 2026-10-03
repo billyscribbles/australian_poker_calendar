@@ -8,6 +8,7 @@ import { tourBrandStyle } from '../content/tourBrands.js'
 import TourLogo from '../components/TourLogo.jsx'
 import SectionHeading from '../components/SectionHeading.jsx'
 import Img from '../components/Img.jsx'
+import NextEvents from '../components/NextEvents.jsx'
 import './EventPage.css'
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -364,6 +365,8 @@ export default function EventPage({ path }) {
           </div>
         </section>
       )}
+
+      <NextEvents path={event.path} />
     </main>
   )
 }

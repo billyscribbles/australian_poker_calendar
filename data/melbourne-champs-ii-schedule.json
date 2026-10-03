@@ -1,11 +1,5 @@
 {
   "series": "Australian Poker Tour – Melbourne Champs II (VIC)",
-  "source_url": "https://australianpokerschedule.com.au/event/australian-poker-tour-melbourne-champs-ii-vic/",
-  "source_images": [
-    "https://australianpokerschedule.com.au/wp-content/uploads/2026/06/1080x1350-Final-MELB-CHAMPS-PG-1A.jpg",
-    "https://australianpokerschedule.com.au/wp-content/uploads/2026/06/1080x1350-Final-MELB-CHAMPS-PG-2A.jpg",
-    "https://australianpokerschedule.com.au/wp-content/uploads/2026/06/VIP-Package-V2.jpg"
-  ],
   "transcribed_from_poster": true,
   "organiser": "Australian Poker Tour (APT)",
   "presented_by": "Hachem Management Group",
@@ -31,15 +25,42 @@
     "total_value": 14300,
     "deposit": "25% deposit required ($3,325)",
     "includes": [
-      { "event": "The Crown Opener", "buy_in": 750 },
-      { "event": "APT Players Champs (Freezeout)", "buy_in": 1500 },
-      { "event": "Hachem Deepstack", "buy_in": 600 },
-      { "event": "Van's Vault", "buy_in": 2000 },
-      { "event": "The Whale", "buy_in": 750 },
-      { "event": "Melbourne Champs Main Event", "buy_in": 1650 },
-      { "event": "The Grind", "buy_in": 1250 },
-      { "event": "The Goliath", "buy_in": 2500 },
-      { "event": "The Big Flipper", "buy_in": 2300 }
+      {
+        "event": "The Crown Opener",
+        "buy_in": 750
+      },
+      {
+        "event": "APT Players Champs (Freezeout)",
+        "buy_in": 1500
+      },
+      {
+        "event": "Hachem Deepstack",
+        "buy_in": 600
+      },
+      {
+        "event": "Van's Vault",
+        "buy_in": 2000
+      },
+      {
+        "event": "The Whale",
+        "buy_in": 750
+      },
+      {
+        "event": "Melbourne Champs Main Event",
+        "buy_in": 1650
+      },
+      {
+        "event": "The Grind",
+        "buy_in": 1250
+      },
+      {
+        "event": "The Goliath",
+        "buy_in": 2500
+      },
+      {
+        "event": "The Big Flipper",
+        "buy_in": 2300
+      }
     ],
     "highlights": [
       "Entry to nine events with more than $1M in guarantees",

@@ -75,6 +75,28 @@ describe('createDocumentBuilder', () => {
     expect(partial).toContain('data-prerender="partial"')
   })
 
+  it('inlines the entry stylesheet and never links it again', () => {
+    const inlined = createDocumentBuilder({
+      template: TEMPLATE,
+      manifest: MANIFEST,
+      themeStyles: '',
+      entryStyles: [{ file: 'assets/index-abc.css', css: 'body{color:red}' }],
+    })
+    const doc = inlined.build(result('<main>hi</main>'), 'src/pages/StoryPage.jsx')
+    expect(doc).toContain('<style>body{color:red}</style>')
+    expect(doc).not.toContain('index-abc.css')
+    // The route's own sheet stays a link: the lazy loader looks for it.
+    expect(doc).toContain('href="/assets/StoryPage-111.css"')
+    expect(() =>
+      createDocumentBuilder({
+        template: TEMPLATE,
+        manifest: MANIFEST,
+        themeStyles: '',
+        entryStyles: [{ file: 'assets/missing.css', css: '' }],
+      }),
+    ).toThrow(/missing\.css/)
+  })
+
   it('keeps the fallback head when a page renders no head tags', () => {
     expect(builder.build(result('<p>x</p>', ''), undefined)).toContain('<title>Fallback</title>')
   })

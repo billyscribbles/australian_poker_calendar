@@ -1,0 +1,149 @@
+/* "Up next" at the foot of a series page: three rounded cards, each a link to
+ * the next series to start. The top band sits on the operator's own colours
+ * (--tour-primary / --tour-secondary set inline from content/tourBrands.js)
+ * with its wordmark across it, the body on the site's card surface. */
+
+.next-events__bar {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 20px;
+}
+
+.next-events__bar .section-heading {
+  flex: 1;
+  margin: 0;
+}
+
+.next-events__all {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  transition: color var(--transition-fast);
+}
+
+.next-events__all:hover,
+.next-events__all:focus-visible {
+  color: var(--color-accent-hover);
+}
+
+.next-events__list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.next-event {
+  --tour-fill: var(--tour-primary, var(--color-accent));
+  --tour-glow: var(--tour-secondary, var(--tour-fill));
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-2xl);
+  background: var(--color-bg-card);
+  color: var(--color-text);
+  transition:
+    border-color var(--transition-base),
+    box-shadow var(--transition-base),
+    transform var(--transition-base);
+}
+
+.next-event:hover,
+.next-event:focus-visible {
+  border-color: color-mix(in srgb, var(--tour-fill) 70%, var(--color-border));
+  box-shadow: 0 10px 32px color-mix(in srgb, var(--tour-fill) 18%, transparent);
+  transform: translateY(-2px);
+}
+
+/* The hero's gradient, shrunk to a band, with the wordmark large across it. */
+.next-event__band {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 120px;
+  padding: 20px 24px;
+  border-bottom: 1px solid color-mix(in srgb, var(--tour-fill) 42%, var(--color-border));
+  background:
+    radial-gradient(
+      80% 140% at 100% 0%,
+      color-mix(in srgb, var(--tour-glow) 30%, transparent) 0%,
+      transparent 60%
+    ),
+    linear-gradient(
+      100deg,
+      var(--color-bg-inset) 0%,
+      color-mix(in srgb, var(--tour-fill) 24%, var(--color-bg-inset)) 100%
+    );
+}
+
+/* The wordmark box caps itself at a share of a timeline bar; here it may
+ * take the whole band, and sits centred rather than hugging an edge. */
+.next-event__band .tour-logo--wordmark {
+  max-width: 100%;
+}
+
+.next-event__band .tour-logo--wordmark .tour-logo__img {
+  object-position: center;
+}
+
+.next-event__body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 18px 22px 22px;
+}
+
+.next-event__name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 19px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.next-event__dates {
+  margin-top: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-accent);
+}
+
+.next-event__place {
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--color-muted);
+}
+
+@media (max-width: 720px) {
+  /* The title keeps its whole line; the calendar link drops beneath it. */
+  .next-events__bar {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .next-events__bar .section-heading {
+    flex-basis: 100%;
+  }
+
+  .next-events__list {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .next-event__band {
+    height: 104px;
+  }
+}

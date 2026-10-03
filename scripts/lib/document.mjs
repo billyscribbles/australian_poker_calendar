@@ -10,6 +10,9 @@
 // theme tokens, and puts the rendered body in #root. The two assertions are
 // the build's guards; see the comments on each.
 
+import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
+
 const FALLBACK = /<!--\s*seo:fallback:start\s*-->[\s\S]*?<!--\s*seo:fallback:end\s*-->/
 const PLACEHOLDER = '<div id="root"></div>'
 
@@ -62,8 +65,10 @@ export function assertNoHiddenContent(html) {
  * @param {string} options.template     dist/index.html (or dist/app-shell.html, the same bytes)
  * @param {object} options.manifest     dist/.vite/manifest.json, parsed
  * @param {string} options.themeStyles  the design tokens as CSS, from the SSR entry
+ * @param {{ file: string, css: string }[]} [options.entryStyles]  stylesheets to
+ *   inline in place of their <link> (readEntryStyles); none by default
  */
-export function createDocumentBuilder({ template, manifest, themeStyles }) {
+export function createDocumentBuilder({ template, manifest, themeStyles, entryStyles = [] }) {
   if (!FALLBACK.test(template)) {
     throw new Error(
       'the seo:fallback markers are missing from index.html — without them the ' +
@@ -90,6 +95,25 @@ export function createDocumentBuilder({ template, manifest, themeStyles }) {
   const templateAssets = new Set(
     [...template.matchAll(/(?:href|src)="(\/assets\/[^"]+)"/g)].map((m) => m[1]),
   )
+
+  // The entry stylesheet, inlined. It is the one request between the HTML and
+  // the first paint on every route: the browser will not paint until it
+  // lands, so on a phone it costs a full round trip before anything shows
+  // (Lighthouse's "render-blocking requests"). Only the entry's: a route's
+  // own stylesheet stays a <link>, because the client's lazy loader looks for
+  // that <link> before fetching the route's CSS and would fetch it again.
+  // templateAssets above still names the file, so it is never linked twice.
+  let shell = template
+  for (const { file, css } of entryStyles) {
+    const escaped = file.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    const tag = new RegExp(`<link rel="stylesheet"[^>]*href="/${escaped}"[^>]*>`)
+    if (!tag.test(shell)) {
+      throw new Error(
+        `the entry stylesheet /${file} is not linked from index.html, so it cannot be inlined.`,
+      )
+    }
+    shell = shell.replace(tag, () => `<style>${css}</style>`)
+  }
 
   /** CSS and JS a route needs, walked transitively through the import graph. */
   function assetsFor(moduleId) {
@@ -119,7 +143,7 @@ export function createDocumentBuilder({ template, manifest, themeStyles }) {
     assertStudioCredit(html)
     assertNoHiddenContent(html)
     const assets = assetsFor(moduleId)
-    let doc = template
+    let doc = shell
 
     // Swap the fallback block for this route's own tags — but only if there
     // are any. A page that renders no head during renderToString keeps the
@@ -177,4 +201,15 @@ export function stripScripts(doc) {
   return doc
     .replace(/[ \t]*<script type="module"[^>]*><\/script>\n?/g, '')
     .replace(/[ \t]*<link rel="modulepreload"[^>]*>\n?/g, '')
+}
+
+/**
+ * The entry chunk's stylesheets from a build, for createDocumentBuilder's
+ * entryStyles.
+ * @param {object} manifest  dist/.vite/manifest.json, parsed
+ * @param {string} dist      the build folder
+ */
+export function readEntryStyles(manifest, dist) {
+  const entry = Object.values(manifest).find((e) => e.isEntry)
+  return (entry?.css ?? []).map((file) => ({ file, css: readFileSync(join(dist, file), 'utf8') }))
 }

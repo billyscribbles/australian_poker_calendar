@@ -86,6 +86,20 @@ const tour = (code) => {
   return `<a class="tour" href="#rooms/${esc(code)}" style="--tour:${esc(brand.primary || '')}" title="${esc(roomOf(code)?.name || code)}">${esc(code)}</a>`
 }
 const roomOf = (code) => state.data.rooms.find((r) => r.code === code)
+// Backing for a room's wordmark. iconBg is chosen for the circle icon, and a
+// white one (PlayLive, Kings, NPL) swallows a light wordmark, so the brand
+// backing is used only when it suits the wordmark's tone.
+const isLightHex = (hex) => {
+  const m = /^#([0-9a-f]{6})$/i.exec(hex || '')
+  if (!m) return false
+  const n = parseInt(m[1], 16)
+  return 0.2126 * (n >> 16) + 0.7152 * ((n >> 8) & 255) + 0.0722 * (n & 255) > 140
+}
+const markBg = (r) => {
+  const wantLight = r.logo.tone === 'dark'
+  const bg = r.brand?.iconBg
+  return bg && isLightHex(bg) === wantLight ? bg : wantLight ? '#ffffff' : '#0a0a0a'
+}
 const check = (ok, text, badText = text) =>
   ok ? `<span class="ok">✓ ${esc(text)}</span>` : `<span class="no">✗ ${esc(badText)}</span>`
 const seriesLink = (s) => `<a href="#series/${esc(s.slug)}">${esc(s.name)}</a>`
@@ -441,7 +455,7 @@ function seriesView() {
     <div class="table-wrap"><table>
       <thead><tr>
         <th>Series</th><th>Status</th><th>Schedule</th><th>Data file</th><th>Key art</th>
-        <th>Home</th><th>Calendar</th><th>Scrape</th><th class="num">To do</th>
+        <th>Home</th><th>Calendar</th><th>Record</th><th class="num">To do</th>
       </tr></thead>
       <tbody>${
         rows
@@ -518,8 +532,12 @@ function seriesDetail(slug) {
     ),
     li(s.onBanner, 'Calendar promo banner', 'Not the calendar promo banner', 'na'),
     sc
-      ? li(s.scrapeDatesMatch, 'Dates match the APS scrape', `Scrape says ${sc.start} to ${sc.end}`)
-      : li(false, '', 'Not on the APS scrape; row taken from the operator site', 'na'),
+      ? li(
+          s.scrapeDatesMatch,
+          'Dates match the series record',
+          `Record says ${sc.start} to ${sc.end}`,
+        )
+      : li(false, '', 'No series record; row taken from the operator site', 'na'),
   ].join('')
 
   return `
@@ -530,7 +548,6 @@ function seriesDetail(slug) {
         <div class="links">
           <a href="${esc(siteUrl(s.href))}" target="_blank" rel="noopener noreferrer">Open on site ↗</a>
           ${s.website ? `<a href="${esc(s.website)}" target="_blank" rel="noopener noreferrer">Operator site ↗</a>` : ''}
-          ${sc ? `<a href="${esc(sc.url)}" target="_blank" rel="noopener noreferrer">APS listing ↗</a>` : ''}
           ${sc?.mapUrl ? `<a href="${esc(sc.mapUrl)}" target="_blank" rel="noopener noreferrer">Map ↗</a>` : ''}
         </div>
         <section class="card ${s.jobs.length ? `card--accent card--${LEVEL[s.jobs[0].level].tone}` : ''}">
@@ -554,17 +571,16 @@ function seriesDetail(slug) {
         ${row('Dates', `${esc(fmtDate(s.start))} – ${esc(fmtDate(s.end))}`)}
         ${row('Place', esc(s.place))}
         ${row('Page', `<a href="${esc(siteUrl(s.href))}" target="_blank" rel="noopener noreferrer"><code>${esc(s.href)}</code></a>`)}
-        ${row('Source', external(s.source, host(s.source)))}
         ${row('Website', external(s.website, host(s.website)))}
       </dl>${editNote(s.contentFile)}</section>
       <section class="card"><h3>Contact</h3>${
         org
           ? `<dl class="kv">${row('Organiser', esc(org.name))}${row('Email', org.email ? `<a href="mailto:${esc(org.email)}">${esc(org.email)}</a>` : '')}${row('Phone', esc(org.phone || ''))}${row('Website', org.website ? external(org.website, host(org.website)) : '')}</dl>`
-          : `<p class="muted">No organiser block on the scrape. Use the operator site: ${external(s.website, host(s.website))}.</p>`
+          : `<p class="muted">No organiser on the series record. Use the operator site: ${external(s.website, host(s.website))}.</p>`
       }</section>
       ${
         sc
-          ? `<section class="card"><h3>APS scrape</h3><dl class="kv">
+          ? `<section class="card"><h3>Series record</h3><dl class="kv">
             ${row('Listed as', esc(sc.title))}
             ${row('Dates', `${esc(sc.start)} to ${esc(sc.end)} ${s.scrapeDatesMatch ? '<span class="ok">✓</span>' : '<span class="no">✗ differs</span>'}`)}
             ${row('Venue', esc(sc.venue))}
@@ -582,7 +598,6 @@ function seriesDetail(slug) {
                   )
                 : ''
             }
-            ${sc.heroImage ? row('APS image', external(sc.heroImage, sc.heroImage.split('/').pop())) : ''}
           </dl></section>`
           : ''
       }
@@ -651,7 +666,7 @@ function roomsView() {
     const next = r.next ? bySlug(r.next) : null
     const open = r.jobs.length
     const live = r.live.length
-    return `<a class="room-card" href="#rooms/${esc(r.code)}" style="--tour:${esc(r.brand?.primary || '#8e8e93')};--tour-bg:${esc(r.brand?.iconBg || '#0a0a0a')}">
+    return `<a class="room-card" href="#rooms/${esc(r.code)}" style="--tour:${esc(r.brand?.primary || '#8e8e93')};--tour-bg:${esc(markBg(r))}">
       <div class="room-card__logo">${r.logo.tile.ok ? `<img src="${esc(r.logo.tile.src)}" alt="">` : `<span class="no">✗ no logo</span>`}</div>
       <div class="room-card__body">
         <strong>${esc(r.name)}</strong>
@@ -723,7 +738,7 @@ function roomDetail(code) {
   return `
     ${pageHead(r.name, `${esc(r.fullName !== r.name ? `${r.fullName} · ` : '')}${r.counts.series} series on the calendar · ${esc(r.cities.join(', ') || 'no city yet')}`, `<a href="#rooms">Poker rooms</a> / ${esc(r.code)}`)}
     <div class="room-hero" style="--tour:${esc(b?.primary || '#8e8e93')};--tour-2:${esc(b?.secondary || '#8e8e93')}">
-      <div class="room-hero__logo" style="background:${esc(b?.iconBg || '#0a0a0a')}">
+      <div class="room-hero__logo" style="background:${esc(markBg(r))}">
         ${r.logo.wordmark.ok ? `<img src="${esc(r.logo.wordmark.src)}" alt="">` : `<span class="no">✗ ${esc(r.logo.wordmark.src || 'no wordmark')}</span>`}
       </div>
       <div class="grid" style="gap:14px">
@@ -762,7 +777,7 @@ function roomDetail(code) {
               ${row('Phone', esc(c.phones.join(' · ')))}
               ${row('Links', c.websites.map((w) => external(w, w.replace(/^https?:\/\//, ''))).join('<br>'))}
             </dl>`
-          : `<p class="muted">No organiser block on the APS scrape. Use the operator site: ${external(r.website, host(r.website))}.</p>`
+          : `<p class="muted">No organiser on the series records. Use the operator site: ${external(r.website, host(r.website))}.</p>`
       }</section>
 
       <section class="card"><h3>Brand</h3>${
@@ -772,7 +787,7 @@ function roomDetail(code) {
           : '<p class="no">✗ No profile in tourBrands.js; the site falls back to gold.</p>'
       }
         <div class="marks">
-          ${mark('Wordmark', r.logo.wordmark, b?.iconBg || '#0a0a0a')}
+          ${mark('Wordmark', r.logo.wordmark, markBg(r))}
           ${mark('Icon', r.logo.icon, b?.iconBg || '#0a0a0a')}
           ${mark('Mono', r.logo.mono, '#0a0a0a')}
           ${r.logo.tile.src !== r.logo.wordmark.src ? mark('Strip tile', r.logo.tile, '#0a0a0a') : ''}
@@ -1128,7 +1143,7 @@ function dataView() {
   const claimed = new Set(posters.map((s) => s.dataFile).filter(Boolean))
   const orphanFiles = d.dataFiles.filter((f) => !claimed.has(f))
   return `
-    ${pageHead('Schedules & data', `The schedules on the site against the files in <code>data/</code>, and the calendar against the Australian Poker Schedule scrape of ${esc(d.scrapedAt || '?')}.`)}
+    ${pageHead('Schedules & data', `The schedules on the site against the files in <code>data/</code>, and the calendar against the series records of ${esc(d.scrapedAt || '?')}.`)}
     <section class="section"><h2>Schedules on the site</h2>
       <div class="table-wrap"><table>
         <thead><tr><th>Series</th><th>Content file</th><th class="num">Rows</th><th class="num">Featured</th><th>Data file</th><th>Key art</th></tr></thead>
@@ -1144,9 +1159,9 @@ function dataView() {
       </table></div>
       ${orphanFiles.length ? `<p class="no" style="margin-top:10px">Data files with no poster page: ${orphanFiles.map((f) => `<code>data/${esc(f)}</code>`).join(', ')}.</p>` : ''}
     </section>
-    <section class="section"><h2>Calendar rows against the scrape</h2>
+    <section class="section"><h2>Calendar rows against the series records</h2>
       <div class="table-wrap"><table>
-        <thead><tr><th>Series</th><th>Row dates</th><th>Scrape dates</th><th>Scrape title</th><th>Match</th></tr></thead>
+        <thead><tr><th>Series</th><th>Row dates</th><th>Record dates</th><th>Record title</th><th>Match</th></tr></thead>
         <tbody>${d.series
           .map(
             (s) =>
@@ -1155,11 +1170,11 @@ function dataView() {
           .join('')}</tbody>
       </table></div>
     </section>
-    <section class="section"><h2>On the scrape, not on the calendar</h2>
+    <section class="section"><h2>In the records, not on the calendar</h2>
       ${
         d.unlisted.length
-          ? `<div class="table-wrap"><table><thead><tr><th>Listing</th><th>Dates</th><th>Organiser</th><th>Venue</th></tr></thead><tbody>${d.unlisted.map((u) => `<tr><td>${external(u.url, u.title)}</td><td class="nowrap">${esc(u.start)} → ${esc(u.end)}</td><td>${esc(u.organiser)}</td><td>${esc(u.venue)}</td></tr>`).join('')}</tbody></table></div>`
-          : '<p class="muted">Every scraped series is on the calendar.</p>'
+          ? `<div class="table-wrap"><table><thead><tr><th>Listing</th><th>Dates</th><th>Organiser</th><th>Venue</th></tr></thead><tbody>${d.unlisted.map((u) => `<tr><td>${esc(u.title)}</td><td class="nowrap">${esc(u.start)} → ${esc(u.end)}</td><td>${esc(u.organiser)}</td><td>${esc(u.venue)}</td></tr>`).join('')}</tbody></table></div>`
+          : '<p class="muted">Every recorded series is on the calendar.</p>'
       }
     </section>`
 }
@@ -1169,10 +1184,10 @@ function contactsView() {
   const roomFor = (o) => d.rooms.find((r) => r.brands?.includes(o.brand))
   const card = (o) => {
     const r = roomFor(o)
-    // The scrape lists every page it saw; one link per site is enough here.
+    // The records list every page they saw; one link per site is enough here.
     const sites = [...new Map((o.websites || []).map((w) => [host(w), w])).values()]
     const logo = r?.logo.tile.ok
-      ? `<a class="contact-card__logo" href="#rooms/${esc(r.code)}" style="background:${esc(r.brand?.iconBg || '#0a0a0a')}"><img src="${esc(r.logo.tile.src)}" alt=""></a>`
+      ? `<a class="contact-card__logo" href="#rooms/${esc(r.code)}" style="background:${esc(markBg(r))}"><img src="${esc(r.logo.tile.src)}" alt=""></a>`
       : `<div class="contact-card__logo contact-card__logo--none">${esc(o.brand)}</div>`
     return `<section class="card contact-card">
       ${logo}
@@ -1187,7 +1202,7 @@ function contactsView() {
     </section>`
   }
   return `
-    ${pageHead('Contacts', "Organisers as listed on the Australian Poker Schedule event pages. Click a logo for the room's full profile.")}
+    ${pageHead('Contacts', "Organisers as listed on each series record. Click a logo for the room's full profile.")}
     <div class="grid grid--3 grid--even">${d.organisers.map(card).join('')}</div>`
 }
 

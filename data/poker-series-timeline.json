@@ -1,6 +1,5 @@
 {
-  "source": "https://australianpokerschedule.com.au/events/",
-  "site": "Australian Poker Schedule (AustralianPokerSchedule.com.au)",
+  "source": "Australian Poker Calendar series records",
   "scraped_at": "2026-10-02",
   "range": {
     "from": "2026-01-01",
@@ -9,8 +8,8 @@
   "event_count": 70,
   "events": [
     {
+      "href": "/events/empire-poker-festival-january-2026",
       "title": "Empire Poker – Poker Festival – Brendale / Brisbane (QLD)",
-      "url": "https://australianpokerschedule.com.au/event/empire-poker-poker-festival-brendale-brisbane-qld/",
       "slug": "empire-poker-poker-festival-brendale-brisbane-qld",
       "tour_brand": "Empire Poker",
       "region": "QLD",
@@ -38,31 +37,18 @@
         "website": "http://www.wantimacountryclub.com.au/"
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "January 2",
         "end": "January 12",
         "website": "https://empirepoker.com.au/"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/11/Empire-Poker-Brisbane-January-2025.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/11/Empire-Poker-Brisbane-January-2025.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2025/11/Empire-Poker-Brisbane-January-2025.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/empire-poker-poker-festival-brendale-brisbane-qld/?ical=1",
       "outlook_location": "Wantima Country Club, 530 S Pine Rd, Brendale, QLD, 4500, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/poker-palace-lucky-8-series",
       "title": "Poker Palace – Lucky 8 Series – Bankstown Sports (NSW)",
-      "url": "https://australianpokerschedule.com.au/event/poker-palace-lucky-8-series-bankstown-sports-nsw/",
       "slug": "poker-palace-lucky-8-series-bankstown-sports-nsw",
       "tour_brand": "Poker Palace",
       "region": "NSW",
@@ -90,31 +76,18 @@
         "website": ""
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "January 5",
         "end": "January 11",
         "website": "https://www.facebook.com/PokerPalaceAustralia"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/11/Poker-Palace-Lucky-888-Series-Bankstown-2026.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/11/Poker-Palace-Lucky-888-Series-Bankstown-2026.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2025/11/Poker-Palace-Lucky-888-Series-Bankstown-2026.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/poker-palace-lucky-8-series-bankstown-sports-nsw/?ical=1",
       "outlook_location": "Bankstown Sports Club, 8 Greenfield Parade, Bankstown, NSW, 2200, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/aplpt-gold-coast-january-2026",
       "title": "APLPT – Gold Coast – Southport Sharks (QLD)",
-      "url": "https://australianpokerschedule.com.au/event/aplpt-gold-coast-southport-sharks-qld/",
       "slug": "aplpt-gold-coast-southport-sharks-qld",
       "tour_brand": "APL Poker Tour (APLPT)",
       "region": "QLD",
@@ -142,31 +115,18 @@
         "website": "https://www.southportsharks.com.au"
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "January 10",
         "end": "January 18",
         "website": "https://playapl.com"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/10/aplpt-gc-jan-25.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/10/aplpt-gc-jan-25.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2025/10/aplpt-gc-jan-25.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/aplpt-gold-coast-southport-sharks-qld/?ical=1",
       "outlook_location": "Southport Sharks, Corner Olsen and Musgrave Ave, Southport, QLD, 4215, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/kings-cup-series-january-2026",
       "title": "Kings Poker – Kings Cup – Churchill’s Sports Bar Kingsford/Sydney (NSW)",
-      "url": "https://australianpokerschedule.com.au/event/kings-poker-kings-cup-churchills-sports-bar-kingsford-sydney-nsw/",
       "slug": "kings-poker-kings-cup-churchills-sports-bar-kingsford-sydney-nsw",
       "tour_brand": "Kings Poker",
       "region": "NSW",
@@ -194,31 +154,18 @@
         "website": ""
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "January 11",
         "end": "January 25",
         "website": "https://kingspoker.com.au/"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/kings-jan-2026-1.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/kings-jan-2026-1.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/kings-jan-2026-1.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/kings-poker-kings-cup-churchills-sports-bar-kingsford-sydney-nsw/?ical=1",
       "outlook_location": "Churchills Sports Bar, 536 Anzac Parade, Kingsford, NSW, 2032, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/queen-b-s-wake-it-up-mini-series",
       "title": "Queen Bs Poker – Wake It Up Mini Series – Beenleigh (QLD)",
-      "url": "https://australianpokerschedule.com.au/event/queen-bs-poker-wake-it-up-mini-series-beenleigh-qld/",
       "slug": "queen-bs-poker-wake-it-up-mini-series-beenleigh-qld",
       "tour_brand": "Queen B’s Poker",
       "region": "QLD",
@@ -246,31 +193,18 @@
         "website": "https://www.queenbs.poker"
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "January 12",
         "end": "January 18",
         "website": "https://www.queenbs.poker/"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/Queen-Bs-Poker-–-Wake-It-Up-Mini-Series-–-Beenleigh-QLD-2026-1.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/Queen-Bs-Poker-–-Wake-It-Up-Mini-Series-–-Beenleigh-QLD-2026-1.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/Queen-Bs-Poker-–-Wake-It-Up-Mini-Series-–-Beenleigh-QLD-2026-1.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/queen-bs-poker-wake-it-up-mini-series-beenleigh-qld/?ical=1",
       "outlook_location": "Queen B’s Poker, 100 York St, Beenleigh, QLD, 4207, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/wpt-league-illawarra-summer-series",
       "title": "WPT League Illawarra – Summer Series – Barrack Heights (NSW)",
-      "url": "https://australianpokerschedule.com.au/event/wpt-league-illawarra-summer-series-barrack-heights-nsw/",
       "slug": "wpt-league-illawarra-summer-series-barrack-heights-nsw",
       "tour_brand": "WPT League",
       "region": "NSW",
@@ -298,31 +232,18 @@
         "website": ""
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "January 14",
         "end": "January 18",
         "website": "https://www.wptleague.com/au/"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/wpt-league-poker-illawarra-jan-2026.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/wpt-league-poker-illawarra-jan-2026.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/wpt-league-poker-illawarra-jan-2026.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/wpt-league-illawarra-summer-series-barrack-heights-nsw/?ical=1",
       "outlook_location": "Warilla Bowls and Recreation Club, Jason Ave, Barrack Heights, NSW, 2528, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/playlive-melbourne-millions-2026",
       "title": "PlayLive – Melbourne Millions (VIC)",
-      "url": "https://australianpokerschedule.com.au/event/playlive-melbourne-millions/",
       "slug": "playlive-melbourne-millions",
       "tour_brand": "PlayLive Melbourne",
       "region": "VIC",
@@ -350,31 +271,18 @@
         "website": "https://playlive.melbourne"
       },
       "description": "#gallery-1 { margin: auto; } #gallery-1 .fg-gallery-item { float: left; margin-top: 10px; text-align: center; width: 33%; } #gallery-1 .fg-gallery-caption { margin-left: 0; } #gallery-1.fastgallery .fg-gallery-caption, #gallery-1.fastgallery .fg-gallery-caption:hover { background-color:rgba( 0 , 0 , 0 , 0.7); } #gallery-1.fastgallery.gallery .gallery-icon .fg_zoom a, #gallery-1.fastgallery.gallery .gallery-icon .fg_zoom a:hover { color:#000; } #gallery-1.fastgallery.fg_style1 .fg-gallery-caption { color:#000; } #gallery-1.fastgallery.gallery.fg_style2 .gallery-icon .fg_zoom a { background:rgba( 0 , 0 , 0 , 0.3); } #gallery-1.fastgallery.fg_style2 .fg-gallery-caption { color:#000; } #gallery-1.fastgallery.gallery.fg_style3 .fg_zoom, #gallery-1.fastgallery.gallery.fg_style3 .fg_zoom:hover { background:rgba( 0 , 0 , 0 , 0.7); } #gallery-1.fastgallery.fg_style3 .fg-gallery-caption { color:#000; } #gallery-1.fastgallery.fg_style4 .fg-gallery-caption, #gallery-1.fastgallery.gallery.fg_style4 .gallery-icon .fg_zoom a, #gallery-1.fastgallery.gallery.fg_style4 .gallery-icon .fg_zoom a:hover { color:#000; } #gallery-1.fastgallery.gallery.fg_style4 .gallery-icon .fg_zoom a, #gallery-1.fastgallery.gallery.fg_style4 .gallery-icon .fg_zoom a:hover { background:rgba( 0 , 0 , 0 , 0.7); } #gallery-1.fastgallery.gallery.fg_style5 .gallery-icon .fg_zoom a, #gallery-1.fastgallery.gallery.fg_style5 .gallery-icon .fg_zoom a:hover { color:#000; background-color:rgba( 0 , 0 , 0 , 0.7); } #gallery-1.fastgallery.gallery.fg_style6 .gallery-icon .fg_zoom a, #gallery-1.fastgallery.gallery.fg_style6 .gallery-icon .fg_zoom a:hover { color:#000; background:rgba( 0 , 0 , 0 , 0.7); } #gallery-1.fastgallery.fg_style6 .fg-gallery-caption { color:#000; } #gallery-1.fastgallery.gallery.fg_style7 .gallery-icon .fg_zoom a, #gallery-1.fastgallery.gallery.fg_style7 .gallery-icon .fg_zoom a:hover { color:#000; background:rgba( 0 , 0 , 0 , 0.7); } #gallery-1.fastgallery.fg_style7 .fg-gallery-caption { color:#000; } #gallery-1.fastgallery.gallery.fg_style8 .gallery-icon .fg_zoom a, #gallery-1.fastgallery.gallery.fg_style8 .gallery-icon .fg_zoom a:hover { color:#000; background:rgba( 0 , 0 , 0 , 0.7); } #gallery-1.fastgallery.fg_style8 .fg-gallery-caption { color:#000; } #gallery-1.fastgallery.gallery.fg_style9 .gallery-icon .fg_zoom a, #gallery-1.fastgallery.gallery.fg_style9 .gallery-icon .fg_zoom a:hover { color:#000; background:rgba( 0 , 0 , 0 , 0.7); } #gallery-1.fastgallery.fg_style9 .fg-gallery-caption { color:#000; } #gallery-1.fastgallery.gallery.fg_style10 .gallery-icon .fg_zoom a, #gallery-1.fastgallery.gallery.fg_style10 .gallery-icon .fg_zoom a:hover { color:#000; background:rgba( 0 , 0 , 0 , 0.7); } #gallery-1.fastgallery.fg_style10 .fg-gallery-caption { color:#000; } /* FOTORAMA */ #gallery-1.fastgallery.fotorama.fg_style1 .fotorama__thumb-border { border-color:rgba( 0 , 0 , 0 , 0.7); } #gallery-1.fastgallery.fotorama.fg_style1 .fotorama__html > div { background:rgba( 0 , 0 , 0 , 0.7); color:#000; } #gallery-1.fastgallery.fotorama.fg_style2 .fotorama__thumb-border { border-color:rgba( 0 , 0 , 0 , 0.7); } #gallery-1.fastgallery.fotorama.fg_style2 .fotorama__html > div { background:rgba( 0 , 0 , 0 , 0.7); color:#000; } #gallery-1.fastgallery.fotorama.fg_style3 .fotorama__thumb-border { border-color:rgba( 0 , 0 , 0 , 0.7); } #gallery-1.fastgallery.fotorama.fg_style3 .fotorama__html > div { color:#000; } #gallery-1.fastgallery.fotorama.fg_style4 .fotorama__thumb-border { border-color:rgba( 0 , 0 , 0 , 0.7); } #gallery-1.fastgallery.fotorama.fg_style4 .fotorama__html > div { color:#000; } #gallery-1.fastgallery.fotorama.fg_style5 .fotorama__thumb-border { border-color:rgba( 0 , 0 , 0 , 0.7); background:rgba( 0 , 0 , 0 , 0.7); } #gallery-1.fastgallery.fotorama.fg_style5 .fotorama__html > div { color:#000; } #gallery-1.fastgallery.fotorama.fg_style6 .fotorama__thumb-border { border-color:rgba( 0 , 0 , 0 , 0.7); background:rgba( 0 , 0 , 0 , 0.7); } #gallery-1.fastgallery.fotorama.fg_style6 .fotorama__html > div { color:#000; } #gallery-1.fastgallery.fotorama.fg_style7 .fotorama__thumb-border { border-color:rgba( 0 , 0 , 0 , 0.7); background:rgba( 0 , 0 , 0 , 0.7); } #gallery-1.fastgallery.fotorama.fg_style7 .fotorama__html > div { color:#000; background:rgba( 0 , 0 , 0 , 0.7); } #gallery-1.fastgallery.fotorama.fg_style8 .fotorama__thumb-border { border-color:rgba( 0 , 0 , 0 , 0.7); background:rgba( 0 , 0 , 0 , 0.7); } #gallery-1.fastgallery.fotorama.fg_style8 .fotorama__html > div { color:#000; background:rgba( 0 , 0 , 0 , 0.7); } #gallery-1.fastgallery.fotorama.fg_style9 .fotorama__thumb-border { border-color:rgba( 0 , 0 , 0 , 0.7); background:rgba( 0 , 0 , 0 , 0.7); } #gallery-1.fastgallery.fotorama.fg_style9 .fotorama__html > div { color:#000; background:rgba( 0 , 0 , 0 , 0.7); } #gallery-1.fastgallery.fotorama.fg_style10 .fotorama__thumb-border { border-color:rgba( 0 , 0 , 0 , 0.7); background:rgba( 0 , 0 , 0 , 0.7); } #gallery-1.fastgallery.fotorama.fg_style10 .fotorama__html > div { color:#000; background:rgba( 0 , 0 , 0 , 0.7); } /* THUMBS ONE ON */ #gallery-1.fastgallery.fg_thumbs_one .fg-gallery-item { display:none; } #gallery-1.fastgallery.fg_thumbs_one .fg-gallery-item:first-child { display:block; } #gallery-1.fastgallery.fg_thumbs_one { width:auto!important; } /* see gallery_shortcode() in wp-includes/media.php */ jQuery(function($){ jQuery(document).ready(function($){ $(\"#gallery-1 a[data-rel^='prettyPhoto']\").prettyPhoto(); }); }); MUST READ TERMS & CONDITIONS PlayLive Melbourne Terms & Conditions 2024 Live Tournaments Updated as of 19th October, 2024 1. Tournament Details 1.1 Entry Fees: As per the advertised schedules for the series. 1.2 Re-buys and/or Add-ons: Re-entries and add-ons are permitted as per the standard conditions outlined in the advertised series schedules. 1.3 Number of Entrants: Events are unlimited unless otherwise specified in the advertised schedule. 1.4 Location: As specified in the series schedule. 1.5 Start Time: The advertised start time for the Tournament is approximate. The Tournament Director reserves the right to adjust the start time due to unforeseen or extenuating circumstances. 1.6 Food and Beverage: Every tournament entry offers the ability to purchase an optional Food and Beverage package that comes with additional starting chips. This package is not mandatory for participation, and will have no bearing on the total prize pool or displayed number of entries. 100% of the prize pool will be funded by tournament entry fees returned to players. 2. Conditions of Entry – PlayLive Melbourne Events 2.1 Participation in a PlayLive Melbourne event implies your consent to abide by the following terms and conditions. 2.2 Entry Methods: 2.2.1 Prior to the Tournament commencement: (a) Complete an online application available on the PlayLive Melbourne website, app, social media platforms, or via personalized email. (b) Register in person at the venue by paying the tournament entry fee and any subsequent re-entries/add-ons (if applicable) to a PlayLive Melbourne staff member or representative. (c) Gain entry by winning a designated satellite seat hosted by a PlayLive Melbourne supporting venue. 2.2.2 Entries will be accepted in person on the day of the Tournament, prior to the event start time or within the designated registration period as determined by PlayLive Melbourne. 2.3 PlayLive Melbourne may specify eligibility criteria for entry into any Tournament prior to its commencement. 2.4 Management reserves the right to refuse any entry application or participation of a nominated substitute in any Tournament. 2.5 Entries for scheduled tournaments will close at the specified time advertised in the schedule, unless sold out earlier. Late entries may be accepted at the discretion of PlayLive Melbourne and its representatives due to extenuating circumstances preventing timely registration. 2.6 Entry fees will be refunded if a Tournament does not proceed or if an entrant is deemed ineligible prior to the Tournament start. 2.7 Entry fees are non-refundable if an entrant withdraws before the Tournament date, but the entry may be transferred to another person as per clause 2.9. 2.8 Entry fees will not be refunded to entrants disqualified from a Tournament, and their chips will be removed from play. 2.9 At the discretion of the Tournament Director, an entrant may nominate a substitute, provided the substitute has not already entered or commenced play in that Tournament. 2.10 By registering, entrants consent to the use of their personal information for future advertising and promotions by PlayLive Melbourne and its partners. Entrants may opt out by notifying PlayLive Melbourne in writing prior to the event. 2.11 PlayLive Melbourne reserves the right to use entrants’ names, addresses, photographs, images, and likenesses for promotional purposes related to current and future poker events. 2.12 By participating in PlayLive Melbourne’s events you consent to appearing in photos and on video taken throughout the events. If you would like to be excluded from photo or video coverage, please inform PlayLive Melbourne in writing or speak to a staff manager during any event. 3. Tournament Format 3.1 The Tournament will consist of one or more rounds and a final table. The number of tables will be determined by the number of entries received. 3.1.1 Tables designated for Tournament play will be used exclusively for this purpose. 3.2 A Tournament Director will inform entrants of the Tournament structure, including: 3.2.1 The type of poker to be played. 3.2.2 The starting chip stack allocated to each entrant. 3.2.3 The Tournament structure. 3.3 Table and Seat Allocation: 3.3.1 Entrants’ table numbers and seating positions will be determined randomly via software. 3.3.2 The number of entrants per table will be at the discretion of the Tournament Director. 3.3.3 Position 1 is to the immediate left of the Dealer, with positions ascending clockwise. 3.3.4 A draw for the Dealer button will occur at the Tournament start. 3.3.5 Seating assignments may be adjusted to separate connected players (e.g. family or associates) at different tables or the final table. 3.3.6 Incorrect seating assignments will result in immediate disqualification, with the player’s starting stack removed from play. 4. Elimination 4.1 Entrants are eliminated when their chip stack reaches 0 chips and no re-buys or add-ons are available. 4.2 Tables will be balanced as needed, with entrants moved to maintain even play. 4.3 In the event of simultaneous eliminations, placements will be determined by chip stacks prior to the hand. 5. Tournament Winners 5.1 The winner is the last remaining entrant after all others have been eliminated. 6. Prize Pool 6.1 The prize pool may include additional value from PlayLive Melbourne and its sponsors. 6.2 The prize pool consists of the collective total of all buy-ins. Any amount contributed to Food and Beverage packages will have no effect on this total. 6.3 Guarantees will only be honoured if the event starts within 20 mins of the scheduled start time. 7. Conduct of Play 7.1 The Tournament Director may penalize entrants for violations, including but not limited to: Abuse of staff or other players. Collusion or soft play. Use of mobile devices at the table during active hands. Any conduct deemed against PlayLive Melbourne’s behavioral code of conduct 7.2 Penalties may include time penalties, hand penalties, disqualification, or removal from the venue. 8. Behavioural Standards 8.1 Encouraged Behaviour: Friendly and prompt play. Protecting your hand. Clear communication of intentions. 8.2 Discouraged Behaviour: Splashing the pot. Acting out of turn. Distracting use of mobile devices. 8.3 Unacceptable Behaviour: Swearing, yelling, or creating disturbances. Collusion or cheating. Verbal or physical abuse of staff or patrons. Targeted offensive language aimed at staff or other players 9. COVID-19 Guidelines 9.1 PlayLive Melbourne reserves the right to cancel, alter, or suspend events in accordance with government guidelines. 9.2 Players impacted by COVID-19 may nominate a proxy for multi-day events, subject to verification of a positive test result. 10. Final Table Details 10.1 PlayLive will help players facilitate deals prompting tournament completion (AKA ‘chops’). At least 10% of prize money deals between players must be reserved for the outright winner. 10.2 Players can propose a deal at any time. Once a deal is formally proposed, PlayLive Melbourne will facilitate an anonymous voting system using red and black cards where each player selects either red (open to the deal) or black (not interested). If even one player selects black, the deal window will close and players will not be able to propose an additional deal until a player is eliminated or after 1 hour of play. 11. Unscheduled Day 2 11.1 Tournaments may be paused between 2am-5am and resumed the following day at 12pm if necessary. 12. Prize Money & Player Payments 12.1 To ensure maximum compliance with AML procedures and ensure secure practice of managing funds, all payouts will be processed via electronic transfer. PlayLive will facilitate PayID, direct transfers, and other preferred methods of secure transfer based on player preference. 13. AUSTRAC Requirements 13.1 Entrants in tournaments with a $10,000+ buy-in must comply with AUSTRAC identity verification requirements. By participating in PlayLive Melbourne events, entrants agree to abide by these terms and conditions.",
-      "description_links": [],
       "details": {
         "start": "January 15",
         "end": "February 3",
         "website": "https://playlive.melbourne/"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/11/playlive-mel-millions-2026c.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/11/playlive-mel-millions-2026c.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2025/11/playlive-mel-millions-2026c.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/playlive-melbourne-millions/?ical=1",
       "outlook_location": "PlayLive Melbourne – Melbourne Poker Room, 129 York Street, South Melbourne, VIC, 3205, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/apl600-sydney",
       "title": "APL600 – Sydney – Canterbury Hurlstone Park (NSW)",
-      "url": "https://australianpokerschedule.com.au/event/apl600-sydney-canterbury-hurlstone-park-nsw/",
       "slug": "apl600-sydney-canterbury-hurlstone-park-nsw",
       "tour_brand": "Australian Poker League (APL)",
       "region": "NSW",
@@ -402,31 +310,18 @@
         "website": ""
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "January 23",
         "end": "February 1",
         "website": "https://playapl.com"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/10/APL600-syd-feb-25-1.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/10/APL600-syd-feb-25-1.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2025/10/APL600-syd-feb-25-1.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/apl600-sydney-canterbury-hurlstone-park-nsw/?ical=1",
       "outlook_location": "Canterbury Hurlstone Park RSL, 10-26 Canterbury Road, Hurlstone Park, NSW, 2193, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/stacked-poker-championship-2026",
       "title": "Stacked Poker Championship – Adelaide (SA)",
-      "url": "https://australianpokerschedule.com.au/event/stacked-poker-championship-adelaide-sa-2026/",
       "slug": "stacked-poker-championship-adelaide-sa-2026",
       "tour_brand": "Stacked Poker",
       "region": "SA",
@@ -454,31 +349,18 @@
         "website": "https://stackedsocial.com.au/"
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "January 25",
         "end": "February 9",
         "website": "https://stackedpoker.com.au/"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/stacked-poker-adelaide-jan-2026.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/stacked-poker-adelaide-jan-2026.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/stacked-poker-adelaide-jan-2026.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/stacked-poker-championship-adelaide-sa-2026/?ical=1",
       "outlook_location": "Stacked Social, 106 O'Connell Street, North Adelaide, SA, 5006, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/mixed-games-academy-the-melbourne-mix",
       "title": "Mixed Games Academy – The Melbourne Mix (VIC)",
-      "url": "https://australianpokerschedule.com.au/event/mixed-games-academy-the-melbourne-mix-vic/",
       "slug": "mixed-games-academy-the-melbourne-mix-vic",
       "tour_brand": "Mixed Games Academy",
       "region": "VIC",
@@ -506,31 +388,18 @@
         "website": "https://playlive.melbourne"
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "February 3",
         "end": "February 8",
         "website": "https://mixedgamesacademy.au/"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/Mixed-Games-Academy-Poker-MGA-February-2026.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/Mixed-Games-Academy-Poker-MGA-February-2026.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/Mixed-Games-Academy-Poker-MGA-February-2026.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/mixed-games-academy-the-melbourne-mix-vic/?ical=1",
       "outlook_location": "PlayLive Melbourne – Melbourne Poker Room, 129 York Street, South Melbourne, VIC, 3205, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/apl-nq-classic-townsville",
       "title": "NQ Classic – Townsville – The Ville (QLD)",
-      "url": "https://australianpokerschedule.com.au/event/nq-classic-townsville-the-ville-qld/",
       "slug": "nq-classic-townsville-the-ville-qld",
       "tour_brand": "Australian Poker League (APL)",
       "region": "QLD",
@@ -558,31 +427,18 @@
         "website": ""
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "February 10",
         "end": "February 15",
         "website": "https://playapl.com/"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/11/Australian-Poker-League-APLPT-Townsville-The-Vill-Feb-2025.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/11/Australian-Poker-League-APLPT-Townsville-The-Vill-Feb-2025.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2025/11/Australian-Poker-League-APLPT-Townsville-The-Vill-Feb-2025.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/nq-classic-townsville-the-ville-qld/?ical=1",
       "outlook_location": "The Ville Resort Casino, Sir Leslie Thiess Dr, Townsville, QLD, 4810, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/kings-poker-chinese-ny-lunar-series-2026",
       "title": "Kings Poker – Chinese NY Lunar Series – Kogarah/Sydney (NSW)",
-      "url": "https://australianpokerschedule.com.au/event/kings-poker-chinese-ny-lunar-series-kogarah-sydney-nsw/",
       "slug": "kings-poker-chinese-ny-lunar-series-kogarah-sydney-nsw",
       "tour_brand": "Kings Poker",
       "region": "NSW",
@@ -610,31 +466,18 @@
         "website": ""
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "February 11",
         "end": "February 23",
         "website": "https://kingspoker.com.au/"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/kings-feb-2026.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/kings-feb-2026.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/kings-feb-2026.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/kings-poker-chinese-ny-lunar-series-kogarah-sydney-nsw/?ical=1",
       "outlook_location": "St. George Leagues Club, 124 Princes Hwy, Kogarah, NSW, 2217, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/the-star-shot-clocks-super-stacks-gold-coast",
       "title": "The Star – Shot Clocks Super Stacks – Gold Coast (QLD)",
-      "url": "https://australianpokerschedule.com.au/event/the-star-shot-clocks-super-stacks-gold-coast-qld/",
       "slug": "the-star-shot-clocks-super-stacks-gold-coast-qld",
       "tour_brand": "The Star Poker",
       "region": "QLD",
@@ -662,40 +505,18 @@
         "website": "https://www.star.com.au/goldcoast/jupiters-gold-coast"
       },
       "description": "The Star Gold Coast’s QLD Shot Clock series is an innovative and an Asian-Pacific first. This series will be fast-paced poker with no unnecessary tanking, you see more hands, all action, bigger stacks, great prize money and some very cool trophies on offer! Below is our analysis of some of the feature events. 🔥𝗧𝗛𝗘 𝗚𝗢𝗟𝗗 𝗖𝗢𝗔𝗦𝗧 𝗣𝗢𝗞𝗘𝗥 𝗖𝗨𝗣 – #𝟭 – 𝟰⭐ 𝟴𝟮𝘀-𝗽𝘁𝘀 🔹 𝗗𝗔𝗧𝗘: Day 1A Fri 13th 14:30 (LR 19:15), Day 1B Sat 14th 12:30 (LR 17:15) – MLR 41.6BB, Day 2 Sun 15th 11:30 🔹 𝗘𝗡𝗧𝗥𝗬: $1000 ($875+125) 🔹 50K Starting Stack 🔹 30 Minute Levels Unlimited Re-Entry *Winner’s prize includes AUD$2,000 WPT Prime entry to WPT Australia, Sydney deducted from total Prize Pool 🔥𝗧𝗘𝗔𝗠𝗦 𝗘𝗩𝗘𝗡𝗧 – #𝟭𝟬 – 𝟯.𝟱⭐ 𝟰𝟰𝘀-𝗽𝘁𝘀 🔹 𝗗𝗔𝗧𝗘: Mon 16th 19:15 | MLR 22:10 25BB 🔹 𝗘𝗡𝗧𝗥𝗬: $450 ($400+50) 🔹 30K Starting Stack 🔹 20 Minute Levels Freezeout 🔥𝗦𝗨𝗣𝗘𝗥𝗦𝗧𝗔𝗖𝗞 𝗠𝗔𝗜𝗡 𝗘𝗩𝗘𝗡𝗧 – #𝟮𝟬 – 𝟰.𝟱⭐ 𝟭𝟭𝟯𝘀-𝗽𝘁𝘀 🔹 𝗗𝗔𝗧𝗘: Day 1A Fri 20th 13:30 (LR 20:30), Day 1B Sat 21st 12:30 (LR 19:30), Day 1C Sun 22nd 12:30 (LR 19:30) – MLR 37.5BB, Day 2 Mon 23rd 11:30, Day 3 Tue 24th 12:45. 🔹 𝗘𝗡𝗧𝗥𝗬: $1500 ($1300+200) 🔹 75K Starting Stack 🔹 40 Minute Levels Day 1 – Unlimited Re-Entry | 60 Minute Levels Day 2 & 3 💰𝗕𝗢𝗡𝗨𝗦 – 10% discount cards for players! 𝟭𝟯𝗧𝗛 – 𝟮𝟰𝗧𝗛 𝗙𝗘𝗕𝗥𝗨𝗔𝗥𝗬 – 𝟮𝟴 𝗘𝗩𝗘𝗡𝗧𝗦 – $𝟯𝟱𝟬-$𝟮𝟬𝟬𝟬 – 𝗦𝗔𝗧𝗘𝗟𝗟𝗜𝗧𝗘𝗦 𝗙𝗥𝗢𝗠 $𝟮𝟰𝟬 🔗 Links at bottom of the page for full series and satellite schedule: The Star – Shot Clocks Super Stacks – Gold Coast (QLD) The Star – Shot Clocks Super Stacks – Gold Coast (QLD) – Schedule The Star – Shot Clocks Super Stacks – Gold Coast (QLD) The Star – Shot Clocks Super Stacks – Gold Coast (QLD) – Structures",
-      "description_links": [
-        {
-          "text": "The Star – Shot Clocks Super Stacks – Gold Coast (QLD) The Star – Shot Clocks Super Stacks – Gold Coast (QLD) – Schedule",
-          "href": "https://australianpokerschedule.com.au/wp-content/uploads/2025/11/TheStar_QLDShotClockSuperStacks_SeriesSchedule_V2_0.pdf"
-        },
-        {
-          "text": "The Star – Shot Clocks Super Stacks – Gold Coast (QLD) The Star – Shot Clocks Super Stacks – Gold Coast (QLD) – Structures",
-          "href": "https://australianpokerschedule.com.au/wp-content/uploads/2025/11/TheStar_QLDShotClockSuperStacks_TournamentStructures.pdf"
-        }
-      ],
       "details": {
         "start": "February 13",
         "end": "February 24",
         "website": "https://www.star.com.au/goldcoast"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/11/The-Star-Gold-Coast-Poker-QLD-Shot-Clocks-Super-Stacks-Feb-2026.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/11/The-Star-Gold-Coast-Poker-QLD-Shot-Clocks-Super-Stacks-Feb-2026.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2025/11/The-Star-Gold-Coast-Poker-QLD-Shot-Clocks-Super-Stacks-Feb-2026.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/the-star-shot-clocks-super-stacks-gold-coast-qld/?ical=1",
       "outlook_location": "The Star, Gold Coast, 1 Casino Drive, Broadbeach, QLD, 4218, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/aplpt-albury-february-2026",
       "title": "APLPT – Albury – Commercial Club (NSW)",
-      "url": "https://australianpokerschedule.com.au/event/aplpt-albury-commercial-club-nsw/",
       "slug": "aplpt-albury-commercial-club-nsw",
       "tour_brand": "APL Poker Tour (APLPT)",
       "region": "NSW",
@@ -723,31 +544,18 @@
         "website": ""
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "February 24",
         "end": "March 1",
         "website": "https://playapl.com"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/11/Australian-Poker-League-APLPT-Albury-Feb-2025.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/11/Australian-Poker-League-APLPT-Albury-Feb-2025.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2025/11/Australian-Poker-League-APLPT-Albury-Feb-2025.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/aplpt-albury-commercial-club-nsw/?ical=1",
       "outlook_location": "Commercial Club Albury, 618 Dean St, Albury, NSW, 2640, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/apt-melbourne-champs",
       "title": "Australian Poker Tour – Melbourne Champs – Melbourne (VIC)",
-      "url": "https://australianpokerschedule.com.au/event/australian-poker-tour-save-the-date-melbourne-vic/",
       "slug": "australian-poker-tour-save-the-date-melbourne-vic",
       "tour_brand": "Australian Poker Tour (APT)",
       "region": "VIC",
@@ -786,25 +594,13 @@
         "end": "March 8",
         "website": "https://australianpokertour.com.au/tournament-poker-fest-melb-2026"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/Australian-Poker-Tour-Melbourne-Champs-Feb-2026.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/Australian-Poker-Tour-Melbourne-Champs-Feb-2026.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/Australian-Poker-Tour-Melbourne-Champs-Feb-2026.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/australian-poker-tour-save-the-date-melbourne-vic/?ical=1",
       "outlook_location": "Oakwood Premier Hotel, 202 Normanby Rd, Southbank, Melbourne, VIC, 3006, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/kings-cup-series-march-2026",
       "title": "Kings Poker – Kings Cup – Churchill’s Sports Bar Kingsford/Sydney (NSW)",
-      "url": "https://australianpokerschedule.com.au/event/kings-poker-kings-cup-churchills-sports-bar-kingsford-sydney-nsw-2/",
       "slug": "kings-poker-kings-cup-churchills-sports-bar-kingsford-sydney-nsw-2",
       "tour_brand": "Kings Poker",
       "region": "NSW",
@@ -832,31 +628,18 @@
         "website": ""
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "March 1",
         "end": "March 15",
         "website": "https://kingspoker.com.au/"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/kings-mar-2026.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/kings-mar-2026.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/kings-mar-2026.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/kings-poker-kings-cup-churchills-sports-bar-kingsford-sydney-nsw-2/?ical=1",
       "outlook_location": "Churchills Sports Bar, 536 Anzac Parade, Kingsford, NSW, 2032, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/playlive-melbourne-grand-prix",
       "title": "PlayLive Melbourne – Grand Prix (VIC)",
-      "url": "https://australianpokerschedule.com.au/event/playlive-melbourne-save-the-dates-grand-prix-vic/",
       "slug": "playlive-melbourne-save-the-dates-grand-prix-vic",
       "tour_brand": "PlayLive Melbourne",
       "region": "VIC",
@@ -884,31 +667,18 @@
         "website": "https://playlive.melbourne"
       },
       "description": "***6.3 Guarantees will only be honoured if the event starts within 20 mins of the scheduled start time. PlayLive Melbourne Terms & Conditions 2024 Live Tournaments Updated as of 19th October, 2024 1. Tournament Details 1.1 Entry Fees: As per the advertised schedules for the series. 1.2 Re-buys and/or Add-ons: Re-entries and add-ons are permitted as per the standard conditions outlined in the advertised series schedules. 1.3 Number of Entrants: Events are unlimited unless otherwise specified in the advertised schedule. 1.4 Location: As specified in the series schedule. 1.5 Start Time: The advertised start time for the Tournament is approximate. The Tournament Director reserves the right to adjust the start time due to unforeseen or extenuating circumstances. 1.6 Food and Beverage: Every tournament entry offers the ability to purchase an optional Food and Beverage package that comes with additional starting chips. This package is not mandatory for participation, and will have no bearing on the total prize pool or displayed number of entries. 100% of the prize pool will be funded by tournament entry fees returned to players. 2. Conditions of Entry – PlayLive Melbourne Events 2.1 Participation in a PlayLive Melbourne event implies your consent to abide by the following terms and conditions. 2.2 Entry Methods: 2.2.1 Prior to the Tournament commencement: (a) Complete an online application available on the PlayLive Melbourne website, app, social media platforms, or via personalized email. (b) Register in person at the venue by paying the tournament entry fee and any subsequent re-entries/add-ons (if applicable) to a PlayLive Melbourne staff member or representative. (c) Gain entry by winning a designated satellite seat hosted by a PlayLive Melbourne supporting venue. 2.2.2 Entries will be accepted in person on the day of the Tournament, prior to the event start time or within the designated registration period as determined by PlayLive Melbourne. 2.3 PlayLive Melbourne may specify eligibility criteria for entry into any Tournament prior to its commencement. 2.4 Management reserves the right to refuse any entry application or participation of a nominated substitute in any Tournament. 2.5 Entries for scheduled tournaments will close at the specified time advertised in the schedule, unless sold out earlier. Late entries may be accepted at the discretion of PlayLive Melbourne and its representatives due to extenuating circumstances preventing timely registration. 2.6 Entry fees will be refunded if a Tournament does not proceed or if an entrant is deemed ineligible prior to the Tournament start. 2.7 Entry fees are non-refundable if an entrant withdraws before the Tournament date, but the entry may be transferred to another person as per clause 2.9. 2.8 Entry fees will not be refunded to entrants disqualified from a Tournament, and their chips will be removed from play. 2.9 At the discretion of the Tournament Director, an entrant may nominate a substitute, provided the substitute has not already entered or commenced play in that Tournament. 2.10 By registering, entrants consent to the use of their personal information for future advertising and promotions by PlayLive Melbourne and its partners. Entrants may opt out by notifying PlayLive Melbourne in writing prior to the event. 2.11 PlayLive Melbourne reserves the right to use entrants’ names, addresses, photographs, images, and likenesses for promotional purposes related to current and future poker events. 2.12 By participating in PlayLive Melbourne’s events you consent to appearing in photos and on video taken throughout the events. If you would like to be excluded from photo or video coverage, please inform PlayLive Melbourne in writing or speak to a staff manager during any event. 3. Tournament Format 3.1 The Tournament will consist of one or more rounds and a final table. The number of tables will be determined by the number of entries received. 3.1.1 Tables designated for Tournament play will be used exclusively for this purpose. 3.2 A Tournament Director will inform entrants of the Tournament structure, including: 3.2.1 The type of poker to be played. 3.2.2 The starting chip stack allocated to each entrant. 3.2.3 The Tournament structure. 3.3 Table and Seat Allocation: 3.3.1 Entrants’ table numbers and seating positions will be determined randomly via software. 3.3.2 The number of entrants per table will be at the discretion of the Tournament Director. 3.3.3 Position 1 is to the immediate left of the Dealer, with positions ascending clockwise. 3.3.4 A draw for the Dealer button will occur at the Tournament start. 3.3.5 Seating assignments may be adjusted to separate connected players (e.g. family or associates) at different tables or the final table. 3.3.6 Incorrect seating assignments will result in immediate disqualification, with the player’s starting stack removed from play. 4. Elimination 4.1 Entrants are eliminated when their chip stack reaches 0 chips and no re-buys or add-ons are available. 4.2 Tables will be balanced as needed, with entrants moved to maintain even play. 4.3 In the event of simultaneous eliminations, placements will be determined by chip stacks prior to the hand. 5. Tournament Winners 5.1 The winner is the last remaining entrant after all others have been eliminated. 6. Prize Pool 6.1 The prize pool may include additional value from PlayLive Melbourne and its sponsors. 6.2 The prize pool consists of the collective total of all buy-ins. Any amount contributed to Food and Beverage packages will have no effect on this total. 6.3 Guarantees will only be honoured if the event starts within 20 mins of the scheduled start time. 7. Conduct of Play 7.1 The Tournament Director may penalize entrants for violations, including but not limited to: Abuse of staff or other players. Collusion or soft play. Use of mobile devices at the table during active hands. Any conduct deemed against PlayLive Melbourne’s behavioral code of conduct 7.2 Penalties may include time penalties, hand penalties, disqualification, or removal from the venue. 8. Behavioural Standards 8.1 Encouraged Behaviour: Friendly and prompt play. Protecting your hand. Clear communication of intentions. 8.2 Discouraged Behaviour: Splashing the pot. Acting out of turn. Distracting use of mobile devices. 8.3 Unacceptable Behaviour: Swearing, yelling, or creating disturbances. Collusion or cheating. Verbal or physical abuse of staff or patrons. Targeted offensive language aimed at staff or other players 9. COVID-19 Guidelines 9.1 PlayLive Melbourne reserves the right to cancel, alter, or suspend events in accordance with government guidelines. 9.2 Players impacted by COVID-19 may nominate a proxy for multi-day events, subject to verification of a positive test result. 10. Final Table Details 10.1 PlayLive will help players facilitate deals prompting tournament completion (AKA ‘chops’). At least 10% of prize money deals between players must be reserved for the outright winner. 10.2 Players can propose a deal at any time. Once a deal is formally proposed, PlayLive Melbourne will facilitate an anonymous voting system using red and black cards where each player selects either red (open to the deal) or black (not interested). If even one player selects black, the deal window will close and players will not be able to propose an additional deal until a player is eliminated or after 1 hour of play. 11. Unscheduled Day 2 11.1 Tournaments may be paused between 2am-5am and resumed the following day at 12pm if necessary. 12. Prize Money & Player Payments 12.1 To ensure maximum compliance with AML procedures and ensure secure practice of managing funds, all payouts will be processed via electronic transfer. PlayLive will facilitate PayID, direct transfers, and other preferred methods of secure transfer based on player preference. 13. AUSTRAC Requirements 13.1 Entrants in tournaments with a $10,000+ buy-in must comply with AUSTRAC identity verification requirements. By participating in PlayLive Melbourne events, entrants agree to abide by these terms and conditions.",
-      "description_links": [],
       "details": {
         "start": "March 5",
         "end": "March 16",
         "website": "https://playlive.melbourne/live-events/"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/PlayLive-Melbourne-Poker-Grand-Prix-March-2026D.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/PlayLive-Melbourne-Poker-Grand-Prix-March-2026D.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/PlayLive-Melbourne-Poker-Grand-Prix-March-2026D.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/playlive-melbourne-save-the-dates-grand-prix-vic/?ical=1",
       "outlook_location": "PlayLive Melbourne – Melbourne Poker Room, 129 York Street, South Melbourne, VIC, 3205, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/kings-poker-newcastle-kingdom-championships-march-2026",
       "title": "Kings Poker Newcastle – Kingdom Championships (NSW)",
-      "url": "https://australianpokerschedule.com.au/event/kings-poker-newcastle-kingdom-championships-nsw/",
       "slug": "kings-poker-newcastle-kingdom-championships-nsw",
       "tour_brand": "Kings Poker Newcastle",
       "region": "NSW",
@@ -983,25 +753,13 @@
         "end": "March 22",
         "website": "https://kingspoker.au/live/"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/11/Kings-Poker-Newcastle-March-2026.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/11/Kings-Poker-Newcastle-March-2026.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2025/11/Kings-Poker-Newcastle-March-2026.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/kings-poker-newcastle-kingdom-championships-nsw/?ical=1",
       "outlook_location": "Blackbutt Hotel, 80 Orchardtown Rd, New Lambton, NSW, 2305, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/gambier-yole-poker-state-showdown",
       "title": "Gambier & Yole Poker State Showdown (SA)",
-      "url": "https://australianpokerschedule.com.au/event/gambier-yole-poker-state-showdown-sa/",
       "slug": "gambier-yole-poker-state-showdown-sa",
       "tour_brand": "Gambier Poker",
       "region": "SA",
@@ -1029,31 +787,18 @@
         "website": ""
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "March 11",
         "end": "March 15",
         "website": "http://www.mountgambier.sa.gov.au/"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/11/Gambier-Yole-Poker-State-Showdown-SA.png"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/11/Gambier-Yole-Poker-State-Showdown-SA.png"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2025/11/Gambier-Yole-Poker-State-Showdown-SA.png",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/gambier-yole-poker-state-showdown-sa/?ical=1",
       "outlook_location": "Mount Gambier Civic Centre, 10 Watson Street, Mount Gambier, SA, 5290, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/empire-poker-ignition-series",
       "title": "Empire Poker – Ignition Series – Wantima Country Club (QLD)",
-      "url": "https://australianpokerschedule.com.au/event/empire-poker-ignition-series-wantima-country-club-qld/",
       "slug": "empire-poker-ignition-series-wantima-country-club-qld",
       "tour_brand": "Empire Poker",
       "region": "QLD",
@@ -1081,31 +826,18 @@
         "website": "http://www.wantimacountryclub.com.au/"
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "March 12",
         "end": "March 16",
         "website": "https://empirepoker.com.au"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Empire-Poker-Brisbane-Wantima-Country-Club-Ignition-Series-2026.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Empire-Poker-Brisbane-Wantima-Country-Club-Ignition-Series-2026.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Empire-Poker-Brisbane-Wantima-Country-Club-Ignition-Series-2026.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/empire-poker-ignition-series-wantima-country-club-qld/?ical=1",
       "outlook_location": "Wantima Country Club, 530 S Pine Rd, Brendale, QLD, 4500, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/aplpt-brisbane-march-2026",
       "title": "APLPT – Brisbane – Broncos Club (QLD)",
-      "url": "https://australianpokerschedule.com.au/event/aplpt-brisbane-broncos-club-qld/",
       "slug": "aplpt-brisbane-broncos-club-qld",
       "tour_brand": "APL Poker Tour (APLPT)",
       "region": "QLD",
@@ -1133,31 +865,18 @@
         "website": ""
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "March 17",
         "end": "March 22",
         "website": "https://www.playapl.com/aplpt/aplpt-brisbane-march-2026"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/11/Australian-Poker-League-APLPT-Brisbane-March-2025A.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/11/Australian-Poker-League-APLPT-Brisbane-March-2025A.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2025/11/Australian-Poker-League-APLPT-Brisbane-March-2025A.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/aplpt-brisbane-broncos-club-qld/?ical=1",
       "outlook_location": "Broncos Club, 98 Fulcher Rd, Red Hill, QLD, 4059, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/the-star-sydney-champs",
       "title": "The Star – Sydney Champs (NSW)",
-      "url": "https://australianpokerschedule.com.au/event/the-star-sydney-champs-nsw/",
       "slug": "the-star-sydney-champs-nsw",
       "tour_brand": "The Star Poker",
       "region": "NSW",
@@ -1185,31 +904,18 @@
         "website": ""
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "March 18",
         "end": "March 31",
         "website": "https://www.starpoker.com.au/sydney"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/11/The-Star-Gold-Coast-Poker-Sydney-Champs-Mar-2026.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/11/The-Star-Gold-Coast-Poker-Sydney-Champs-Mar-2026.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2025/11/The-Star-Gold-Coast-Poker-Sydney-Champs-Mar-2026.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/the-star-sydney-champs-nsw/?ical=1",
       "outlook_location": "The Star, Sydney, 20-80 Pyrmont St, Pyrmont, NSW, 2009, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/queen-b-s-the-swarm-series",
       "title": "Queen B’s Poker – The Swarm Series – Beenleigh (QLD)",
-      "url": "https://australianpokerschedule.com.au/event/queen-bs-poker-the-swarm-series-beenleigh-qld/",
       "slug": "queen-bs-poker-the-swarm-series-beenleigh-qld",
       "tour_brand": "Queen B’s Poker",
       "region": "QLD",
@@ -1237,31 +943,18 @@
         "website": "https://www.queenbs.poker"
       },
       "description": "THE SWARM IS COMING March 25 – March 29 Queen B’s Poker is unleashing The Swarm — a 5-Day Mini Series built for Queensland players who want value, structure, and real poker $125,000 GUARANTEED $250,000+ estimated in series prize pools Every tournament professionally dealt (excluding Sunday) Satellites running into the Coronation Cup First ever Queen B’s Poker trophies for every event winner PLUS… Player of the Hive (Player of the Series) Points Race Top 3 players across the series share 5% of every prize pool in added prize money. Swarm to the hive for five massive days of poker. Full schedule & tournament details via link below.",
-      "description_links": [],
       "details": {
         "start": "March 25",
         "end": "March 29",
         "website": "https://www.queenbs.poker/"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/02/QueenBs-Poker-Swarm-Series-March-2025.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/02/QueenBs-Poker-Swarm-Series-March-2025.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/02/QueenBs-Poker-Swarm-Series-March-2025.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/queen-bs-poker-the-swarm-series-beenleigh-qld/?ical=1",
       "outlook_location": "Queen B’s Poker, 100 York St, Beenleigh, QLD, 4207, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/australian-poker-open-2026",
       "title": "Australian Poker Open – Marconi, Western Sydney (NSW)",
-      "url": "https://australianpokerschedule.com.au/event/australian-poker-open-marconi-western-sydney-nsw/",
       "slug": "australian-poker-open-marconi-western-sydney-nsw",
       "tour_brand": "Poker Palace",
       "region": "NSW",
@@ -1289,31 +982,18 @@
         "website": ""
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "April 1",
         "end": "April 12",
         "website": "https://www.australianpokeropen.com.au/"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/apo-2026.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/apo-2026.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/apo-2026.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/australian-poker-open-marconi-western-sydney-nsw/?ical=1",
       "outlook_location": "Doltone House Western Sydney, 121-133 Prairie Vale Rd, Bossley Park, 2176, NSW, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/apt-brisbane-champs",
       "title": "Australian Poker Tour – Brisbane Champs – Eatons Hill/Brisbane (QLD)",
-      "url": "https://australianpokerschedule.com.au/event/australian-poker-tour-save-the-date-eatons-hill-brisbane-qld/",
       "slug": "australian-poker-tour-save-the-date-eatons-hill-brisbane-qld",
       "tour_brand": "Australian Poker Tour (APT)",
       "region": "QLD",
@@ -1341,31 +1021,18 @@
         "website": ""
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "April 12",
         "end": "April 19",
         "website": "https://australianpokertour.com.au/"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/APT-Brisbane-Poker-Champs-April-2026.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/APT-Brisbane-Poker-Champs-April-2026.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/APT-Brisbane-Poker-Champs-April-2026.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/australian-poker-tour-save-the-date-eatons-hill-brisbane-qld/?ical=1",
       "outlook_location": "Eatons HIll Hotel, 646 S Pine Rd, Eatons Hill, QLD, 4037, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/playlive-melbourne-big-birthday-weekend",
       "title": "PlayLive Melbourne – Big Birthday Weekend (VIC)",
-      "url": "https://australianpokerschedule.com.au/event/playlive-melbourne-save-the-dates-big5-bday-bash-vic/",
       "slug": "playlive-melbourne-save-the-dates-big5-bday-bash-vic",
       "tour_brand": "PlayLive Melbourne",
       "region": "VIC",
@@ -1393,31 +1060,18 @@
         "website": "https://playlive.melbourne"
       },
       "description": "***6.3 Guarantees will only be honoured if the event starts within 20 mins of the scheduled start time. PlayLive Melbourne Terms & Conditions 2024 Live Tournaments Updated as of 19th October, 2024 1. Tournament Details 1.1 Entry Fees: As per the advertised schedules for the series. 1.2 Re-buys and/or Add-ons: Re-entries and add-ons are permitted as per the standard conditions outlined in the advertised series schedules. 1.3 Number of Entrants: Events are unlimited unless otherwise specified in the advertised schedule. 1.4 Location: As specified in the series schedule. 1.5 Start Time: The advertised start time for the Tournament is approximate. The Tournament Director reserves the right to adjust the start time due to unforeseen or extenuating circumstances. 1.6 Food and Beverage: Every tournament entry offers the ability to purchase an optional Food and Beverage package that comes with additional starting chips. This package is not mandatory for participation, and will have no bearing on the total prize pool or displayed number of entries. 100% of the prize pool will be funded by tournament entry fees returned to players. 2. Conditions of Entry – PlayLive Melbourne Events 2.1 Participation in a PlayLive Melbourne event implies your consent to abide by the following terms and conditions. 2.2 Entry Methods: 2.2.1 Prior to the Tournament commencement: (a) Complete an online application available on the PlayLive Melbourne website, app, social media platforms, or via personalized email. (b) Register in person at the venue by paying the tournament entry fee and any subsequent re-entries/add-ons (if applicable) to a PlayLive Melbourne staff member or representative. (c) Gain entry by winning a designated satellite seat hosted by a PlayLive Melbourne supporting venue. 2.2.2 Entries will be accepted in person on the day of the Tournament, prior to the event start time or within the designated registration period as determined by PlayLive Melbourne. 2.3 PlayLive Melbourne may specify eligibility criteria for entry into any Tournament prior to its commencement. 2.4 Management reserves the right to refuse any entry application or participation of a nominated substitute in any Tournament. 2.5 Entries for scheduled tournaments will close at the specified time advertised in the schedule, unless sold out earlier. Late entries may be accepted at the discretion of PlayLive Melbourne and its representatives due to extenuating circumstances preventing timely registration. 2.6 Entry fees will be refunded if a Tournament does not proceed or if an entrant is deemed ineligible prior to the Tournament start. 2.7 Entry fees are non-refundable if an entrant withdraws before the Tournament date, but the entry may be transferred to another person as per clause 2.9. 2.8 Entry fees will not be refunded to entrants disqualified from a Tournament, and their chips will be removed from play. 2.9 At the discretion of the Tournament Director, an entrant may nominate a substitute, provided the substitute has not already entered or commenced play in that Tournament. 2.10 By registering, entrants consent to the use of their personal information for future advertising and promotions by PlayLive Melbourne and its partners. Entrants may opt out by notifying PlayLive Melbourne in writing prior to the event. 2.11 PlayLive Melbourne reserves the right to use entrants’ names, addresses, photographs, images, and likenesses for promotional purposes related to current and future poker events. 2.12 By participating in PlayLive Melbourne’s events you consent to appearing in photos and on video taken throughout the events. If you would like to be excluded from photo or video coverage, please inform PlayLive Melbourne in writing or speak to a staff manager during any event. 3. Tournament Format 3.1 The Tournament will consist of one or more rounds and a final table. The number of tables will be determined by the number of entries received. 3.1.1 Tables designated for Tournament play will be used exclusively for this purpose. 3.2 A Tournament Director will inform entrants of the Tournament structure, including: 3.2.1 The type of poker to be played. 3.2.2 The starting chip stack allocated to each entrant. 3.2.3 The Tournament structure. 3.3 Table and Seat Allocation: 3.3.1 Entrants’ table numbers and seating positions will be determined randomly via software. 3.3.2 The number of entrants per table will be at the discretion of the Tournament Director. 3.3.3 Position 1 is to the immediate left of the Dealer, with positions ascending clockwise. 3.3.4 A draw for the Dealer button will occur at the Tournament start. 3.3.5 Seating assignments may be adjusted to separate connected players (e.g. family or associates) at different tables or the final table. 3.3.6 Incorrect seating assignments will result in immediate disqualification, with the player’s starting stack removed from play. 4. Elimination 4.1 Entrants are eliminated when their chip stack reaches 0 chips and no re-buys or add-ons are available. 4.2 Tables will be balanced as needed, with entrants moved to maintain even play. 4.3 In the event of simultaneous eliminations, placements will be determined by chip stacks prior to the hand. 5. Tournament Winners 5.1 The winner is the last remaining entrant after all others have been eliminated. 6. Prize Pool 6.1 The prize pool may include additional value from PlayLive Melbourne and its sponsors. 6.2 The prize pool consists of the collective total of all buy-ins. Any amount contributed to Food and Beverage packages will have no effect on this total. 6.3 Guarantees will only be honoured if the event starts within 20 mins of the scheduled start time. 7. Conduct of Play 7.1 The Tournament Director may penalize entrants for violations, including but not limited to: Abuse of staff or other players. Collusion or soft play. Use of mobile devices at the table during active hands. Any conduct deemed against PlayLive Melbourne’s behavioral code of conduct 7.2 Penalties may include time penalties, hand penalties, disqualification, or removal from the venue. 8. Behavioural Standards 8.1 Encouraged Behaviour: Friendly and prompt play. Protecting your hand. Clear communication of intentions. 8.2 Discouraged Behaviour: Splashing the pot. Acting out of turn. Distracting use of mobile devices. 8.3 Unacceptable Behaviour: Swearing, yelling, or creating disturbances. Collusion or cheating. Verbal or physical abuse of staff or patrons. Targeted offensive language aimed at staff or other players 9. COVID-19 Guidelines 9.1 PlayLive Melbourne reserves the right to cancel, alter, or suspend events in accordance with government guidelines. 9.2 Players impacted by COVID-19 may nominate a proxy for multi-day events, subject to verification of a positive test result. 10. Final Table Details 10.1 PlayLive will help players facilitate deals prompting tournament completion (AKA ‘chops’). At least 10% of prize money deals between players must be reserved for the outright winner. 10.2 Players can propose a deal at any time. Once a deal is formally proposed, PlayLive Melbourne will facilitate an anonymous voting system using red and black cards where each player selects either red (open to the deal) or black (not interested). If even one player selects black, the deal window will close and players will not be able to propose an additional deal until a player is eliminated or after 1 hour of play. 11. Unscheduled Day 2 11.1 Tournaments may be paused between 2am-5am and resumed the following day at 12pm if necessary. 12. Prize Money & Player Payments 12.1 To ensure maximum compliance with AML procedures and ensure secure practice of managing funds, all payouts will be processed via electronic transfer. PlayLive will facilitate PayID, direct transfers, and other preferred methods of secure transfer based on player preference. 13. AUSTRAC Requirements 13.1 Entrants in tournaments with a $10,000+ buy-in must comply with AUSTRAC identity verification requirements. By participating in PlayLive Melbourne events, entrants agree to abide by these terms and conditions.",
-      "description_links": [],
       "details": {
         "start": "April 17",
         "end": "April 19",
         "website": "https://playlive.melbourne/live-events/"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/PlayLive-Melbourne-Poker-Big5-Bday-Bash-April-2026-AB.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/PlayLive-Melbourne-Poker-Big5-Bday-Bash-April-2026-AB.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/PlayLive-Melbourne-Poker-Big5-Bday-Bash-April-2026-AB.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/playlive-melbourne-save-the-dates-big5-bday-bash-vic/?ical=1",
       "outlook_location": "PlayLive Melbourne – Melbourne Poker Room, 129 York Street, South Melbourne, VIC, 3205, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/2026-aussie-millions",
       "title": "Aussie Millions – Crown Melbourne (VIC)",
-      "url": "https://australianpokerschedule.com.au/event/2026-aussie-millions-crown-melbourne-poker/",
       "slug": "2026-aussie-millions-crown-melbourne-poker",
       "tour_brand": "Crown Poker",
       "region": "VIC",
@@ -1445,48 +1099,18 @@
         "website": ""
       },
       "description": "The Aussie Millions Poker Championship returns to Crown Melbourne 24 April – 10 May 2026 The Aussie Millions Poker Championship is making its return to Crown Melbourne. From 24 April to 10 May 2026, join us for 18 days of poker action with 18 tournaments and an estimated prize pool of AU$14 million. With buy-ins ranging from AU$1,500 to AU$25,000, including the AU$10,600 Main Event, there’s a place for everyone at the table. Get ready for the ultimate poker experience. The Aussie Millions Poker Championship is back. 2026 Aussie Millions – Schedule 2026 Aussie Millions – Structures 2026 Aussie Millions – Terms & Conditions How to Fund you Play at the 2026 Aussie Millions",
-      "description_links": [
-        {
-          "text": "2026 Aussie Millions – Schedule",
-          "href": "https://australianpokerschedule.com.au/wp-content/uploads/2026/04/crown-melbourne-casino-aussie-millions-2026-poker-full-tournament-calendar-schedule.pdf"
-        },
-        {
-          "text": "2026 Aussie Millions – Structures",
-          "href": "https://australianpokerschedule.com.au/wp-content/uploads/2026/04/crown-melbourne-casino-aussie-millions-2026-poker-full-tournament-structures.pdf"
-        },
-        {
-          "text": "2026 Aussie Millions – Terms & Conditions",
-          "href": "https://australianpokerschedule.com.au/wp-content/uploads/2026/04/crown-melbourne-casino-aussie-millions-2026-poker-full-tournament-terms-conditions.pdf"
-        },
-        {
-          "text": "How to Fund you Play at the 2026 Aussie Millions",
-          "href": "https://australianpokerschedule.com.au/wp-content/uploads/2026/03/Crown-Melbourne-How-To-Fund-Your-Play.pdf"
-        }
-      ],
       "details": {
         "start": "April 24",
         "end": "May 10",
         "website": "https://www.crownmelbourne.com.au/casino/offers/aussie-millions"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2024/10/Aussie-Millions-Crown-2026.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2024/10/Aussie-Millions-Crown-2026.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2024/10/Aussie-Millions-Crown-2026.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/2026-aussie-millions-crown-melbourne-poker/?ical=1",
       "outlook_location": "Crown Melbourne, 8 Whiteman St, Southbank, Melbourne, VIC, 3006, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/aplpt-gold-coast-may-2026",
       "title": "APLPT – Gold Coast – Southport Sharks (QLD)",
-      "url": "https://australianpokerschedule.com.au/event/aplpt-gold-coast-southport-sharks-qld-2/",
       "slug": "aplpt-gold-coast-southport-sharks-qld-2",
       "tour_brand": "APL Poker Tour (APLPT)",
       "region": "QLD",
@@ -1514,31 +1138,18 @@
         "website": "https://www.southportsharks.com.au"
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "May 11",
         "end": "May 17",
         "website": "https://playapl.com/aplpt"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/669169213_1398724378953853_8529658055681854777_n.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/669169213_1398724378953853_8529658055681854777_n.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/669169213_1398724378953853_8529658055681854777_n.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/aplpt-gold-coast-southport-sharks-qld-2/?ical=1",
       "outlook_location": "Southport Sharks, Corner Olsen and Musgrave Ave, Southport, QLD, 4215, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/apt-adelaide-champs",
       "title": "Australian Poker Tour – Adelaide Champs – Mawson Lakes (SA)",
-      "url": "https://australianpokerschedule.com.au/event/australian-poker-tour-adelaide-champs-sa/",
       "slug": "australian-poker-tour-adelaide-champs-sa",
       "tour_brand": "Australian Poker Tour (APT)",
       "region": "SA",
@@ -1566,31 +1177,18 @@
         "website": "https://www.ihg.com/crowneplaza/hotels/us/en/adelaide/adlml/hoteldetail"
       },
       "description": "𝗔𝗣𝗧 𝗔𝗗𝗘𝗟𝗔𝗜𝗗𝗘 𝗖𝗛𝗔𝗠𝗣𝗦 𝗦𝗖𝗛𝗘𝗗𝗨𝗟𝗘 𝗗𝗥𝗢𝗣! It’s here… and it’s BIG May 15 – May 24, 2026 Crowne Plaza, Mawson Lakes $1 MILLION+ Series Estimate 10 Massive Days of Poker Fully Dealer Dealt Get ready for an electrifying poker series at the luxurious Crowne Plaza in Mawson Lakes. Experience the thrill of premium poker in a stunning five-star setting that will leave you breathless. Adelaide is widely regarded as one of Australia’s premier food and wine destinations, with world-class regions like the Barossa Valley and McLaren Vale just a short drive from the city. Add in a relaxed lifestyle, stunning coastline, including favourites like Glenelg and Henley Beach and a vibrant, walkable atmosphere, and you’ve got one of the country’s most liveable cities. From monster guarantees to stacked daily action, this schedule has something for everyone Highlights include $150,000 GTD Adelaide Champs $75,000 GTD Goliath Shot Clock $75,000 GTD The Grind $75,000 GTD Mid Stakes Champs $50,000 GTD APT Players Champs $50,000 GTD Hachem Deepstack $25,000 GTD The Beast PLO, Shot Clock, Freezeouts & more Satellites running all series Full schedule below — start planning your attack now! We hope to see you all in Adelaide… we can’t wait",
-      "description_links": [],
       "details": {
         "start": "May 15",
         "end": "May 24",
         "website": "https://australianpokertour.com.au/live-feed/"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Australian-Poker-Tour-May-Adelaide.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Australian-Poker-Tour-May-Adelaide.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Australian-Poker-Tour-May-Adelaide.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/australian-poker-tour-adelaide-champs-sa/?ical=1",
       "outlook_location": "Crowne Plaza Hotel, Mawson Lakes, Adelaide, 1-3 Metro Parade, Mawson Lakes, SA, 5095, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/kings-poker-colossus-series",
       "title": "Kings Poker – Colossus Series – Kogarah/Sydney (NSW)",
-      "url": "https://australianpokerschedule.com.au/event/kings-poker-colossus-series-kogarah-sydney-nsw/",
       "slug": "kings-poker-colossus-series-kogarah-sydney-nsw",
       "tour_brand": "Kings Poker",
       "region": "NSW",
@@ -1618,31 +1216,18 @@
         "website": ""
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "May 20",
         "end": "June 1",
         "website": "https://kingspoker.com.au/"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/kings-may-2026.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/kings-may-2026.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/kings-may-2026.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/kings-poker-colossus-series-kogarah-sydney-nsw/?ical=1",
       "outlook_location": "St. George Leagues Club, 124 Princes Hwy, Kogarah, NSW, 2217, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/stacked-social-adelaide-championship",
       "title": "Stacked Social – Adelaide Championship (SA)",
-      "url": "https://australianpokerschedule.com.au/event/stacked-social-adelaide-championship-sa/",
       "slug": "stacked-social-adelaide-championship-sa",
       "tour_brand": "Stacked Poker",
       "region": "SA",
@@ -1670,31 +1255,18 @@
         "website": "https://stackedsocial.com.au/"
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "May 28",
         "end": "June 8",
         "website": "https://stackedpoker.com.au/"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/04/stacked-poker-adelaide-champs-2026.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/04/stacked-poker-adelaide-champs-2026.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/04/stacked-poker-adelaide-champs-2026.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/stacked-social-adelaide-championship-sa/?ical=1",
       "outlook_location": "Stacked Social, 106 O'Connell Street, North Adelaide, SA, 5006, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/poker-palace-winter-series",
       "title": "Poker Palace Winter Series – Club Marconi – Sydney (NSW)",
-      "url": "https://australianpokerschedule.com.au/event/poker-palace-winter-series-club-marconi-sydney-nsw/",
       "slug": "poker-palace-winter-series-club-marconi-sydney-nsw",
       "tour_brand": "Poker Palace",
       "region": "NSW",
@@ -1722,31 +1294,18 @@
         "website": ""
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "June 1",
         "end": "June 8",
         "website": "https://pokerpalace.com.au/"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/06/Poker-Palace-Marconi-Sydney-Winter-Series-NSW.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/06/Poker-Palace-Marconi-Sydney-Winter-Series-NSW.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/06/Poker-Palace-Marconi-Sydney-Winter-Series-NSW.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/poker-palace-winter-series-club-marconi-sydney-nsw/?ical=1",
       "outlook_location": "Poker Palace – Club Marconi, 121/133 Prairie Vale Rd, Bossley Park, NSW, 2176, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/playlive-melbourne-winter-champs",
       "title": "PlayLive Melbourne – Winter Champs (VIC)",
-      "url": "https://australianpokerschedule.com.au/event/playlive-melbourne-save-the-dates-winter-champs-vic/",
       "slug": "playlive-melbourne-save-the-dates-winter-champs-vic",
       "tour_brand": "PlayLive Melbourne",
       "region": "VIC",
@@ -1774,31 +1333,18 @@
         "website": "https://playlive.melbourne"
       },
       "description": "***6.3 Guarantees will only be honoured if the event starts within 20 mins of the scheduled start time. PlayLive Melbourne Terms & Conditions 2024 Live Tournaments Updated as of 19th October, 2024 1. Tournament Details 1.1 Entry Fees: As per the advertised schedules for the series. 1.2 Re-buys and/or Add-ons: Re-entries and add-ons are permitted as per the standard conditions outlined in the advertised series schedules. 1.3 Number of Entrants: Events are unlimited unless otherwise specified in the advertised schedule. 1.4 Location: As specified in the series schedule. 1.5 Start Time: The advertised start time for the Tournament is approximate. The Tournament Director reserves the right to adjust the start time due to unforeseen or extenuating circumstances. 1.6 Food and Beverage: Every tournament entry offers the ability to purchase an optional Food and Beverage package that comes with additional starting chips. This package is not mandatory for participation, and will have no bearing on the total prize pool or displayed number of entries. 100% of the prize pool will be funded by tournament entry fees returned to players. 2. Conditions of Entry – PlayLive Melbourne Events 2.1 Participation in a PlayLive Melbourne event implies your consent to abide by the following terms and conditions. 2.2 Entry Methods: 2.2.1 Prior to the Tournament commencement: (a) Complete an online application available on the PlayLive Melbourne website, app, social media platforms, or via personalized email. (b) Register in person at the venue by paying the tournament entry fee and any subsequent re-entries/add-ons (if applicable) to a PlayLive Melbourne staff member or representative. (c) Gain entry by winning a designated satellite seat hosted by a PlayLive Melbourne supporting venue. 2.2.2 Entries will be accepted in person on the day of the Tournament, prior to the event start time or within the designated registration period as determined by PlayLive Melbourne. 2.3 PlayLive Melbourne may specify eligibility criteria for entry into any Tournament prior to its commencement. 2.4 Management reserves the right to refuse any entry application or participation of a nominated substitute in any Tournament. 2.5 Entries for scheduled tournaments will close at the specified time advertised in the schedule, unless sold out earlier. Late entries may be accepted at the discretion of PlayLive Melbourne and its representatives due to extenuating circumstances preventing timely registration. 2.6 Entry fees will be refunded if a Tournament does not proceed or if an entrant is deemed ineligible prior to the Tournament start. 2.7 Entry fees are non-refundable if an entrant withdraws before the Tournament date, but the entry may be transferred to another person as per clause 2.9. 2.8 Entry fees will not be refunded to entrants disqualified from a Tournament, and their chips will be removed from play. 2.9 At the discretion of the Tournament Director, an entrant may nominate a substitute, provided the substitute has not already entered or commenced play in that Tournament. 2.10 By registering, entrants consent to the use of their personal information for future advertising and promotions by PlayLive Melbourne and its partners. Entrants may opt out by notifying PlayLive Melbourne in writing prior to the event. 2.11 PlayLive Melbourne reserves the right to use entrants’ names, addresses, photographs, images, and likenesses for promotional purposes related to current and future poker events. 2.12 By participating in PlayLive Melbourne’s events you consent to appearing in photos and on video taken throughout the events. If you would like to be excluded from photo or video coverage, please inform PlayLive Melbourne in writing or speak to a staff manager during any event. 3. Tournament Format 3.1 The Tournament will consist of one or more rounds and a final table. The number of tables will be determined by the number of entries received. 3.1.1 Tables designated for Tournament play will be used exclusively for this purpose. 3.2 A Tournament Director will inform entrants of the Tournament structure, including: 3.2.1 The type of poker to be played. 3.2.2 The starting chip stack allocated to each entrant. 3.2.3 The Tournament structure. 3.3 Table and Seat Allocation: 3.3.1 Entrants’ table numbers and seating positions will be determined randomly via software. 3.3.2 The number of entrants per table will be at the discretion of the Tournament Director. 3.3.3 Position 1 is to the immediate left of the Dealer, with positions ascending clockwise. 3.3.4 A draw for the Dealer button will occur at the Tournament start. 3.3.5 Seating assignments may be adjusted to separate connected players (e.g. family or associates) at different tables or the final table. 3.3.6 Incorrect seating assignments will result in immediate disqualification, with the player’s starting stack removed from play. 4. Elimination 4.1 Entrants are eliminated when their chip stack reaches 0 chips and no re-buys or add-ons are available. 4.2 Tables will be balanced as needed, with entrants moved to maintain even play. 4.3 In the event of simultaneous eliminations, placements will be determined by chip stacks prior to the hand. 5. Tournament Winners 5.1 The winner is the last remaining entrant after all others have been eliminated. 6. Prize Pool 6.1 The prize pool may include additional value from PlayLive Melbourne and its sponsors. 6.2 The prize pool consists of the collective total of all buy-ins. Any amount contributed to Food and Beverage packages will have no effect on this total. 6.3 Guarantees will only be honoured if the event starts within 20 mins of the scheduled start time. 7. Conduct of Play 7.1 The Tournament Director may penalize entrants for violations, including but not limited to: Abuse of staff or other players. Collusion or soft play. Use of mobile devices at the table during active hands. Any conduct deemed against PlayLive Melbourne’s behavioral code of conduct 7.2 Penalties may include time penalties, hand penalties, disqualification, or removal from the venue. 8. Behavioural Standards 8.1 Encouraged Behaviour: Friendly and prompt play. Protecting your hand. Clear communication of intentions. 8.2 Discouraged Behaviour: Splashing the pot. Acting out of turn. Distracting use of mobile devices. 8.3 Unacceptable Behaviour: Swearing, yelling, or creating disturbances. Collusion or cheating. Verbal or physical abuse of staff or patrons. Targeted offensive language aimed at staff or other players 9. COVID-19 Guidelines 9.1 PlayLive Melbourne reserves the right to cancel, alter, or suspend events in accordance with government guidelines. 9.2 Players impacted by COVID-19 may nominate a proxy for multi-day events, subject to verification of a positive test result. 10. Final Table Details 10.1 PlayLive will help players facilitate deals prompting tournament completion (AKA ‘chops’). At least 10% of prize money deals between players must be reserved for the outright winner. 10.2 Players can propose a deal at any time. Once a deal is formally proposed, PlayLive Melbourne will facilitate an anonymous voting system using red and black cards where each player selects either red (open to the deal) or black (not interested). If even one player selects black, the deal window will close and players will not be able to propose an additional deal until a player is eliminated or after 1 hour of play. 11. Unscheduled Day 2 11.1 Tournaments may be paused between 2am-5am and resumed the following day at 12pm if necessary. 12. Prize Money & Player Payments 12.1 To ensure maximum compliance with AML procedures and ensure secure practice of managing funds, all payouts will be processed via electronic transfer. PlayLive will facilitate PayID, direct transfers, and other preferred methods of secure transfer based on player preference. 13. AUSTRAC Requirements 13.1 Entrants in tournaments with a $10,000+ buy-in must comply with AUSTRAC identity verification requirements. By participating in PlayLive Melbourne events, entrants agree to abide by these terms and conditions.",
-      "description_links": [],
       "details": {
         "start": "June 4",
         "end": "June 23",
         "website": "https://playlive.melbourne/live-events/"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/PlayLive-Melbourne-Winter-Series-Melbourne.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/PlayLive-Melbourne-Winter-Series-Melbourne.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/PlayLive-Melbourne-Winter-Series-Melbourne.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/playlive-melbourne-save-the-dates-winter-champs-vic/?ical=1",
       "outlook_location": "PlayLive Melbourne – Melbourne Poker Room, 129 York Street, South Melbourne, VIC, 3205, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/queen-b-s-coronation-cup",
       "title": "Queen Bs Poker – Coronation Cup – Beenleigh (QLD)",
-      "url": "https://australianpokerschedule.com.au/event/queen-bs-poker-coronation-cup-beenleigh-qld/",
       "slug": "queen-bs-poker-coronation-cup-beenleigh-qld",
       "tour_brand": "Queen B’s Poker",
       "region": "QLD",
@@ -1837,25 +1383,13 @@
         "end": "June 14",
         "website": "https://www.queenbs.poker"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/Queen-Bs-Poker-–-Coronation-Cup-–-Beenleigh-QLD-2026-Get-Early-Bird-Offer.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/Queen-Bs-Poker-–-Coronation-Cup-–-Beenleigh-QLD-2026-Get-Early-Bird-Offer.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/Queen-Bs-Poker-–-Coronation-Cup-–-Beenleigh-QLD-2026-Get-Early-Bird-Offer.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/queen-bs-poker-coronation-cup-beenleigh-qld/?ical=1",
       "outlook_location": "Queen B’s Poker, 100 York St, Beenleigh, QLD, 4207, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/aplpt-adelaide",
       "title": "APLPT – Adelaide – The Junction (SA)",
-      "url": "https://australianpokerschedule.com.au/event/australian-poker-league-aplpt-adelaide-sa/",
       "slug": "australian-poker-league-aplpt-adelaide-sa",
       "tour_brand": "APL Poker Tour (APLPT)",
       "region": "SA",
@@ -1883,31 +1417,18 @@
         "website": "https://www.mville.co/thejunction/"
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "June 9",
         "end": "June 14",
         "website": "https://playapl.com/aplpt"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/04/APLPT_adl_generic1.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/04/APLPT_adl_generic1.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/04/APLPT_adl_generic1.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/australian-poker-league-aplpt-adelaide-sa/?ical=1",
       "outlook_location": "The Junction, 470 Anzac Hwy, Camden Park, SA, 5038, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/aurum-festivus-series",
       "title": "Festivus Series – Aurum Poker Grand – St Johns Park – Western Sydney (NSW)",
-      "url": "https://australianpokerschedule.com.au/event/festivus-series-aurum-poker-grand-st-johns-park-western-sydney-nsw/",
       "slug": "festivus-series-aurum-poker-grand-st-johns-park-western-sydney-nsw",
       "tour_brand": "Aurum Poker",
       "region": "NSW",
@@ -1935,31 +1456,18 @@
         "website": ""
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "June 9",
         "end": "June 22",
         "website": "https://bit.ly/FestivusPlayerGuide"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/06/709709541_122134790061136219_307500713556584353_n.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/06/709709541_122134790061136219_307500713556584353_n.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/06/709709541_122134790061136219_307500713556584353_n.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/festivus-series-aurum-poker-grand-st-johns-park-western-sydney-nsw/?ical=1",
       "outlook_location": "Aurum Poker Grand, St. Johns Park Bowling Club, 93 Edensor Rd, St Johns park, NSW, 2176, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/apt-satellite-showdown",
       "title": "Australian Poker Tour – Satellite Showdown – Melbourne (VIC)",
-      "url": "https://australianpokerschedule.com.au/event/australian-poker-tour-satellite-showdown-melbourne-vic/",
       "slug": "australian-poker-tour-satellite-showdown-melbourne-vic",
       "tour_brand": "Australian Poker Tour (APT)",
       "region": "VIC",
@@ -1987,31 +1495,18 @@
         "website": "https://www.ihg.com/crowneplaza/hotels/gb/en/carlton/melcn/hoteldetail"
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "July 7",
         "end": "July 19",
         "website": "https://australianpokertour.com.au/live-feed/"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/06/July2026-Carlton-event1.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/06/July2026-Carlton-event1.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/06/July2026-Carlton-event1.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/australian-poker-tour-satellite-showdown-melbourne-vic/?ical=1",
       "outlook_location": "Crowne Plaza, Melbourne Carlton, 701 Swanston St, Carlton, VIC, 3053, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/apl-highways-satellite-series",
       "title": "APL Highways Satellite Series, Springvale (VIC)",
-      "url": "https://australianpokerschedule.com.au/event/apl-highways-satellite-series-springvale-vic/",
       "slug": "apl-highways-satellite-series-springvale-vic",
       "tour_brand": "Australian Poker League (APL)",
       "region": "VIC",
@@ -2039,31 +1534,18 @@
         "website": "https://highways.net.au"
       },
       "description": "💰 OVER $90,000 IN CASH & SEATS GUARANTEED! 💰 Get ready for five huge days of action with over $90,000 in cash and APL Million seats guaranteed! ✅ NO rake or admin fees on any game✅ Self-dealt tournaments throughout the series✅ Every dollar goes straight back into the prize pool 🔥 Friday, 10 July | 10 APL Million Main Event Seats Added • 10 APL Million Main Event Seats added to the prize pool • Unlimited $100 re-entries • One $100 add-on • Every entry and add-on is added on top of the 10 seats already guaranteed! 🎯 $50,000 Mystery Bounty Satellite • $400 Buy-in ($200 + $200) • All Mystery Bounties paid in APL Million Event Seats • Remaining prize pool paid in cash No rake. Self-dealt. Massive added value. Your chance to win cash and secure your seat into the APL Million starts here!",
-      "description_links": [],
       "details": {
         "start": "July 8",
         "end": "July 12",
         "website": "https://www.playapl.com/"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/06/APL-Highways-Satellite-Series-Springvale.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/06/APL-Highways-Satellite-Series-Springvale.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/06/APL-Highways-Satellite-Series-Springvale.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/apl-highways-satellite-series-springvale-vic/?ical=1",
       "outlook_location": "Highways Springvale, Princes Hwy &, Corrigan Rd, Springvale, Victoria, 3171, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/the-star-shot-clocks-super-stacks-sydney",
       "title": "The Star – Shot Clocks Super Stacks – Sydney (NSW)",
-      "url": "https://australianpokerschedule.com.au/event/the-star-shot-clocks-super-stacks-sydney-nsw/",
       "slug": "the-star-shot-clocks-super-stacks-sydney-nsw",
       "tour_brand": "The Star Poker",
       "region": "NSW",
@@ -2091,31 +1573,18 @@
         "website": ""
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "July 9",
         "end": "July 20",
         "website": "https://www.starpoker.com.au/sydney"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/11/Screenshot-2026-05-14-121728.png"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/11/Screenshot-2026-05-14-121728.png"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2025/11/Screenshot-2026-05-14-121728.png",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/the-star-shot-clocks-super-stacks-sydney-nsw/?ical=1",
       "outlook_location": "The Star, Sydney, 20-80 Pyrmont St, Pyrmont, NSW, 2009, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/aplpt-sydney",
       "title": "APLPT – Sydney – Canterbury-Hurlstone Park (NSW)",
-      "url": "https://australianpokerschedule.com.au/event/aplpt-sydney-nsw-3/",
       "slug": "aplpt-sydney-nsw-3",
       "tour_brand": "APL Poker Tour (APLPT)",
       "region": "NSW",
@@ -2154,25 +1623,13 @@
         "end": "July 19",
         "website": "https://playapl.com/aplpt"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/APLPT_SYD_generic.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/APLPT_SYD_generic.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/APLPT_SYD_generic.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/aplpt-sydney-nsw-3/?ical=1",
       "outlook_location": "Canterbury Hurlstone Park RSL, 10-26 Canterbury Road, Hurlstone Park, NSW, 2193, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/kings-cup-series-july-2026",
       "title": "Kings Poker – Kings Cup – Churchill’s Sports Bar Kingsford/Sydney (NSW)",
-      "url": "https://australianpokerschedule.com.au/event/kings-poker-kings-cup-churchills-sports-bar-kingsford-sydney-nsw-3/",
       "slug": "kings-poker-kings-cup-churchills-sports-bar-kingsford-sydney-nsw-3",
       "tour_brand": "Kings Poker",
       "region": "NSW",
@@ -2200,31 +1657,18 @@
         "website": ""
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "July 21",
         "end": "August 2",
         "website": "https://kingspoker.com.au/"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/01/Kings_Cup_generic.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/01/Kings_Cup_generic.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2025/01/Kings_Cup_generic.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/kings-poker-kings-cup-churchills-sports-bar-kingsford-sydney-nsw-3/?ical=1",
       "outlook_location": "Churchills Sports Bar, 536 Anzac Parade, Kingsford, NSW, 2032, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/kings-poker-newcastle-kingdom-championships-july-2026",
       "title": "Kings Poker Newcastle – Kingdom Championships (NSW)",
-      "url": "https://australianpokerschedule.com.au/event/kings-poker-newcastle-kingdom-championships-nsw-2/",
       "slug": "kings-poker-newcastle-kingdom-championships-nsw-2",
       "tour_brand": "Kings Poker Newcastle",
       "region": "NSW",
@@ -2252,31 +1696,18 @@
         "website": ""
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "July 21",
         "end": "August 2",
         "website": "https://kingspoker.au/live/"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/04/kings-newc.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/04/kings-newc.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/04/kings-newc.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/kings-poker-newcastle-kingdom-championships-nsw-2/?ical=1",
       "outlook_location": "Blackbutt Hotel, 80 Orchardtown Rd, New Lambton, NSW, 2305, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/apl-cairns-winter-series",
       "title": "APL – Cairns Winter Series (QLD)",
-      "url": "https://australianpokerschedule.com.au/event/apl-cairns-winter-series-qld/",
       "slug": "apl-cairns-winter-series-qld",
       "tour_brand": "Australian Poker League (APL)",
       "region": "QLD",
@@ -2304,31 +1735,18 @@
         "website": "https://www.brotherscairns.com.au"
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "July 24",
         "end": "July 26",
         "website": "https://playapl.com/"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/06/Screenshot-2026-06-09-003755.png"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/06/Screenshot-2026-06-09-003755.png"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/06/Screenshot-2026-06-09-003755.png",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/apl-cairns-winter-series-qld/?ical=1",
       "outlook_location": "Brothers Leagues Club Cairns, 99-107 Anderson St, Manunda, QLD, 4870, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/empire-poker-evolution-festival",
       "title": "Empire Poker – Evolution Festival – Wantima Country Club (QLD)",
-      "url": "https://australianpokerschedule.com.au/event/empire-poker-evolution-festival-wantima-country-club-qld/",
       "slug": "empire-poker-evolution-festival-wantima-country-club-qld",
       "tour_brand": "Empire Poker",
       "region": "QLD",
@@ -2356,31 +1774,18 @@
         "website": "http://www.wantimacountryclub.com.au/"
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "July 25",
         "end": "August 3",
         "website": "https://empirepoker.com.au"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Empire-Poker-Evolution-Poker-Festival-Brisbane-2026-banner.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Empire-Poker-Evolution-Poker-Festival-Brisbane-2026-banner.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Empire-Poker-Evolution-Poker-Festival-Brisbane-2026-banner.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/empire-poker-evolution-festival-wantima-country-club-qld/?ical=1",
       "outlook_location": "Wantima Country Club, 530 S Pine Rd, Brendale, QLD, 4500, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/kings-poker-signature-series",
       "title": "Kings Poker – Signature Series – Kogarah/Sydney (NSW)",
-      "url": "https://australianpokerschedule.com.au/event/kings-poker-signature-series-kogarah-sydney-nsw/",
       "slug": "kings-poker-signature-series-kogarah-sydney-nsw",
       "tour_brand": "Kings Poker",
       "region": "NSW",
@@ -2408,31 +1813,18 @@
         "website": ""
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "July 29",
         "end": "August 10",
         "website": "https://kingspoker.com.au/"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/Untitled-20260728-111402-6783.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/Untitled-20260728-111402-6783.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/Untitled-20260728-111402-6783.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/kings-poker-signature-series-kogarah-sydney-nsw/?ical=1",
       "outlook_location": "St. George Leagues Club, 124 Princes Hwy, Kogarah, NSW, 2217, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/mixed-games-academy-mixed-games-festival",
       "title": "Mixed Games Academy – Mixed Games Festival, Melbourne (VIC)",
-      "url": "https://australianpokerschedule.com.au/event/mixed-games-academy-mixed-games-festival-melbourne-vic/",
       "slug": "mixed-games-academy-mixed-games-festival-melbourne-vic",
       "tour_brand": "Mixed Games Academy",
       "region": "VIC",
@@ -2460,31 +1852,18 @@
         "website": "https://playlive.melbourne"
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "August 4",
         "end": "August 10",
         "website": "https://mixedgamesacademy.au/"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/07/Screenshot-2026-07-16-210409.png"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/07/Screenshot-2026-07-16-210409.png"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/07/Screenshot-2026-07-16-210409.png",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/mixed-games-academy-mixed-games-festival-melbourne-vic/?ical=1",
       "outlook_location": "PlayLive Melbourne – Melbourne Poker Room, 129 York Street, South Melbourne, VIC, 3205, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/check-raise-poker-championships-2026",
       "title": "Check Raise Poker (QLD)",
-      "url": "https://australianpokerschedule.com.au/event/check-raise-poker-championships-qld-2026/",
       "slug": "check-raise-poker-championships-qld-2026",
       "tour_brand": "Check Raise Poker",
       "region": "QLD",
@@ -2512,31 +1891,18 @@
         "website": "https://springlakehotel.com.au"
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "August 7",
         "end": "August 9",
         "website": "https://www.checkraisepoker.com.au"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/06/check-raise-poker-queensland.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/06/check-raise-poker-queensland.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/06/check-raise-poker-queensland.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/check-raise-poker-championships-qld-2026/?ical=1",
       "outlook_location": "Springlake Hotel, 1 Springfield Lakes Blvd, Springfield Lakes, QLD, 4300, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/apl-million-gold-coast-2026",
       "title": "APL Million – Southport Sharks (QLD)",
-      "url": "https://australianpokerschedule.com.au/event/apl-million-southport-sharks-qld/",
       "slug": "apl-million-southport-sharks-qld",
       "tour_brand": "Australian Poker League (APL)",
       "region": "QLD",
@@ -2583,25 +1949,13 @@
         "end": "August 31",
         "website": "https://www.playapl.com/aplpt/2026-apl-million"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/2026-apl-million-australian-poker-southport-sharks-gold-coast-aps.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/2026-apl-million-australian-poker-southport-sharks-gold-coast-aps.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/2026-apl-million-australian-poker-southport-sharks-gold-coast-aps.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/apl-million-southport-sharks-qld/?ical=1",
       "outlook_location": "Southport Sharks, Corner Olsen and Musgrave Ave, Southport, QLD, 4215, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/irish-poker-open-sydney",
       "title": "Irish Poker Open, Sydney – Poker Palace at Club Marconi, Western Sydney (NSW)",
-      "url": "https://australianpokerschedule.com.au/event/irish-poker-open-sydney-poker-palace-at-club-marconi-western-sydney-nsw/",
       "slug": "irish-poker-open-sydney-poker-palace-at-club-marconi-western-sydney-nsw",
       "tour_brand": "Poker Palace",
       "region": "NSW",
@@ -2629,31 +1983,18 @@
         "website": ""
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "August 31",
         "end": "September 14",
         "website": "https://irishpokeropen.com/sydney/"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/07/Irish-Poker-Open-Sydney-Poker-Palace-at-Club-Marconi-Western-Sydney-NSW.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/07/Irish-Poker-Open-Sydney-Poker-Palace-at-Club-Marconi-Western-Sydney-NSW.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/07/Irish-Poker-Open-Sydney-Poker-Palace-at-Club-Marconi-Western-Sydney-NSW.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/irish-poker-open-sydney-poker-palace-at-club-marconi-western-sydney-nsw/?ical=1",
       "outlook_location": "Poker Palace – Club Marconi, 121/133 Prairie Vale Rd, Bossley Park, NSW, 2176, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/apt-satellite-showdown-ii",
       "title": "Australian Poker Tour – Satellite Showdown II – Melbourne (VIC)",
-      "url": "https://australianpokerschedule.com.au/event/australian-poker-tour-melbourne-satellite-showdown-ii-vic/",
       "slug": "australian-poker-tour-melbourne-satellite-showdown-ii-vic",
       "tour_brand": "Australian Poker Tour (APT)",
       "region": "VIC",
@@ -2681,31 +2022,18 @@
         "website": "https://www.ihg.com/crowneplaza/hotels/gb/en/carlton/melcn/hoteldetail"
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "September 2",
         "end": "September 14",
         "website": "https://australianpokertour.com.au/live-feed/"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Australian-Poker-Tour-Generic.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Australian-Poker-Tour-Generic.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Australian-Poker-Tour-Generic.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/australian-poker-tour-melbourne-satellite-showdown-ii-vic/?ical=1",
       "outlook_location": "Crowne Plaza, Melbourne Carlton, 701 Swanston St, Carlton, VIC, 3053, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/wpt-australia-2026",
       "title": "The Star – WPT Australia – Sydney (NSW)",
-      "url": "https://australianpokerschedule.com.au/event/the-star-wpt-australia-sydney-nsw/",
       "slug": "the-star-wpt-australia-sydney-nsw",
       "tour_brand": "The Star Poker",
       "region": "NSW",
@@ -2733,31 +2061,18 @@
         "website": ""
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "September 10",
         "end": "September 30",
         "website": "https://www.starpoker.com.au/sydney"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/11/The-Star-Sydney-Poker-WPT-Australia-Sep-2026.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/11/The-Star-Sydney-Poker-WPT-Australia-Sep-2026.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2025/11/The-Star-Sydney-Poker-WPT-Australia-Sep-2026.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/the-star-wpt-australia-sydney-nsw/?ical=1",
       "outlook_location": "The Star, Sydney, 20-80 Pyrmont St, Pyrmont, NSW, 2009, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/playlive-the-finals-2026",
       "title": "PlayLive Melbourne – The Finals, South Melbourne (VIC)",
-      "url": "https://australianpokerschedule.com.au/event/playlive-melbourne-the-finals-south-melbourne-vic/",
       "slug": "playlive-melbourne-the-finals-south-melbourne-vic",
       "tour_brand": "PlayLive Melbourne",
       "region": "VIC",
@@ -2785,31 +2100,18 @@
         "website": "https://playlive.melbourne"
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "September 16",
         "end": "September 28",
         "website": "https://playlive.melbourne"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/07/playlive-melb-finals-2026.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/07/playlive-melb-finals-2026.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/07/playlive-melb-finals-2026.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/playlive-melbourne-the-finals-south-melbourne-vic/?ical=1",
       "outlook_location": "PlayLive Melbourne – Melbourne Poker Room, 129 York Street, South Melbourne, VIC, 3205, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/apt-melbourne-champs-ii",
       "title": "Australian Poker Tour – Melbourne Champs II (VIC)",
-      "url": "https://australianpokerschedule.com.au/event/australian-poker-tour-melbourne-champs-ii-vic/",
       "slug": "australian-poker-tour-melbourne-champs-ii-vic",
       "tour_brand": "Australian Poker Tour (APT)",
       "region": "VIC",
@@ -2842,36 +2144,11 @@
         "google_formatted_address": "8 Whiteman St, Southbank VIC 3006, Australia"
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "September 30",
         "end": "October 11",
         "website": "https://australianpokertour.com.au/"
       },
-      "hero_image": {
-        "alt": "Australian Poker Tour - Melbourne Champs II (VIC)",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/06/APT-MELB-CHAMPS-IIA.jpg"
-      },
-      "images": [
-        {
-          "alt": "Australian Poker Tour - Melbourne Champs II (VIC)",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/06/APT-MELB-CHAMPS-IIA.jpg"
-        },
-        {
-          "alt": "Australian Poker Tour VIP Package best poker melbourne",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/06/VIP-Package-V2.jpg"
-        },
-        {
-          "alt": "Australian Poker Tour - Melbourne Champs II (VIC)",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/06/1080x1350-Final-MELB-CHAMPS-PG-1A.jpg"
-        },
-        {
-          "alt": "Australian Poker Tour - Melbourne Champs II (VIC)",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/06/1080x1350-Final-MELB-CHAMPS-PG-2A.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/06/APT-MELB-CHAMPS-IIA.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/australian-poker-tour-melbourne-champs-ii-vic/?ical=1",
       "outlook_location": "Crown Melbourne, Metropol – Sky Bar 28, 8 Whiteman St, Southbank, Melbourne, VIC, 3006, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {
@@ -2886,8 +2163,8 @@
       }
     },
     {
+      "href": "/events/aurum-sydney-showdown",
       "title": "Sydney Showdown – Aurum Poker Grand, St. Johns Park (NSW)",
-      "url": "https://australianpokerschedule.com.au/event/sydney-showdown-aurum-poker-grand-st-johns-park-nsw/",
       "slug": "sydney-showdown-aurum-poker-grand-st-johns-park-nsw",
       "tour_brand": "Aurum Poker",
       "region": "NSW",
@@ -2920,24 +2197,11 @@
         "google_formatted_address": "93 Edensor Rd, St Johns Park NSW 2176, Australia"
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "October 1",
         "end": "October 19",
         "website": "https://aurumpoker.com.au"
       },
-      "hero_image": {
-        "alt": "Sydney Showdown - Aurum Poker Grand, St. Johns Park",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/07/Untitled-20260716-153011-1199.jpg"
-      },
-      "images": [
-        {
-          "alt": "Sydney Showdown - Aurum Poker Grand, St. Johns Park",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/07/Untitled-20260716-153011-1199.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/07/Untitled-20260716-153011-1199-1024x768.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/sydney-showdown-aurum-poker-grand-st-johns-park-nsw/?ical=1",
       "outlook_location": "Aurum Poker Grand, St. Johns Park Bowling Club, 93 Edensor Rd, St Johns park, NSW, 2176, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {
@@ -2947,8 +2211,8 @@
       }
     },
     {
+      "href": "/events/aplpt-brisbane",
       "title": "APLPT – Brisbane – Broncos Club (QLD)",
-      "url": "https://australianpokerschedule.com.au/event/aplpt-brisbane-broncos-club-qld-2/",
       "slug": "aplpt-brisbane-broncos-club-qld-2",
       "tour_brand": "APL Poker Tour (APLPT)",
       "region": "QLD",
@@ -2981,31 +2245,18 @@
         "google_formatted_address": "98 Fulcher Rd, Red Hill QLD 4059, Australia"
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "October 6",
         "end": "October 11",
         "website": "https://www.playapl.com/aplpt/"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/07/APLPT_generic.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/07/APLPT_generic.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/07/APLPT_generic.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/aplpt-brisbane-broncos-club-qld-2/?ical=1",
       "outlook_location": "Broncos Club, 98 Fulcher Rd, Red Hill, QLD, 4059, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/victorian-poker-championship-2026",
       "title": "Crown Poker – Victorian Poker Champs, Melbourne (VIC)",
-      "url": "https://australianpokerschedule.com.au/event/crown-poker-victorian-poker-champs-melbourne-vic/",
       "slug": "crown-poker-victorian-poker-champs-melbourne-vic",
       "tour_brand": "Crown Poker",
       "region": "VIC",
@@ -3038,24 +2289,11 @@
         "google_formatted_address": "8 Whiteman St, Southbank VIC 3006, Australia"
       },
       "description": "𝗧𝗛𝗘 𝗩𝗜𝗖𝗧𝗢𝗥𝗜𝗔𝗡 𝗣𝗢𝗞𝗘𝗥 𝗖𝗛𝗔𝗠𝗣𝗜𝗢𝗡𝗦𝗛𝗜𝗣 𝗥𝗘𝗧𝗨𝗥𝗡𝗦 𝗜𝗡 𝟮𝟬𝟮𝟲! After delivering a massive $2 Million Series in 2025, the Victorian Poker Championship is set to return to the iconic Crown Poker Room from 12-27 October 2026. Fresh off the hugely successful return of the Aussie Millions, Crown Melbourne is once again preparing to welcome players from across Australia and around the world for two weeks of championship poker action. With major events, packed side schedules, industry-leading tournament operations, and one of the most prestigious poker rooms in the Asia-Pacific, all signs point to the Victorian Poker Championship aiming to go even bigger in 2026. 12-27 October 2026 Crown Melbourne Poker Room Full schedule and satellite details coming soon The countdown starts now!",
-      "description_links": [],
       "details": {
         "start": "October 12",
         "end": "October 27",
         "website": "https://www.crownmelbourne.com.au/casino/table-games/poker"
       },
-      "hero_image": {
-        "alt": "2026 Crown Poker Melbourne - Victorian Poker Champs",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/06/2026-Crown-Poker-Melbourne-Victorian-Poker-Champs.jpg"
-      },
-      "images": [
-        {
-          "alt": "2026 Crown Poker Melbourne - Victorian Poker Champs",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/06/2026-Crown-Poker-Melbourne-Victorian-Poker-Champs.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/06/2026-Crown-Poker-Melbourne-Victorian-Poker-Champs.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/crown-poker-victorian-poker-champs-melbourne-vic/?ical=1",
       "outlook_location": "Crown Melbourne, 8 Whiteman St, Southbank, Melbourne, VIC, 3006, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {
@@ -3064,8 +2302,8 @@
       }
     },
     {
+      "href": "/events/apl-the-ville-600-townsville",
       "title": "APL – The Ville 600 – Townsville (QLD)",
-      "url": "https://australianpokerschedule.com.au/event/apl-the-ville-600-townsville-qld-3/",
       "slug": "apl-the-ville-600-townsville-qld-3",
       "tour_brand": "Australian Poker League (APL)",
       "region": "QLD",
@@ -3096,32 +2334,19 @@
         "google_formatted_address": "Sir Leslie Thiess Dr, Townsville City QLD 4810, Australia"
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "October 18",
         "end": "October 25",
         "website": "https://playapl.com/"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2023/12/APL_ville600_generic.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2023/12/APL_ville600_generic.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2023/12/APL_ville600_generic.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/apl-the-ville-600-townsville-qld-3/?ical=1",
       "outlook_location": "The Ville Resort Casino, Sir Leslie Thiess Dr, Townsville, QLD, 4810, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {},
       "organiser_inferred": true
     },
     {
+      "href": "/events/kings-poker-sydney-millions",
       "title": "Kings Poker – Sydney Millions – Kogarah/Sydney (NSW)",
-      "url": "https://australianpokerschedule.com.au/event/kings-poker-sydney-millions-kogarah-sydney-nsw/",
       "slug": "kings-poker-sydney-millions-kogarah-sydney-nsw",
       "tour_brand": "Kings Poker",
       "region": "NSW",
@@ -3154,24 +2379,11 @@
         "google_formatted_address": "124 Princes Hwy, Beverley Park NSW 2217, Australia"
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "October 27",
         "end": "November 9",
         "website": "https://kingspoker.com.au/"
       },
-      "hero_image": {
-        "alt": "Kings Poker – Sydney Millions – Kogarah/Sydney (NSW)",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/Kings-Poker-%E2%80%93-Sydney-Millions-%E2%80%93-Kogarah-Sydney.jpg"
-      },
-      "images": [
-        {
-          "alt": "Kings Poker – Sydney Millions – Kogarah/Sydney (NSW)",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/Kings-Poker-%E2%80%93-Sydney-Millions-%E2%80%93-Kogarah-Sydney.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/Kings-Poker-%E2%80%93-Sydney-Millions-%E2%80%93-Kogarah-Sydney-1024x617.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/kings-poker-sydney-millions-kogarah-sydney-nsw/?ical=1",
       "outlook_location": "St. George Leagues Club, 124 Princes Hwy, Kogarah, NSW, 2217, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {
@@ -3180,8 +2392,8 @@
       }
     },
     {
+      "href": "/events/apt-sydney-champs",
       "title": "Australian Poker Tour – Sydney Champs (NSW)",
-      "url": "https://australianpokerschedule.com.au/event/australian-poker-tour-sydney-champs-nsw/",
       "slug": "australian-poker-tour-sydney-champs-nsw",
       "tour_brand": "Australian Poker Tour (APT)",
       "region": "NSW",
@@ -3214,31 +2426,18 @@
         "google_formatted_address": "Workers Club, 2B Brett St, Revesby NSW 2212, Australia"
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "November 5",
         "end": "November 15",
         "website": "https://australianpokertour.com.au/"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Australian-Poker-Tour-Generic.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Australian-Poker-Tour-Generic.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Australian-Poker-Tour-Generic.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/australian-poker-tour-sydney-champs-nsw/?ical=1",
       "outlook_location": "Revesby Workers’ Club, 2B Brett St, Revesby, NSW, 2212, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/aplpt-albury",
       "title": "APLPT – Albury – SS&A Club (NSW)",
-      "url": "https://australianpokerschedule.com.au/event/aplpt-albury-ssa-club-nsw-1/",
       "slug": "aplpt-albury-ssa-club-nsw-1",
       "tour_brand": "APL Poker Tour (APLPT)",
       "region": "NSW",
@@ -3271,31 +2470,18 @@
         "google_formatted_address": "570/582 Olive St, Albury NSW 2640, Australia"
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "November 17",
         "end": "November 22",
         "website": "https://playapl.com/aplpt"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/07/APLPT_generic.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/07/APLPT_generic.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/07/APLPT_generic.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/aplpt-albury-ssa-club-nsw-1/?ical=1",
       "outlook_location": "SS&A Albury, 570/582 Olive St, Albury, NSW, 2640, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/apt-gold-coast-champs",
       "title": "Australian Poker Tour – Gold Coast Champs (QLD)",
-      "url": "https://australianpokerschedule.com.au/event/australian-poker-tour-gold-coast-champs-qld/",
       "slug": "australian-poker-tour-gold-coast-champs-qld",
       "tour_brand": "Australian Poker Tour (APT)",
       "region": "QLD",
@@ -3328,31 +2514,18 @@
         "google_formatted_address": "2807 Gold Coast Hwy, Surfers Paradise QLD 4217, Australia"
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "November 27",
         "end": "December 6",
         "website": "https://australianpokertour.com.au/live-feed/"
       },
-      "hero_image": {
-        "alt": "Australian Poker Tour November Gold Coast",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Australian-Poker-Tour-November-Gold-Coast.jpg"
-      },
-      "images": [
-        {
-          "alt": "Australian Poker Tour November Gold Coast",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Australian-Poker-Tour-November-Gold-Coast.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Australian-Poker-Tour-November-Gold-Coast.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/australian-poker-tour-gold-coast-champs-qld/?ical=1",
       "outlook_location": "Crowne Plaza Hotel, Surfers Paradise, 2807 Gold Coast Hwy, Surfers Paradise, Queensland, 4217, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/kings-cup-series-december-2026",
       "title": "Kings Poker – Kings Cup – Churchill’s Sports Bar Kingsford/Sydney (NSW)",
-      "url": "https://australianpokerschedule.com.au/event/kings-poker-kings-cup-churchills-sports-bar-kingsford-sydney-nsw-4/",
       "slug": "kings-poker-kings-cup-churchills-sports-bar-kingsford-sydney-nsw-4",
       "tour_brand": "Kings Poker",
       "region": "NSW",
@@ -3385,24 +2558,11 @@
         "google_formatted_address": "536 Anzac Parade, Kingsford NSW 2032, Australia"
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "December 1",
         "end": "December 13",
         "website": "https://kingspoker.com.au/"
       },
-      "hero_image": {
-        "alt": "Kings Poker – Kings Cup – Churchill’s Sports Bar Kingsford/Sydney (NSW)",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/Untitled-20260728-114333-0290-scaled.jpg"
-      },
-      "images": [
-        {
-          "alt": "Kings Poker – Kings Cup – Churchill’s Sports Bar Kingsford/Sydney (NSW)",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/Untitled-20260728-114333-0290-scaled.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2025/12/Untitled-20260728-114333-0290-1024x576.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/kings-poker-kings-cup-churchills-sports-bar-kingsford-sydney-nsw-4/?ical=1",
       "outlook_location": "Churchills Sports Bar, 536 Anzac Parade, Kingsford, NSW, 2032, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {
@@ -3411,8 +2571,8 @@
       }
     },
     {
+      "href": "/events/apt-melbourne-champs-iii",
       "title": "Australian Poker Tour – Melbourne Champs III (VIC)",
-      "url": "https://australianpokerschedule.com.au/event/australian-poker-tour-melbourne-champs-iii-vic/",
       "slug": "australian-poker-tour-melbourne-champs-iii-vic",
       "tour_brand": "Australian Poker Tour (APT)",
       "region": "VIC",
@@ -3445,31 +2605,18 @@
         "google_formatted_address": "8 Whiteman St, Southbank VIC 3006, Australia"
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "January 8",
         "end": "January 26",
         "website": "https://australianpokertour.com.au"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Australian-Poker-Tour-Generic.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Australian-Poker-Tour-Generic.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Australian-Poker-Tour-Generic.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/australian-poker-tour-melbourne-champs-iii-vic/?ical=1",
       "outlook_location": "Crown Melbourne, 8 Whiteman St, Southbank, Melbourne, VIC, 3006, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/kings-cup-series-january-2027",
       "title": "Kings Poker – Kings Cup – Churchill’s Sports Bar Kingsford/Sydney (NSW)",
-      "url": "https://australianpokerschedule.com.au/event/kings-poker-kings-cup-churchills-sports-bar-kingsford-sydney-nsw-5/",
       "slug": "kings-poker-kings-cup-churchills-sports-bar-kingsford-sydney-nsw-5",
       "tour_brand": "Kings Poker",
       "region": "NSW",
@@ -3502,24 +2649,11 @@
         "google_formatted_address": "536 Anzac Parade, Kingsford NSW 2032, Australia"
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "January 10",
         "end": "January 24",
         "website": "https://kingspoker.com.au/"
       },
-      "hero_image": {
-        "alt": "Kings Poker – Kings Cup – Churchill’s Sports Bar Kingsford/Sydney (NSW)",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/07/Untitled-20260728-114112-9996-scaled.jpg"
-      },
-      "images": [
-        {
-          "alt": "Kings Poker – Kings Cup – Churchill’s Sports Bar Kingsford/Sydney (NSW)",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/07/Untitled-20260728-114112-9996-scaled.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/07/Untitled-20260728-114112-9996-1024x576.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/kings-poker-kings-cup-churchills-sports-bar-kingsford-sydney-nsw-5/?ical=1",
       "outlook_location": "Churchills Sports Bar, 536 Anzac Parade, Kingsford, NSW, 2032, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {
@@ -3528,8 +2662,8 @@
       }
     },
     {
+      "href": "/events/kings-poker-chinese-ny-lunar-series",
       "title": "Kings Poker – Chinese NY Lunar Series – Kogarah/Sydney (NSW)",
-      "url": "https://australianpokerschedule.com.au/event/kings-poker-chinese-ny-lunar-series-kogarah-sydney-nsw-2/",
       "slug": "kings-poker-chinese-ny-lunar-series-kogarah-sydney-nsw-2",
       "tour_brand": "Kings Poker",
       "region": "NSW",
@@ -3562,24 +2696,11 @@
         "google_formatted_address": "124 Princes Hwy, Beverley Park NSW 2217, Australia"
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "February 2",
         "end": "February 15",
         "website": "https://kingspoker.com.au/"
       },
-      "hero_image": {
-        "alt": "Kings Poker - Chinese NY Lunar Series - Kogarah/Sydney (NSW)",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/07/Untitled-20260728-113446-4489.jpg"
-      },
-      "images": [
-        {
-          "alt": "Kings Poker - Chinese NY Lunar Series - Kogarah/Sydney (NSW)",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/07/Untitled-20260728-113446-4489.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/07/Untitled-20260728-113446-4489-1024x576.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/kings-poker-chinese-ny-lunar-series-kogarah-sydney-nsw-2/?ical=1",
       "outlook_location": "St. George Leagues Club, 124 Princes Hwy, Kogarah, NSW, 2217, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {
@@ -3588,8 +2709,8 @@
       }
     },
     {
+      "href": "/events/apt-adelaide-champs-ii",
       "title": "Australian Poker Tour – Adelaide Champs II – Mawson Lakes (SA)",
-      "url": "https://australianpokerschedule.com.au/event/australian-poker-tour-adelaide-champs-ii-mawson-lakes-sa/",
       "slug": "australian-poker-tour-adelaide-champs-ii-mawson-lakes-sa",
       "tour_brand": "Australian Poker Tour (APT)",
       "region": "SA",
@@ -3622,31 +2743,18 @@
         "google_formatted_address": "1-3 Metro Parade, Mawson Lakes SA 5095, Australia"
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "February 12",
         "end": "February 22",
         "website": "https://australianpokertour.com.au/live-feed/"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Australian-Poker-Tour-Generic.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Australian-Poker-Tour-Generic.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Australian-Poker-Tour-Generic.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/australian-poker-tour-adelaide-champs-ii-mawson-lakes-sa/?ical=1",
       "outlook_location": "Crowne Plaza Hotel, Mawson Lakes, Adelaide, 1-3 Metro Parade, Mawson Lakes, SA, 5095, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/apl-million-sydney-2027",
       "title": "APL Million Sydney – The Star (NSW)",
-      "url": "https://australianpokerschedule.com.au/event/apl-million-sydney-the-star-nsw/",
       "slug": "apl-million-sydney-the-star-nsw",
       "tour_brand": "Australian Poker League (APL)",
       "region": "NSW",
@@ -3679,24 +2787,11 @@
         "google_formatted_address": "20-80 Pyrmont St, Pyrmont NSW 2009, Australia"
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "February 24",
         "end": "March 15",
         "website": "https://playapl.com"
       },
-      "hero_image": {
-        "alt": "APL Million Sydney - The Star (NSW)",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/08/Untitled-20260828-143752-3047.jpg"
-      },
-      "images": [
-        {
-          "alt": "APL Million Sydney - The Star (NSW)",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/08/Untitled-20260828-143752-3047.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/08/Untitled-20260828-143752-3047-1024x576.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/apl-million-sydney-the-star-nsw/?ical=1",
       "outlook_location": "The Star, Sydney, 20-80 Pyrmont St, Pyrmont, NSW, 2009, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {
@@ -3711,8 +2806,8 @@
       }
     },
     {
+      "href": "/events/apt-sydney-champs-ii",
       "title": "Australian Poker Tour – Sydney Champs II (NSW)",
-      "url": "https://australianpokerschedule.com.au/event/australian-poker-tour-sydney-champs-ii-nsw/",
       "slug": "australian-poker-tour-sydney-champs-ii-nsw",
       "tour_brand": "Australian Poker Tour (APT)",
       "region": "NSW",
@@ -3745,31 +2840,18 @@
         "google_formatted_address": "Workers Club, 2B Brett St, Revesby NSW 2212, Australia"
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "March 19",
         "end": "March 29",
         "website": "https://australianpokertour.com.au/"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Australian-Poker-Tour-Generic.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Australian-Poker-Tour-Generic.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Australian-Poker-Tour-Generic.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/australian-poker-tour-sydney-champs-ii-nsw/?ical=1",
       "outlook_location": "Revesby Workers’ Club, 2B Brett St, Revesby, NSW, 2212, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/2027-aussie-millions",
       "title": "2027 Aussie Millions – Crown Melbourne",
-      "url": "https://australianpokerschedule.com.au/event/2027-aussie-millions-crown-melbourne/",
       "slug": "2027-aussie-millions-crown-melbourne",
       "tour_brand": "Crown Poker",
       "region": "",
@@ -3802,31 +2884,18 @@
         "google_formatted_address": "8 Whiteman St, Southbank VIC 3006, Australia"
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "April 8",
         "end": "April 24",
         "website": "https://www.crownmelbourne.com.au/casino/table-games/poker"
       },
-      "hero_image": {
-        "alt": "2027 Aussie Millions - Crown Melbourne",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2024/10/Aussie-Millions-Crown-2026.jpg"
-      },
-      "images": [
-        {
-          "alt": "2027 Aussie Millions - Crown Melbourne",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2024/10/Aussie-Millions-Crown-2026.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2024/10/Aussie-Millions-Crown-2026.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/2027-aussie-millions-crown-melbourne/?ical=1",
       "outlook_location": "Crown Melbourne, 8 Whiteman St, Southbank, Melbourne, VIC, 3006, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
     },
     {
+      "href": "/events/apt-melbourne-champs-iv",
       "title": "Australian Poker Tour – Melbourne Champs IV (VIC)",
-      "url": "https://australianpokerschedule.com.au/event/australian-poker-tour-melbourne-champs-iv-vic/",
       "slug": "australian-poker-tour-melbourne-champs-iv-vic",
       "tour_brand": "Australian Poker Tour (APT)",
       "region": "VIC",
@@ -3859,24 +2928,11 @@
         "google_formatted_address": "8 Whiteman St, Southbank VIC 3006, Australia"
       },
       "description": "",
-      "description_links": [],
       "details": {
         "start": "April 8",
         "end": "April 18",
         "website": "https://australianpokertour.com.au/"
       },
-      "hero_image": {
-        "alt": "",
-        "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Australian-Poker-Tour-Generic.jpg"
-      },
-      "images": [
-        {
-          "alt": "",
-          "src": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Australian-Poker-Tour-Generic.jpg"
-        }
-      ],
-      "listing_image": "https://australianpokerschedule.com.au/wp-content/uploads/2026/01/Australian-Poker-Tour-Generic.jpg",
-      "ical_url": "webcal://australianpokerschedule.com.au/event/australian-poker-tour-melbourne-champs-iv-vic/?ical=1",
       "outlook_location": "Crown Melbourne, 8 Whiteman St, Southbank, Melbourne, VIC, 3006, Australia",
       "source_scraped": "2026-10-02",
       "poster_facts": {}
@@ -4559,7 +3615,6 @@
     }
   ],
   "notes": [
-    "Regenerated 2026-10-02 by scripts/scrape-aps-events.mjs from the site's Events Calendar REST API (https://australianpokerschedule.com.au/wp-json/tribe/events/v1/events), every event from 2026-01-01 to 2027-12-31.",
     "Dates are exact ISO dates from the API. duration_days is inclusive.",
     "Records first scraped from the Series Timeline pages on 2026-10-02 keep their poster_facts, venue coordinates and description copy; the API does not carry those.",
     "tour_brand is derived from the organiser name (and the title, for APL vs APLPT)."

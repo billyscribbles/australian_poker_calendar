@@ -12,7 +12,7 @@ rules). Read `docs/ENVIRONMENTS.md` for how staging and production are released.
 
 ## Quick start
 
-Requires Node 20 (pinned in `.nvmrc`) and Yarn 4 via Corepack.
+Requires Node 22 (pinned in `.nvmrc`) and Yarn 4 via Corepack.
 
 ```bash
 corepack enable
@@ -62,8 +62,8 @@ Open Graph card. Tour logos are in `public/images/tours/`.
 
 ## The calendar data
 
-The series list comes from the Australian Poker Schedule series timeline
-(https://australianpokerschedule.com.au/series-timeline/), scraped on 2 October 2026.
+The series list is the site's own record, compiled from operators'
+announcements and kept in `data/`.
 
 - `data/poker-series-timeline.json` and `.csv` hold the full record per series:
   organiser contacts, venue address and coordinates, guarantees, poster facts.

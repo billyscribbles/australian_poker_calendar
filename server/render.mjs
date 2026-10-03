@@ -23,6 +23,7 @@ import { dirname, join } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import {
   createDocumentBuilder,
+  readEntryStyles,
   stripScripts,
   withRuntimeContent,
 } from '../scripts/lib/document.mjs'
@@ -69,7 +70,12 @@ export function createRenderer({
         render: mod.render,
         setRuntimeContent: mod.setRuntimeContent,
         routeModules: mod.routeModules,
-        builder: createDocumentBuilder({ template, manifest, themeStyles: mod.themeStyles }),
+        builder: createDocumentBuilder({
+          template,
+          manifest,
+          themeStyles: mod.themeStyles,
+          entryStyles: readEntryStyles(manifest, dist),
+        }),
       }
       return true
     } catch (error) {

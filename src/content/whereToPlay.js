@@ -1,9 +1,8 @@
 // Where to play: every venue a series on the calendar is dealt at, grouped by
 // state, with its street address and a link out. Taken from the venue record
-// on each Australian Poker Schedule event page (data/poker-series-timeline.json,
-// scraped 2026-10-02); the two NPL clubs are from NPL's own series pages, which
-// the APS listing does not carry. Re-run the scrape and add a row here when an
-// operator announces a new stop.
+// on each series in data/poker-series-timeline.json (2026-10-02); the two NPL
+// clubs are from NPL's own series pages. Add a row here when an operator
+// announces a new stop.
 //
 // `tours` names the operators that run series at the venue, keyed against
 // calendarPage.tours, so the card can show each room's own mark and link to

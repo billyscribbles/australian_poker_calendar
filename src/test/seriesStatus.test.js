@@ -58,10 +58,10 @@ describe('series status', () => {
     expect(oct20.slots.find((e) => e.slot === 'Home hero').state.tone).toBe('critical')
   })
 
-  it('matches calendar rows to the scrape by source URL', () => {
+  it('matches calendar rows to the series records by href', () => {
     const scraped = status.series.filter((s) => s.scraped)
     expect(scraped.length).toBeGreaterThan(10)
-    for (const s of scraped) expect(s.scraped.url).toBe(s.source)
+    for (const s of scraped) expect(s.scraped.href).toBe(s.href)
     expect(status.unlisted).toEqual([])
   })
 

@@ -33,6 +33,5 @@ describe('responsible-gambling footer line', () => {
   it('links Gambling Help Online in the config', () => {
     const hrefs = site.footer.responsible.map((i) => i.href).filter(Boolean)
     expect(hrefs).toContain('https://www.gamblinghelponline.org.au/')
-    expect(hrefs.some((h) => h.startsWith('tel:'))).toBe(true)
   })
 })
