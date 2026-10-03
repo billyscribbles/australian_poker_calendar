@@ -23,8 +23,9 @@ import './FestivalTimeline.css'
 
 /**
  * Month-at-a-time Gantt view: one 64px column per day, one lane per row of
- * non-overlapping festivals. Scrolls horizontally; on load it centres today's
- * column when the viewed month contains it.
+ * non-overlapping festivals. Scrolls horizontally; on load and on every month
+ * change it centres today's column when the viewed month contains it, and
+ * otherwise snaps back to the 1st.
  *
  * Each bar carries its tour's colours (content/tourBrands.js) as custom
  * properties, and the stylesheet composes the brand gradient from them. The
@@ -46,9 +47,11 @@ export default function FestivalTimeline({ festivals, year, month, today }) {
   const scrollRef = useRef(null)
   useEffect(() => {
     const el = scrollRef.current
-    if (!el || todayIndex < 0) return
-    el.scrollLeft = Math.max(0, todayIndex * DAY + DAY / 2 - el.clientWidth / 2)
-  }, [todayIndex, month])
+    if (!el) return
+    // Any other month starts from the 1st, not wherever the last one was left.
+    el.scrollLeft =
+      todayIndex < 0 ? 0 : Math.max(0, todayIndex * DAY + DAY / 2 - el.clientWidth / 2)
+  }, [todayIndex, month, year])
 
   return (
     <div className="timeline scroll-row" ref={scrollRef}>
