@@ -370,25 +370,6 @@ const rows = [
     tours: ['PLAYLIVE', 'MGA'],
     website: 'https://playlive.melbourne/',
   },
-  // World Pro Poker's two finals venues, from its own venue list.
-  {
-    name: 'Sunbury Bowls Club',
-    street: '49 Riddell Road',
-    suburb: 'Sunbury',
-    city: 'melbourne',
-    state: 'VIC',
-    postcode: '3429',
-    tours: ['WPP'],
-  },
-  {
-    name: 'Westend Market Hotel',
-    street: '47 McIntyre Road',
-    suburb: 'Sunshine',
-    city: 'melbourne',
-    state: 'VIC',
-    postcode: '3020',
-    tours: ['WPP'],
-  },
 ]
 
 // Poker rooms with no series on the calendar: casino rooms and card clubs
@@ -417,22 +398,6 @@ const rows = [
 
 /** @type {Room[]} */
 const rooms = [
-  {
-    // A pub, not a card room: "Home of Anzac Cup Poker and weekly tournaments"
-    // (newmarkethotel.com.au, 2026-10-04).
-    name: 'Newmarket Hotel',
-    street: 'Corner Gardeners Road and Botany Road',
-    suburb: 'Mascot',
-    state: 'NSW',
-    postcode: '2020',
-    website: 'https://newmarkethotel.com.au/',
-    // Initials tile: its logo is a wordmark with no square form.
-    mark: {
-      iconSrc: '/images/rooms/newmarket-hotel-icon.webp',
-      primary: '#F5F2EB',
-      iconBg: '#0E0E0E',
-    },
-  },
   {
     name: 'Casino Canberra',
     street: '21 Binara Street',
@@ -609,6 +574,21 @@ const leagueRows = [
       'Weekly $35 to $55 games at Melbourne pubs and clubs, from Darebin and Fawkner RSLs to Sunbury and Rosebud, where 1 in 10 qualify for its $80,000 finals.',
     website:
       'https://www.worldpropoker.com.au/index.php?option=com_content&view=article&id=3:venue-details-and-location&catid=22&Itemid=113',
+  },
+  // A pub, not a card room: "Home of Anzac Cup Poker and weekly tournaments"
+  // (newmarkethotel.com.au, 2026-10-04).
+  {
+    name: 'Newmarket Hotel',
+    states: ['NSW'],
+    about:
+      'A Mascot pub on the corner of Gardeners and Botany Roads, home of Anzac Cup Poker and weekly tournaments.',
+    website: 'https://newmarkethotel.com.au/',
+    // Initials tile: its logo is a wordmark with no square form.
+    mark: {
+      iconSrc: '/images/rooms/newmarket-hotel-icon.webp',
+      primary: '#F5F2EB',
+      iconBg: '#0E0E0E',
+    },
   },
   {
     name: 'Gambier Poker',
