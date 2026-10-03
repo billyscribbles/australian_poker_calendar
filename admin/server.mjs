@@ -11,6 +11,7 @@ import { dirname, extname, join, normalize, sep } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { createAdminHandler } from './handler.mjs'
 import { createStore } from '../server/store.mjs'
+import { createMediaHandler } from '../server/media.mjs'
 
 const PUBLIC = join(dirname(fileURLToPath(import.meta.url)), '..', 'public')
 const PORT = Number(process.env.PORT) || 4400
@@ -24,10 +25,14 @@ const MIME = {
   '.ico': 'image/x-icon',
 }
 
-const admin = createAdminHandler({ site: SITE, store: createStore() })
+const store = createStore()
+const admin = createAdminHandler({ site: SITE, store })
+// The uploads the editors show, from the store's media folder.
+const media = createMediaHandler({ dir: store.content.mediaDir })
 
 createServer((req, res) => {
   if (admin(req, res)) return
+  if (media(req, res)) return
   const pathname = decodeURIComponent(new URL(req.url, 'http://localhost').pathname)
   if (pathname === '/') {
     res.writeHead(302, { Location: '/admin/' })

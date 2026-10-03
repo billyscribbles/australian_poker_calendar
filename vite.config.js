@@ -6,6 +6,8 @@ import { theme } from './src/config/theme.config.js'
 import { createAdminHandler } from './admin/handler.mjs'
 import { createApiHandler } from './server/api.mjs'
 import { createStore } from './server/store.mjs'
+import { createMediaHandler } from './server/media.mjs'
+import { withRuntimeContent } from './scripts/lib/document.mjs'
 
 // The day this bundle is built, exposed to the app as import.meta.env.VITE_BUILD_DATE.
 //
@@ -61,20 +63,32 @@ function webfonts() {
 }
 
 /**
- * The dashboard at /admin and the forms' /api/enquiry on the dev server, as
- * on the site server. Both read and write .data/ (see server/store.mjs).
+ * The dashboard at /admin, the forms' /api/enquiry and the uploaded media at
+ * /media on the dev server, as on the site server. All read and write .data/
+ * (see server/store.mjs). The published stories and shorts are written into
+ * the page as the production server writes them, so `yarn dev` shows them
+ * (client-rendered, as everything is in dev) instead of the demo cards.
  */
 function admin(mode) {
   const store = createStore()
   // Vite keeps .env out of process.env; the forms' Formspree id lives there.
   const { VITE_FORMSPREE_ID: formspreeId = '' } = loadEnv(mode, process.cwd(), 'VITE_')
-  const handlers = [createApiHandler({ store, formspreeId }), createAdminHandler({ store })]
+  const handlers = [
+    createApiHandler({ store, formspreeId }),
+    createAdminHandler({ store }),
+    createMediaHandler({ dir: store.content.mediaDir }),
+  ]
   return {
     name: 'site-admin',
+    apply: 'serve',
     configureServer(server) {
       server.middlewares.use((req, res, next) => {
         if (!handlers.some((handle) => handle(req, res))) next()
       })
+    },
+    transformIndexHtml: {
+      order: 'post',
+      handler: (html) => withRuntimeContent(html, store.content.publicContent()),
     },
   }
 }

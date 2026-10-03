@@ -14,19 +14,28 @@
 // canonical URL per page (no trailing-slash twins) and long-lived caching on
 // the hashed assets so the Lighthouse budget survives.
 //
+// It also serves what the dashboard publishes: uploaded media at /media/*
+// (with Range support, server/media.mjs), and the home page, the stories
+// index and each story rendered at request time with the published content
+// (server/render.mjs), plus a sitemap that lists the stories. `vite preview`
+// would do none of it.
+//
 // No dependencies — Node's own http/fs/zlib cover all of it. Add per-site
 // concerns (a www -> apex redirect, legacy URL 301s) here when a site needs
 // them; the template ships none.
 
 import { createServer } from 'node:http'
+import { createHash } from 'node:crypto'
 import { createReadStream, existsSync, statSync, readFileSync } from 'node:fs'
 import { join, extname, normalize, sep, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { createGzip, createBrotliCompress, constants as zlib } from 'node:zlib'
+import { createGzip, createBrotliCompress, constants as zlib, gzipSync } from 'node:zlib'
 import { pipeline } from 'node:stream'
 import { canonicalHost, legacyRedirects, cspExtra } from '../src/config/server.config.js'
 import { createAdminHandler } from '../admin/handler.mjs'
 import { createApiHandler } from './api.mjs'
+import { createMediaHandler } from './media.mjs'
+import { createRenderer } from './render.mjs'
 import { createStore } from './store.mjs'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
@@ -39,7 +48,15 @@ const store = createStore()
 const api = createApiHandler({ store })
 // The dashboard at /admin. Local connections only unless ADMIN_PASSWORD is
 // set; see admin/handler.mjs.
-const admin = createAdminHandler({ store })
+// Uploaded images and video, from the store's media folder, with Range support.
+const media = createMediaHandler({ dir: store.content.mediaDir })
+// The home page, the stories index and each story, rendered at request time
+// from the published content; see server/render.mjs.
+const renderer = createRenderer({ dist: DIST, store })
+renderer.ready.then((ok) => {
+  if (!ok) console.error(`[server] live rendering is off: ${renderer.error}`)
+})
+const admin = createAdminHandler({ store, renderer })
 const HOST = process.env.HOST || '0.0.0.0'
 
 // Routes scripts/prerender.mjs wrote real HTML for. Anything outside this list
@@ -190,6 +207,30 @@ function serveFile(req, res, filePath, status = 200, extraHeaders = {}) {
   else pipeline(stream, res, onError)
 }
 
+/** An in-memory document (a live page, the sitemap): ETag from its bytes, gzip when asked. */
+function sendDocument(req, res, body, { type, cacheControl, status = 200 }) {
+  const buffer = Buffer.from(body)
+  const etag = `W/"${createHash('sha1').update(buffer).digest('base64url').slice(0, 20)}"`
+  securityHeaders(res, { html: type.startsWith('text/html') })
+  res.setHeader('ETag', etag)
+  if (req.headers['if-none-match'] === etag) {
+    res.writeHead(304)
+    return res.end()
+  }
+  res.setHeader('Content-Type', type)
+  res.setHeader('Vary', 'Accept-Encoding')
+  res.setHeader('Cache-Control', cacheControl)
+  let out = buffer
+  if (buffer.length > 1024 && /\bgzip\b/.test(req.headers['accept-encoding'] || '')) {
+    res.setHeader('Content-Encoding', 'gzip')
+    out = gzipSync(buffer, { level: 6 })
+  }
+  res.setHeader('Content-Length', String(out.length))
+  res.statusCode = status
+  if (req.method === 'HEAD') return res.end()
+  res.end(out)
+}
+
 /** One line in the traffic tally. The address never reaches the disk. */
 function recordView(req, pathname) {
   const forwarded = req.headers['x-forwarded-for']
@@ -208,7 +249,7 @@ function documentFor(route) {
   return existsSync(file) ? file : null
 }
 
-const server = createServer((req, res) => {
+async function handle(req, res) {
   const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`)
   const pathname = url.pathname
 
@@ -248,6 +289,10 @@ const server = createServer((req, res) => {
     return res.end('Method Not Allowed')
   }
 
+  // Uploaded media. Before the trailing-slash rule and the dist lookup: the
+  // files are not in dist, and they take Range requests.
+  if (media(req, res)) return
+
   // URLs the old site ranked for. Before the file lookup, so a legacy path that
   // happens to collide with a real asset name still redirects.
   const legacy = legacyRedirects[pathname.replace(/\/+$/, '') || '/']
@@ -269,10 +314,34 @@ const server = createServer((req, res) => {
     return res.end()
   }
 
+  // The sitemap, with the published stories added. dist/sitemap.xml is a real
+  // file, so this has to come before the file lookup.
+  if (pathname === '/sitemap.xml') {
+    const xml = await renderer.sitemap()
+    if (xml) {
+      return sendDocument(req, res, xml, {
+        type: MIME['.xml'],
+        cacheControl: 'public, max-age=3600',
+      })
+    }
+  }
+
   // A real file on disk: hashed assets, fonts, images, robots.txt, sitemap.xml.
   const filePath = safeJoin(DIST, pathname)
   if (filePath && existsSync(filePath) && statSync(filePath).isFile()) {
     return serveFile(req, res, filePath)
+  }
+
+  // A live route: the home page and the stories, rendered with the published
+  // content. Ahead of the prerendered lookup, which holds the build-time
+  // versions of "/" and "/stories" (demo content) as the fallback.
+  const live = await renderer.page(pathname)
+  if (live) {
+    if (req.method === 'GET') recordView(req, pathname)
+    return sendDocument(req, res, live, {
+      type: MIME['.html'],
+      cacheControl: 'public, max-age=0, must-revalidate',
+    })
   }
 
   // A prerendered page. A document, not an asset, so it counts as a view.
@@ -296,6 +365,14 @@ const server = createServer((req, res) => {
   }
   res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' })
   res.end('404 Not Found')
+}
+
+const server = createServer((req, res) => {
+  handle(req, res).catch((error) => {
+    console.error('[server]', error)
+    if (!res.headersSent) res.writeHead(500, { 'Content-Type': 'text/plain; charset=utf-8' })
+    res.end('Internal Server Error')
+  })
 })
 
 // Railway stops a deploy with SIGTERM; write the last few seconds of views.
