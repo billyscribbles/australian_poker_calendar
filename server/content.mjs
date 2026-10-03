@@ -12,7 +12,15 @@
 // write so server/render.mjs can cache rendered pages until something changes.
 
 import { randomBytes } from 'node:crypto'
-import { existsSync, mkdirSync, readFileSync, renameSync, unlinkSync, writeFileSync } from 'node:fs'
+import {
+  existsSync,
+  mkdirSync,
+  readFileSync,
+  renameSync,
+  statSync,
+  unlinkSync,
+  writeFileSync,
+} from 'node:fs'
 import { basename, dirname, join } from 'node:path'
 import { sanitizeHtml } from './sanitize.mjs'
 
@@ -79,7 +87,24 @@ export function createContentStore({
   dir = process.env.DATA_DIR || join(process.cwd(), '.data'),
 } = {}) {
   const mediaDir = join(dir, 'media')
+  const files = Object.values(KINDS).map((k) => join(dir, k.file))
   let version = 1
+
+  // Size and mtime of both files. Another process (the dashboard on its own
+  // port, a script) can write them too, so `version` also moves when this
+  // changes, not only on this store's own writes.
+  const signature = () =>
+    files
+      .map((f) => {
+        try {
+          const s = statSync(f)
+          return `${s.size}:${s.mtimeMs}`
+        } catch {
+          return '-'
+        }
+      })
+      .join('|')
+  let seen = signature()
 
   function removeMedia(url) {
     if (!MEDIA_URL.test(url || '')) return
@@ -101,6 +126,7 @@ export function createContentStore({
     const write = (list) => {
       writeJson(file, list)
       version += 1
+      seen = signature() // our own write counts once
     }
 
     function uniqueSlug(list, wanted, exceptId) {
@@ -265,6 +291,11 @@ export function createContentStore({
     dir,
     mediaDir,
     get version() {
+      const now = signature()
+      if (now !== seen) {
+        seen = now
+        version += 1
+      }
       return version
     },
     // Newest first, for the dashboard's lists.

@@ -115,6 +115,16 @@ describe('stories', () => {
     expect(content.version).toBe(v0 + 2)
   })
 
+  it('sees a write made by another process', () => {
+    // The dashboard on its own port (yarn admin) writes the same files the
+    // site server renders from; the site's cache must notice.
+    const before = content.version
+    createContentStore({ dir }).addStory({ title: 'From elsewhere' })
+    expect(content.version).not.toBe(before)
+    const settled = content.version
+    expect(content.version).toBe(settled)
+  })
+
   it('deletes a story and its own media only', () => {
     const hero = media('hero.webp')
     const thumb = media('thumb.webp')
