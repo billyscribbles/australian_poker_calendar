@@ -22,7 +22,6 @@
   min-height: 300px;
   border-radius: var(--radius-2xl);
   overflow: hidden;
-  border: 1.5px solid var(--color-accent);
   background: radial-gradient(
     600px 300px at 90% 50%,
     var(--color-bg-selected),
