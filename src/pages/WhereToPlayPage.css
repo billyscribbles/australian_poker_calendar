@@ -1,9 +1,10 @@
-/* Where to play: hero, a row of state jump links, then one section per state
- * holding a grid of venue cards. Operator marks are TourLogo circles in the
+/* Where to play: hero with the rooms / leagues tabs along its foot, a browse
+ * block (state tiles, city links), then one section per state holding a grid
+ * of venue cards. Operator marks are TourLogo circles in the
  * room's own colours. */
 
 .venues-hero {
-  padding: 112px 0 48px;
+  padding: 112px 0 0;
   background: var(--color-bg);
 }
 
@@ -23,45 +24,6 @@
   line-height: 1.7;
   color: var(--color-muted);
   max-width: 640px;
-}
-
-.venues-jump {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 32px;
-}
-
-.venues-jump__link {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  height: 44px;
-  padding: 0 18px;
-  border-radius: var(--radius-full);
-  border: 1px solid var(--color-border);
-  background: var(--color-bg-card);
-  color: var(--color-text);
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  transition:
-    border-color var(--transition-fast),
-    color var(--transition-fast);
-}
-
-.venues-jump__link:hover,
-.venues-jump__link:focus-visible {
-  border-color: var(--color-accent);
-  color: var(--color-champagne);
-}
-
-.venues-jump__count {
-  font-family: var(--font-display);
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--color-accent);
 }
 
 /* A state section. The anchor offset keeps the heading clear of the top of
@@ -98,22 +60,274 @@
   color: var(--color-muted);
 }
 
+/* The leagues section's line under its heading. */
+.venues-state__intro {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--color-muted);
+  max-width: 880px;
+  margin: -8px 0 24px;
+}
+
+/* "What is a poker league?": a full-width band above the league cards, the
+ * heading on the left and its points side by side. */
+.venues-explainer {
+  display: grid;
+  grid-template-columns: minmax(180px, 1fr) repeat(3, minmax(0, 2fr));
+  gap: 32px;
+  padding: 28px 32px;
+  margin-bottom: 32px;
+  border: 1px solid var(--color-border);
+  border-top: 2px solid var(--color-accent);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-card);
+}
+
+.venues-explainer__heading {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.venues-explainer__text {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--color-muted);
+  margin: 0;
+}
+
+/* Tablets: heading across the top, points in a row below it. */
+@media (max-width: 1024px) {
+  .venues-explainer {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px 24px;
+  }
+  .venues-explainer__heading {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 680px) {
+  .venues-explainer {
+    grid-template-columns: 1fr;
+    padding: 24px 20px;
+  }
+}
+
 @media (max-width: 768px) {
   .venues-hero {
-    padding: 72px 0 40px;
+    padding-top: 72px;
   }
   .venues-state {
     padding: 32px 0 40px;
   }
 }
 
-/* The second row of chips: one per city page. */
-.venues-jump--cities {
-  margin-top: 12px;
+/* The rooms / leagues switch: an underlined tab bar along the foot of the
+ * hero, the selected tab marked by a gold rule. */
+.venues-tabs {
+  display: flex;
+  gap: 32px;
+  margin-top: 40px;
+  border-bottom: 1px solid var(--color-border);
 }
 
-.venues-jump--cities .venues-jump__link {
-  text-transform: none;
-  letter-spacing: 0;
+.venues-tabs__tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0;
+  margin-bottom: -1px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: var(--color-muted);
+  font: inherit;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    color var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.venues-tabs__tab:hover {
+  color: var(--color-text);
+}
+
+.venues-tabs__tab:focus-visible {
+  outline: 2px solid var(--color-champagne);
+  outline-offset: 4px;
+}
+
+.venues-tabs__tab[aria-selected='true'] {
+  color: var(--color-text);
+  border-bottom-color: var(--color-accent);
+}
+
+.venues-tabs__count {
+  min-width: 28px;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-raised);
+  color: var(--color-muted);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.venues-tabs__tab[aria-selected='true'] .venues-tabs__count {
+  background: var(--color-bg-selected);
+  color: var(--color-accent);
+}
+
+/* Browse: a labelled grid of state tiles, then a labelled list of city
+ * pages. The tiles jump down this page; the city links go to their own. */
+.venues-browse {
+  display: grid;
+  gap: 28px;
+  padding-top: 32px;
+  padding-bottom: 8px;
+}
+
+.venues-browse__label {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+
+.venues-states {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.venues-states__tile {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 14px 16px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-card);
+  transition:
+    border-color var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.venues-states__tile:hover,
+.venues-states__tile:focus-visible {
+  border-color: var(--color-accent);
+  background: var(--color-bg-selected);
+}
+
+.venues-states__code {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-text);
+}
+
+.venues-states__name {
+  margin-top: 6px;
+  font-size: 13px;
+  line-height: 1.35;
+  color: var(--color-muted);
+}
+
+.venues-states__count {
+  margin-top: auto;
+  padding-top: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-accent);
+}
+
+.venues-cities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 28px;
+}
+
+.venues-cities__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 40px;
+  font-size: 15px;
   font-weight: 500;
+  color: var(--color-text);
+  transition: color var(--transition-fast);
+}
+
+.venues-cities__icon {
+  color: var(--color-accent);
+  transition: transform var(--transition-fast);
+}
+
+.venues-cities__link:hover,
+.venues-cities__link:focus-visible {
+  color: var(--color-champagne);
+}
+
+.venues-cities__link:hover .venues-cities__icon {
+  transform: translate(2px, -2px);
+}
+
+@media (max-width: 1024px) {
+  .venues-states {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Phones: tiles keep the code and count; the full name stays in the link's
+ * text for screen readers and crawlers. Cities fall into two columns. */
+@media (max-width: 560px) {
+  .venues-tabs {
+    gap: 24px;
+  }
+  .venues-tabs__tab {
+    font-size: 19px;
+  }
+  .venues-states__tile {
+    padding: 12px;
+  }
+  .venues-states__code {
+    font-size: 22px;
+  }
+  .venues-states__name {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+  .venues-cities {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 16px;
+  }
+  /* Inline so a wrapped name keeps its arrow beside the last word. */
+  .venues-cities li {
+    padding: 9px 0;
+  }
+  .venues-cities__link {
+    display: inline;
+  }
+  .venues-cities__icon {
+    margin-left: 4px;
+    vertical-align: -2px;
+  }
 }

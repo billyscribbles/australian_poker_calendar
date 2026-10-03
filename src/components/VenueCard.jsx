@@ -16,7 +16,8 @@ function host(url) {
 
 /**
  * One venue: the marks of the operators that deal there, its name, street
- * address, operators and a link out. Lives in a `.venues-grid` list.
+ * address, operators and a link out. Lives in a `.venues-grid` list. A room
+ * with no series on the calendar shows its own mark and no operators line.
  *
  * @param {{ venue: Venue }} props
  */
@@ -25,9 +26,13 @@ export default function VenueCard({ venue }) {
   return (
     <li className="venue-card glow-card">
       <div className="venue-card__marks" aria-hidden="true">
-        {venue.operators.map((operator) => (
-          <TourLogo key={operator.code} code={operator.code} variant="icon" size={48} />
-        ))}
+        {venue.mark ? (
+          <TourLogo code="" mark={venue.mark} variant="icon" size={48} />
+        ) : (
+          venue.operators.map((operator) => (
+            <TourLogo key={operator.code} code={operator.code} variant="icon" size={48} />
+          ))
+        )}
       </div>
       <div className="venue-card__body">
         <h3 className="venue-card__name">{venue.name}</h3>
@@ -35,17 +40,19 @@ export default function VenueCard({ venue }) {
           <MapPin size={14} strokeWidth={1.75} aria-hidden="true" />
           {venue.address}
         </address>
-        <p className="venue-card__operators">
-          <span className="venue-card__operators-label">{operatorsLabel}</span>{' '}
-          {venue.operators.map((operator, i) => (
-            <span key={operator.code}>
-              {i > 0 && ', '}
-              <a href={operator.website} target="_blank" rel="noopener noreferrer">
-                {operator.name}
-              </a>
-            </span>
-          ))}
-        </p>
+        {venue.operators.length > 0 && (
+          <p className="venue-card__operators">
+            <span className="venue-card__operators-label">{operatorsLabel}</span>{' '}
+            {venue.operators.map((operator, i) => (
+              <span key={operator.code}>
+                {i > 0 && ', '}
+                <a href={operator.website} target="_blank" rel="noopener noreferrer">
+                  {operator.name}
+                </a>
+              </span>
+            ))}
+          </p>
+        )}
         <a
           className="venue-card__link"
           href={venue.website}
