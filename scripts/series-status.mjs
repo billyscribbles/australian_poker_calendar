@@ -169,7 +169,7 @@ export function buildStatus(today = melbourneToday()) {
 
     if (phase.key === 'done') {
       if (isHero) job('now', 'Finished but still the home hero. Rotate the hero to a live series.')
-      if (side) job('now', `Finished but still a home side card (${side.status}). Replace it.`)
+      if (side) job('now', 'Finished but still a home side card. Replace it.')
       if (tickerRows) job('now', `Finished but the ticker still lists ${tickerRows} of its events.`)
       if (upNext) job('now', 'Finished but still in Up Next on the calendar page.')
       if (onBanner) job('now', 'Finished but still the calendar promo banner. Replace the artwork.')
@@ -177,8 +177,6 @@ export function buildStatus(today = melbourneToday()) {
     if (phase.key === 'live') {
       if (!isHero && !side)
         job('soon', 'Live but not on the home events banner (hero or side card).')
-      if (side?.status === 'upcoming')
-        job('now', 'Live, but its home side card still says Upcoming.')
       if (upNext) job('soon', 'Already running; drop it from Up Next.')
     }
     if (phase.key !== 'done') {
@@ -237,8 +235,8 @@ export function buildStatus(today = melbourneToday()) {
       imageSrc,
       imageExists,
       isHero,
-      side: side ? { status: side.status, dates: side.dates } : null,
-      home: isHero ? 'Hero' : side ? `Side card (${side.status})` : '',
+      side: side ? { dates: side.dates } : null,
+      home: isHero ? 'Hero' : side ? 'Side card' : '',
       tickerRows,
       upNext: upNext ? { dates: upNext.dates, prize: upNext.prize || '' } : null,
       onBanner,

@@ -3,7 +3,7 @@ import { join } from 'node:path'
 // Contract: the home page sections render their fixtures and the two pieces of
 // behaviour the design specifies — a single-open FAQ accordion and a pulsing
 // LIVE badge — work as described in the handoff README.
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi, afterEach } from 'vitest'
 import { render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router-dom'
@@ -15,6 +15,8 @@ import PlayersOfTheYear from '../components/PlayersOfTheYear.jsx'
 import { faq } from '../content/faq.js'
 import { heroEvent, sideEvents, ticker, tickerSeries } from '../content/events.js'
 import { calendarPage } from '../content/calendarPage.js'
+import { festivals } from '../content/festivals.js'
+import { phaseOn, todayStamp } from '../lib/calendar.js'
 import { featuredNews } from '../content/featuredNews.js'
 import { stories } from '../content/stories.js'
 import { shorts } from '../content/shorts.js'
@@ -104,12 +106,8 @@ describe('EventsBanner — events and ticker from fixtures', () => {
     }
   })
 
-  it("shows status badges, each chip's guarantee or entries, and the live chip leaders", () => {
+  it("shows each chip's guarantee or entries, and the live chip leaders", () => {
     withRouter(<EventsBanner />)
-    const liveSideEvents = sideEvents.filter((event) => event.status === 'live')
-    expect(liveSideEvents.length).toBeGreaterThan(0)
-    const upcomingSideEvents = sideEvents.filter((event) => event.status === 'upcoming')
-    expect(screen.getAllByText('Upcoming')).toHaveLength(upcomingSideEvents.length)
     for (const event of ticker) {
       expect(screen.getAllByText(event.entries ?? event.guarantee).length).toBeGreaterThan(0)
     }
@@ -120,19 +118,55 @@ describe('EventsBanner — events and ticker from fixtures', () => {
         expect(screen.getByText(leader.stack)).toBeInTheDocument()
       }
     }
-    // The hero wears a Featured tag until its series is live, then the large
-    // LIVE badge. Each live side card has the large badge (with the pulsing
-    // dot), each live chip a small one.
-    expect(document.querySelectorAll('.live-event .badge--outline').length).toBe(
-      heroEvent.featured ? 1 : 0,
-    )
-    expect(document.querySelectorAll('.live-badge').length).toBe(
-      (heroEvent.featured ? 0 : 1) + liveSideEvents.length + liveChips.length,
-    )
-    expect(document.querySelectorAll('.side-event .live-badge--lg').length).toBe(
-      liveSideEvents.length,
-    )
-    expect(document.querySelector('.live-badge--lg .live-badge__dot')).not.toBeNull()
+    expect(document.querySelectorAll('.ticker-chip .live-badge--sm').length).toBe(liveChips.length)
+  })
+})
+
+describe('EventsBanner — status badges follow the date', () => {
+  // Only Date is faked so user-event's timers keep working.
+  const onDay = (year, month, day) =>
+    vi.useFakeTimers({ toFake: ['Date'], now: new Date(year, month - 1, day, 12) })
+  afterEach(() => {
+    vi.useRealTimers()
+  })
+
+  const byHref = new Map(festivals.map((festival) => [festival.href, festival]))
+  const phaseOf = (event) => {
+    const festival = byHref.get(event.href)
+    return phaseOn(festival.start, festival.end, todayStamp())
+  }
+  const cards = () => [...document.querySelectorAll('.live-event, .side-event')]
+  const badgeText = (card) => card.querySelector('.live-badge, .badge').textContent
+
+  it('marks every series running today LIVE, the rest Upcoming (hero: Featured)', () => {
+    // The day the hero and one side series were both running: 3 October 2026.
+    onDay(2026, 10, 3)
+    withRouter(<EventsBanner />)
+    const events = [heroEvent, ...sideEvents]
+    const live = events.filter((event) => phaseOf(event) === 'live')
+    expect(live.length).toBeGreaterThan(1)
+    cards().forEach((card, i) => {
+      const phase = phaseOf(events[i])
+      if (phase === 'live') {
+        expect(badgeText(card)).toBe('LIVE')
+        expect(card.querySelector('.live-badge--lg .live-badge__dot')).not.toBeNull()
+      } else {
+        expect(badgeText(card)).toBe(i === 0 ? 'Featured' : 'Upcoming')
+      }
+    })
+  })
+
+  it('shows nothing as live before any series starts, and Finished once they have all ended', () => {
+    onDay(2020, 1, 1)
+    const { unmount } = withRouter(<EventsBanner />)
+    expect(document.querySelector('.live-event .live-badge, .side-event .live-badge')).toBeNull()
+    expect(cards().map(badgeText)).toEqual(['Featured', 'Upcoming', 'Upcoming', 'Upcoming'])
+    unmount()
+
+    vi.setSystemTime(new Date(2030, 0, 1, 12))
+    withRouter(<EventsBanner />)
+    expect(document.querySelector('.live-event .live-badge, .side-event .live-badge')).toBeNull()
+    expect(cards().map(badgeText)).toEqual(['Finished', 'Finished', 'Finished', 'Finished'])
   })
 })
 
@@ -162,10 +196,13 @@ describe('home fixtures — shape each section renders', () => {
     }
   }
 
-  it('events: hero, three side events with a known status, ticker chips with a figure', () => {
+  it('events: hero, three side events on the calendar, ticker chips with a figure', () => {
     expect(heroEvent.name && heroEvent.dates && heroEvent.place && heroEvent.venue).toBeTruthy()
     expect(sideEvents).toHaveLength(3)
-    for (const event of sideEvents) expect(['live', 'upcoming']).toContain(event.status)
+    // The badges are read off the calendar row's dates, so each card must be
+    // a series festivals.js knows.
+    const hrefs = festivals.map((festival) => festival.href)
+    for (const event of [heroEvent, ...sideEvents]) expect(hrefs, event.name).toContain(event.href)
     const codes = calendarPage.tours.map((t) => t.code)
     for (const event of [heroEvent, ...sideEvents, ...ticker]) {
       expect(codes, event.name).toContain(event.tour)

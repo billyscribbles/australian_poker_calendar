@@ -1,9 +1,13 @@
-// Events banner: the live hero event, three side events and the tournament
+// Events banner: the hero event, three side events and the tournament
 // ticker. Series and dates come from the Australian Poker Schedule timeline
 // scrape (data/poker-series-timeline.json); the ticker rows are the featured
 // events on the APT Melbourne Champs II schedule poster
 // (data/melbourne-champs-ii-schedule.json). Live chip leaders need a results
 // feed and are left out until one exists.
+//
+// Nothing here says whether a series is live. Each card's `href` names its
+// row in festivals.js, and EventsBanner reads that row's dates against today:
+// LIVE while it runs, Upcoming (the hero: Featured) before, Finished after.
 
 /**
  * @typedef {object} HeroEvent
@@ -12,18 +16,16 @@
  * @property {string} place   city, country
  * @property {string} venue
  * @property {string} tour      tour code from calendarPage.tours; draws the circular badge
- * @property {string} href
+ * @property {string} href      the series' calendar link, /events/<slug>; must match its festivals.js row
  * @property {string} [imageSrc] key visual; placeholder when absent
- * @property {boolean} [featured] the series is featured, not yet live; draws the Featured tag in place of LIVE
  */
 
 /**
  * @typedef {object} SideEvent
- * @property {'live' | 'upcoming'} status
  * @property {string} tour
  * @property {string} name
  * @property {string} dates
- * @property {string} href
+ * @property {string} href      the series' calendar link; must match its festivals.js row
  * @property {string} [imageSrc]
  */
 
@@ -63,7 +65,6 @@
 export const heroEvent = {
   tour: 'APT',
   name: 'APT Melbourne Champs II',
-  featured: true,
   dates: 'Sep 30 – Oct 11',
   place: 'Melbourne, Australia',
   venue: 'Crown Melbourne, Metropol – Sky Bar 28',
@@ -75,7 +76,6 @@ export const heroEvent = {
 /** @type {SideEvent[]} */
 export const sideEvents = [
   {
-    status: 'live',
     tour: 'AURUM',
     name: 'Aurum Sydney Showdown',
     dates: 'Oct 1 – Oct 19',
@@ -86,7 +86,6 @@ export const sideEvents = [
     imageSrc: '/images/events/aurum-sydney-showdown.webp',
   },
   {
-    status: 'upcoming',
     tour: 'APLPT',
     name: 'APLPT Brisbane',
     dates: 'Oct 6 – Oct 11',
@@ -97,7 +96,6 @@ export const sideEvents = [
     imageSrc: '/images/events/aplpt-brisbane.webp',
   },
   {
-    status: 'upcoming',
     tour: 'CROWN',
     name: 'Victorian Poker Championship',
     dates: 'Oct 12 – Oct 27',
@@ -197,5 +195,11 @@ export const tickerControls = {
   next: 'Later events',
 }
 
-/** The tag on the hero tile while its series is featured rather than live. */
+/** The tag on the hero tile until its series is live. */
 export const featuredLabel = 'Featured'
+
+/** The tags on a side card while its series is not live. */
+export const phaseLabels = {
+  upcoming: 'Upcoming',
+  finished: 'Finished',
+}

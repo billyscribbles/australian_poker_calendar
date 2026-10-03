@@ -8,7 +8,11 @@ import {
   tickerSeries,
   tickerControls,
   featuredLabel,
+  phaseLabels,
 } from '../content/events.js'
+import { festivals } from '../content/festivals.js'
+import { phaseOn } from '../lib/calendar.js'
+import { useToday } from '../lib/useToday.js'
 import ImagePlaceholder from './ImagePlaceholder.jsx'
 import { Badge, LiveBadge } from './Badge.jsx'
 import TourLogo from './TourLogo.jsx'
@@ -19,8 +23,22 @@ import './EventsBanner.css'
 /** @typedef {import('../content/events.js').TickerEvent} TickerEvent */
 /** @typedef {import('../content/events.js').TickerSeries} TickerSeries */
 
+const festivalByHref = new Map(festivals.map((festival) => [festival.href, festival]))
+
+/**
+ * Whether the series behind a card is running today, read off its calendar
+ * row so the badges move with the date instead of being typed by hand.
+ * @returns {'upcoming' | 'live' | 'finished'}
+ */
+function useSeriesPhase(href) {
+  const today = useToday()
+  const festival = festivalByHref.get(href)
+  return festival ? phaseOn(festival.start, festival.end, today) : 'upcoming'
+}
+
 /** @param {{ event: HeroEvent }} props */
 function LiveEventCard({ event }) {
+  const phase = useSeriesPhase(event.href)
   return (
     <Link to={event.href} className="live-event">
       <div className="live-event__body">
@@ -54,12 +72,16 @@ function LiveEventCard({ event }) {
         height={252}
         priority
       />
-      {event.featured ? (
+      {phase === 'live' ? (
+        <LiveBadge className="live-event__badge" />
+      ) : phase === 'upcoming' ? (
         <Badge variant="outline" className="live-event__badge">
           {featuredLabel}
         </Badge>
       ) : (
-        <LiveBadge className="live-event__badge" />
+        <Badge variant="neutral" className="live-event__badge">
+          {phaseLabels.finished}
+        </Badge>
       )}
     </Link>
   )
@@ -67,6 +89,7 @@ function LiveEventCard({ event }) {
 
 /** @param {{ event: SideEvent }} props */
 function SideEventCard({ event }) {
+  const phase = useSeriesPhase(event.href)
   return (
     <Link to={event.href} className="side-event">
       <ImagePlaceholder
@@ -77,11 +100,11 @@ function SideEventCard({ event }) {
         width={400}
         height={300}
       />
-      {event.status === 'live' ? (
+      {phase === 'live' ? (
         <LiveBadge className="side-event__badge" />
       ) : (
         <Badge variant="neutral" className="side-event__badge">
-          Upcoming
+          {phaseLabels[phase]}
         </Badge>
       )}
       <div className="side-event__content">
@@ -245,7 +268,7 @@ function Ticker({ events }) {
 }
 
 /**
- * Events banner: live hero event, three side events, a "More" link, and
+ * Events banner: the hero event, three side events, a "More" link, and
  * beneath them a panel for one featured series: its header, then the
  * horizontally scrolling ticker of its events.
  */

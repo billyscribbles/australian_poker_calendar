@@ -1015,12 +1015,12 @@ function homeView() {
     .map((href) => d.series.find((s) => s.href === href))
     .filter(Boolean)
   return `
-    ${pageHead('Home page', 'What the events banner shows right now: the hero, two side cards and the ticker.')}
+    ${pageHead('Home page', "What the events banner shows right now: the hero, three side cards and the ticker. LIVE, Upcoming and Finished come from each series' dates.")}
     ${editNote('src/content/events.js')}
     <section class="section"><h2>Events banner</h2>
       <div class="art-grid">
         ${card('Hero', h.hero)}
-        ${h.sideEvents.map((s, i) => card(`Side card ${i + 1}`, s, pill('muted', s.status))).join('')}
+        ${h.sideEvents.map((s, i) => card(`Side card ${i + 1}`, s)).join('')}
       </div>
     </section>
     <section class="section"><h2>Ticker</h2>

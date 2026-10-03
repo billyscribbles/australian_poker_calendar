@@ -44,6 +44,17 @@ export function todayStamp(now = new Date()) {
   return Date.UTC(now.getFullYear(), now.getMonth(), now.getDate())
 }
 
+/**
+ * Where `today` falls against a series' inclusive ISO date range:
+ * 'upcoming' before it starts, 'live' while it runs, 'finished' after.
+ * @returns {'upcoming' | 'live' | 'finished'}
+ */
+export function phaseOn(start, end, today) {
+  if (today < toStamp(start)) return 'upcoming'
+  if (today > toStamp(end)) return 'finished'
+  return 'live'
+}
+
 /** First and last day of the month, inclusive. */
 export function monthBounds(year, month) {
   const start = Date.UTC(year, month - 1, 1)
