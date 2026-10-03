@@ -1,10 +1,7 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { ArrowUpRight } from 'lucide-react'
 import SEO from '../lib/seo.jsx'
 import { breadcrumbLd } from '../lib/structuredData.js'
-import { whereToPlay } from '../content/whereToPlay.js'
-import { cities, cityPage } from '../content/cities.js'
+import { whereToPlay, STATES } from '../content/whereToPlay.js'
 import VenueCard from '../components/VenueCard.jsx'
 import LeagueCard from '../components/LeagueCard.jsx'
 import MajorCard from '../components/MajorCard.jsx'
@@ -12,54 +9,71 @@ import './WhereToPlayPage.css'
 
 const PATH = '/where-to-play'
 
+/** Does a card or state belong to the picked states? None picked is every state. */
+const inStates = (picked, codes) => picked.length === 0 || codes.some((c) => picked.includes(c))
+
 /**
  * Where to play, in three tabs: all (the Majors on the calendar, then the
  * Local Circuit of rooms and leagues), poker rooms (one section per state, a
- * card per room or venue, and the way in to each city's own page) and the pub
- * leagues by state. All is the default. Every panel is in the static HTML; the
- * hidden ones carry `hidden`. `#rooms` or a state's section (`#NSW`) opens the
- * rooms tab and `#leagues` the leagues tab, read after hydration so the first
- * client render matches the prerendered document. Everything comes from content/whereToPlay.js and
- * content/cities.js; the operator marks and colours from calendarPage.tours
+ * card per room or venue) and the pub
+ * leagues by state. All is the default. Over the tabs, a state filter that
+ * takes any number of states and narrows every tab and its count; with none
+ * picked, as in the static HTML, every state shows. Every panel is in the
+ * static HTML; the hidden ones carry `hidden`. `#rooms` opens the rooms tab,
+ * a state's code (`#NSW`) the rooms tab filtered to it, and `#leagues` or
+ * `#leagues-NSW` the leagues tab the same way, read after hydration so the
+ * first client render matches the prerendered document. Everything comes from content/whereToPlay.js; the operator marks and colours from calendarPage.tours
  * and tourBrands.js through TourLogo.
  */
 export default function WhereToPlayPage() {
-  const {
-    seo,
-    eyebrow,
-    title,
-    intro,
-    jumpLabel,
-    stateNavHeading,
-    cityNavHeading,
-    countLabel,
-    states,
-    leagues,
-    all,
-    tabs,
-  } = whereToPlay
+  const { seo, eyebrow, title, intro, filter, countLabel, states, leagues, all, tabs } = whereToPlay
   const [tab, setTab] = useState('all')
+  const [picked, setPicked] = useState(/** @type {string[]} */ ([]))
 
   useEffect(() => {
-    // #leagues, or a state's section on it (#leagues-NSW), is the leagues tab;
-    // #rooms, or a state's section on it (#NSW), is the rooms tab.
+    // #leagues is the leagues tab and #leagues-NSW that tab filtered to NSW;
+    // #rooms is the rooms tab and #NSW that tab filtered to NSW.
     const fromHash = () => {
       const hash = window.location.hash.slice(1)
+      const code = hash.replace(`${leagues.id}-`, '')
+      const state = STATES.some((s) => s.code === code) ? [code] : null
       if (hash.startsWith(leagues.id)) setTab('leagues')
-      else if (hash === 'rooms' || states.some((state) => state.code === hash)) setTab('rooms')
+      else if (hash === 'rooms' || state) setTab('rooms')
       else setTab('all')
+      if (state) setPicked(state)
     }
     fromHash()
     window.addEventListener('hashchange', fromHash)
     return () => window.removeEventListener('hashchange', fromHash)
-  }, [leagues.id, states])
+  }, [leagues.id])
 
-  const roomCount = states.reduce((sum, state) => sum + state.venues.length, 0)
+  const majors = all.majors.list.filter((major) => inStates(picked, major.states))
+  const local = all.local.list.filter((item) =>
+    inStates(picked, item.kind === 'room' ? [item.state] : item.states),
+  )
+  const roomStates = states.filter((state) => inStates(picked, [state.code]))
+  const leagueStates = leagues.states.filter((state) => inStates(picked, [state.code]))
+  // A league in two picked states is one league, not two.
+  const leagueCount = leagues.list.filter((league) => inStates(picked, league.states)).length
+  const leagueVenueCount = leagueStates.reduce((sum, state) => sum + state.venues.length, 0)
+
   const tabList = [
-    { id: 'all', label: tabs.all, count: all.majors.list.length + all.local.list.length },
-    { id: 'rooms', label: tabs.rooms, count: roomCount },
-    { id: 'leagues', label: tabs.leagues, count: leagues.list.length },
+    { id: 'all', label: tabs.all, count: majors.length + local.length },
+    {
+      id: 'rooms',
+      label: tabs.rooms,
+      count: roomStates.reduce((sum, state) => sum + state.venues.length, 0),
+    },
+    { id: 'leagues', label: tabs.leagues, count: leagueCount + leagueVenueCount },
   ]
+
+  /** @param {string} code */
+  const toggle = (code) =>
+    setPicked((current) =>
+      current.includes(code) ? current.filter((c) => c !== code) : [...current, code],
+    )
+
+  const empty = <p className="venues-empty">{filter.empty}</p>
 
   /** @param {string} id */
   const choose = (id) => {
@@ -93,6 +107,43 @@ export default function WhereToPlayPage() {
           <span className="section-eyebrow">{eyebrow}</span>
           <h1 className="venues-hero__title">{title}</h1>
           <p className="venues-hero__sub">{intro}</p>
+          <div className="venues-filter" role="group" aria-labelledby="venues-filter-heading">
+            <div className="venues-filter__head">
+              <span id="venues-filter-heading" className="venues-filter__label">
+                {filter.heading}
+              </span>
+              <span className="venues-filter__status" aria-live="polite">
+                {picked.length > 0 && filter.selectedLabel(picked.length)}
+              </span>
+            </div>
+            <ul className="venues-states">
+              <li>
+                <button
+                  type="button"
+                  className="venues-states__tile venues-states__tile--all"
+                  aria-pressed={picked.length === 0}
+                  onClick={() => setPicked([])}
+                >
+                  <span className="venues-states__code">{filter.clear}</span>
+                </button>
+              </li>
+              {STATES.map((state) => (
+                <li key={state.code}>
+                  <button
+                    type="button"
+                    className="venues-states__tile"
+                    aria-pressed={picked.includes(state.code)}
+                    onClick={() => toggle(state.code)}
+                  >
+                    <span className="venues-states__code" aria-hidden="true">
+                      {state.code}
+                    </span>
+                    <span className="venues-states__name">{state.name}</span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
           <div className="venues-tabs" role="tablist" aria-label={tabs.label}>
             {tabList.map((t) => (
               <button
@@ -121,34 +172,43 @@ export default function WhereToPlayPage() {
         aria-labelledby="venues-tab-all"
         hidden={tab !== 'all'}
       >
-        {[all.majors, all.local].map((group, i) => (
-          <section
-            key={group.heading}
-            className="venues-state"
-            aria-labelledby={`venues-all-${i}-heading`}
-          >
-            <div className="container">
-              <div className="venues-state__head">
-                <h2 id={`venues-all-${i}-heading`} className="venues-state__heading">
-                  {group.heading}
-                </h2>
-                <span className="venues-state__count">{group.countLabel(group.list.length)}</span>
-              </div>
-              <p className="venues-state__intro">{group.intro}</p>
-              <ul className="venues-grid">
-                {group === all.majors
-                  ? all.majors.list.map((major) => <MajorCard key={major.code} major={major} />)
-                  : all.local.list.map((item) =>
-                      item.kind === 'room' ? (
-                        <VenueCard key={item.id} venue={item} />
-                      ) : (
-                        <LeagueCard key={item.id} league={item} />
-                      ),
-                    )}
-              </ul>
-            </div>
-          </section>
-        ))}
+        {majors.length + local.length === 0 && <div className="container">{empty}</div>}
+        {[
+          { ...all.majors, list: majors },
+          { ...all.local, list: local },
+        ].map(
+          (group, i) =>
+            group.list.length > 0 && (
+              <section
+                key={group.heading}
+                className="venues-state"
+                aria-labelledby={`venues-all-${i}-heading`}
+              >
+                <div className="container">
+                  <div className="venues-state__head">
+                    <h2 id={`venues-all-${i}-heading`} className="venues-state__heading">
+                      {group.heading}
+                    </h2>
+                    <span className="venues-state__count">
+                      {group.countLabel(group.list.length)}
+                    </span>
+                  </div>
+                  <p className="venues-state__intro">{group.intro}</p>
+                  <ul className="venues-grid">
+                    {i === 0
+                      ? group.list.map((major) => <MajorCard key={major.code} major={major} />)
+                      : group.list.map((item) =>
+                          item.kind === 'room' ? (
+                            <VenueCard key={item.id} venue={item} />
+                          ) : (
+                            <LeagueCard key={item.id} league={item} />
+                          ),
+                        )}
+                  </ul>
+                </div>
+              </section>
+            ),
+        )}
       </div>
 
       <div
@@ -157,49 +217,8 @@ export default function WhereToPlayPage() {
         aria-labelledby="venues-tab-rooms"
         hidden={tab !== 'rooms'}
       >
-        <div className="container venues-browse">
-          <div className="venues-browse__group">
-            <span className="venues-browse__label" aria-hidden="true">
-              {stateNavHeading}
-            </span>
-            <nav aria-label={jumpLabel}>
-              <ul className="venues-states">
-                {states.map((state) => (
-                  <li key={state.code}>
-                    <a className="venues-states__tile" href={`#${state.code}`}>
-                      <span className="venues-states__code" aria-hidden="true">
-                        {state.code}
-                      </span>
-                      <span className="venues-states__name">{state.name}</span>
-                      <span className="venues-states__count">
-                        {countLabel(state.venues.length)}
-                      </span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </div>
-          <div className="venues-browse__group">
-            <span className="venues-browse__label" aria-hidden="true">
-              {cityNavHeading}
-            </span>
-            <nav aria-label={cityPage.otherHeading}>
-              <ul className="venues-cities">
-                {cities.map((city) => (
-                  <li key={city.slug}>
-                    <Link className="venues-cities__link" to={city.path}>
-                      {city.heading}
-                      <ArrowUpRight className="venues-cities__icon" size={16} aria-hidden="true" />
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </div>
-        </div>
-
-        {states.map((state) => (
+        {roomStates.length === 0 && <div className="container">{empty}</div>}
+        {roomStates.map((state) => (
           <section
             key={state.code}
             id={state.code}
@@ -247,33 +266,10 @@ export default function WhereToPlayPage() {
               ))}
             </div>
           </div>
-          <div className="container venues-browse">
-            <div className="venues-browse__group">
-              <span className="venues-browse__label" aria-hidden="true">
-                {stateNavHeading}
-              </span>
-              <nav aria-label={leagues.jumpLabel}>
-                <ul className="venues-states">
-                  {leagues.states.map((state) => (
-                    <li key={state.code}>
-                      <a className="venues-states__tile" href={`#leagues-${state.code}`}>
-                        <span className="venues-states__code" aria-hidden="true">
-                          {state.code}
-                        </span>
-                        <span className="venues-states__name">{state.name}</span>
-                        <span className="venues-states__count">
-                          {leagues.stateCountLabel(state)}
-                        </span>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
-            </div>
-          </div>
         </section>
 
-        {leagues.states.map((state) => (
+        {leagueStates.length === 0 && <div className="container">{empty}</div>}
+        {leagueStates.map((state) => (
           <section
             key={state.code}
             id={`leagues-${state.code}`}

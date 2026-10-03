@@ -111,12 +111,7 @@ describe('WhereToPlayPage', () => {
   it('renders a section per state with every venue, its address and links', () => {
     renderTab(whereToPlay.tabs.rooms)
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(whereToPlay.title)
-    const jump = screen.getByRole('navigation', { name: whereToPlay.jumpLabel })
     for (const state of whereToPlay.states) {
-      expect(within(jump).getByRole('link', { name: new RegExp(state.name) })).toHaveAttribute(
-        'href',
-        `#${state.code}`,
-      )
       const section = screen.getByRole('region', { name: state.name })
       const cards = within(section).getAllByRole('listitem')
       expect(cards).toHaveLength(state.venues.length)
@@ -188,14 +183,21 @@ describe('WhereToPlayPage', () => {
     expect(document.getElementById('venues-panel-all')).toHaveAttribute('hidden')
   })
 
-  it("opens the rooms tab on a state's link", () => {
-    window.history.replaceState(null, '', `/where-to-play#${whereToPlay.states[0].code}`)
+  it("opens the rooms tab filtered to a state on that state's hash", () => {
+    const [first, second] = whereToPlay.states
+    window.history.replaceState(null, '', `/where-to-play#${first.code}`)
     try {
       renderPage()
       expect(screen.getByRole('tab', { name: new RegExp(whereToPlay.tabs.rooms) })).toHaveAttribute(
         'aria-selected',
         'true',
       )
+      expect(screen.getByRole('button', { name: first.name })).toHaveAttribute(
+        'aria-pressed',
+        'true',
+      )
+      expect(screen.getByRole('region', { name: first.name })).toBeTruthy()
+      expect(screen.queryByRole('region', { name: second.name })).toBeNull()
     } finally {
       window.history.replaceState(null, '', '/')
     }
@@ -247,17 +249,58 @@ describe('WhereToPlayPage', () => {
 
     renderPage()
     fireEvent.click(screen.getByRole('tab', { name: new RegExp(whereToPlay.tabs.leagues) }))
-    const jump = screen.getByRole('navigation', { name: whereToPlay.leagues.jumpLabel })
     for (const state of states) {
       const section = screen.getByRole('region', { name: whereToPlay.leagues.stateHeading(state) })
       expect(section).toHaveAttribute('id', `leagues-${state.code}`)
       for (const league of state.leagues) {
         expect(within(section).getByRole('heading', { level: 3, name: league.name })).toBeTruthy()
       }
-      expect(within(jump).getByRole('link', { name: new RegExp(state.name) })).toHaveAttribute(
-        'href',
-        `#leagues-${state.code}`,
-      )
+    }
+  })
+
+  it('filters every tab by any number of states, above the tabs', () => {
+    renderPage()
+    const { filter } = whereToPlay
+    const group = screen.getByRole('group', { name: filter.heading })
+    const tablist = screen.getByRole('tablist', { name: whereToPlay.tabs.label })
+    // The filter sits above the tabs it narrows.
+    expect(group.compareDocumentPosition(tablist) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
+    const allStates = within(group).getByRole('button', { name: filter.clear })
+    expect(allStates).toHaveAttribute('aria-pressed', 'true')
+
+    const [a, b, c] = whereToPlay.states
+    fireEvent.click(within(group).getByRole('button', { name: a.name }))
+    fireEvent.click(within(group).getByRole('button', { name: b.name }))
+    expect(allStates).toHaveAttribute('aria-pressed', 'false')
+
+    const rooms = screen.getByRole('tab', { name: new RegExp(whereToPlay.tabs.rooms) })
+    expect(rooms).toHaveTextContent(String(a.venues.length + b.venues.length))
+    fireEvent.click(rooms)
+    expect(screen.getByRole('region', { name: a.name })).toBeTruthy()
+    expect(screen.getByRole('region', { name: b.name })).toBeTruthy()
+    expect(screen.queryByRole('region', { name: c.name })).toBeNull()
+
+    // Pressing a state again lets it go; "All states" clears the rest.
+    fireEvent.click(within(group).getByRole('button', { name: b.name }))
+    expect(screen.queryByRole('region', { name: b.name })).toBeNull()
+    fireEvent.click(allStates)
+    for (const state of whereToPlay.states)
+      expect(screen.getByRole('region', { name: state.name })).toBeTruthy()
+  })
+
+  it('narrows the all tab to the Majors and Local Circuit in the picked states', () => {
+    renderPage()
+    const code = 'TAS'
+    fireEvent.click(screen.getByRole('button', { name: 'Tasmania' }))
+    const { majors, local } = whereToPlay.all
+    for (const major of majors.list) {
+      const shown = screen.queryByRole('link', { name: `${majors.linkLabel}: ${major.name}` })
+      expect(Boolean(shown), major.name).toBe(major.states.includes(code))
+    }
+    for (const item of local.list) {
+      const codes = item.kind === 'room' ? [item.state] : item.states
+      const shown = screen.queryAllByRole('heading', { level: 3, name: item.name }).length > 0
+      expect(shown, item.name).toBe(codes.includes(code))
     }
   })
 
@@ -274,7 +317,7 @@ describe('Where to Play all tab', () => {
     for (const major of majors) expect(major.count, major.code).toBeGreaterThan(0)
   })
 
-  it('puts every room and non-calendar league in the Local Circuit, once', () => {
+  it('puts every room, series venue and non-calendar league in the Local Circuit, once', () => {
     const names = whereToPlay.all.local.list.map((item) => item.name)
     expect(new Set(names).size).toBe(names.length)
     expect(names).toEqual([...names].sort((a, b) => a.localeCompare(b, 'en-AU')))
@@ -282,6 +325,12 @@ describe('Where to Play all tab', () => {
       expect(names.includes(league.name), league.name).toBe(!league.code)
     }
     expect(names).toContain('Crown Perth')
+    // Every card on the rooms tab and every venue on the leagues tab.
+    const tabs = [
+      ...whereToPlay.states.flatMap((state) => state.venues),
+      ...whereToPlay.leagues.states.flatMap((state) => state.venues),
+    ]
+    for (const venue of tabs) expect(names, venue.name).toContain(venue.name)
   })
 })
 

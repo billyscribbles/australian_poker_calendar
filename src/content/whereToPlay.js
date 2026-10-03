@@ -902,7 +902,7 @@ export const whereToPlay = {
   eyebrow: 'Where to play',
   title: 'Poker rooms and venues across Australia',
   intro:
-    'The Majors that run the series on our calendar, and the Local Circuit of casino rooms, card clubs and pub leagues. Switch to poker rooms or poker leagues to browse by state.',
+    'The Majors that run the series on our calendar, and the Local Circuit of casino rooms, card clubs and pub leagues. Pick one or more states to narrow every list.',
   /** The switch between the three lists; all shows first. */
   tabs: {
     label: 'Show everyone, poker rooms or poker leagues',
@@ -910,11 +910,15 @@ export const whereToPlay = {
     rooms: 'Poker rooms',
     leagues: 'Poker leagues',
   },
-  /** Label for the state jump links above the list. */
-  jumpLabel: 'Jump to a state',
-  /** Visible labels over the state tiles and the city links. */
-  stateNavHeading: 'Browse by state',
-  cityNavHeading: 'Poker by city',
+  /** The state filter over the tabs: any number of states, none picked shows every state. */
+  filter: {
+    heading: 'Filter by state',
+    label: 'Filter the lists by state',
+    clear: 'All states',
+    /** @param {number} count */
+    selectedLabel: (count) => `${count} ${count === 1 ? 'state' : 'states'} selected`,
+    empty: 'Nothing listed here in the states you picked yet. Try another tab or add a state.',
+  },
   operatorsLabel: 'Series by',
   visitLabel: 'Visit website',
   /** @param {number} count */
@@ -956,7 +960,6 @@ export const whereToPlay = {
         .join(', '),
     /** @type {LeagueCard[]} */
     list: leagueRows.map(leagueCard).sort((a, b) => a.name.localeCompare(b.name, 'en-AU')),
-    jumpLabel: 'Jump to a state’s leagues',
     /** A state section's heading; also its region's accessible name. */
     stateHeading: (state) => `Poker leagues in ${state.name}`,
   },
@@ -993,16 +996,25 @@ whereToPlay.all = {
   local: {
     heading: 'Local Circuit',
     intro:
-      'Casino poker rooms, card clubs and pub leagues running regular games, from free league nights to daily tournaments and cash.',
+      'Casino poker rooms, card clubs, pub leagues and the pubs, clubs and hotels that host series, from free league nights to daily tournaments and cash.',
     /** @param {number} count */
-    countLabel: (count) => `${count} rooms and leagues`,
-    /** Rooms and leagues in one list, by name; `kind` picks the card. */
+    countLabel: (count) => `${count} rooms, leagues and venues`,
+    /**
+     * Everything on the rooms and leagues tabs that is not a Major, by name:
+     * every room, every pub, club and hotel that hosts a series, and every
+     * league not on the calendar. `kind` picks the card.
+     */
     list: [
-      ...rooms.map((room) => ({ kind: 'room', ...roomCard(room) })),
-      ...whereToPlay.leagues.list
-        .filter((league) => !league.code)
-        .map((league) => ({ kind: 'league', ...league })),
-    ].sort((a, b) => a.name.localeCompare(b.name, 'en-AU')),
+      ...whereToPlay.states.flatMap((state) => state.venues),
+      ...venues.filter((venue) => !venue.room),
+    ]
+      .map((venue) => ({ kind: 'room', ...venue }))
+      .concat(
+        whereToPlay.leagues.list
+          .filter((league) => !league.code)
+          .map((league) => ({ kind: 'league', ...league })),
+      )
+      .sort((a, b) => a.name.localeCompare(b.name, 'en-AU')),
   },
 }
 
