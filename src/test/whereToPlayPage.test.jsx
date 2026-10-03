@@ -347,12 +347,18 @@ describe('Where to Play rooms tab', () => {
   it('lists only casinos and dedicated poker rooms; pubs, clubs and hotels go with the leagues', () => {
     const rooms = whereToPlay.states.flatMap((state) => state.venues.map((venue) => venue.name))
     const others = whereToPlay.leagues.states.flatMap((state) => state.venues.map((v) => v.name))
-    for (const name of ['Crown Melbourne', 'The Star Sydney', 'Club Marconi', 'PlayLive Melbourne'])
+    for (const name of [
+      'Crown Melbourne',
+      'The Star Sydney',
+      'Club Marconi',
+      'PlayLive Melbourne',
+      'The Kingdom Poker Room, Blackbutt Hotel',
+    ])
       expect(rooms).toContain(name)
     for (const name of [
       'Highways Springvale',
       'Bexley RSL',
-      'Blackbutt Hotel',
+      'Canterbury Hurlstone Park RSL',
       'Churchills Sports Bar',
     ]) {
       expect(rooms).not.toContain(name)

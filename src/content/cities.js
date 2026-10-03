@@ -86,7 +86,8 @@ export const CITY_ROWS = [
     state: 'NSW',
     stateName: 'New South Wales',
     places: ['Newcastle'],
-    blurb: 'Newcastle’s series are Kings Poker’s stops at the Blackbutt Hotel in New Lambton.',
+    blurb:
+      'Newcastle’s series are dealt at The Kingdom, Kings Poker’s 17-table poker room inside the Blackbutt Hotel in New Lambton.',
   },
   {
     slug: 'townsville',

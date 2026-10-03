@@ -93,7 +93,7 @@ describe('series status', () => {
       expect.arrayContaining(['Kings Poker Sydney', 'Kings Poker Newcastle']),
     )
     expect(kings.contact.emails).toContain('kingspokernewcastle@gmail.com')
-    expect(kings.venues.map((v) => v.name)).toContain('Blackbutt Hotel')
+    expect(kings.venues.map((v) => v.name)).toContain('The Kingdom Poker Room, Blackbutt Hotel')
     expect(kings.venues[0].address).toMatch(/NSW \d{4}$/)
     expect(kings.cities).toEqual(expect.arrayContaining(['Sydney', 'Newcastle']))
 

@@ -60,14 +60,19 @@ const rows = [
     postcode: '2207',
     tours: ['NPL'],
   },
+  // Kings Poker Newcastle's own room, The Kingdom: 17 tables and a streamed
+  // feature table inside the Blackbutt Hotel. Its site is kingspoker.au, not
+  // the Sydney operator's kingspoker.com.au that the KINGS tour links to.
   {
-    name: 'Blackbutt Hotel',
+    name: 'The Kingdom Poker Room, Blackbutt Hotel',
     street: '80 Orchardtown Road',
     suburb: 'New Lambton',
     city: 'newcastle',
     state: 'NSW',
     postcode: '2305',
     tours: ['KINGS'],
+    room: true,
+    website: 'https://kingspoker.au/',
   },
   {
     name: 'Canterbury Hurlstone Park RSL',
@@ -136,8 +141,9 @@ const rows = [
     postcode: '2640',
     tours: ['APLPT'],
   },
+  // Kings Poker's Sydney room, the Kings Room, inside St George Leagues.
   {
-    name: 'St George Leagues Club',
+    name: 'Kings Room, St George Leagues Club',
     street: '124 Princes Highway',
     suburb: 'Kogarah',
     city: 'sydney',
@@ -145,6 +151,7 @@ const rows = [
     postcode: '2217',
     tours: ['KINGS'],
     room: true,
+    website: 'https://kingsroom.com.au/',
   },
   {
     name: 'St Johns Park Bowling Club',
@@ -709,6 +716,21 @@ const leagueRows = [
     mark: {
       iconSrc: '/images/rooms/big-boyz-poker-icon.webp',
       primary: '#E0A800',
+      iconBg: '#0B0B0B',
+    },
+  },
+  // From riverrats.au, its upcoming games and Where to Play banners (2026-10-04).
+  {
+    name: 'River Rats Poker League',
+    states: ['NSW'],
+    about:
+      'Free-to-join pub poker around the Manning Valley and Great Lakes, Monday to Thursday, at the Hallidays Point Tavern, The Recky at Pacific Palms, the Nabiac Hotel and the Bellevue Hotel in Tuncurry.',
+    website: 'https://www.riverrats.au/',
+    // The silver RR Poker monogram from its site header, with the red heart
+    // as the accent, on black.
+    mark: {
+      iconSrc: '/images/rooms/river-rats-poker-league-icon.webp',
+      primary: '#A31919',
       iconBg: '#0B0B0B',
     },
   },
