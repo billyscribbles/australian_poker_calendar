@@ -243,4 +243,98 @@ describe('admin handler', () => {
     expect((await fetch(`${open.base}/admin/login`)).status).toBe(404)
     expect(await (await fetch(`${open.base}/admin/`)).text()).not.toContain('name="password"')
   })
+
+  describe('publishing API', () => {
+    const PNG = Buffer.concat([
+      Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]),
+      Buffer.alloc(40, 1),
+    ])
+    const json = (method, path, body) =>
+      fetch(`${open.base}/admin/${path}`, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: body === undefined ? undefined : JSON.stringify(body),
+      })
+
+    it('is behind the sign-in like the rest of the API', async () => {
+      expect((await fetch(`${locked.base}/admin/api/stories`)).status).toBe(401)
+      expect(
+        (await fetch(`${locked.base}/admin/api/media?kind=image`, { method: 'PUT', body: PNG }))
+          .status,
+      ).toBe(401)
+    })
+
+    it('creates, edits, publishes, unpublishes and deletes a story', async () => {
+      const created = await json('POST', 'api/stories', { title: 'First story' })
+      expect(created.status).toBe(201)
+      const story = await created.json()
+      expect(story).toMatchObject({ slug: 'first-story', status: 'draft' })
+
+      const upload = await fetch(`${open.base}/admin/api/media?kind=image`, {
+        method: 'PUT',
+        body: PNG,
+      })
+      expect(upload.status).toBe(201)
+      const { url } = await upload.json()
+
+      const refused = await json('POST', `api/stories/${story.id}/publish`)
+      expect(refused.status).toBe(422)
+      expect((await refused.json()).missing).toEqual(['heroImage'])
+
+      const edited = await json('PUT', `api/stories/${story.id}`, {
+        heroImage: url,
+        body: '<p>Hello</p><script>x</script>',
+      })
+      expect(edited.status).toBe(200)
+      expect((await edited.json()).body).toBe('<p>Hello</p>')
+
+      const published = await json('POST', `api/stories/${story.id}/publish`)
+      expect(published.status).toBe(200)
+      expect((await published.json()).status).toBe('published')
+      expect((await (await fetch(`${open.base}/admin/api/stories`)).json()).items[0].id).toBe(
+        story.id,
+      )
+      expect((await (await fetch(`${open.base}/admin/api/stories/${story.id}`)).json()).id).toBe(
+        story.id,
+      )
+
+      const status = await (await fetch(`${open.base}/admin/api/status`)).json()
+      expect(status.publishing.stories).toEqual({ total: 1, published: 1 })
+
+      expect((await json('POST', `api/stories/${story.id}/unpublish`)).status).toBe(200)
+      expect((await json('DELETE', `api/stories/${story.id}`)).status).toBe(204)
+      expect((await json('DELETE', `api/stories/${story.id}`)).status).toBe(404)
+      expect((await json('GET', `api/stories/${story.id}`)).status).toBe(404)
+      expect((await json('POST', `api/stories/nope/publish`)).status).toBe(404)
+    })
+
+    it('does the same for shorts and refuses bad uploads and bodies', async () => {
+      const short = await (await json('POST', 'api/shorts', { title: 'Clip', duration: 20 })).json()
+      expect(short.slug).toBe('clip')
+      expect((await json('POST', `api/shorts/${short.id}/publish`)).status).toBe(422)
+      expect((await json('PATCH', `api/shorts/${short.id}`)).status).toBe(405)
+      expect((await json('DELETE', `api/shorts/${short.id}`)).status).toBe(204)
+
+      expect(
+        (await fetch(`${open.base}/admin/api/media?kind=image`, { method: 'PUT', body: 'text' }))
+          .status,
+      ).toBe(415)
+      expect(
+        (await fetch(`${open.base}/admin/api/media?kind=zip`, { method: 'PUT', body: PNG })).status,
+      ).toBe(400)
+      expect((await fetch(`${open.base}/admin/api/media`, { method: 'GET' })).status).toBe(405)
+
+      const notJson = await fetch(`${open.base}/admin/api/stories`, {
+        method: 'POST',
+        body: '{nope',
+      })
+      expect(notJson.status).toBe(400)
+      const huge = await fetch(`${open.base}/admin/api/stories`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title: 'x'.repeat(3 * 1024 * 1024) }),
+      })
+      expect(huge.status).toBe(413)
+    })
+  })
 })

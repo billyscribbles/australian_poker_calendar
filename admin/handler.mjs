@@ -12,6 +12,18 @@
 //   api/enquiries/<id>    POST {handled: true|false} to tick one off
 //   api/traffic?days=30   the daily page-view tally
 //
+// and the Publish section's endpoints (server/content.mjs, server/media.mjs):
+//
+//   GET    api/stories                 { items } newest first, every status
+//   POST   api/stories   {json}        201 the new draft
+//   GET    api/stories/<id>            the record | 404
+//   PUT    api/stories/<id> {json}     update fields (body sanitised) | 404; 2 MB cap → 413
+//   DELETE api/stories/<id>            204 | 404
+//   POST   api/stories/<id>/publish    the record | 422 {missing:[...]} | 404
+//   POST   api/stories/<id>/unpublish  the record | 404
+//                                      the same six under api/shorts
+//   PUT    api/media?kind=image|video  raw body → 201 { url, bytes, type } | 400 | 413 | 415
+//
 // Everything else falls through to the host server, which is what serves the
 // images the page shows.
 //
@@ -29,6 +41,7 @@ import { createHmac, timingSafeEqual } from 'node:crypto'
 import { createReadStream, existsSync, statSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { saveUpload } from '../server/media.mjs'
 
 const ADMIN = dirname(fileURLToPath(import.meta.url))
 const ROOT = join(ADMIN, '..')
@@ -45,6 +58,7 @@ const LOOPBACK = /^(::1|127\.\d+\.\d+\.\d+|::ffff:127\.\d+\.\d+\.\d+)$/
 const COOKIE = 'apc_admin'
 const SESSION_SECONDS = 30 * 24 * 60 * 60
 const MAX_FORM_BYTES = 4096
+const MAX_JSON_BYTES = 2 * 1024 * 1024
 
 function status(today) {
   const args = [STATUS_SCRIPT, '--json']
@@ -78,23 +92,50 @@ function redirect(res, location) {
   res.end()
 }
 
-function readForm(req) {
+function readRaw(req, limit) {
   return new Promise((resolve, reject) => {
     const chunks = []
     let size = 0
+    let failed = false
     req.on('data', (chunk) => {
+      if (failed) return
       size += chunk.length
-      if (size > MAX_FORM_BYTES) {
-        reject(new Error('too large'))
-        req.destroy()
+      if (size > limit) {
+        // Drain the rest rather than destroy the socket, or the 413 never
+        // reaches the client.
+        failed = true
+        chunks.length = 0
+        reject(Object.assign(new Error('too large'), { status: 413 }))
         return
       }
       chunks.push(chunk)
     })
-    req.on('end', () => resolve(new URLSearchParams(Buffer.concat(chunks).toString('utf8'))))
+    req.on('end', () => {
+      if (!failed) resolve(Buffer.concat(chunks))
+    })
     req.on('error', reject)
   })
 }
+
+function readForm(req) {
+  return readRaw(req, MAX_FORM_BYTES).then((raw) => new URLSearchParams(raw.toString('utf8')))
+}
+
+/** A JSON object body, or a rejection carrying the status to answer with. */
+async function readJson(req) {
+  const raw = await readRaw(req, MAX_JSON_BYTES)
+  try {
+    const value = JSON.parse(raw.toString('utf8') || '{}')
+    if (!value || typeof value !== 'object' || Array.isArray(value))
+      throw new Error('not an object')
+    return value
+  } catch {
+    throw Object.assign(new Error('bad json'), { status: 400 })
+  }
+}
+
+const formError = (res) => (error) =>
+  send(res, error.status || 500, error.status === 413 ? 'Form too large' : 'Bad request')
 
 function secure(req) {
   return Boolean(req.socket?.encrypted) || req.headers['x-forwarded-proto'] === 'https'
@@ -202,20 +243,17 @@ export function createAdminHandler({ prefix = '/admin', site = '', password, sto
       send(res, 405, 'Method Not Allowed')
       return
     }
-    readForm(req).then(
-      (form) => {
-        if (passwordMatches(form.get('password') || '')) {
-          res.setHeader(
-            'Set-Cookie',
-            `${COOKIE}=${mintCookie()}; ${cookieAttributes(req, prefix, SESSION_SECONDS)}`,
-          )
-          redirect(res, `${prefix}/`)
-        } else {
-          send(res, 401, loginPage('That password is not right.'), 'text/html; charset=utf-8')
-        }
-      },
-      () => send(res, 413, 'Form too large'),
-    )
+    readForm(req).then((form) => {
+      if (passwordMatches(form.get('password') || '')) {
+        res.setHeader(
+          'Set-Cookie',
+          `${COOKIE}=${mintCookie()}; ${cookieAttributes(req, prefix, SESSION_SECONDS)}`,
+        )
+        redirect(res, `${prefix}/`)
+      } else {
+        send(res, 401, loginPage('That password is not right.'), 'text/html; charset=utf-8')
+      }
+    }, formError(res))
   }
 
   function logout(req, res) {
@@ -254,6 +292,112 @@ export function createAdminHandler({ prefix = '/admin', site = '', password, sto
     return true
   }
 
+  // ------------------------------------------------------------ publishing
+
+  const COLLECTION = /^api\/(stories|shorts)(?:\/([a-z0-9]+)(?:\/(publish|unpublish))?)?$/
+
+  function collectionApi(name) {
+    const c = store.content
+    return name === 'stories'
+      ? {
+          list: c.listStories,
+          get: c.getStory,
+          add: c.addStory,
+          update: c.updateStory,
+          publish: c.publishStory,
+          unpublish: c.unpublishStory,
+          remove: c.deleteStory,
+        }
+      : {
+          list: c.listShorts,
+          get: c.getShort,
+          add: c.addShort,
+          update: c.updateShort,
+          publish: c.publishShort,
+          unpublish: c.unpublishShort,
+          remove: c.deleteShort,
+        }
+  }
+
+  const onBodyError = (res) => (error) =>
+    json(res, error.status || 500, { error: error.status === 413 ? 'too-large' : 'bad-body' })
+
+  /** The stories, shorts and media endpoints. True when answered. */
+  function publishing(req, res, rest, url) {
+    if (rest === 'api/media') {
+      if (req.method !== 'PUT') {
+        send(res, 405, 'Method Not Allowed')
+        return true
+      }
+      if (!store?.content) {
+        json(res, 503, { error: 'no-store' })
+        return true
+      }
+      saveUpload(req, { dir: store.content.mediaDir, kind: url.searchParams.get('kind') }).then(
+        (saved) => json(res, 201, { url: saved.url, bytes: saved.bytes, type: saved.type }),
+        (error) => json(res, error.status || 500, { error: error.code || 'upload-failed' }),
+      )
+      return true
+    }
+    const match = COLLECTION.exec(rest)
+    if (!match) return false
+    if (!store?.content) {
+      json(res, 503, { error: 'no-store' })
+      return true
+    }
+    const [, name, id, action] = match
+    const api = collectionApi(name)
+
+    if (action) {
+      if (req.method !== 'POST') {
+        send(res, 405, 'Method Not Allowed')
+        return true
+      }
+      const result = api[action](id)
+      if (!result) json(res, 404, { error: 'not-found' })
+      else if (result.missing) json(res, 422, { error: 'missing', missing: result.missing })
+      else json(res, 200, result.record ?? result)
+      return true
+    }
+    if (!id) {
+      if (req.method === 'GET' || req.method === 'HEAD') json(res, 200, { items: api.list() })
+      else if (req.method === 'POST') {
+        readJson(req).then((fields) => json(res, 201, api.add(fields)), onBodyError(res))
+      } else send(res, 405, 'Method Not Allowed')
+      return true
+    }
+    if (req.method === 'GET' || req.method === 'HEAD') {
+      const record = api.get(id)
+      if (record) json(res, 200, record)
+      else json(res, 404, { error: 'not-found' })
+    } else if (req.method === 'PUT') {
+      readJson(req).then((fields) => {
+        const record = api.update(id, fields)
+        if (record) json(res, 200, record)
+        else json(res, 404, { error: 'not-found' })
+      }, onBodyError(res))
+    } else if (req.method === 'DELETE') {
+      if (api.remove(id)) {
+        res.writeHead(204, { 'Cache-Control': 'no-store' })
+        res.end()
+      } else json(res, 404, { error: 'not-found' })
+    } else send(res, 405, 'Method Not Allowed')
+    return true
+  }
+
+  /** Counts for the Overview and the nav badges. */
+  function publishingStatus() {
+    const c = store?.content
+    const count = (list) => ({
+      total: list.length,
+      published: list.filter((r) => r.status === 'published').length,
+    })
+    return {
+      stories: count(c ? c.listStories() : []),
+      shorts: count(c ? c.listShorts() : []),
+    }
+  }
+
   return function handleAdmin(req, res) {
     const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`)
     const pathname = url.pathname
@@ -267,6 +411,7 @@ export function createAdminHandler({ prefix = '/admin', site = '', password, sto
     const rest = pathname.slice(prefix.length + 1)
 
     if (gate(req, res, rest)) return true
+    if (publishing(req, res, rest, url)) return true
 
     const tick = rest.match(/^api\/enquiries\/([a-z0-9]+)$/)
     if (tick) {
@@ -274,14 +419,11 @@ export function createAdminHandler({ prefix = '/admin', site = '', password, sto
         send(res, 405, 'Method Not Allowed')
         return true
       }
-      readForm(req).then(
-        (form) => {
-          const record = store?.updateEnquiry(tick[1], { handled: form.get('handled') === 'true' })
-          if (record) json(res, 200, record)
-          else send(res, 404, 'No such enquiry')
-        },
-        () => send(res, 413, 'Form too large'),
-      )
+      readForm(req).then((form) => {
+        const record = store?.updateEnquiry(tick[1], { handled: form.get('handled') === 'true' })
+        if (record) json(res, 200, record)
+        else send(res, 404, 'No such enquiry')
+      }, formError(res))
       return true
     }
 
@@ -313,7 +455,10 @@ export function createAdminHandler({ prefix = '/admin', site = '', password, sto
             200,
             // The script does not know the site URL or whether a password is
             // set; the page reads both from here (auth shows the Sign out button).
-            json.replace(/^\{/, `{"site":${JSON.stringify(site)},"auth":${Boolean(secret)},`),
+            json.replace(
+              /^\{/,
+              `{"site":${JSON.stringify(site)},"auth":${Boolean(secret)},"publishing":${JSON.stringify(publishingStatus())},`,
+            ),
             'application/json; charset=utf-8',
           ),
         (error) => send(res, 500, `series-status failed:\n${error.message}`),
