@@ -69,8 +69,9 @@ export const heroEvent = {
   place: 'Melbourne, Australia',
   venue: 'Crown Melbourne, Metropol – Sky Bar 28',
   href: '/events/apt-melbourne-champs-ii',
-  // APT's own promo shot (800×1000 webp, from the 1122×1402 original).
-  imageSrc: '/images/events/apt-melbourne-champs-ii.webp',
+  // APT's own promo shot: the 500×625 card from scripts/gen-event-cards.py,
+  // cut from the series page's 800×1000 poster (itself from 1122×1402).
+  imageSrc: '/images/events/apt-melbourne-champs-ii-card.webp',
 }
 
 /** @type {SideEvent[]} */
@@ -80,10 +81,11 @@ export const sideEvents = [
     name: 'Aurum Sydney Showdown',
     dates: 'Oct 1 – Oct 19',
     href: '/events/aurum-sydney-showdown',
-    // Aurum's portrait "$1.5 Million in guarantees" key visual (800×1000 webp,
-    // from the 768×960 original). Use the portrait cut, not the landscape
-    // banner: the card is 4:5 and crops a 16:9 headline to "NEY SHOWDO".
-    imageSrc: '/images/events/aurum-sydney-showdown.webp',
+    // Aurum's portrait "$1.5 Million in guarantees" key visual, as a 500×625
+    // card (scripts/gen-event-cards.py). Use the portrait cut, not the
+    // landscape banner: the card is 4:5 and crops a 16:9 headline to
+    // "NEY SHOWDO".
+    imageSrc: '/images/events/aurum-sydney-showdown-card.webp',
   },
   {
     tour: 'APLPT',
@@ -92,16 +94,16 @@ export const sideEvents = [
     href: '/events/aplpt-brisbane',
     // APL's "$500,000 in event guarantees" square poster, at 800 wide near the
     // top of an 800×1000 canvas (same treatment as the Aurum card) so the
-    // logo clears the status badge.
-    imageSrc: '/images/events/aplpt-brisbane.webp',
+    // logo clears the status badge; shown as its 500×625 card.
+    imageSrc: '/images/events/aplpt-brisbane-card.webp',
   },
   {
     tour: 'CROWN',
     name: 'Victorian Poker Championship',
     dates: 'Oct 12 – Oct 27',
     href: '/events/victorian-poker-championship-2026',
-    // Crown's 623×533 lockup from the schedule PDF, scaled to 800 wide at the
-    // top of an 800×1000 canvas in the art's own red, so the empty lower half
+    // Crown's 623×533 lockup from the schedule PDF, scaled to the width of a
+    // 500×625 canvas, at its top, in the art's own red, so the empty lower half
     // fades into the name band rather than the headline being cropped.
     imageSrc: '/images/events/victorian-poker-championship-card.webp',
   },

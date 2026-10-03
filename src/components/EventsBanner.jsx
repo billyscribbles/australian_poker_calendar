@@ -97,8 +97,11 @@ function SideEventCard({ event }) {
         labelAlign="top-left"
         className="side-event__visual"
         src={event.imageSrc}
-        width={400}
-        height={300}
+        // The card's real size (scripts/gen-event-cards.py). The poster is
+        // drawn at full width and natural height, so a wrong ratio here
+        // reserves the wrong box and the row jumps when the image lands.
+        width={500}
+        height={625}
       />
       {phase === 'live' ? (
         <LiveBadge className="side-event__badge" />
