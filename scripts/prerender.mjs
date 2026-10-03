@@ -12,7 +12,7 @@
 //
 // Pure Node, no headless browser, so it runs in any build environment.
 
-import { readFile, writeFile, mkdir, rm } from 'node:fs/promises'
+import { readFile, writeFile, mkdir } from 'node:fs/promises'
 import { existsSync, readFileSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
@@ -335,7 +335,8 @@ await writeFile(
   JSON.stringify({ routes: written, generatedAt: new Date().toISOString() }, null, 2),
 )
 
-// The SSR bundle is a build artefact, not something to deploy.
-await rm(SSR, { recursive: true, force: true })
+// The SSR bundle stays: server/render.mjs loads it at boot to render the home
+// page and the stories with the published content at request time. It is
+// git-ignored and rebuilt on every `yarn build`.
 
 console.log(`[prerender] ${written.length} routes written`)
