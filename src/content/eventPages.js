@@ -12,7 +12,7 @@ import { event as playLiveSummerChampionship2026 } from './eventPlayLiveSummerCh
 import { event as playLiveMelbourneMillions2027 } from './eventPlayLiveMelbourneMillions2027.js'
 import { event as nplSuperSeries2026 } from './eventNplSuperSeries2026.js'
 import { festivals, STATUS_LABELS } from './festivals.js'
-import { formatRangeWithYear } from '../lib/calendar.js'
+import { formatRangeWithYear, toStamp } from '../lib/calendar.js'
 
 /** The hand-built pages, keyed by the name their content file exports. */
 export const eventPages = {
@@ -44,6 +44,33 @@ export const scheduleFilter = {
   any: 'Any',
   steps: [100, 150, 200, 250, 300, 400, 500, 750, 1000, 1500, 2000, 2500, 5000, 10000],
   empty: 'No events in this buy-in range.',
+}
+
+/**
+ * The cards that close every series page: the next few series to start,
+ * each through to its own page, with a link to the full calendar.
+ */
+export const nextUp = {
+  heading: 'Up next on the calendar',
+  link: 'Full calendar',
+  count: 3,
+}
+
+/**
+ * The next `count` series to start after `today` (a UTC-midnight stamp, see
+ * src/lib/calendar.js), earliest first, leaving out the series at `path` and
+ * anything cancelled, postponed or moved. Empty once the calendar runs out.
+ *
+ * @param {string} path   the page's own path, never offered
+ * @param {number} today
+ * @param {number} count
+ * @returns {import('./festivals.js').Festival[]}
+ */
+export function nextEvents(path, today, count) {
+  return festivals
+    .filter((f) => f.href !== path && !f.status && toStamp(f.start) > today)
+    .sort((a, b) => toStamp(a.start) - toStamp(b.start))
+    .slice(0, count)
 }
 
 const byPath = new Map(Object.values(eventPages).map((event) => [event.path, event]))

@@ -10,7 +10,15 @@ import { MemoryRouter } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
 import { axe, toHaveNoViolations } from 'jest-axe'
 import EventPage from '../pages/EventPage.jsx'
-import { eventPages, eventFor, schedulePending, scheduleFilter } from '../content/eventPages.js'
+import {
+  eventPages,
+  eventFor,
+  nextEvents,
+  nextUp,
+  schedulePending,
+  scheduleFilter,
+} from '../content/eventPages.js'
+import { toStamp } from '../lib/calendar.js'
 import { festivals } from '../content/festivals.js'
 import { ROUTES } from '../routes.js'
 import { existsSync } from 'node:fs'
@@ -510,5 +518,56 @@ describe('EventPage — unknown path', () => {
     expect(eventFor('/events/nope')).toBeUndefined()
     const { container } = renderPath('/events/nope')
     expect(container).toBeEmptyDOMElement()
+  })
+})
+
+describe('EventPage — up next', () => {
+  const today = toStamp('2026-10-03')
+
+  it('picks the next series to start after today, skipping this page and anything off', () => {
+    const here = eventPages.melbourneChampsII.path
+    const picks = nextEvents(here, today, nextUp.count)
+    expect(picks).toHaveLength(nextUp.count)
+    const starts = picks.map((f) => toStamp(f.start))
+    expect(starts).toEqual([...starts].sort((a, b) => a - b))
+    for (const pick of picks) {
+      expect(pick.href).not.toBe(here)
+      expect(pick.status).toBeUndefined()
+      expect(toStamp(pick.start)).toBeGreaterThan(today)
+    }
+    // Nothing earlier was skipped: the first pick is the very next start.
+    const earliest = festivals
+      .filter((f) => f.href !== here && !f.status && toStamp(f.start) > today)
+      .reduce((a, b) => (toStamp(a.start) <= toStamp(b.start) ? a : b))
+    expect(picks[0]).toBe(earliest)
+  })
+
+  it('never offers the page its own series, even when it is the next to start', () => {
+    const next = nextEvents('/events/none', today, 1)[0]
+    expect(nextEvents(next.href, today, nextUp.count)).not.toContain(next)
+  })
+
+  it('returns nothing once the calendar runs out', () => {
+    expect(nextEvents('/events/none', toStamp('2099-01-01'), nextUp.count)).toEqual([])
+  })
+
+  it('closes every series page with cards through to the next series', () => {
+    const here = eventPages.melbourneChampsII.path
+    renderPath(here)
+    const region = screen.getByRole('region', { name: nextUp.heading })
+    const cards = within(region)
+      .getAllByRole('link')
+      .filter((a) => a.getAttribute('href').startsWith('/events/'))
+    expect(cards).toHaveLength(nextUp.count)
+    for (const card of cards) {
+      expect(card).not.toHaveAttribute('href', here)
+      const festival = festivals.find((f) => f.href === card.getAttribute('href'))
+      expect(festival).toBeDefined()
+      expect(card).toHaveTextContent(festival.name)
+    }
+    expect(within(region).getByRole('link', { name: nextUp.link })).toHaveAttribute(
+      'href',
+      '/poker-calendar/2026',
+    )
   })
 })
