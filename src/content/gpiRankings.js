@@ -1145,9 +1145,9 @@ export const gpiRankings = {
   source: {
     name: 'Global Poker Index',
     href: 'https://www.globalpokerindex.com/rankings/australia/300/',
-    logoSrc: '/images/gpi/gpi-logo.png',
-    logoWidth: 230,
-    logoHeight: 130,
+    logoSrc: '/images/gpi/gpi-logo.webp',
+    logoWidth: 320,
+    logoHeight: 156,
   },
   /** The first board is the default tab. @type {GpiBoard[]} */
   boards: [
