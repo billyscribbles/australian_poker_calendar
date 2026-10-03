@@ -26,13 +26,20 @@ import { createGzip, createBrotliCompress, constants as zlib } from 'node:zlib'
 import { pipeline } from 'node:stream'
 import { canonicalHost, legacyRedirects, cspExtra } from '../src/config/server.config.js'
 import { createAdminHandler } from '../admin/handler.mjs'
+import { createApiHandler } from './api.mjs'
+import { createStore } from './store.mjs'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const DIST = join(root, 'dist')
 const PORT = Number(process.env.PORT) || 4173
-// The series dashboard at /admin. Local connections only unless ADMIN_PASSWORD
-// is set; see admin/handler.mjs.
-const admin = createAdminHandler()
+// Enquiries and the traffic tally, as files under DATA_DIR (a Railway volume
+// in production; .data/ locally). See server/store.mjs.
+const store = createStore()
+// The forms post here; the record is saved, then emailed via Formspree.
+const api = createApiHandler({ store })
+// The dashboard at /admin. Local connections only unless ADMIN_PASSWORD is
+// set; see admin/handler.mjs.
+const admin = createAdminHandler({ store })
 const HOST = process.env.HOST || '0.0.0.0'
 
 // Routes scripts/prerender.mjs wrote real HTML for. Anything outside this list
@@ -95,7 +102,7 @@ const CSP_BASE = {
   'base-uri': ["'self'"],
   'object-src': ["'none'"],
   'frame-ancestors': ["'none'"],
-  'form-action': ["'self'", 'https://formspree.io'],
+  'form-action': ["'self'"],
   'script-src': ["'self'", 'https://www.googletagmanager.com'],
   'style-src': ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
   'font-src': ["'self'", 'https://fonts.gstatic.com', 'data:'],
@@ -109,7 +116,6 @@ const CSP_BASE = {
     "'self'",
     'https://www.google-analytics.com',
     'https://region1.google-analytics.com',
-    'https://formspree.io',
   ],
 }
 
@@ -184,6 +190,18 @@ function serveFile(req, res, filePath, status = 200, extraHeaders = {}) {
   else pipeline(stream, res, onError)
 }
 
+/** One line in the traffic tally. The address never reaches the disk. */
+function recordView(req, pathname) {
+  const forwarded = req.headers['x-forwarded-for']
+  store.recordView({
+    path: pathname,
+    referrer: req.headers.referer || '',
+    host: req.headers.host || '',
+    ip: (forwarded ? String(forwarded).split(',')[0].trim() : req.socket?.remoteAddress) || '',
+    ua: req.headers['user-agent'] || '',
+  })
+}
+
 /** The HTML document for a route, if the prerender wrote one. */
 function documentFor(route) {
   const file = route === '/' ? join(DIST, 'index.html') : join(DIST, route.slice(1), 'index.html')
@@ -191,11 +209,6 @@ function documentFor(route) {
 }
 
 const server = createServer((req, res) => {
-  if (req.method !== 'GET' && req.method !== 'HEAD') {
-    res.writeHead(405, { Allow: 'GET, HEAD' })
-    return res.end('Method Not Allowed')
-  }
-
   const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`)
   const pathname = url.pathname
 
@@ -223,6 +236,18 @@ const server = createServer((req, res) => {
     }
   }
 
+  // The two things that take a POST: the forms' endpoint and the dashboard
+  // (its sign-in). Both before the method check, which refuses everything
+  // else, and before the trailing-slash rule, which the dashboard needs the
+  // other way round (relative URLs in its page resolve against /admin/).
+  if (api(req, res)) return
+  if (admin(req, res)) return
+
+  if (req.method !== 'GET' && req.method !== 'HEAD') {
+    res.writeHead(405, { Allow: 'GET, HEAD' })
+    return res.end('Method Not Allowed')
+  }
+
   // URLs the old site ranked for. Before the file lookup, so a legacy path that
   // happens to collide with a real asset name still redirects.
   const legacy = legacyRedirects[pathname.replace(/\/+$/, '') || '/']
@@ -231,10 +256,6 @@ const server = createServer((req, res) => {
     res.writeHead(301, { Location: legacy, 'Cache-Control': 'public, max-age=86400' })
     return res.end()
   }
-
-  // The series dashboard. Before the trailing-slash rule, which it needs the
-  // other way round (relative URLs in the page resolve against /admin/).
-  if (admin(req, res)) return
 
   // One canonical URL per page. /about/ and /about are otherwise two live URLs
   // serving identical HTML, which is duplicate content Google has to resolve
@@ -254,10 +275,13 @@ const server = createServer((req, res) => {
     return serveFile(req, res, filePath)
   }
 
-  // A prerendered page.
+  // A prerendered page. A document, not an asset, so it counts as a view.
   if (PRERENDERED.has(pathname)) {
     const doc = documentFor(pathname)
-    if (doc) return serveFile(req, res, doc)
+    if (doc) {
+      if (req.method === 'GET') recordView(req, pathname)
+      return serveFile(req, res, doc)
+    }
   }
 
   // Genuinely not here. The 404 document with an actual 404 status — a 200
@@ -273,6 +297,15 @@ const server = createServer((req, res) => {
   res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' })
   res.end('404 Not Found')
 })
+
+// Railway stops a deploy with SIGTERM; write the last few seconds of views.
+for (const signal of ['SIGTERM', 'SIGINT']) {
+  process.on(signal, () => {
+    store.flush()
+    server.close(() => process.exit(0))
+    setTimeout(() => process.exit(0), 1000).unref()
+  })
+}
 
 server.listen(PORT, HOST, () => {
   console.log(`[server] listening on http://localhost:${PORT} (bound to ${HOST})`)

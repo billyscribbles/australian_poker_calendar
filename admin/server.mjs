@@ -10,6 +10,7 @@ import { createReadStream, existsSync, statSync } from 'node:fs'
 import { dirname, extname, join, normalize, sep } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { createAdminHandler } from './handler.mjs'
+import { createStore } from '../server/store.mjs'
 
 const PUBLIC = join(dirname(fileURLToPath(import.meta.url)), '..', 'public')
 const PORT = Number(process.env.PORT) || 4400
@@ -23,7 +24,7 @@ const MIME = {
   '.ico': 'image/x-icon',
 }
 
-const admin = createAdminHandler({ site: SITE })
+const admin = createAdminHandler({ site: SITE, store: createStore() })
 
 createServer((req, res) => {
   if (admin(req, res)) return

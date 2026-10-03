@@ -1,7 +1,8 @@
 // Contract: the poker-room listing form has its own page, the footer on every
 // page carries a short call-to-action that links to it, the form reads its
-// copy from the content file, posts to the same Formspree inbox as the contact
-// page with a topic that identifies it, and never lets a honeypot hit through.
+// copy from the content file, posts to the site's own /api/enquiry tagged as
+// the venue form (the server saves it and emails it on), and never lets a
+// honeypot hit through.
 import { describe, it, expect, vi, afterEach } from 'vitest'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { renderToString } from 'react-dom/server'
@@ -12,6 +13,7 @@ import VenueForm from '../components/VenueForm.jsx'
 import ListVenuePage from '../pages/ListVenuePage.jsx'
 import { venueForm } from '../content/contact.js'
 import { site } from '../config/site.config.js'
+import { ENQUIRY_ENDPOINT } from '../lib/useEnquiry.js'
 import { ROUTES } from '../routes.js'
 
 const fill = () => {
@@ -25,11 +27,7 @@ const fill = () => {
 }
 
 describe('VenueForm', () => {
-  const originalId = site.integrations.formspreeId
-  afterEach(() => {
-    site.integrations.formspreeId = originalId
-    vi.restoreAllMocks()
-  })
+  afterEach(() => vi.restoreAllMocks())
 
   it('has a route of its own, prerendered and indexable', () => {
     const route = ROUTES.find((r) => r.path === venueForm.path)
@@ -71,7 +69,6 @@ describe('VenueForm', () => {
   })
 
   it('tags the submission as a listing request and counts it on acceptance', async () => {
-    site.integrations.formspreeId = 'abc123'
     const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValue({ ok: true })
     render(<VenueForm />)
     fill()
@@ -79,14 +76,14 @@ describe('VenueForm', () => {
     await waitFor(() => expect(screen.getByText(venueForm.success)).toBeInTheDocument())
     expect(fetchMock).toHaveBeenCalledTimes(1)
     const [url, init] = fetchMock.mock.calls[0]
-    expect(url).toBe('https://formspree.io/f/abc123')
+    expect(url).toBe(ENQUIRY_ENDPOINT)
+    expect(init.body.get('form')).toBe('venue')
     expect(init.body.get('topic')).toBe(venueForm.topic)
     expect(init.body.get('_subject')).toBe(venueForm.subject)
     expect(init.body.get('venue')).toBe('Crown')
   })
 
-  it('drops a submission whose honeypot is filled without calling Formspree', () => {
-    site.integrations.formspreeId = 'abc123'
+  it('drops a submission whose honeypot is filled without posting it', () => {
     const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValue({ ok: true })
     render(<VenueForm />)
     fill()
@@ -95,8 +92,8 @@ describe('VenueForm', () => {
     expect(fetchMock).not.toHaveBeenCalled()
   })
 
-  it('points at the contact email when no Formspree id is configured', async () => {
-    site.integrations.formspreeId = ''
+  it('points at the contact email when the server refuses the submission', async () => {
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue({ ok: false })
     const { container } = render(<VenueForm />)
     fill()
     fireEvent.submit(screen.getByRole('button', { name: venueForm.submit }).closest('form'))

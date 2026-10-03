@@ -1,6 +1,6 @@
 import { site } from '../config/site.config.js'
 import { venueForm } from '../content/contact.js'
-import { useFormspree } from '../lib/useFormspree.js'
+import { useEnquiry } from '../lib/useEnquiry.js'
 import UploadField from './UploadField.jsx'
 import './VenueForm.css'
 
@@ -8,7 +8,7 @@ import './VenueForm.css'
 // Formspree inbox as the contact page; the hidden topic and subject fields
 // mark it as a listing request so it is easy to triage.
 export default function VenueForm() {
-  const { status, handleSubmit } = useFormspree('venue-form')
+  const { status, handleSubmit } = useEnquiry('venue', 'venue-form')
 
   return (
     <form className="venue-form" onSubmit={handleSubmit}>

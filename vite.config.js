@@ -1,9 +1,11 @@
 /// <reference types="vitest/config" />
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 import { visualizer } from 'rollup-plugin-visualizer'
 import { theme } from './src/config/theme.config.js'
 import { createAdminHandler } from './admin/handler.mjs'
+import { createApiHandler } from './server/api.mjs'
+import { createStore } from './server/store.mjs'
 
 // The day this bundle is built, exposed to the app as import.meta.env.VITE_BUILD_DATE.
 //
@@ -58,14 +60,20 @@ function webfonts() {
   }
 }
 
-/** The series dashboard at /admin on the dev server, as on the site server. */
-function admin() {
-  const handle = createAdminHandler()
+/**
+ * The dashboard at /admin and the forms' /api/enquiry on the dev server, as
+ * on the site server. Both read and write .data/ (see server/store.mjs).
+ */
+function admin(mode) {
+  const store = createStore()
+  // Vite keeps .env out of process.env; the forms' Formspree id lives there.
+  const { VITE_FORMSPREE_ID: formspreeId = '' } = loadEnv(mode, process.cwd(), 'VITE_')
+  const handlers = [createApiHandler({ store, formspreeId }), createAdminHandler({ store })]
   return {
     name: 'site-admin',
     configureServer(server) {
       server.middlewares.use((req, res, next) => {
-        if (!handle(req, res)) next()
+        if (!handlers.some((handle) => handle(req, res))) next()
       })
     },
   }
@@ -78,11 +86,11 @@ const analyze = process.env.ANALYZE === 'true'
 // with --ssr for src/entry-prerender.jsx, whose output scripts/prerender.mjs
 // imports to render every route to static HTML. The two passes want different
 // rollup output, so the config is a function of the build kind.
-export default defineConfig(({ isSsrBuild }) => ({
+export default defineConfig(({ isSsrBuild, mode }) => ({
   plugins: [
     react(),
     webfonts(),
-    admin(),
+    admin(mode),
     analyze && visualizer({ filename: 'dist/bundle-stats.html', gzipSize: true }),
   ].filter(Boolean),
   preview: {

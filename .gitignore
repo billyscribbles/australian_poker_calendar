@@ -18,6 +18,8 @@ dist-ssr
 
 # local-only
 .firecrawl/
+# enquiries and the traffic tally (server/store.mjs); a volume on Railway
+.data/
 .claude/settings.local.json
 # Lighthouse CI's working directory from a local `lhci autorun`
 .lighthouseci/

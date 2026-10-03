@@ -4,10 +4,16 @@
 //   vite.config.js     the dev server (yarn dev)
 //   admin/server.mjs   on its own (yarn admin)
 //
-// It answers /admin/ (the page), /admin/app.js, /admin/app.css and
-// /admin/api/status, which runs scripts/series-status.mjs in a fresh process
-// so content edits show up on refresh. Everything else falls through to the
-// host server, which is what serves the images the page shows.
+// It answers /admin/ (the page), /admin/app.js, /admin/app.css and the API:
+//
+//   api/status            runs scripts/series-status.mjs in a fresh process,
+//                         so content edits show up on refresh
+//   api/enquiries         every form submission in the store, newest first
+//   api/enquiries/<id>    POST {handled: true|false} to tick one off
+//   api/traffic?days=30   the daily page-view tally
+//
+// Everything else falls through to the host server, which is what serves the
+// images the page shows.
 //
 // Access: the page lists organiser emails and phones, so it is never public.
 // With ADMIN_PASSWORD set, /admin/ shows its own sign-in page; the right
@@ -107,7 +113,7 @@ function loginPage(error) {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex" />
-    <title>Sign in · Series Dashboard</title>
+    <title>Sign in · Dashboard</title>
     <link rel="icon" href="../brand/favicon.ico" />
     <link
       rel="stylesheet"
@@ -120,7 +126,7 @@ function loginPage(error) {
       <form class="login__card" method="post" action="login">
         <div class="brand">
           <span class="brand__mark">APC</span>
-          <span class="brand__name">Series Dashboard</span>
+          <span class="brand__name">Dashboard</span>
         </div>
         <h1 class="login__title">Sign in</h1>
         <p class="login__lede">Organiser contacts live here, so it stays behind a password.</p>
@@ -149,11 +155,15 @@ function loginPage(error) {
  * @param {string} [options.prefix]   URL prefix, default '/admin'
  * @param {string} [options.site]     where "open on site" links point; '' = same origin
  * @param {string} [options.password] overrides process.env.ADMIN_PASSWORD
+ * @param {ReturnType<typeof import('../server/store.mjs').createStore>} [options.store]
+ *   enquiries and traffic; without one those sections read as empty
  * @returns {(req: import('node:http').IncomingMessage, res: import('node:http').ServerResponse) => boolean}
  *   true when the request was for the dashboard and has been answered
  */
-export function createAdminHandler({ prefix = '/admin', site = '', password } = {}) {
+export function createAdminHandler({ prefix = '/admin', site = '', password, store } = {}) {
   const secret = password ?? process.env.ADMIN_PASSWORD ?? ''
+  const json = (res, code, value) =>
+    send(res, code, JSON.stringify(value), 'application/json; charset=utf-8')
 
   // Session cookie: "<issued-at hex>.<hmac(issued-at)>" keyed on the password.
   function sign(issued) {
@@ -234,7 +244,7 @@ export function createAdminHandler({ prefix = '/admin', site = '', password } = 
     }
     // The sign-in page is styled by the same sheet; it holds no data.
     if (rest === 'app.css' || hasSession(req)) return false
-    if (rest === 'api/status') {
+    if (rest.startsWith('api/')) {
       send(res, 401, '{"error":"signed-out"}', 'application/json; charset=utf-8')
     } else if (rest === '') {
       send(res, 401, loginPage(''), 'text/html; charset=utf-8')
@@ -257,8 +267,36 @@ export function createAdminHandler({ prefix = '/admin', site = '', password } = 
     const rest = pathname.slice(prefix.length + 1)
 
     if (gate(req, res, rest)) return true
+
+    const tick = rest.match(/^api\/enquiries\/([a-z0-9]+)$/)
+    if (tick) {
+      if (req.method !== 'POST') {
+        send(res, 405, 'Method Not Allowed')
+        return true
+      }
+      readForm(req).then(
+        (form) => {
+          const record = store?.updateEnquiry(tick[1], { handled: form.get('handled') === 'true' })
+          if (record) json(res, 200, record)
+          else send(res, 404, 'No such enquiry')
+        },
+        () => send(res, 413, 'Form too large'),
+      )
+      return true
+    }
+
     if (req.method !== 'GET' && req.method !== 'HEAD') {
       send(res, 405, 'Method Not Allowed')
+      return true
+    }
+
+    if (rest === 'api/enquiries') {
+      json(res, 200, { enquiries: store ? store.listEnquiries() : [] })
+      return true
+    }
+    if (rest === 'api/traffic') {
+      const days = Math.min(Math.max(Number(url.searchParams.get('days')) || 30, 1), 365)
+      json(res, 200, store ? store.traffic({ days }) : null)
       return true
     }
 

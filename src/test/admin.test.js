@@ -6,7 +6,11 @@
 // Node fails here.
 import { describe, it, expect, beforeAll, afterAll } from 'vitest'
 import { createServer } from 'node:http'
+import { mkdtempSync, rmSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import { join } from 'node:path'
 import { createAdminHandler } from '../../admin/handler.mjs'
+import { createStore } from '../../server/store.mjs'
 
 function serve(handler) {
   const server = createServer((req, res) => {
@@ -22,22 +26,58 @@ function serve(handler) {
 }
 
 describe('admin handler', () => {
-  let open, locked
+  let open, locked, dir, store
 
   beforeAll(async () => {
-    open = await serve(createAdminHandler({ password: '' }))
-    locked = await serve(createAdminHandler({ password: 'hunter2' }))
+    dir = mkdtempSync(join(tmpdir(), 'apc-admin-'))
+    store = createStore({ dir })
+    open = await serve(createAdminHandler({ password: '', store }))
+    locked = await serve(createAdminHandler({ password: 'hunter2', store }))
   })
   afterAll(() => {
     open.server.close()
     locked.server.close()
+    rmSync(dir, { recursive: true, force: true })
+  })
+
+  it('serves the enquiries and the traffic tally, and ticks an enquiry off', async () => {
+    const { id } = store.addEnquiry({ form: 'contact', fields: { email: 'a@b.c', message: 'hi' } })
+    store.recordView({ path: '/', host: 'x', ip: '1.1.1.1', ua: 'Mozilla', today: '2026-10-03' })
+
+    const list = await (await fetch(`${open.base}/admin/api/enquiries`)).json()
+    expect(list.enquiries[0]).toMatchObject({ id, handled: false })
+
+    const tick = await fetch(`${open.base}/admin/api/enquiries/${id}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: 'handled=true',
+    })
+    expect(tick.status).toBe(200)
+    expect((await tick.json()).handled).toBe(true)
+    expect((await fetch(`${open.base}/admin/api/enquiries/nope`, { method: 'POST' })).status).toBe(
+      404,
+    )
+
+    const traffic = await (await fetch(`${open.base}/admin/api/traffic?days=3`)).json()
+    expect(traffic.days).toHaveLength(3)
+    expect(traffic.totals.views).toBeGreaterThanOrEqual(1)
+  })
+
+  it('reads empty enquiries and no traffic without a store', async () => {
+    const bare = await serve(createAdminHandler({ password: '' }))
+    try {
+      expect((await (await fetch(`${bare.base}/admin/api/enquiries`)).json()).enquiries).toEqual([])
+      expect(await (await fetch(`${bare.base}/admin/api/traffic`)).json()).toBeNull()
+    } finally {
+      bare.server.close()
+    }
   })
 
   it('serves the page, its assets and the API to localhost when no password is set', async () => {
     const page = await fetch(`${open.base}/admin/`)
     expect(page.status).toBe(200)
     expect(page.headers.get('x-robots-tag')).toMatch(/noindex/)
-    expect(await page.text()).toContain('Series Dashboard')
+    expect(await page.text()).toContain('Dashboard')
 
     for (const asset of ['app.js', 'app.css']) {
       expect((await fetch(`${open.base}/admin/${asset}`)).status, asset).toBe(200)
@@ -101,10 +141,14 @@ describe('admin handler', () => {
     })
 
     it('answers the API with 401 JSON when signed out', async () => {
-      const res = await fetch(`${locked.base}/admin/api/status`)
-      expect(res.status).toBe(401)
-      expect(res.headers.get('content-type')).toMatch(/json/)
-      expect((await res.json()).error).toBe('signed-out')
+      for (const path of ['api/status', 'api/enquiries', 'api/traffic']) {
+        const res = await fetch(`${locked.base}/admin/${path}`)
+        expect(res.status, path).toBe(401)
+        expect(res.headers.get('content-type')).toMatch(/json/)
+        expect((await res.json()).error).toBe('signed-out')
+      }
+      const tick = await fetch(`${locked.base}/admin/api/enquiries/abc`, { method: 'POST' })
+      expect(tick.status).toBe(401)
     })
 
     it('rejects a wrong password with the page and no cookie', async () => {

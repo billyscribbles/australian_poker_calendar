@@ -140,7 +140,22 @@ the production domain would publish canonicals claiming to _be_ production — s
 it to the staging URL.
 
 Give staging its own Formspree form (or leave it blank) so test submissions never
-hit the real inbox.
+hit the real inbox. The browser never talks to Formspree: both forms post to the
+site's own `/api/enquiry`, which saves the enquiry for the dashboard and then
+emails it on through Formspree, so `VITE_FORMSPREE_ID` is also read by the
+server at run time.
+
+### Run-time variables and the data volume
+
+| Variable         | Purpose                                                                  |
+| ---------------- | ------------------------------------------------------------------------ |
+| `ADMIN_PASSWORD` | opens `/admin` (see CLAUDE.md, "Dashboard")                              |
+| `DATA_DIR`       | where `server/store.mjs` keeps `enquiries.json` and `traffic/<day>.json` |
+
+Railway's filesystem is wiped on every deploy, so **each environment needs a
+volume** (service → Settings → Volumes) mounted at, say, `/data`, with
+`DATA_DIR=/data`. Without one, enquiries and the traffic tally start from empty
+after every push; the email copy of each enquiry still arrives via Formspree.
 
 ---
 

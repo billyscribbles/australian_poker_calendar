@@ -108,10 +108,14 @@ All `VITE_*` variables are inlined at build time. Change one, rebuild.
 | Variable            | Purpose                                                          |
 | ------------------- | ---------------------------------------------------------------- |
 | `VITE_SITE_URL`     | Canonical origin for meta tags, sitemap and robots               |
-| `VITE_FORMSPREE_ID` | Contact form endpoint                                            |
+| `VITE_FORMSPREE_ID` | Where the server emails form submissions on to (optional)        |
 | `VITE_GA_ID`        | GA4 measurement ID. Loads only after cookie consent              |
 | `VITE_SENTRY_DSN`   | Optional error reporting                                         |
 | `VITE_NOINDEX`      | `true` on staging only. Writes a Disallow-all robots and noindex |
+
+Two more are read by the server at run time, not the build: `ADMIN_PASSWORD`
+opens the `/admin` dashboard, and `DATA_DIR` is where it keeps enquiries and
+the traffic tally (default `.data/`; a volume on Railway).
 
 ## Testing and quality gates
 

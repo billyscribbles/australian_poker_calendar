@@ -1,10 +1,10 @@
 import { site } from '../config/site.config.js'
 import { contact } from '../content/contact.js'
-import { useFormspree } from '../lib/useFormspree.js'
+import { useEnquiry } from '../lib/useEnquiry.js'
 import './Contact.css'
 
 export default function Contact() {
-  const { status, handleSubmit } = useFormspree('contact-form')
+  const { status, handleSubmit } = useEnquiry('contact', 'contact-form')
 
   return (
     <section className="contact section section--dark" id="contact">
