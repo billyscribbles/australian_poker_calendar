@@ -22,7 +22,7 @@ export const site = {
   nav: [
     { label: 'News', icon: 'news', to: '/' },
     { label: 'Poker Calendar', icon: 'calendar', to: '/poker-calendar/2026' },
-    { label: 'Tours', icon: 'tours', to: '/tours' },
+    { label: 'Series', icon: 'tours', to: '/tours' },
     { label: 'Where to Play', icon: 'map', to: '/where-to-play' },
     { label: 'Poker Players', icon: 'players', to: '/players' },
   ],
