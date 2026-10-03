@@ -133,7 +133,9 @@ describe('CityPage', () => {
     })
   })
 
-  it('renders every city with no axe violations', async () => {
+  // One axe run per city, in sequence; the 5 s default is too tight once the
+  // big cities list a few dozen series.
+  it('renders every city with no axe violations', { timeout: 20000 }, async () => {
     for (const city of cities) {
       const { container, unmount } = renderCity(city)
       expect(await axe(container)).toHaveNoViolations()
