@@ -160,6 +160,39 @@ await prepare()
 
 const template = await readFile(TEMPLATE, 'utf8')
 
+// --- Entry stylesheet, inlined ----------------------------------------------
+// The entry stylesheet is the one request between the HTML and the first paint
+// on every route: the browser will not paint until it lands, so on a phone it
+// costs a full round trip before anything shows (Lighthouse's "render-blocking
+// requests"). It is small once compressed, so each document carries it as a
+// <style> instead. The fonts it names are then discovered with the HTML.
+//
+// Only the entry's: a route's own stylesheet stays a <link>, because the
+// client's lazy loader looks for that <link> before fetching the route's CSS
+// and would request it again if it were inlined.
+const entryStyles = await Promise.all(
+  (Object.values(viteManifest).find((entry) => entry.isEntry)?.css ?? []).map(async (file) => ({
+    file,
+    css: await readFile(join(DIST, file), 'utf8'),
+  })),
+)
+
+function inlineEntryStyles(doc) {
+  for (const { file, css } of entryStyles) {
+    const escaped = file.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    const tag = new RegExp(`<link rel="stylesheet"[^>]*href="/${escaped}"[^>]*>`)
+    if (!tag.test(doc)) {
+      fail(
+        `the entry stylesheet /${file} is not linked from dist/index.html, so it cannot be inlined.`,
+      )
+    }
+    doc = doc.replace(tag, () => `<style>${css}</style>`)
+  }
+  return doc
+}
+
+const shell = inlineEntryStyles(template)
+
 assertOgImage()
 
 // --- Route assets ------------------------------------------------------------
@@ -253,7 +286,7 @@ function assertNoHiddenContent(html) {
 function buildDocument({ html, head, complete }, assets) {
   assertStudioCredit(html)
   assertNoHiddenContent(html)
-  let doc = template
+  let doc = shell
 
   if (!FALLBACK.test(doc)) {
     throw new Error(
