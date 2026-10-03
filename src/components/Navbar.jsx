@@ -55,7 +55,10 @@ export default function Navbar() {
             alt={brand.name}
             width={brand.logoWidth}
             height={brand.logoHeight}
-            priority
+            // Eager, since it is above the fold, but not `priority`: a second
+            // fetchpriority=high image splits the phone's bandwidth with the
+            // hero, which is the page's LCP element.
+            loading="eager"
             className="site-header__logo-img"
           />
         </Link>
