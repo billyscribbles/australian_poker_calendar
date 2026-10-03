@@ -429,20 +429,6 @@ const rooms = [
     },
   },
   {
-    name: 'Country Club Tasmania',
-    street: 'Country Club Avenue',
-    suburb: 'Prospect Vale',
-    state: 'TAS',
-    postcode: '7250',
-    website: 'https://countryclubtasmania.com.au/casino/',
-    // The club suit from the wordmark SVG, cream on the club's green.
-    mark: {
-      iconSrc: '/images/rooms/country-club-tasmania-icon.svg',
-      primary: '#FEFCDA',
-      iconBg: '#00491E',
-    },
-  },
-  {
     name: 'Crown Perth',
     street: 'Great Eastern Highway',
     suburb: 'Burswood',
@@ -661,7 +647,7 @@ const leagueRows = [
   {
     name: 'National Poker League (NPL)',
     code: 'NPL',
-    states: ['NSW', 'QLD', 'SA', 'TAS', 'VIC'],
+    states: ['NSW', 'QLD', 'SA', 'VIC'],
     about:
       'Free to join, with over 500 games a week in pubs and clubs: sign up at any NPL night. It also runs the Super Series and the Sydney Poker Open.',
     website: 'https://www.npl.com.au/Events/List',

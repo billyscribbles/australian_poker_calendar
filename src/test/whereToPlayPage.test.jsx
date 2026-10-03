@@ -235,8 +235,8 @@ describe('WhereToPlayPage', () => {
 
   it('groups the leagues by state, a league under every state it plays in', () => {
     const { states } = whereToPlay.leagues
-    const order = whereToPlay.states.map((s) => s.code)
-    // Only states that have a league, in the rooms tab's order.
+    const order = STATES.map((s) => s.code)
+    // Only states that have a league, in the page's state order.
     expect(states.length).toBeGreaterThan(1)
     expect(states.map((s) => s.code)).toEqual(order.filter((c) => states.some((s) => s.code === c)))
     for (const state of states) {
