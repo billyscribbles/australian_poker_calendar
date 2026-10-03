@@ -20,7 +20,8 @@ are load-bearing. Break them and the site silently stops being crawlable.
 - Framer Motion 11, Lucide React icons
 - Yarn 4 with `.pnp` caching, Node 20 (`.nvmrc`)
 - `react-helmet-async` for per-page SEO; the forms post to the site's own `/api/enquiry`, which saves them and emails them on through Formspree
-- Railway deployment: `yarn start` runs `server/index.mjs`, a dependency-free Node static server (NOT `vite preview`). It also answers the forms, counts page views and serves the dashboard; `server/store.mjs` keeps enquiries and the daily traffic tally as JSON under `DATA_DIR` (`.data/` locally, a volume on Railway)
+- Railway deployment: `yarn start` runs `server/index.mjs`, a dependency-free Node static server (NOT `vite preview`). It also answers the forms, counts page views, serves the dashboard and renders the published stories live; `server/store.mjs` keeps enquiries, the daily traffic tally, and the dashboard's stories, shorts and uploaded media under `DATA_DIR` (`.data/` locally, a volume on Railway, required: without it a redeploy erases every published story)
+- `tinymce@6.8.6` (MIT; never 7 or later, which is GPL or paid) is the dashboard's article editor, served from the package by `admin/handler.mjs` and marked `unplugged` in `package.json` so PnP leaves real files on disk
 - ESLint flat config + Prettier; Vitest contract suite with axe
 - GitHub Actions CI: lint, format check, test, build, Lighthouse gate
 - Opt-in GA4 behind a consent banner (`integrations.consent: true`) and opt-in Sentry; both no-op until env keys are set
@@ -47,23 +48,30 @@ src/
 │                         tourBrands.js, events.js, news sections, players,
 │                         guides, pokerRooms, partners, faq, consent, legal
 ├── lib/                  applyTheme, seo.jsx, motion, calendar.js (date/layout maths),
-│                         useToday, useHydrated, consent, analytics, errorReporter
+│                         useToday, useHydrated, consent, analytics, errorReporter,
+│                         runtimeContent (published stories/shorts), dates
 ├── components/           Navbar, Footer, EventsBanner, FeaturedNews, Stories, Shorts,
 │                         LiveNews, PokerCalendar, FestivalCalendar/List/Timeline,
 │                         RecentChampions, PlayersOfTheYear, Guides, FAQ,
 │                         PokerRooms, TourLogo, ConsentBanner, Contact, ...
 ├── pages/                Home, CalendarPage, PlayersPage, AboutPage, ContactPage,
-│                         LegalPage, NotFoundPage
+│                         StoriesPage, StoryPage, LegalPage, NotFoundPage
 └── test/                 the contract suite
 data/                     scraped series timeline (json/csv), one series schedule, promo HTML
 public/brand/             wordmark, favicon set (yarn icons), og card
 public/images/tours/      operator logos: full colour, icon, and -mono (scripts/gen-tour-mono.py)
 scripts/                  prerender.mjs, gen-seo-files.mjs, gen-icons.mjs, gen-tour-mono.py,
-                          series-status.mjs (the status model behind `yarn status` and admin/)
-admin/                    the dashboard at /admin (handler.mjs, mounted by the site and dev servers)
-server/index.mjs          production server: prerendered docs, real 404s, cache headers, CSP
+                          series-status.mjs (the status model behind `yarn status` and admin/),
+                          lib/document.mjs (document assembly shared with server/render.mjs)
+admin/                    the dashboard at /admin (handler.mjs, mounted by the site and dev servers;
+                          publish.js + publish.css are the Publish section's editors)
+server/index.mjs          production server: prerendered docs, live pages, media, real 404s, CSP
 server/api.mjs            POST /api/enquiry: saves the form submission, forwards it to Formspree
 server/store.mjs          enquiries.json and traffic/<day>.json under DATA_DIR
+server/content.mjs        stories.json, shorts.json and media/ under DATA_DIR
+server/media.mjs          streamed uploads (type by bytes, size caps) and /media with Range
+server/render.mjs         renders /, /stories and /stories/<slug> at request time
+server/sanitize.mjs       allowlist rebuild of every story body on save
 docs/ENVIRONMENTS.md      main = staging, production branch, Railway envs
 ```
 
@@ -80,6 +88,14 @@ non-technical editor, with a Back to website link at the top. Sections:
   room's colour, filterable by room, for reading clashes and gaps.
 - **Series, Poker rooms**: searchable, filterable lists; each row or card opens
   a profile page.
+- **Publish: Stories, Shorts.** Articles written in TinyMCE with a hero image,
+  previewed as the real page, and published to "Stories by Us" on the home page
+  and to `/stories/<slug>`; vertical videos with a captured poster and duration,
+  published to the Shorts row and played in an overlay. The AI-generated demo
+  cards in `content/stories.js` and `content/shorts.js` stay until the first
+  real item in that section is published. A story's address follows its title
+  while it is a draft and locks once published. Delete removes the record's
+  own hero, thumb, video and poster, never images inside a body.
 - **Enquiries**: everything the contact and venue forms received, with Reply and
   Mark handled. **Traffic**: page views, visitors, top pages and referrers,
   counted by the server (no cookies, no consent needed).
@@ -115,6 +131,8 @@ route's chunk before hydrating.
 /poker-calendar/2026           CalendarPage  props: { year: 2026 }
 /poker-calendar/2027           CalendarPage  props: { year: 2027 }
 /where-to-play                 WhereToPlayPage  venues by state, from content/whereToPlay.js
+/stories                       StoriesPage   prerendered with the demo cards, rendered live in production
+/stories/:slug                 StoryPage     dynamic: never prerendered, rendered live per published story
 /players                       PlayersPage   noindex until rankings exist
 /about  /contact               AboutPage, ContactPage
 /privacy  /terms               LegalPage     props: { type }
@@ -177,6 +195,7 @@ Non-obvious behaviours to know before changing any of this:
 - **Never put anything inside `#root` in `index.html`.** The prerender replaces the exact string `<div id="root"></div>`; anything inside means the rendered body is silently never injected.
 - **Keep the `<!-- seo:fallback:start/end -->` markers in `index.html`.** The prerender replaces that block with the page's real head tags. The build fails without them, on purpose.
 - **`vite preview` cannot serve this site.** It answers every unknown URL with a 200 and the app shell, a soft 404 on unlimited URLs. `yarn preview` and `yarn start` both run `server/index.mjs`.
+- **Three routes render at request time.** `/`, `/stories` and `/stories/<slug>` are rendered by `server/render.mjs` with the build's own SSR bundle (`.prerender/`, which the build now keeps) and `scripts/lib/document.mjs`, fed the published content through `src/lib/runtimeContent.js` and an inline `#apc-runtime` JSON block that `main.jsx` reads before hydrating. The build still prerenders `/` and `/stories` with the demo cards as the fallback if the bundle cannot load. Anything that shows published content must render the same on both sides, so no `new Date()` or locale formatting in that path (`src/lib/dates.js`). The cache follows `store.content.version`, which also moves when another process writes the data files. Run the server through `yarn start` or `yarn preview`: plain `node` has no PnP and cannot load the bundle.
 
 ## Derived assets
 

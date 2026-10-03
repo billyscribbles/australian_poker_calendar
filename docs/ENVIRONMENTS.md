@@ -147,15 +147,27 @@ server at run time.
 
 ### Run-time variables and the data volume
 
-| Variable         | Purpose                                                                  |
-| ---------------- | ------------------------------------------------------------------------ |
-| `ADMIN_PASSWORD` | opens `/admin` (see CLAUDE.md, "Dashboard")                              |
-| `DATA_DIR`       | where `server/store.mjs` keeps `enquiries.json` and `traffic/<day>.json` |
+| Variable         | Purpose                                                                                                  |
+| ---------------- | -------------------------------------------------------------------------------------------------------- |
+| `ADMIN_PASSWORD` | opens `/admin` (see CLAUDE.md, "Dashboard")                                                              |
+| `DATA_DIR`       | where `server/store.mjs` keeps enquiries, the traffic tally, and the published stories, shorts and media |
 
 Railway's filesystem is wiped on every deploy, so **each environment needs a
-volume** (service → Settings → Volumes) mounted at, say, `/data`, with
-`DATA_DIR=/data`. Without one, enquiries and the traffic tally start from empty
-after every push; the email copy of each enquiry still arrives via Formspree.
+volume** (service → Settings → Volumes) mounted at `/data`, with
+`DATA_DIR=/data`. This is required, not advisable: the volume holds every story
+and short published from the dashboard and every image and video uploaded for
+them. Without one, a push erases all of it, along with the enquiries and the
+traffic tally (the email copy of each enquiry still arrives via Formspree).
+
+```bash
+railway volume add -m /data -e staging
+railway volume add -m /data -e production
+railway variables --set DATA_DIR=/data -e staging
+railway variables --set DATA_DIR=/data -e production
+```
+
+Staging and production have separate volumes, so a story published on staging
+does not appear on production. Publish on the environment the public reads.
 
 ---
 
