@@ -1074,7 +1074,7 @@ const rows = [
   [
     '2027-02-03',
     '2:10 PM',
-    'Melb. Poker Open – Day 2',
+    'Melbourne Poker Open – Day 2',
     '$750K GTD',
     '',
     'Qualifiers only',
@@ -1159,7 +1159,7 @@ const rows = [
   [
     '2027-02-04',
     '2:10 PM',
-    'Melb. Poker Open – Day 3',
+    'Melbourne Poker Open – Day 3',
     '$750K GTD',
     '',
     'Qualifiers only',
