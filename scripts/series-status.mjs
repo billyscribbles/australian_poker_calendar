@@ -209,6 +209,7 @@ export function buildStatus(today = melbourneToday()) {
     const { event } = poster || {}
     return {
       ...festival,
+      facebook: calendarPage.tours.find((t) => t.code === festival.tour)?.facebook || '',
       slug,
       phase,
       dates: formatRange(festival.start, festival.end),

@@ -19,7 +19,7 @@ const state = {
   inbox: [], // api/enquiries
   traffic: null, // api/traffic
   error: '',
-  filters: { q: '', tour: '', phase: '', needs: '' }, // Series
+  filters: { q: '', tour: '', phase: 'open', needs: '' }, // Series; finished hidden by default
   rooms: { q: '', show: '' }, // Poker rooms
   months: { tour: '', finished: false }, // Calendar
   enquiries: { q: '', show: 'open', form: '' }, // Enquiries
@@ -435,7 +435,8 @@ function seriesView() {
   const tours = [...new Set(d.series.map((s) => s.tour))]
   const rows = d.series.filter((s) => {
     if (f.tour && s.tour !== f.tour) return false
-    if (f.phase && s.phase.key !== f.phase) return false
+    if (f.phase === 'open' ? s.phase.key === 'done' : f.phase && s.phase.key !== f.phase)
+      return false
     if (f.needs === 'schedule' && (s.poster || s.phase.key === 'done')) return false
     if (f.needs === 'jobs' && !s.jobs.length) return false
     if (f.needs === 'art' && s.imageSrc) return false
@@ -448,13 +449,13 @@ function seriesView() {
     <div class="filters">
       <label class="field"><span>Search</span><input type="search" id="f-q" value="${esc(f.q)}" placeholder="name, venue, city"></label>
       <label class="field"><span>Poker room</span><select id="f-tour">${opt('', 'All rooms', f.tour)}${tours.map((t) => opt(t, roomOf(t)?.name || t, f.tour)).join('')}</select></label>
-      <label class="field"><span>Status</span><select id="f-phase">${opt('', 'Any', f.phase)}${opt('live', 'Running', f.phase)}${opt('upcoming', 'Upcoming', f.phase)}${opt('done', 'Finished', f.phase)}</select></label>
+      <label class="field"><span>Status</span><select id="f-phase">${opt('open', 'Not finished', f.phase)}${opt('', 'Any', f.phase)}${opt('live', 'Running', f.phase)}${opt('upcoming', 'Upcoming', f.phase)}${opt('done', 'Finished', f.phase)}</select></label>
       <label class="field"><span>Needs</span><select id="f-needs">${opt('', 'Anything', f.needs)}${opt('schedule', 'A schedule', f.needs)}${opt('art', 'Key art', f.needs)}${opt('jobs', 'Something doing', f.needs)}</select></label>
       <span class="count">${rows.length} of ${d.series.length}</span>
     </div>
     <div class="table-wrap"><table>
       <thead><tr>
-        <th>Series</th><th>Status</th><th>Schedule</th><th>Data file</th><th>Key art</th>
+        <th>Series</th><th>Status</th><th>Links</th><th>Schedule</th><th>Data file</th><th>Key art</th>
         <th>Home</th><th>Calendar</th><th>Record</th><th class="num">To do</th>
       </tr></thead>
       <tbody>${
@@ -463,6 +464,7 @@ function seriesView() {
             (s) => `<tr class="clickable row--${s.phase.key}" data-href="#series/${esc(s.slug)}">
           <td><div class="name">${tour(s.tour)} ${seriesLink(s)}</div><div class="sub">${esc(s.dates)} · ${esc(s.place)}</div></td>
           <td>${phasePill(s)}</td>
+          <td class="nowrap">${[s.website && external(s.website, 'Website'), s.facebook && external(s.facebook, 'Facebook')].filter(Boolean).join(' · ') || '<span class="na">–</span>'}</td>
           <td>${
             s.poster
               ? `${check(true, `${s.scheduleRows} rows`)}<div class="sub">${s.featuredRows} featured</div>`
@@ -488,7 +490,7 @@ function seriesView() {
           <td class="num">${s.jobs.length ? levelPill(s.jobs[0].level) + ` ${s.jobs.length}` : '<span class="ok">✓</span>'}</td>
         </tr>`,
           )
-          .join('') || '<tr><td colspan="9" class="empty">No series match.</td></tr>'
+          .join('') || '<tr><td colspan="10" class="empty">No series match.</td></tr>'
       }</tbody></table></div>`
 }
 
