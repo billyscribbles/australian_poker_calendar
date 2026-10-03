@@ -766,6 +766,21 @@ const leagueRows = [
       iconBg: '#000000',
     },
   },
+  // From southernpokertour.com.au and its Previous Events page (2026-10-04).
+  {
+    name: 'Southern Poker Tour',
+    states: ['SA'],
+    about:
+      'Live tournament series around regional South Australia since 2020, from the Riverland and the Barossa to Hahndorf in the Adelaide Hills, with player of the series and year standings. Its 2026 stops include the Spencer Gulf Steel Series in Whyalla.',
+    website: 'https://southernpokertour.com.au/',
+    // The pair of aces from its oval logo (SPT-Logo.svg), on the logo's navy;
+    // ring is the logo's cyan brushstroke.
+    mark: {
+      iconSrc: '/images/rooms/southern-poker-tour-icon.webp',
+      primary: '#00AEEF',
+      iconBg: '#081640',
+    },
+  },
   {
     name: 'Perth Poker League',
     states: ['WA'],
