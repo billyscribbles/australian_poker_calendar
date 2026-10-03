@@ -1,11 +1,13 @@
-// Shorts: vertical video cards in a horizontal scroll row. These are teasers
-// only; no short has a page or a video behind it yet, so the cards do not link.
+// Shorts: vertical video cards in a horizontal scroll row. The real ones are
+// uploaded in the dashboard (/admin → Publish → Shorts) and reach the site
+// through lib/runtimeContent.js; a published short plays in an overlay. This
+// file holds the section's strings and the demo cards shown until then.
 //
-// Posters are generated artwork under public/images/shorts/, 360x640 WebP
+// Demo posters are generated artwork under public/images/shorts/, 360x640 WebP
 // (2x the 180x320 card), named after the short's slug.
 
 /**
- * @typedef {object} Short
+ * @typedef {object} Short  a demo card
  * @property {string} duration  "m:ss"
  * @property {string} title
  * @property {string} [posterSrc]
@@ -13,8 +15,11 @@
 
 export const shorts = {
   heading: 'Shorts',
+  homeLimit: 8,
+  play: 'Play',
+  close: 'Close video',
   /** @type {Short[]} */
-  items: [
+  demo: [
     {
       duration: '0:30',
       title: "She had the tens... and wasn't going anywhere.",

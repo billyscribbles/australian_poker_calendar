@@ -1,11 +1,13 @@
-// Stories: short in-house features, rendered as a card grid. These are
-// teasers only; none of them has a page yet, so the cards do not link.
+// Stories by Us: in-house articles. The real ones are written in the
+// dashboard (/admin → Publish → Stories) and reach the site through
+// lib/runtimeContent.js; this file holds the section's strings and the demo
+// cards shown while nothing has been published yet.
 //
-// Images are generated artwork under public/images/stories/, 540x300 WebP,
+// Demo images are generated artwork under public/images/stories/, 540x300 WebP,
 // named after the story's slug.
 
 /**
- * @typedef {object} Story
+ * @typedef {object} Story  a demo card
  * @property {string} date
  * @property {string} title
  * @property {string} [imageSrc]
@@ -13,8 +15,24 @@
 
 export const stories = {
   heading: 'Stories by Us',
+  allLink: 'All stories',
+  /** How many published stories the home page shows. */
+  homeLimit: 8,
+  path: '/stories',
+  index: {
+    title: 'Stories by Us',
+    description:
+      'Features, hands and reads from the Australian poker scene, written by the Australian Poker Calendar team.',
+    intro: 'Features, hands and reads from the Australian poker scene, written by us.',
+    empty: 'The first story is on its way.',
+  },
+  page: {
+    eyebrow: 'Stories by Us',
+    more: 'More stories',
+    back: 'All stories',
+  },
   /** @type {Story[]} */
-  items: [
+  demo: [
     {
       date: 'Oct 2',
       title: 'The River Card That Changed Everything',

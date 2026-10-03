@@ -26,6 +26,10 @@ import { recentChampions } from '../content/recentChampions.js'
 import { playersOfTheYear } from '../content/playersOfTheYear.js'
 import { asiaTours } from '../content/asiaTours.js'
 import { partners } from '../content/partners.js'
+import { fireEvent } from '@testing-library/react'
+import Stories from '../components/Stories.jsx'
+import Shorts from '../components/Shorts.jsx'
+import { setRuntimeContent } from '../lib/runtimeContent.js'
 
 const withRouter = (ui) => render(<MemoryRouter>{ui}</MemoryRouter>)
 
@@ -230,21 +234,20 @@ describe('home fixtures — shape each section renders', () => {
       hasLinks(list)
       for (const item of list) expect(item.title && item.date).toBeTruthy()
     }
-    // Stories are teasers with no page behind them: title, date and artwork, no link.
-    expect(stories.items.length).toBeGreaterThan(0)
-    for (const item of stories.items) {
+    // Demo stories are teasers with no page behind them: title, date and artwork, no link.
+    expect(stories.demo.length).toBeGreaterThan(0)
+    for (const item of stories.demo) {
       expect(item.title && item.date && item.imageSrc, item.title).toBeTruthy()
       expect(item.href, item.title).toBeUndefined()
       expect(existsSync(join('public', item.imageSrc)), item.imageSrc).toBe(true)
     }
   })
 
-  it('shorts have a duration, title and poster, and no link', () => {
-    // Teasers with no page or video behind them yet, like the stories.
-    expect(shorts.items.length).toBeGreaterThan(0)
-    for (const item of shorts.items) {
+  it('demo shorts have a duration, title and poster, and no video', () => {
+    expect(shorts.demo.length).toBeGreaterThan(0)
+    for (const item of shorts.demo) {
       expect(item.duration && item.title && item.posterSrc, item.title).toBeTruthy()
-      expect(item.href, item.title).toBeUndefined()
+      expect(item.video, item.title).toBeUndefined()
       expect(existsSync(join('public', item.posterSrc)), item.posterSrc).toBe(true)
     }
   })
@@ -311,5 +314,82 @@ describe('home fixtures — shape each section renders', () => {
     }
     expect(partners.items.length).toBeGreaterThan(0)
     for (const partner of partners.items) expect(partner.name).toBeTruthy()
+  })
+})
+
+describe('Stories and Shorts — published content replaces the demo cards', () => {
+  afterEach(() => setRuntimeContent(null))
+
+  const story = (n) => ({
+    slug: `story-${n}`,
+    href: `/stories/story-${n}`,
+    title: `Story ${n}`,
+    date: '2026-10-02',
+    standfirst: '',
+    heroImage: `/media/h${n}.webp`,
+    heroThumb: `/media/t${n}.webp`,
+    heroAlt: `Story ${n}`,
+    body: '<p>x</p>',
+    publishedAt: '2026-10-02T00:00:00.000Z',
+    updatedAt: '2026-10-02T00:00:00.000Z',
+  })
+  const short = (n) => ({
+    slug: `clip-${n}`,
+    title: `Clip ${n}`,
+    video: `/media/v${n}.mp4`,
+    poster: `/media/p${n}.webp`,
+    duration: 65,
+    publishedAt: '2026-10-02T00:00:00.000Z',
+  })
+
+  it('shows the demo cards while nothing is published', () => {
+    withRouter(<Stories />)
+    expect(screen.getByText(stories.demo[0].title)).toBeInTheDocument()
+    expect(screen.queryByRole('link')).toBeNull()
+    withRouter(<Shorts />)
+    expect(screen.getByText(shorts.demo[0].title)).toBeInTheDocument()
+    expect(screen.queryByRole('button')).toBeNull()
+  })
+
+  it('renders published stories as links, newest eight, with a link to them all', () => {
+    setRuntimeContent({ stories: Array.from({ length: 10 }, (_, i) => story(i + 1)) })
+    withRouter(<Stories />)
+    const links = screen.getAllByRole('link')
+    const cards = links.filter((a) => a.getAttribute('href').startsWith('/stories/'))
+    expect(cards).toHaveLength(stories.homeLimit)
+    expect(cards[0]).toHaveAttribute('href', '/stories/story-1')
+    expect(within(cards[0]).getByText('2 Oct')).toBeInTheDocument()
+    // alt="" gives the picture no img role, so query the element itself.
+    expect(cards[0].querySelector('img')).toHaveAttribute('src', '/media/t1.webp')
+    expect(screen.getByRole('link', { name: stories.allLink })).toHaveAttribute(
+      'href',
+      stories.path,
+    )
+    expect(screen.queryByText(stories.demo[0].title)).toBeNull()
+  })
+
+  it('renders published shorts as buttons that open and close the player', () => {
+    setRuntimeContent({ shorts: [short(1), short(2)] })
+    withRouter(<Shorts />)
+    const buttons = screen.getAllByRole('button')
+    expect(buttons).toHaveLength(2)
+    expect(within(buttons[0]).getByText('1:05')).toBeInTheDocument()
+    expect(screen.queryByLabelText(shorts.close)).toBeNull()
+
+    fireEvent.click(buttons[0])
+    const video = document.querySelector('video')
+    expect(video).toHaveAttribute('src', '/media/v1.mp4')
+    expect(video).toHaveAttribute('poster', '/media/p1.webp')
+    expect(document.body.style.overflow).toBe('hidden')
+
+    fireEvent.click(screen.getByLabelText(shorts.close))
+    expect(document.querySelector('video')).toBeNull()
+    expect(document.body.style.overflow).toBe('')
+    expect(document.activeElement).toBe(buttons[0])
+
+    // Escape closes the dialog natively, which fires `close` on it.
+    fireEvent.click(buttons[1])
+    fireEvent(document.querySelector('dialog'), new Event('close'))
+    expect(document.querySelector('video')).toBeNull()
   })
 })
