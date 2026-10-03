@@ -238,6 +238,7 @@ Do not claim work is done until these pass, with evidence:
 - **Never introduce Tailwind, styled-components, or TypeScript.**
 - **Never replace `yarn start` with `vite preview`, and never delete the prerender step.**
 - **Keep content and data in sync.** A series row in `festivals.js` should match its record in `data/`.
+- **Never commit until Billy has verified the change.** Make the edit, show what changed and how it was checked, then stop and wait for Billy's go-ahead before `git commit` (and never push without it). Approval for one commit does not cover the next.
 - **Keep commits atomic:** one concern per commit.
 - **Don't over-engineer.** Small, focused, easy to scan beats clever abstractions.
 - **Code must pass CI and Lighthouse before declaring done.** No "I'll fix it later".
