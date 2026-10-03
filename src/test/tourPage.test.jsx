@@ -102,7 +102,9 @@ describe('TourPage', () => {
     expect(screen.getByText(tourPage.noUpcoming(quiet))).toBeInTheDocument()
   })
 
-  it('renders every tour with no axe violations', async () => {
+  // One axe run per tour, in sequence: about 4 s alone, more under the full
+  // suite's parallel load, so the 5 s default is too tight.
+  it('renders every tour with no axe violations', { timeout: 20000 }, async () => {
     for (const tour of tourPages) {
       const { container, unmount } = wrap(tour.path, <TourPage path={tour.path} />)
       expect(await axe(container)).toHaveNoViolations()
