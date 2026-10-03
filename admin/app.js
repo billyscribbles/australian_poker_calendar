@@ -156,6 +156,8 @@ function overview() {
   const c = d.counts
   const t = state.traffic
   const week = t ? t.days.slice(-7).reduce((sum, day) => sum + day.views, 0) : null
+  const p = d.publishing
+  const drafts = p ? p.stories.total - p.stories.published : 0
   const stat = (label, value, tone = '', sub = '', href = '') =>
     `<a class="stat ${tone ? `stat--${tone}` : ''}" href="${esc(href)}"><dt>${esc(label)}</dt><dd>${esc(value)}${sub ? `<small>${esc(sub)}</small>` : ''}</dd></a>`
   const open = openEnquiries()
@@ -168,7 +170,14 @@ function overview() {
       ${stat('This week', c.jobs.soon, c.jobs.soon ? 'warning' : '', '', '#todo')}
       ${stat('New enquiries', open.length, open.length ? 'warning' : '', '', '#enquiries')}
       ${stat('Views, 7 days', week === null ? '–' : n(week), '', '', '#traffic')}
+      ${stat('Stories live', p ? p.stories.published : '–', '', drafts ? `${drafts} draft${drafts === 1 ? '' : 's'}` : '', '#stories')}
+      ${stat('Shorts live', p ? p.shorts.published : '–', '', '', '#shorts')}
     </dl>
+    ${
+      p?.renderer === 'error'
+        ? `<section class="card card--accent card--critical"><h2>Publishing is not reaching the site</h2><p>The server could not load the built pages, so published stories and shorts are not showing and story pages 404.</p><p class="sub">${esc(p.rendererError)} Run <code>yarn build</code> and restart the server.</p></section>`
+        : ''
+    }
     <section class="section"><h2>To do</h2>${jobsCards(d.jobs)}</section>
     <section class="section"><h2>Next 120 days</h2>${timeline(120)}</section>
     <section class="section"><h2>Latest enquiries</h2>${
