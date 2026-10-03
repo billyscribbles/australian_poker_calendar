@@ -167,9 +167,55 @@ describe('WhereToPlayPage', () => {
       screen.getByRole('heading', { level: 2, name: whereToPlay.leagues.heading }),
     ).toBeTruthy()
     for (const league of whereToPlay.leagues.list) {
-      expect(screen.getByRole('heading', { level: 3, name: league.name })).toBeTruthy()
+      expect(
+        screen.getAllByRole('heading', { level: 3, name: league.name }).length,
+      ).toBeGreaterThan(0)
     }
-    expect(screen.queryByRole('region', { name: whereToPlay.states[0].name })).toBeNull()
+    expect(document.getElementById('venues-panel-rooms')).toHaveAttribute('hidden')
+  })
+
+  it("opens the leagues tab on a state's leagues link, and stays there", () => {
+    const code = whereToPlay.leagues.states[0].code
+    window.history.replaceState(null, '', `/where-to-play#leagues-${code}`)
+    try {
+      renderPage()
+      const leagues = screen.getByRole('tab', { name: new RegExp(whereToPlay.tabs.leagues) })
+      expect(leagues).toHaveAttribute('aria-selected', 'true')
+      window.location.hash = `#leagues-${whereToPlay.leagues.states.at(-1).code}`
+      fireEvent(window, new HashChangeEvent('hashchange'))
+      expect(leagues).toHaveAttribute('aria-selected', 'true')
+    } finally {
+      window.history.replaceState(null, '', '/')
+    }
+  })
+
+  it('groups the leagues by state, a league under every state it plays in', () => {
+    const { states } = whereToPlay.leagues
+    const order = whereToPlay.states.map((s) => s.code)
+    // Only states that have a league, in the rooms tab's order.
+    expect(states.length).toBeGreaterThan(1)
+    expect(states.map((s) => s.code)).toEqual(order.filter((c) => states.some((s) => s.code === c)))
+    for (const state of states) {
+      expect(state.leagues.length, state.code).toBeGreaterThan(0)
+      for (const league of state.leagues) expect(league.states, league.name).toContain(state.code)
+      const expected = whereToPlay.leagues.list.filter((l) => l.states.includes(state.code))
+      expect(state.leagues.map((l) => l.name)).toEqual(expected.map((l) => l.name))
+    }
+
+    renderPage()
+    fireEvent.click(screen.getByRole('tab', { name: new RegExp(whereToPlay.tabs.leagues) }))
+    const jump = screen.getByRole('navigation', { name: whereToPlay.leagues.jumpLabel })
+    for (const state of states) {
+      const section = screen.getByRole('region', { name: whereToPlay.leagues.stateHeading(state) })
+      expect(section).toHaveAttribute('id', `leagues-${state.code}`)
+      for (const league of state.leagues) {
+        expect(within(section).getByRole('heading', { level: 3, name: league.name })).toBeTruthy()
+      }
+      expect(within(jump).getByRole('link', { name: new RegExp(state.name) })).toHaveAttribute(
+        'href',
+        `#leagues-${state.code}`,
+      )
+    }
   })
 
   it('renders with no axe violations', async () => {

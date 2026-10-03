@@ -37,7 +37,9 @@ export default function WhereToPlayPage() {
   const [tab, setTab] = useState('rooms')
 
   useEffect(() => {
-    const fromHash = () => setTab(window.location.hash === `#${leagues.id}` ? 'leagues' : 'rooms')
+    // #leagues, or a state's section on it (#leagues-NSW), is the leagues tab.
+    const fromHash = () =>
+      setTab(window.location.hash.startsWith(`#${leagues.id}`) ? 'leagues' : 'rooms')
     fromHash()
     window.addEventListener('hashchange', fromHash)
     return () => window.removeEventListener('hashchange', fromHash)
@@ -197,13 +199,57 @@ export default function WhereToPlayPage() {
                 </p>
               ))}
             </div>
-            <ul className="venues-grid">
-              {leagues.list.map((league) => (
-                <LeagueCard key={league.id} league={league} />
-              ))}
-            </ul>
+          </div>
+          <div className="container venues-browse">
+            <div className="venues-browse__group">
+              <span className="venues-browse__label" aria-hidden="true">
+                {stateNavHeading}
+              </span>
+              <nav aria-label={leagues.jumpLabel}>
+                <ul className="venues-states">
+                  {leagues.states.map((state) => (
+                    <li key={state.code}>
+                      <a className="venues-states__tile" href={`#leagues-${state.code}`}>
+                        <span className="venues-states__code" aria-hidden="true">
+                          {state.code}
+                        </span>
+                        <span className="venues-states__name">{state.name}</span>
+                        <span className="venues-states__count">
+                          {leagues.countLabel(state.leagues.length)}
+                        </span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            </div>
           </div>
         </section>
+
+        {leagues.states.map((state) => (
+          <section
+            key={state.code}
+            id={`leagues-${state.code}`}
+            className="venues-state"
+            aria-labelledby={`leagues-${state.code}-heading`}
+          >
+            <div className="container">
+              <div className="venues-state__head">
+                <h2 id={`leagues-${state.code}-heading`} className="venues-state__heading">
+                  {leagues.stateHeading(state)}
+                </h2>
+                <span className="venues-state__count">
+                  {leagues.countLabel(state.leagues.length)}
+                </span>
+              </div>
+              <ul className="venues-grid">
+                {state.leagues.map((league) => (
+                  <LeagueCard key={league.id} league={league} />
+                ))}
+              </ul>
+            </div>
+          </section>
+        ))}
       </div>
     </main>
   )

@@ -947,5 +947,15 @@ export const whereToPlay = {
     countLabel: (count) => `${count} ${count === 1 ? 'league' : 'leagues'}`,
     /** @type {LeagueCard[]} */
     list: leagueRows.map(leagueCard).sort((a, b) => a.name.localeCompare(b.name, 'en-AU')),
+    jumpLabel: 'Jump to a state’s leagues',
+    /** A state section's heading; also its region's accessible name. */
+    stateHeading: (state) => `Poker leagues in ${state.name}`,
   },
 }
+
+// The leagues tab, one section per state in the rooms tab's order: a league
+// is listed under every state it plays in, and a state with none is left out.
+whereToPlay.leagues.states = STATES.map((state) => ({
+  ...state,
+  leagues: whereToPlay.leagues.list.filter((league) => league.states.includes(state.code)),
+})).filter((state) => state.leagues.length > 0)
