@@ -70,4 +70,47 @@ describe('series status', () => {
     expect(levels).toEqual([...levels].sort())
     for (const j of status.jobs) expect(typeof j.slug).toBe('string')
   })
+
+  it('profiles every poker room from the tours, brands, venues and scrape', () => {
+    const codes = status.rooms.map((r) => r.code)
+    expect(codes).toEqual(status.calendar.tours.map((t) => t.code))
+    for (const room of status.rooms) {
+      expect(room.path).toBe(`/tours/${room.slug}`)
+      expect(room.website).toMatch(/^https?:\/\//)
+      expect(room.brand, room.code).not.toBeNull()
+      expect(room.logo.wordmark.ok, `${room.code} wordmark`).toBe(true)
+      // Every series on the calendar under this code, newest first within each phase.
+      const mine = status.series.filter((s) => s.tour === room.code).map((s) => s.slug)
+      expect([...room.live, ...room.upcoming, ...room.done].sort()).toEqual([...mine].sort())
+      expect(room.counts.series).toBe(mine.length)
+    }
+  })
+
+  it('merges every organiser record a room files under and lists where it deals', () => {
+    const kings = status.rooms.find((r) => r.code === 'KINGS')
+    expect(kings.name).toBe('Kings Poker')
+    expect(kings.contact.organisers).toEqual(
+      expect.arrayContaining(['Kings Poker Sydney', 'Kings Poker Newcastle']),
+    )
+    expect(kings.contact.emails).toContain('kingspokernewcastle@gmail.com')
+    expect(kings.venues.map((v) => v.name)).toContain('Blackbutt Hotel')
+    expect(kings.venues[0].address).toMatch(/NSW \d{4}$/)
+    expect(kings.cities).toEqual(expect.arrayContaining(['Sydney', 'Newcastle']))
+
+    // NPL is not on the scrape: no organiser block, but the room still profiles.
+    const npl = status.rooms.find((r) => r.code === 'NPL')
+    expect(npl.contact.organisers).toEqual([])
+    expect(npl.contact.websites).toContain('https://www.npl.com.au/')
+    expect(npl.venues.length).toBeGreaterThan(0)
+  })
+
+  it("rolls a room's open jobs up from its series", () => {
+    const oct20 = buildStatus('2026-10-20')
+    const apt = oct20.rooms.find((r) => r.code === 'APT')
+    const melb = find(oct20, 'APT Melbourne Champs II')
+    expect(apt.jobs).toEqual(
+      expect.arrayContaining(melb.jobs.map((j) => ({ ...j, slug: melb.slug, series: melb.name }))),
+    )
+    expect(apt.counts.jobs).toBe(apt.jobs.length)
+  })
 })

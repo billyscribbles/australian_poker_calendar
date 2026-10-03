@@ -414,6 +414,9 @@ code {
   background: var(--bg-raised);
   margin: 1px 3px 1px 0;
 }
+.tour:is(a) {
+  text-decoration: none;
+}
 .tour {
   display: inline-block;
   font-family: var(--display);
@@ -611,6 +614,134 @@ tbody th {
   position: relative;
 }
 
+/* Poker rooms */
+.room-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+}
+.room-card {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--tour);
+  border-radius: 10px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  min-width: 0;
+}
+.room-card:hover {
+  border-color: var(--tour);
+}
+.room-card__logo {
+  background: var(--tour-bg);
+  height: 88px;
+  padding: 12px 18px;
+}
+.room-card__logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.room-card__body {
+  padding: 12px 14px 14px;
+}
+.room-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+.room-hero {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+.room-hero__logo {
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  aspect-ratio: 4 / 3;
+  padding: 24px;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--tour) 40%, transparent);
+}
+.room-hero__logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.stats--compact {
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+}
+.swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+}
+.swatch {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+.swatch i {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.marks {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+.mark-cell__box {
+  height: 64px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  padding: 8px 10px;
+  margin-bottom: 6px;
+}
+.mark-cell__box img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.venues {
+  display: grid;
+  gap: 10px;
+}
+.art-grid--wide {
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+.schedule-fold > summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 14px;
+  margin-bottom: 10px;
+}
+.schedule-fold > summary::-webkit-details-marker {
+  display: none;
+}
+.schedule-fold > summary::before {
+  content: '▸';
+  color: var(--accent);
+  font-size: 0.9rem;
+}
+.schedule-fold[open] > summary::before {
+  content: '▾';
+}
+.schedule-fold > summary h2 {
+  margin: 0;
+}
+
 /* Detail */
 .detail-hero {
   display: grid;
@@ -749,7 +880,8 @@ tbody th {
   .main {
     padding: 20px 16px 48px;
   }
-  .detail-hero {
+  .detail-hero,
+  .room-hero {
     grid-template-columns: 1fr;
   }
 }

@@ -24,6 +24,8 @@ import { eventPages } from '../src/content/eventPages.js'
 import { heroEvent, sideEvents, ticker } from '../src/content/events.js'
 import { calendarPage } from '../src/content/calendarPage.js'
 import { tourBrands } from '../src/content/tourBrands.js'
+import { tourPages } from '../src/content/tourPages.js'
+import { pokerRooms } from '../src/content/pokerRooms.js'
 import { formatRange, toStamp } from '../src/lib/calendar.js'
 
 // Vitest runs this under jsdom, where import.meta.url is not a file: URL; the
@@ -321,6 +323,72 @@ export function buildStatus(today = melbourneToday()) {
     ...globalJobs.map((j) => ({ ...j, slug: '', series: '' })),
   ].sort((a, b) => LEVELS.indexOf(a.level) - LEVELS.indexOf(b.level))
 
+  // One profile per poker room: the operator behind a tour code, with its
+  // identity (content/tourBrands.js, calendarPage.tours), the strip tile
+  // (content/pokerRooms.js), the rooms it deals at (content/whereToPlay.js, via
+  // the tour page) and the organiser blocks the scrape filed its series under.
+  const organisers = timeline.organisers || []
+  const uniq = (list) => [...new Set(list.filter(Boolean))]
+  const rooms = tourPages.map((page) => {
+    const mine = series.filter((s) => s.tour === page.code)
+    const brands = new Set(
+      mine.map((s) => timeline.events.find((e) => e.url === s.source)?.tour_brand).filter(Boolean),
+    )
+    const records = organisers.filter((o) => brands.has(o.brand))
+    const tile = pokerRooms.rooms.find((r) => r.code === page.code) || null
+    const brand = tourBrands[page.code] || null
+    const mark = (src) => ({ src: src || '', ok: publicFile(src) })
+    const slugs = (phase) => mine.filter((s) => s.phase.key === phase).map((s) => s.slug)
+    const roomJobs = jobs.filter((j) => j.slug && mine.some((s) => s.slug === j.slug))
+    const next =
+      mine.find((s) => s.phase.key === 'live') || mine.find((s) => s.phase.key === 'upcoming')
+    return {
+      code: page.code,
+      label: page.label,
+      name: page.name,
+      fullName: tile?.name || page.name,
+      slug: page.slug,
+      path: page.path,
+      website: page.website,
+      brand,
+      logo: {
+        wordmark: mark(page.logoSrc),
+        icon: mark(page.iconSrc),
+        mono: mark(page.monoSrc),
+        tile: mark(tile?.logoSrc),
+        tone: tile?.tone || brand?.logo || 'light',
+      },
+      contact: {
+        organisers: uniq(records.flatMap((o) => o.organiser_names || [])).map((n) =>
+          n.replace(/\s*\(.*\)$/, ''),
+        ),
+        emails: uniq(records.flatMap((o) => o.email || [])),
+        phones: uniq(records.flatMap((o) => o.phone || [])),
+        websites: uniq([page.website, ...records.flatMap((o) => o.websites || [])]),
+      },
+      venues: page.venues.map((v) => ({
+        id: v.id,
+        name: v.name,
+        address: v.address,
+        state: v.state,
+        website: v.website,
+        shared: v.tours.filter((code) => code !== page.code),
+      })),
+      cities: page.cities.map((c) => c.name),
+      live: slugs('live'),
+      upcoming: slugs('upcoming'),
+      done: slugs('done'),
+      next: next?.slug || '',
+      jobs: roomJobs,
+      counts: {
+        series: mine.length,
+        withSchedule: mine.filter((s) => s.poster).length,
+        venues: page.venues.length,
+        jobs: roomJobs.length,
+      },
+    }
+  })
+
   const counts = {
     series: series.length,
     live: series.filter((s) => s.phase.key === 'live').length,
@@ -358,8 +426,9 @@ export function buildStatus(today = melbourneToday()) {
         series: series.filter((s) => s.tour === t.code).length,
       })),
     },
+    rooms,
     brands: tourBrands,
-    organisers: timeline.organisers || [],
+    organisers,
     dataFiles: scheduleFiles,
   }
 }

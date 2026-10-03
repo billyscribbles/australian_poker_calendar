@@ -46,6 +46,7 @@ describe('admin handler', () => {
     const data = await api.json()
     expect(data.today).toBe('2026-10-03')
     expect(data.series.length).toBeGreaterThan(10)
+    expect(data.rooms.length).toBe(data.calendar.tours.length)
     expect(data.site).toBe('')
   })
 

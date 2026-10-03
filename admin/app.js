@@ -1,5 +1,6 @@
 // Series dashboard. One fetch of /api/status, rendered by hash route:
-// #overview, #jobs, #series, #series/<slug>, #home, #calendar, #data, #contacts.
+// #overview, #jobs, #series, #series/<slug>, #rooms, #rooms/<code>, #home,
+// #calendar, #data, #contacts.
 // Plain DOM and template strings; nothing to build.
 
 const state = {
@@ -13,6 +14,7 @@ const NAV = [
   ['overview', 'Overview'],
   ['jobs', 'Jobs'],
   ['series', 'Series'],
+  ['rooms', 'Poker rooms'],
   ['home', 'Home page'],
   ['calendar', 'Calendar page'],
   ['data', 'Schedules & data'],
@@ -39,8 +41,9 @@ const levelPill = (level) => pill(LEVEL[level].tone, level)
 const phasePill = (s) => pill(PHASE_TONE[s.phase.key], s.phase.label)
 const tour = (code) => {
   const brand = state.data.brands[code] || {}
-  return `<span class="tour" style="--tour:${esc(brand.primary || '')}">${esc(code)}</span>`
+  return `<a class="tour" href="#rooms/${esc(code)}" style="--tour:${esc(brand.primary || '')}" title="${esc(roomOf(code)?.name || code)}">${esc(code)}</a>`
 }
+const roomOf = (code) => state.data.rooms.find((r) => r.code === code)
 const check = (ok, text, badText = text) =>
   ok ? `<span class="ok">✓ ${esc(text)}</span>` : `<span class="no">✗ ${esc(badText)}</span>`
 const seriesLink = (s) => `<a href="#series/${esc(s.slug)}">${esc(s.name)}</a>`
@@ -284,7 +287,7 @@ function seriesDetail(slug) {
   ].join('')
 
   return `
-    ${pageHead(s.name, `${esc(s.dates)} · ${s.days} days · ${esc(s.place)}`, `<a href="#series">Series</a> / ${esc(s.tour)}`)}
+    ${pageHead(s.name, `${esc(s.dates)} · ${s.days} days · ${esc(s.place)}`, `<a href="#series">Series</a> / <a href="#rooms/${esc(s.tour)}">${esc(roomOf(s.tour)?.name || s.tour)}</a>`)}
     <div class="detail-hero">
       <div class="grid" style="gap:16px">
         <div>${tour(s.tour)} ${phasePill(s)} ${s.status ? pill('critical', s.status) : ''}</div>
@@ -390,6 +393,166 @@ function scheduleTable(s) {
           </tr>`
         })
         .join('')}</tbody></table></div></section>`
+}
+
+function roomsView() {
+  const d = state.data
+  const card = (r) => {
+    const next = r.next ? bySlug(r.next) : null
+    const open = r.jobs.length
+    return `<a class="room-card" href="#rooms/${esc(r.code)}" style="--tour:${esc(r.brand?.primary || '#8e8e93')};--tour-bg:${esc(r.brand?.iconBg || '#0a0a0a')}">
+      <div class="room-card__logo">${r.logo.tile.ok ? `<img src="${esc(r.logo.tile.src)}" alt="">` : `<span class="no">✗ no logo</span>`}</div>
+      <div class="room-card__body">
+        <strong>${esc(r.name)}</strong>
+        <div class="sub">${esc(r.cities.join(', ') || '—')}</div>
+        <div class="room-card__meta">
+          <span class="tag">${r.counts.series} series</span>
+          <span class="tag">${r.counts.venues} ${r.counts.venues === 1 ? 'venue' : 'venues'}</span>
+          ${open ? `<span class="pill pill--${LEVEL[r.jobs[0].level].tone}">${open} job${open === 1 ? '' : 's'}</span>` : ''}
+        </div>
+        <div class="sub" style="margin-top:6px">${next ? `${phasePill(next)} ${esc(next.name)}` : '<span class="na">nothing upcoming</span>'}</div>
+      </div>
+    </a>`
+  }
+  const active = d.rooms.filter((r) => r.live.length || r.upcoming.length)
+  const quiet = d.rooms.filter((r) => !r.live.length && !r.upcoming.length)
+  return `
+    ${pageHead('Poker rooms', `${d.rooms.length} operators on the calendar. Identity from <code>src/content/tourBrands.js</code> and <code>calendarPage.js</code>, venues from <code>whereToPlay.js</code>, contacts from the APS scrape.`)}
+    <section class="section"><h2>With series coming up <span class="count">${active.length}</span></h2>
+      <div class="room-grid">${active.map(card).join('')}</div></section>
+    ${
+      quiet.length
+        ? `<section class="section"><h2>Nothing scheduled <span class="count">${quiet.length}</span></h2>
+      <div class="room-grid">${quiet.map(card).join('')}</div></section>`
+        : ''
+    }`
+}
+
+function roomDetail(code) {
+  const r = roomOf(code)
+  if (!r)
+    return `${pageHead('Not found', `No poker room with the code ${esc(code)}.`)}<p><a href="#rooms">Back to poker rooms</a></p>`
+  const b = r.brand
+  const c = r.contact
+  const row = (dt, dd) => (dd ? `<dt>${esc(dt)}</dt><dd>${dd}</dd>` : '')
+  const mark = (label, m, bg) =>
+    `<div class="mark-cell"><div class="mark-cell__box" style="background:${esc(bg)}">${m.ok ? `<img src="${esc(m.src)}" alt="">` : `<span class="no">✗</span>`}</div><div class="sub">${esc(label)}<br>${m.src ? `<code>${esc(m.src.split('/').pop())}</code>` : '<span class="na">none</span>'}</div></div>`
+  const swatch = (label, hex) =>
+    hex
+      ? `<span class="swatch"><i style="background:${esc(hex)}"></i>${esc(label)} <code>${esc(hex)}</code></span>`
+      : ''
+  const live = r.live.map(bySlug)
+  const upcoming = r.upcoming.map(bySlug)
+  const done = r.done.map(bySlug).reverse()
+  const current = [...live, ...upcoming]
+
+  const seriesCard = (s) => `<div class="card art-card">
+      ${s.imageSrc && s.imageExists ? `<img src="${esc(s.imageSrc)}" alt="">` : `<div class="placeholder">${s.imageSrc ? 'file missing' : 'no poster art'}</div>`}
+      <div class="caption">
+        <strong>${seriesLink(s)}</strong>
+        <div class="sub">${esc(s.dates)} · ${esc(s.place)}</div>
+        <div style="margin-top:6px">${phasePill(s)} ${s.poster ? pill('good', `schedule · ${s.scheduleRows} rows`) : pill('warning', 'no schedule yet')}</div>
+        ${s.jobs.length ? `<div class="sub" style="margin-top:6px">${levelPill(s.jobs[0].level)} ${esc(s.jobs[0].text)}</div>` : ''}
+      </div>
+    </div>`
+
+  const schedules = current.filter((s) => s.schedule)
+
+  return `
+    ${pageHead(r.name, `${esc(r.fullName !== r.name ? `${r.fullName} · ` : '')}${r.counts.series} series on the calendar · ${esc(r.cities.join(', ') || 'no city yet')}`, `<a href="#rooms">Poker rooms</a> / ${esc(r.code)}`)}
+    <div class="room-hero" style="--tour:${esc(b?.primary || '#8e8e93')};--tour-2:${esc(b?.secondary || '#8e8e93')}">
+      <div class="room-hero__logo" style="background:${esc(b?.iconBg || '#0a0a0a')}">
+        ${r.logo.wordmark.ok ? `<img src="${esc(r.logo.wordmark.src)}" alt="">` : `<span class="no">✗ ${esc(r.logo.wordmark.src || 'no wordmark')}</span>`}
+      </div>
+      <div class="grid" style="gap:14px">
+        <div class="links">
+          ${external(r.website, `Official site · ${host(r.website)}`)}
+          <a href="${esc(siteUrl(r.path))}" target="_blank" rel="noopener noreferrer">Tour page on site ↗</a>
+          ${c.emails[0] ? `<a href="mailto:${esc(c.emails[0])}">Email ↗</a>` : ''}
+        </div>
+        <dl class="stats stats--compact">
+          <div class="stat ${live.length ? 'stat--good' : ''}"><dt>Live</dt><dd>${live.length}</dd></div>
+          <div class="stat"><dt>Upcoming</dt><dd>${upcoming.length}</dd></div>
+          <div class="stat"><dt>Finished</dt><dd>${done.length}</dd></div>
+          <div class="stat"><dt>Schedules up</dt><dd>${r.counts.withSchedule}<small>of ${r.counts.series}</small></dd></div>
+          <div class="stat ${r.jobs.length && r.jobs[0].level === 'now' ? 'stat--critical' : r.jobs.length ? 'stat--warning' : ''}"><dt>Open jobs</dt><dd>${r.jobs.length}</dd></div>
+        </dl>
+        ${r.jobs.length ? `<section class="card card--accent card--${LEVEL[r.jobs[0].level].tone}"><h3>Jobs <span class="count">${r.jobs.length}</span></h3><ul class="plain">${r.jobs.map((j) => `<li>${levelPill(j.level)} <strong>${seriesLink(bySlug(j.slug))}</strong> ${esc(j.text)}</li>`).join('')}</ul></section>` : ''}
+      </div>
+    </div>
+
+    <div class="section grid grid--2">
+      <section class="card"><h3>Profile</h3><dl class="kv">
+        ${row('Name', esc(r.name))}
+        ${r.fullName !== r.name ? row('Strip tile reads', esc(r.fullName)) : ''}
+        ${row('Code', `<code>${esc(r.code)}</code> <span class="muted">· label ${esc(r.label)}</span>`)}
+        ${row('Website', external(r.website, r.website))}
+        ${row('Site page', `<a href="${esc(siteUrl(r.path))}" target="_blank" rel="noopener noreferrer"><code>${esc(r.path)}</code></a>`)}
+        ${row('Cities', esc(r.cities.join(', ')))}
+        ${row('Series', `${r.counts.series} on the calendar · ${r.counts.withSchedule} with a schedule`)}
+      </dl></section>
+
+      <section class="card"><h3>Contact</h3>${
+        c.organisers.length || c.emails.length || c.phones.length
+          ? `<dl class="kv">
+              ${row('Listed as', esc(c.organisers.join(', ')))}
+              ${row('Email', c.emails.map((e) => `<a href="mailto:${esc(e)}">${esc(e)}</a>`).join('<br>'))}
+              ${row('Phone', esc(c.phones.join(' · ')))}
+              ${row('Links', c.websites.map((w) => external(w, w.replace(/^https?:\/\//, ''))).join('<br>'))}
+            </dl>`
+          : `<p class="muted">No organiser block on the APS scrape. Use the operator site: ${external(r.website, host(r.website))}.</p>`
+      }</section>
+
+      <section class="card"><h3>Brand</h3>${
+        b
+          ? `<div class="swatches">${swatch('Primary', b.primary)}${swatch('Secondary', b.secondary)}${swatch('Icon backing', b.iconBg)}</div>
+             <dl class="kv" style="margin-top:12px">${row('Mark tone', esc(b.logo))}${row('Sampled from', esc(b.source))}</dl>`
+          : '<p class="no">✗ No profile in tourBrands.js; the site falls back to gold.</p>'
+      }
+        <div class="marks">
+          ${mark('Wordmark', r.logo.wordmark, b?.iconBg || '#0a0a0a')}
+          ${mark('Icon', r.logo.icon, b?.iconBg || '#0a0a0a')}
+          ${mark('Mono', r.logo.mono, '#0a0a0a')}
+          ${r.logo.tile.src !== r.logo.wordmark.src ? mark('Strip tile', r.logo.tile, '#0a0a0a') : ''}
+        </div>
+      </section>
+
+      <section class="card"><h3>Where it deals <span class="count">${r.venues.length}</span></h3>${
+        r.venues.length
+          ? `<ul class="plain venues">${r.venues
+              .map(
+                (v) =>
+                  `<li><strong>${esc(v.name)}</strong><div class="sub">${esc(v.address)}</div><div class="sub">${v.website ? external(v.website, host(v.website)) : ''}${v.shared.length ? ` · shared with ${v.shared.map((code) => tour(code)).join(' ')}` : ''}</div></li>`,
+              )
+              .join('')}</ul>`
+          : '<p class="muted">No venue in whereToPlay.js lists this room.</p>'
+      }</section>
+    </div>
+
+    <section class="section"><h2>Upcoming series <span class="count">${current.length}</span></h2>
+      ${current.length ? `<div class="art-grid art-grid--wide">${current.map(seriesCard).join('')}</div>` : '<p class="muted">Nothing live or upcoming on the calendar for this room.</p>'}
+    </section>
+
+    ${schedules
+      .map(
+        (s, i) => `<details class="section schedule-fold" ${i === 0 ? 'open' : ''}>
+          <summary><h2>${esc(s.name)} schedule <span class="count">${s.scheduleRows} rows</span></h2><span class="sub">${esc(s.dates)} · ${phasePill(s)} · ${seriesLink(s)}</span></summary>
+          ${scheduleTable(s)
+            .replace(/^<section class="section">.*?<\/h2>/, '')
+            .replace(/<\/section>$/, '')}
+        </details>`,
+      )
+      .join('')}
+
+    ${
+      done.length
+        ? `<section class="section"><h2>Earlier series <span class="count">${done.length}</span></h2>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Series</th><th>Dates</th><th>Place</th><th>Schedule</th><th>Poster</th></tr></thead>
+            <tbody>${done.map((s) => `<tr class="clickable row--done" data-href="#series/${esc(s.slug)}"><td>${seriesLink(s)}</td><td class="nowrap">${esc(s.dates)}</td><td>${esc(s.place)}</td><td>${s.poster ? check(true, `${s.scheduleRows} rows`) : '<span class="na">never posted</span>'}</td><td>${s.imageSrc ? check(s.imageExists, 'yes', 'file missing') : '<span class="na">none</span>'}</td></tr>`).join('')}</tbody>
+          </table></div></section>`
+        : ''
+    }`
 }
 
 function homeView() {
@@ -586,7 +749,9 @@ function renderNav() {
         ? `<span class="badge ${c.jobs.now ? 'badge--critical' : ''}">${c.jobs.now + c.jobs.soon + c.jobs.later}</span>`
         : key === 'series' && c
           ? `<span class="badge">${c.series}</span>`
-          : ''
+          : key === 'rooms' && c
+            ? `<span class="badge">${state.data.rooms.length}</span>`
+            : ''
     return `<a href="#${key}" class="${page === key ? 'active' : ''}">${esc(label)}${badge}</a>`
   }).join('')
 }
@@ -607,6 +772,7 @@ function render() {
     overview,
     jobs: jobsView,
     series: () => (param ? seriesDetail(param) : seriesView()),
+    rooms: () => (param ? roomDetail(param) : roomsView()),
     home: homeView,
     calendar: calendarView,
     data: dataView,
@@ -638,6 +804,12 @@ function bindFilters() {
 async function load() {
   try {
     const res = await fetch(`api/status${state.today ? `?today=${state.today}` : ''}`)
+    if (res.status === 401) {
+      // The session cookie has expired or the password changed: the server
+      // answers this same URL with the sign-in page.
+      location.replace('./')
+      return
+    }
     if (!res.ok) throw new Error(await res.text())
     state.data = await res.json()
     state.error = ''
