@@ -337,6 +337,17 @@
   white-space: normal;
 }
 
+/* Every second day lifts to the card black and its day band to the gold-tinted
+ * selected surface, so the eye finds the day boundary without reading the
+ * dates. Declared before the gold and red fills so those still win. */
+.schedule__row--alt .schedule__cell {
+  background: var(--color-bg-card);
+}
+
+.schedule__row--alt .schedule__day {
+  background: var(--color-bg-selected);
+}
+
 /* The poster's gold rows: the series' feature events. */
 .schedule__row--featured .schedule__cell {
   background: var(--color-accent);
@@ -691,6 +702,16 @@
 
   .schedule__cell:empty {
     display: none;
+  }
+
+  /* Cards already stand apart under their own day band: drop the alternate
+   * tints so the cells and band read like every other day's. */
+  .schedule__row--alt .schedule__cell {
+    background: none;
+  }
+
+  .schedule__row--alt .schedule__day {
+    background: var(--color-bg);
   }
 
   .schedule__row--featured,

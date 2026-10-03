@@ -190,7 +190,7 @@ export default function EventPage({ path }) {
               </tr>
             </thead>
             <tbody>
-              {days.map(({ date, rows }) => {
+              {days.map(({ date, rows }, dayIndex) => {
                 const { day, weekday } = dayLabel(date)
                 return (
                   <Fragment key={date}>
@@ -199,6 +199,7 @@ export default function EventPage({ path }) {
                         key={`${date}-${row.time}-${row.name}`}
                         className={[
                           'schedule__row',
+                          dayIndex % 2 === 1 && 'schedule__row--alt',
                           row.featured && 'schedule__row--featured',
                           row.feeds && 'schedule__row--feeds',
                         ]

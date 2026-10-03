@@ -77,6 +77,16 @@ function describeSeriesPage({ key, path, rows, days, sample }) {
       expect(container.querySelectorAll('.schedule__row--feeds')).toHaveLength(feeds)
     })
 
+    it('tints every second day so consecutive days read apart', () => {
+      const { container } = renderPage(key)
+      const dates = [...new Set(event.schedule.map((r) => r.date))]
+      const altRows = event.schedule.filter((r) => dates.indexOf(r.date) % 2 === 1).length
+      expect(altRows).toBeGreaterThan(0)
+      expect(container.querySelectorAll('.schedule__row--alt')).toHaveLength(altRows)
+      const first = container.querySelector('.schedule__row')
+      expect(first.classList.contains('schedule__row--alt')).toBe(false)
+    })
+
     it('shows only the columns its poster fills', () => {
       renderPage(key)
       const headers = screen.getAllByRole('columnheader').map((th) => th.textContent)
