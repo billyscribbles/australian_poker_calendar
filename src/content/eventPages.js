@@ -33,6 +33,19 @@ export const schedulePending = {
   link: 'Official site',
 }
 
+/**
+ * The "Min buy-in" and "Max buy-in" controls above a schedule. `steps` is the
+ * ladder both selects offer; a page shows only the rungs between its cheapest
+ * and dearest buy-in, and no controls at all when every event costs the same.
+ */
+export const scheduleFilter = {
+  min: 'Min buy-in',
+  max: 'Max buy-in',
+  any: 'Any',
+  steps: [100, 150, 200, 250, 300, 400, 500, 750, 1000, 1500, 2000, 2500, 5000, 10000],
+  empty: 'No events in this buy-in range.',
+}
+
 const byPath = new Map(Object.values(eventPages).map((event) => [event.path, event]))
 
 /**

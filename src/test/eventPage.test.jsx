@@ -5,11 +5,12 @@
 // the festival row and say the schedule is coming. routes.js passes the path.
 import { describe, it, expect } from 'vitest'
 import { render, screen, within } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
 import { axe, toHaveNoViolations } from 'jest-axe'
 import EventPage from '../pages/EventPage.jsx'
-import { eventPages, eventFor, schedulePending } from '../content/eventPages.js'
+import { eventPages, eventFor, schedulePending, scheduleFilter } from '../content/eventPages.js'
 import { festivals } from '../content/festivals.js'
 import { ROUTES } from '../routes.js'
 import { existsSync } from 'node:fs'
@@ -85,6 +86,131 @@ function describeSeriesPage({ key, path, rows, days, sample }) {
       expect(container.querySelectorAll('.schedule__row--alt')).toHaveLength(altRows)
       const first = container.querySelector('.schedule__row')
       expect(first.classList.contains('schedule__row--alt')).toBe(false)
+    })
+
+    it('trims the grid to a maximum buy-in and restores it on "Any"', async () => {
+      const user = userEvent.setup()
+      const { container } = renderPage(key)
+      const amounts = event.schedule
+        .filter((r) => r.buyIn)
+        .map((r) => Number(r.buyIn.replace(/[^0-9]/g, '')))
+      // Only rungs that hide something are offered, between the cheapest and
+      // dearest event; a series priced at one figure has no control at all.
+      const expected = scheduleFilter.steps.filter(
+        (s) => s >= Math.min(...amounts) && s < Math.max(...amounts),
+      )
+      const select = screen.queryByRole('combobox', { name: scheduleFilter.max })
+      if (expected.length === 0) {
+        expect(select).toBeNull()
+        expect(screen.queryByRole('combobox', { name: scheduleFilter.min })).toBeNull()
+        return
+      }
+      const options = within(select)
+        .getAllByRole('option')
+        .map((o) => o.value)
+      expect(options[0]).toBe('')
+      const steps = options.slice(1).map(Number)
+      expect(steps).toEqual(expected)
+
+      const max = steps[0]
+      await user.selectOptions(select, String(max))
+      const rows = [...container.querySelectorAll('.schedule__row')]
+      expect(rows.length).toBeLessThan(event.schedule.length)
+      expect(rows.length).toBeGreaterThan(0)
+      // Every priced row left costs the maximum or less...
+      const prices = rows
+        .map((row) => row.querySelector('.schedule__total')?.textContent)
+        .filter(Boolean)
+        .map((text) => Number(text.replace(/[^0-9]/g, '')))
+      expect(prices.length).toBeGreaterThan(0)
+      expect(prices.every((p) => p <= max)).toBe(true)
+      // ...and a Day 2 of an event over the cap goes with it.
+      const dearest = event.schedule.find(
+        (r) => r.buyIn && Number(r.buyIn.replace(/[^0-9]/g, '')) === Math.max(...amounts),
+      )
+      const dearStem = dearest.number || dearest.name.split(' – ')[0]
+      const dearDay2 = event.schedule.find(
+        (r) => !r.buyIn && (r.number || r.name.split(' – ')[0]) === dearStem,
+      )
+      if (dearDay2) expect(within(table()).queryByText(dearDay2.name)).toBeNull()
+      // The columns are the full poster's, so the grid keeps its shape.
+      expect(screen.getAllByRole('columnheader').length).toBeGreaterThan(3)
+
+      await user.selectOptions(select, '')
+      expect(container.querySelectorAll('.schedule__row')).toHaveLength(event.schedule.length)
+
+      function table() {
+        return screen.getByRole('table', { name: /schedule/i })
+      }
+    })
+
+    it('trims the grid to a minimum buy-in, and the two ends never cross', async () => {
+      const user = userEvent.setup()
+      const { container } = renderPage(key)
+      const amounts = event.schedule
+        .filter((r) => r.buyIn)
+        .map((r) => Number(r.buyIn.replace(/[^0-9]/g, '')))
+      const cheapest = Math.min(...amounts)
+      const dearest = Math.max(...amounts)
+      const expected = scheduleFilter.steps.filter((s) => s > cheapest && s <= dearest)
+      const min = screen.queryByRole('combobox', { name: scheduleFilter.min })
+      if (expected.length === 0) {
+        expect(min).toBeNull()
+        return
+      }
+      const steps = within(min)
+        .getAllByRole('option')
+        .slice(1)
+        .map((o) => Number(o.value))
+      expect(steps).toEqual(expected)
+
+      const floor = steps[steps.length - 1]
+      await user.selectOptions(min, String(floor))
+      const rows = [...container.querySelectorAll('.schedule__row')]
+      expect(rows.length).toBeLessThan(event.schedule.length)
+      const prices = rows
+        .map((row) => row.querySelector('.schedule__total')?.textContent)
+        .filter(Boolean)
+        .map((text) => Number(text.replace(/[^0-9]/g, '')))
+      expect(prices.length).toBeGreaterThan(0)
+      expect(prices.every((p) => p >= floor)).toBe(true)
+
+      // A ceiling under the floor resets the floor to "Any", so the grid is
+      // never asked for a range that cannot exist.
+      const max = screen.getByRole('combobox', { name: scheduleFilter.max })
+      const ceiling = within(max)
+        .getAllByRole('option')
+        .slice(1)
+        .map((o) => Number(o.value))
+        .find((s) => s < floor)
+      if (ceiling) {
+        await user.selectOptions(max, String(ceiling))
+        expect(min).toHaveValue('')
+        expect(max).toHaveValue(String(ceiling))
+        await user.selectOptions(min, String(floor))
+        expect(max).toHaveValue('')
+        expect(min).toHaveValue(String(floor))
+      }
+    })
+
+    it('says so when a range matches nothing, inside the grid', async () => {
+      const user = userEvent.setup()
+      const { container } = renderPage(key)
+      const amounts = event.schedule
+        .filter((r) => r.buyIn)
+        .map((r) => Number(r.buyIn.replace(/[^0-9]/g, '')))
+      // A rung both selects offer that prices no event: floor = ceiling = rung.
+      const gap = scheduleFilter.steps.find(
+        (s) => s > Math.min(...amounts) && s < Math.max(...amounts) && !amounts.includes(s),
+      )
+      if (!gap) return
+      await user.selectOptions(screen.getByRole('combobox', { name: scheduleFilter.min }), `${gap}`)
+      await user.selectOptions(screen.getByRole('combobox', { name: scheduleFilter.max }), `${gap}`)
+      expect(container.querySelectorAll('.schedule__row:not(.schedule__row--empty)')).toHaveLength(
+        0,
+      )
+      expect(screen.getByText(scheduleFilter.empty)).toBeInTheDocument()
+      expect(screen.getAllByRole('columnheader').length).toBeGreaterThan(3)
     })
 
     it('shows only the columns its poster fills', () => {

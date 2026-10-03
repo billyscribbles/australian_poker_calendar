@@ -1,9 +1,9 @@
-import { Fragment } from 'react'
-import { MapPin, CalendarClock } from 'lucide-react'
+import { Fragment, useState } from 'react'
+import { MapPin, CalendarClock, ChevronDown } from 'lucide-react'
 import SEO from '../lib/seo.jsx'
 import { eventLd, breadcrumbLd } from '../lib/structuredData.js'
 import { calendarPage } from '../content/calendarPage.js'
-import { eventFor, schedulePending } from '../content/eventPages.js'
+import { eventFor, schedulePending, scheduleFilter } from '../content/eventPages.js'
 import { tourBrandStyle } from '../content/tourBrands.js'
 import TourLogo from '../components/TourLogo.jsx'
 import SectionHeading from '../components/SectionHeading.jsx'
@@ -29,6 +29,79 @@ function byDay(schedule) {
     else days.push({ date: row.date, rows: [row] })
   }
   return days
+}
+
+/** "$1,500" → 1500; '' → NaN. */
+const parseBuyIn = (buyIn) => Number(buyIn.replace(/[^0-9]/g, ''))
+
+/** 1500 → "$1,500", without locale differences between the build and the browser. */
+const formatBuyIn = (amount) => `$${String(amount).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`
+
+/**
+ * What ties a Day 2 or final-table row (no buy-in, "Qualifiers only") to the
+ * event it continues: the poster's event number, else the name before the
+ * dash ("Showdown Cup – Day 2" and "Showdown Cup – Flight 1A" share a stem).
+ */
+const stem = (row) => row.number || row.name.split(' – ')[0]
+
+/**
+ * The rows priced from `min` to `max` (0 for no floor, 0 for no ceiling),
+ * plus the later days of those events. A continuation row whose event the
+ * schedule never prices stays put.
+ */
+function filterByBuyIn(schedule, min, max) {
+  if (!min && !max) return schedule
+  const inRange = (row) => {
+    const amount = parseBuyIn(row.buyIn)
+    return amount >= (min || 0) && amount <= (max || Infinity)
+  }
+  const priced = schedule.filter((row) => row.buyIn)
+  const known = new Set(priced.map(stem))
+  const kept = new Set(priced.filter(inRange).map(stem))
+  return schedule.filter((row) =>
+    row.buyIn ? inRange(row) : kept.has(stem(row)) || !known.has(stem(row)),
+  )
+}
+
+/**
+ * The rungs of the ladder that would actually hide something on this
+ * schedule: as a floor, those above the cheapest event; as a ceiling, those
+ * below the dearest.
+ */
+function buyInSteps(schedule) {
+  const amounts = schedule.filter((row) => row.buyIn).map((row) => parseBuyIn(row.buyIn))
+  if (amounts.length === 0) return { min: [], max: [] }
+  const cheapest = Math.min(...amounts)
+  const dearest = Math.max(...amounts)
+  return {
+    min: scheduleFilter.steps.filter((step) => step > cheapest && step <= dearest),
+    max: scheduleFilter.steps.filter((step) => step >= cheapest && step < dearest),
+  }
+}
+
+/** One labelled select: "Any", then the rungs it offers. */
+function BuyInSelect({ label, value, steps, onChange }) {
+  return (
+    <label className="schedule-filter">
+      <span className="schedule-filter__label">{label}</span>
+      <span className="schedule-filter__control">
+        <select className="schedule-filter__select" value={value} onChange={onChange}>
+          <option value="">{scheduleFilter.any}</option>
+          {steps.map((step) => (
+            <option key={step} value={step}>
+              {formatBuyIn(step)}
+            </option>
+          ))}
+        </select>
+        <ChevronDown
+          size={16}
+          strokeWidth={2.25}
+          aria-hidden="true"
+          className="schedule-filter__chevron"
+        />
+      </span>
+    </label>
+  )
 }
 
 // Every column a poster can carry. A page shows only the ones its schedule
@@ -83,12 +156,26 @@ function Cell({ col, row }) {
  * `path` is the route's own path; content/eventPages.js resolves it.
  */
 export default function EventPage({ path }) {
+  // '' is "Any": the full schedule, which is also what the prerender ships.
+  // A floor above the ceiling (or the reverse) resets the other to "Any".
+  const [minBuyIn, setMinBuyIn] = useState('')
+  const [maxBuyIn, setMaxBuyIn] = useState('')
+  const pickMin = (e) => {
+    setMinBuyIn(e.target.value)
+    if (maxBuyIn && Number(e.target.value) > Number(maxBuyIn)) setMaxBuyIn('')
+  }
+  const pickMax = (e) => {
+    setMaxBuyIn(e.target.value)
+    if (minBuyIn && Number(e.target.value) < Number(minBuyIn)) setMinBuyIn('')
+  }
   const event = eventFor(path)
   if (!event) return null
   const { tour, title, dates, presentedBy, venue, venueDetail, image, status, schedule } = event
-  const days = byDay(schedule ?? [])
+  const steps = buyInSteps(schedule ?? [])
+  const days = byDay(filterByBuyIn(schedule ?? [], Number(minBuyIn), Number(maxBuyIn)))
+  // Columns come from the whole schedule so the grid keeps its shape while filtered.
   const columns = COLUMNS.filter(
-    (col) => col.key === 'event' || days.some(({ rows }) => rows.some((row) => row[col.key])),
+    (col) => col.key === 'event' || (schedule ?? []).some((row) => row[col.key]),
   ).map((col) => (col.key === 'buyIn' ? { ...col, sub: event.buyInSub } : col))
   const hasNotes = event.notes.length > 0 || event.sponsors.length > 0
   const calendarYear = `/poker-calendar/${event.start.slice(0, 4)}`
@@ -174,7 +261,25 @@ export default function EventPage({ path }) {
 
       {schedule && (
         <section className="container event-schedule" aria-labelledby="schedule-heading">
-          <SectionHeading id="schedule-heading">{schedulePending.heading}</SectionHeading>
+          <div className="event-schedule__bar">
+            <SectionHeading id="schedule-heading">{schedulePending.heading}</SectionHeading>
+            {steps.max.length > 0 && (
+              <div className="schedule-filters">
+                <BuyInSelect
+                  label={scheduleFilter.min}
+                  value={minBuyIn}
+                  steps={steps.min}
+                  onChange={pickMin}
+                />
+                <BuyInSelect
+                  label={scheduleFilter.max}
+                  value={maxBuyIn}
+                  steps={steps.max}
+                  onChange={pickMax}
+                />
+              </div>
+            )}
+          </div>
           <table className="schedule" aria-labelledby="schedule-heading">
             <thead>
               <tr className="schedule__head">
@@ -190,6 +295,13 @@ export default function EventPage({ path }) {
               </tr>
             </thead>
             <tbody>
+              {days.length === 0 && (
+                <tr className="schedule__row schedule__row--empty">
+                  <td className="schedule__cell schedule__empty" colSpan={columns.length + 1}>
+                    {scheduleFilter.empty}
+                  </td>
+                </tr>
+              )}
               {days.map(({ date, rows }, dayIndex) => {
                 const { day, weekday } = dayLabel(date)
                 return (

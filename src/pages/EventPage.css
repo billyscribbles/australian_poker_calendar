@@ -202,8 +202,159 @@
 
 /* Schedule table -------------------------------------------------------- */
 
-.event-schedule .section-heading {
+.event-schedule__bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 24px;
   margin-bottom: 20px;
+}
+
+.event-schedule__bar .section-heading {
+  flex: 1 1 240px;
+  margin-bottom: 0;
+}
+
+/* "Min buy-in" and "Max buy-in", each a select set like a column header so
+ * the pair reads as part of the table it trims. The browser's arrow is replaced by a gold
+ * chevron; the open list is restyled below where `base-select` exists and is
+ * the browser's own list elsewhere. */
+.schedule-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 24px;
+}
+
+.schedule-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.schedule-filter__control {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.schedule-filter__select {
+  appearance: none;
+  min-width: 128px;
+  padding: 9px 38px 9px 14px;
+  border: 1px solid var(--color-control-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-raised);
+  color: var(--color-text);
+  color-scheme: dark;
+  font: inherit;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.schedule-filter__select option {
+  background: var(--color-bg-card);
+  color: var(--color-text);
+}
+
+.schedule-filter__chevron {
+  position: absolute;
+  right: 12px;
+  pointer-events: none;
+  color: var(--color-accent);
+  transition: transform var(--transition-fast);
+}
+
+.schedule-filter__select:hover {
+  border-color: var(--color-accent);
+}
+
+.schedule-filter__select:focus-visible {
+  outline: 0;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-glow);
+}
+
+.schedule__empty {
+  padding: 28px 16px;
+  text-align: center;
+  color: var(--color-muted);
+}
+
+/* Customisable select: the picker becomes an element the page styles, so the
+ * open list is a midnight panel with gold hover and a gold tick on the chosen
+ * row, in the table's own type. */
+@supports (appearance: base-select) {
+  .schedule-filter__select,
+  .schedule-filter__select::picker(select) {
+    appearance: base-select;
+  }
+
+  .schedule-filter__select::picker-icon {
+    display: none;
+  }
+
+  .schedule-filter__select:open {
+    border-color: var(--color-accent);
+  }
+
+  .schedule-filter__select:open + .schedule-filter__chevron {
+    transform: rotate(180deg);
+  }
+
+  .schedule-filter__select::picker(select) {
+    min-width: anchor-size(width);
+    margin-top: 6px;
+    padding: 6px;
+    border: 1px solid var(--color-control-border);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-card);
+    box-shadow: var(--shadow-glow);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    color: var(--color-text);
+  }
+
+  .schedule-filter__select option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 9px 12px;
+    border-radius: var(--radius-xs);
+    background: transparent;
+    cursor: pointer;
+    transition:
+      background var(--transition-fast),
+      color var(--transition-fast);
+  }
+
+  .schedule-filter__select option:hover,
+  .schedule-filter__select option:focus-visible {
+    outline: 0;
+    background: var(--color-bg-selected);
+    color: var(--color-accent-light);
+  }
+
+  .schedule-filter__select option:checked {
+    color: var(--color-accent);
+  }
+
+  .schedule-filter__select option::checkmark {
+    order: 1;
+    color: var(--color-accent);
+  }
 }
 
 .schedule {
