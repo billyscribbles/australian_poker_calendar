@@ -759,6 +759,20 @@ const leagueRows = [
       iconBg: '#082838',
     },
   },
+  // From funcasinomelbourne.com.au/weekly-poker-tournaments (2026-10-04).
+  {
+    name: 'Poker Times Fun Casino',
+    states: ['VIC'],
+    about:
+      'Weekly $25 tournaments at 7pm on Chapel Street, Windsor: Wednesdays at the Union Hotel and Bar Blanco, Thursdays at the Railway Hotel.',
+    website: 'https://funcasinomelbourne.com.au/weekly-poker-tournaments/',
+    // The red diamond and spade from its logo, on black; ring is its red.
+    mark: {
+      iconSrc: '/images/rooms/poker-times-fun-casino-icon.webp',
+      primary: '#ED2728',
+      iconBg: '#000000',
+    },
+  },
   // From bellarinepokerleague.com (2026-10-04).
   {
     name: 'Bellarine Poker League',
