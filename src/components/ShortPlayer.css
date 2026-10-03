@@ -1,4 +1,7 @@
 .short-player {
+  /* A modal dialog centres itself with auto margins; the base stylesheet's
+     reset zeroes them, which pins it to the top-left corner. */
+  margin: auto;
   padding: 0;
   border: 0;
   background: transparent;
