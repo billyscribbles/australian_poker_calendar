@@ -17,6 +17,12 @@ const SOCIALS = [
   ['twitter', Twitter, 'X'],
 ]
 
+// A link list flows down then across, at most MAX_ROWS deep, so a long list
+// (the tours) splits into even columns instead of one tall one: 7 links stay
+// a single column, 11 become 6 and 5, 17 become 9 and 8.
+const MAX_ROWS = 9
+const rowsFor = (count) => Math.ceil(count / Math.ceil(count / MAX_ROWS))
+
 export default function Footer() {
   const { brand, footer, social, contact } = site
   // The config's own columns, then one of city pages and one of tour pages,
@@ -37,7 +43,7 @@ export default function Footer() {
     <footer className="footer">
       <VenueCta />
       <div className="footer__main">
-        <div>
+        <div className="footer__brand">
           <Img
             src={brand.logoSrc}
             alt={brand.name}
@@ -49,10 +55,10 @@ export default function Footer() {
           <Link to={footer.about.to} className="footer__about">
             {footer.about.label} →
           </Link>
-        </div>
 
-        <div>
-          <h2 className="footer__col-title">{footer.newsletter.heading}</h2>
+          <h2 className="footer__col-title footer__col-title--newsletter">
+            {footer.newsletter.heading}
+          </h2>
           <form className="footer__newsletter" onSubmit={(e) => e.preventDefault()}>
             <label htmlFor="footer-newsletter-email" className="sr-only">
               Email address
@@ -70,7 +76,7 @@ export default function Footer() {
             </button>
           </form>
 
-          <h3 className="footer__col-title footer__col-title--follow">{footer.followHeading}</h3>
+          <h2 className="footer__col-title footer__col-title--follow">{footer.followHeading}</h2>
           <div className="footer__socials">
             {SOCIALS.map(([key, Icon, label]) =>
               social[key] ? (
@@ -90,9 +96,9 @@ export default function Footer() {
         </div>
 
         {columns.map((col) => (
-          <div key={col.title}>
+          <div key={col.title} className="footer__group">
             <h2 className="footer__col-title">{col.title}</h2>
-            <ul className="footer__links">
+            <ul className="footer__links" style={{ '--footer-rows': rowsFor(col.links.length) }}>
               {col.links.map((l) => (
                 <li key={l.to}>
                   <Link to={l.to} className="footer__link">

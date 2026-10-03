@@ -5,12 +5,16 @@
   color: var(--color-text);
 }
 
+/* One grid: the brand column (logo, blurb, newsletter, socials) and then one
+   content-width track per link group, spread edge to edge. The link labels
+   never wrap, so the brand column takes whatever width is left. */
 .footer__main {
   max-width: var(--layout-container-max);
   margin: 0 auto;
   padding: 48px var(--layout-container-pad) 32px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: minmax(0, 440px) repeat(3, max-content);
+  justify-content: space-between;
   gap: 40px;
 }
 
@@ -50,14 +54,17 @@
   line-height: 1.2;
 }
 
+.footer__col-title--newsletter {
+  margin-top: 32px;
+}
+
 .footer__col-title--follow {
-  margin-bottom: 12px;
+  margin-top: 28px;
 }
 
 .footer__newsletter {
   display: flex;
   gap: 8px;
-  margin-bottom: 24px;
 }
 
 .footer__input {
@@ -128,24 +135,37 @@
   color: var(--color-accent);
 }
 
-/* Each link is a full-width, finger-height row (44px) rather than a bare
-   line of text, so the column reads the same but is tappable on a phone. */
+/* Each list flows down then across, `--footer-rows` deep (set per list in
+   Footer.jsx), as many content-width columns as that takes, no label
+   wrapping. */
 .footer__links {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0 16px;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(var(--footer-rows, 9), auto);
+  grid-auto-columns: max-content;
+  gap: 0 32px;
   font-size: 14px;
 }
 
+/* Each link is a full-width row with room above and below rather than a
+   bare line of text, so it is tappable on a phone; on a desktop the rows
+   tighten up so the columns stay compact. */
 .footer__link {
   display: block;
   padding: 12px 0;
   color: var(--color-muted);
+  white-space: nowrap;
   transition: color var(--transition-fast);
 }
 
 .footer__link:hover {
   color: var(--color-accent);
+}
+
+@media (min-width: 901px) {
+  .footer__link {
+    padding: 7px 0;
+  }
 }
 
 .footer__contact {
@@ -237,8 +257,32 @@
   left: -12px;
 }
 
+/* Tablet: two by two, the brand beside the first group, the city and tour
+   lists on the row below. The lists become two equal columns that may wrap
+   a long label, since half a tablet is narrower than two content-width
+   columns. */
+@media (max-width: 1199px) {
+  .footer__main {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .footer__links {
+    grid-auto-flow: row;
+    grid-template-rows: none;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 16px;
+  }
+  .footer__link {
+    white-space: normal;
+  }
+}
+
+/* Phone: everything in one column. */
 @media (max-width: 600px) {
   .footer__main {
+    grid-template-columns: minmax(0, 1fr);
     padding: 40px var(--layout-container-pad) 24px;
     gap: 32px;
   }
