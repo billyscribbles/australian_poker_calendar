@@ -291,7 +291,7 @@ describe('CalendarPage — accessibility', () => {
 })
 
 describe('festivals — fixture shape', () => {
-  it('every festival has a known tour, name, ISO dates, place, link, source and website', () => {
+  it('every festival has a known tour, name, ISO dates, place, link and website', () => {
     const codes = calendarPage.tours.map((t) => t.code)
     for (const f of festivals) {
       expect(f.tour && f.name && f.place && f.href, f.name).toBeTruthy()
@@ -299,7 +299,7 @@ describe('festivals — fixture shape', () => {
       expect(f.start).toMatch(/^\d{4}-\d{2}-\d{2}$/)
       expect(f.end).toMatch(/^\d{4}-\d{2}-\d{2}$/)
       expect(f.start <= f.end, f.name).toBe(true)
-      expect(f.source, f.name).toMatch(/^https:\/\//)
+      expect(f).not.toHaveProperty('source')
       expect(f.website, f.name).toMatch(/^https:\/\//)
       if (f.status) expect(Object.keys(STATUS_LABELS)).toContain(f.status)
     }

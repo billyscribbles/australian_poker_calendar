@@ -1,6 +1,6 @@
 // Events banner: the hero event, three side events and the tournament
-// ticker. Series and dates come from the Australian Poker Schedule timeline
-// scrape (data/poker-series-timeline.json); the ticker rows are the featured
+// ticker. Series and dates come from the series timeline
+// (data/poker-series-timeline.json); the ticker rows are the featured
 // events on the APT Melbourne Champs II schedule poster
 // (data/melbourne-champs-ii-schedule.json). Live chip leaders need a results
 // feed and are left out until one exists.

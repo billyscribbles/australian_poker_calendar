@@ -7,10 +7,10 @@
 //   yarn status --today=2026-10-20   pretend it is another day
 //
 // Reads the same content files the site renders from (festivals, event pages,
-// the home events banner, the calendar page) plus the scrape in data/, and
+// the home events banner, the calendar page) plus the series records in data/, and
 // derives per series: phase (done / live / upcoming), whether a schedule is up,
 // whether the data file and key art exist, where it is placed on the home and
-// calendar pages, and whether the row still matches the scrape. From those it
+// calendar pages, and whether the row still matches its record. From those it
 // lists the jobs: rotate a finished hero, chase an operator for a schedule,
 // refresh Up Next, and so on. Nothing here is hand-maintained; change the
 // content and re-run.
@@ -133,18 +133,17 @@ export function buildStatus(today = melbourneToday()) {
       poster?.event.image?.src || (isHero ? heroEvent.imageSrc : side?.imageSrc) || ''
     const imageExists = publicFile(imageSrc)
 
-    const scrapedFull = timeline.events.find((event) => event.url === festival.source)
+    const scrapedFull = timeline.events.find((event) => event.href === festival.href)
     const scraped = scrapedFull
       ? {
           title: scrapedFull.title,
-          url: scrapedFull.url,
+          href: scrapedFull.href,
           start: scrapedFull.start_date,
           end: scrapedFull.end_date,
           region: scrapedFull.region,
           venue: scrapedFull.venue?.name || '',
           address: scrapedFull.venue?.full_address || '',
           mapUrl: scrapedFull.venue?.google_maps_search_url || '',
-          heroImage: scrapedFull.hero_image?.src || '',
           posterFacts: scrapedFull.poster_facts || null,
           description: scrapedFull.description || '',
         }
@@ -200,7 +199,10 @@ export function buildStatus(today = melbourneToday()) {
       }
     }
     if (scraped && !scrapeDatesMatch) {
-      job('now', `Dates differ from the scrape (${scraped.start} to ${scraped.end}). Resolve.`)
+      job(
+        'now',
+        `Dates differ from the series record (${scraped.start} to ${scraped.end}). Resolve.`,
+      )
     }
     if (!tourOk) job('now', `Tour code ${festival.tour} has no brand profile or tour tile.`)
 
@@ -250,13 +252,13 @@ export function buildStatus(today = melbourneToday()) {
   const series = festivals.map(describe).sort((a, b) => toStamp(a.start) - toStamp(b.start))
   const bySlug = Object.fromEntries(series.map((s) => [s.href, s]))
 
-  // Series the scrape lists that the calendar does not.
-  const onCalendar = new Set(festivals.map((f) => f.source))
+  // Series the records list that the calendar does not.
+  const onCalendar = new Set(festivals.map((f) => f.href))
   const unlisted = timeline.events
-    .filter((event) => !onCalendar.has(event.url))
+    .filter((event) => !onCalendar.has(event.href))
     .map((event) => ({
       title: event.title,
-      url: event.url,
+      href: event.href,
       start: event.start_date,
       end: event.end_date,
       organiser: event.organiser?.name || '',
@@ -312,7 +314,7 @@ export function buildStatus(today = melbourneToday()) {
   for (const event of unlisted) {
     globalJobs.push({
       level: 'later',
-      text: `On the APS scrape but not on the calendar: ${event.title} (${event.start} to ${event.end}).`,
+      text: `In the series records but not on the calendar: ${event.title} (${event.start} to ${event.end}).`,
     })
   }
 
@@ -324,13 +326,13 @@ export function buildStatus(today = melbourneToday()) {
   // One profile per poker room: the operator behind a tour code, with its
   // identity (content/tourBrands.js, calendarPage.tours), the strip tile
   // (content/pokerRooms.js), the rooms it deals at (content/whereToPlay.js, via
-  // the tour page) and the organiser blocks the scrape filed its series under.
+  // the tour page) and the organiser blocks its series are filed under.
   const organisers = timeline.organisers || []
   const uniq = (list) => [...new Set(list.filter(Boolean))]
   const rooms = tourPages.map((page) => {
     const mine = series.filter((s) => s.tour === page.code)
     const brands = new Set(
-      mine.map((s) => timeline.events.find((e) => e.url === s.source)?.tour_brand).filter(Boolean),
+      mine.map((s) => timeline.events.find((e) => e.href === s.href)?.tour_brand).filter(Boolean),
     )
     const records = organisers.filter((o) => brands.has(o.brand))
     const tile = pokerRooms.rooms.find((r) => r.code === page.code) || null
@@ -346,7 +348,7 @@ export function buildStatus(today = melbourneToday()) {
       name: page.name,
       fullName: tile?.name || page.name,
       slug: page.slug,
-      // The organiser brands the scrape filed this room's series under, so the
+      // The organiser brands this room's series are filed under, so the
       // dashboard's Contacts page can put the room's logo on each organiser.
       brands: [...brands],
       path: page.path,

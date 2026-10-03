@@ -133,17 +133,18 @@ They 404 until added.
 ## The calendar data
 
 `src/content/festivals.js` holds every series as a compact row:
-`[tour, name, start, end, place, source, website, status?]`. Dates are full ISO
+`[tour, name, start, end, place, website, status?]`. Dates are full ISO
 so a season can cross New Year; `CalendarPage` filters each year's document to
 the rows that touch it. `href` is derived from the name (`/events/<slug>`), so a
 hard-coded event page's path must match that derivation.
 
-The rows were taken from the Australian Poker Schedule series timeline on
-2026-10-02. The full record per series is in `data/poker-series-timeline.json`;
-`data/README.md` is the readable version with organiser contacts. The scrape
-cache in `.firecrawl/` is ignored by git. Re-scrape and regenerate when
-operators add stops; do not hand-edit the data files and the content file out of
-sync.
+The series data is our own. The full record per series is in
+`data/poker-series-timeline.json` (and `.csv`), keyed by the calendar `href`;
+`data/README.md` is the readable version with organiser contacts. When an
+operator adds a stop, add the row to `festivals.js` and its record to `data/`
+together; do not let the data files and the content file drift out of sync.
+The site has no ties to any third-party listing site: no source links, no
+scrapers, no hot-linked images.
 
 `src/content/tourBrands.js` holds each operator's colour and wordmark treatment.
 Reuse those profiles; do not re-scrape brand colours. New operator: add a

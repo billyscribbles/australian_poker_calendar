@@ -17,7 +17,7 @@ export const about = {
     },
     {
       heading: 'How the calendar is compiled',
-      body: 'Every series on the calendar is taken from the operator’s own announcement or schedule and checked against the Australian Poker Schedule listing. Dates, venues and guarantees are updated as operators confirm their stops, and each entry links back to the operator so you can verify before you travel.',
+      body: 'Every series on the calendar is taken from the operator’s own announcement or schedule. Dates, venues and guarantees are updated as operators confirm their stops, and each entry links back to the operator so you can verify before you travel.',
     },
     {
       heading: 'Why trust us',

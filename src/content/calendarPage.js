@@ -2,8 +2,8 @@
 // (those live in festivals.js). Title, tours, promo banner slot,
 // Up Next cards and the page's own FAQ items.
 //
-// Tours, Up Next figures and dates come from the Australian Poker Schedule
-// series timeline scrape of 2026-10-02 (data/poker-series-timeline.json).
+// Tours, Up Next figures and dates come from the series timeline of
+// 2026-10-02 (data/poker-series-timeline.json).
 
 /**
  * @typedef {object} Tour
@@ -11,7 +11,7 @@
  * @property {string} label     the short name shown where the wordmark is not
  * @property {string} name      the operator's full name, for the Event records' organizer
  * @property {string} href
- * @property {string} website   the operator's own site, as linked from each APS event page
+ * @property {string} website   the operator's own site
  * @property {string} [logoSrc] the full wordmark, transparent, in the operator's colours
  *                              (a WebP from scripts/gen-tour-webp.py; the PNG beside it is the source)
  * @property {string} [iconSrc] 256×256 transparent square mark, drawn in a circle (WebP, as above)
@@ -33,7 +33,7 @@
 export const calendarPage = {
   /** @param {number} year */
   seo: (year) => ({
-    title: `${year} Australian Poker Schedule: Tournaments, Series & Events`,
+    title: `${year} Australian Poker Calendar: Tournaments, Series & Events`,
     description: `Every confirmed ${year} poker tournament series and event in Australia, month by month: dates, venues and buy-ins from the Australian Poker Tour, APL, Kings Poker, Crown Poker, Aurum and PlayLive. Updated as operators confirm their stops.`,
   }),
   /** @param {number} year */
