@@ -364,7 +364,7 @@ show counts and the renderer warning.
 
 New and changed tests in `src/test/`:
 
-- `content.test.js` (store): create, update, slug derivation and clashes,
+- `contentStore.test.js`: create, update, slug derivation and clashes,
   slug lock after publish, publish validation, delete removes the record and
   its own files, `publicContent()` ordering and filtering, `version` bumps.
 - `sanitize.test.js`: allowed markup survives unchanged, scripts and event
