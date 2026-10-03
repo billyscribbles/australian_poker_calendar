@@ -354,6 +354,25 @@ const rows = [
     tours: ['PLAYLIVE', 'MGA'],
     website: 'https://playlive.melbourne/',
   },
+  // World Pro Poker's two finals venues, from its own venue list.
+  {
+    name: 'Sunbury Bowls Club',
+    street: '49 Riddell Road',
+    suburb: 'Sunbury',
+    city: 'melbourne',
+    state: 'VIC',
+    postcode: '3429',
+    tours: ['WPP'],
+  },
+  {
+    name: 'Westend Market Hotel',
+    street: '47 McIntyre Road',
+    suburb: 'Sunshine',
+    city: 'melbourne',
+    state: 'VIC',
+    postcode: '3020',
+    tours: ['WPP'],
+  },
 ]
 
 const tourByCode = new Map(calendarPage.tours.map((tour) => [tour.code, tour]))

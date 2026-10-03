@@ -470,6 +470,14 @@ const rows = [
     'https://aurumpoker.com.au/',
   ],
   [
+    'WPP',
+    'World Pro Poker Super Mega Stack Series Final 2026',
+    '2026-10-04',
+    '2026-10-04',
+    'Melbourne, Westend Market Hotel (Sunshine)',
+    'https://www.worldpropoker.com.au/index.php?option=com_content&view=article&id=34&Itemid=149',
+  ],
+  [
     'APLPT',
     'APLPT Brisbane',
     '2026-10-06',
@@ -510,6 +518,14 @@ const rows = [
     'https://australianpokertour.com.au/',
   ],
   [
+    'WPP',
+    'World Pro Poker High Rollers Main Event 2026',
+    '2026-11-15',
+    '2026-11-15',
+    'Melbourne, Sunbury Bowls Club (Sunbury)',
+    'https://www.worldpropoker.com.au/index.php?option=com_content&view=article&id=34&Itemid=149',
+  ],
+  [
     'APLPT',
     'APLPT Albury',
     '2026-11-17',
@@ -548,6 +564,14 @@ const rows = [
     '2026-12-13',
     'Sydney, Churchills Sports Bar',
     'https://kingspoker.com.au/',
+  ],
+  [
+    'WPP',
+    'World Pro Poker Chockys Wargames Grand Final 2026',
+    '2026-12-06',
+    '2026-12-06',
+    'Melbourne, Westend Market Hotel (Sunshine)',
+    'https://www.worldpropoker.com.au/index.php?option=com_content&view=article&id=34&Itemid=149',
   ],
   [
     'APT',
