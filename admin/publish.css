@@ -213,6 +213,21 @@
   border-radius: 8px !important;
   border-color: var(--border) !important;
 }
+/* The dark skin is navy; match the dashboard's greys instead. The editing
+   area itself is set in publish.js (content_style), inside the iframe. */
+.tox.tox-tinymce .tox-editor-header,
+.tox.tox-tinymce .tox-toolbar,
+.tox.tox-tinymce .tox-toolbar__primary,
+.tox.tox-tinymce .tox-toolbar__overflow,
+.tox.tox-tinymce .tox-toolbar-overlord {
+  background: var(--bg-card) !important;
+}
+.tox.tox-tinymce .tox-tbtn--bespoke {
+  background: var(--bg-raised) !important;
+}
+.tox.tox-tinymce .tox-edit-area__iframe {
+  background: var(--bg-raised) !important;
+}
 
 /* Toast */
 .toast {

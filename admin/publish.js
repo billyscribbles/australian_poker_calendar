@@ -473,11 +473,12 @@ function bindEditor(kind, record) {
           selector: '#ed-body',
           base_url: new URL('vendor/tinymce', location.href).pathname,
           suffix: '.min',
-          // White editing area with dark text, and text from the left edge.
-          skin: 'oxide',
-          content_css: 'default',
+          // Dark skin, but the editing area in the dashboard's light black
+          // (--bg-raised) rather than TinyMCE's navy, text from the left edge.
+          skin: 'oxide-dark',
+          content_css: 'dark',
           content_style:
-            'body{font-family:Barlow,system-ui,sans-serif;font-size:17px;line-height:1.7;color:#1a1a1a;background:#fff;margin:16px 20px} img{max-width:100%;height:auto} blockquote{border-left:3px solid #DFA95A;margin-left:0;padding-left:16px;color:#555}',
+            'html,body{background:#222222}body{font-family:Barlow,system-ui,sans-serif;font-size:17px;line-height:1.7;color:#f5f2eb;margin:16px 20px} a{color:#dfa95a} img{max-width:100%;height:auto} blockquote{border-left:3px solid #DFA95A;margin-left:0;padding-left:16px;color:#aaa7a1}',
           plugins: 'lists link image table code autolink autoresize',
           toolbar:
             'blocks | bold italic underline strikethrough | link image | bullist numlist blockquote table | alignleft aligncenter alignright | removeformat code',
