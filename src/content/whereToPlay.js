@@ -766,6 +766,21 @@ const leagueRows = [
       iconBg: '#000000',
     },
   },
+  // From feltorianpokerclub.com (2026-10-04). Its site names no venue: events
+  // are at local venues shared with registered players.
+  {
+    name: 'Feltorian Poker Club',
+    states: ['SA'],
+    about:
+      'A Mount Gambier tournament series with season points and standings: $25 single entries, $55 featured events and a $90 season pass, at local venues confirmed on registration.',
+    website: 'https://feltorianpokerclub.com/',
+    // The gold club from its wordmark (favicon.svg), on black.
+    mark: {
+      iconSrc: '/images/rooms/feltorian-poker-club-icon.webp',
+      primary: '#AE831D',
+      iconBg: '#000000',
+    },
+  },
   // From southernpokertour.com.au and its Previous Events page (2026-10-04).
   {
     name: 'Southern Poker Tour',
