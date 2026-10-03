@@ -354,6 +354,18 @@ const rows = [
     tours: ['CROWN', 'APT'],
     room: true,
   },
+  // An APL venue, not a card room: its Saturday High Roller is a $160 APL
+  // game (the club's own poster, 2026-10-04).
+  {
+    name: 'Club Italia Sporting Club',
+    street: '128-152 Furlong Road',
+    suburb: 'North Sunshine',
+    city: 'melbourne',
+    state: 'VIC',
+    postcode: '3020',
+    tours: ['APL'],
+    website: 'https://www.clubitaliasportingclub.com.au/',
+  },
   {
     name: 'Crowne Plaza Melbourne Carlton',
     street: '701 Swanston Street',
@@ -435,20 +447,6 @@ const rooms = [
       iconSrc: '/images/rooms/casino-canberra-icon.svg',
       primary: '#EB1C2D',
       iconBg: '#11171F',
-    },
-  },
-  {
-    name: 'Club Italia Sporting Club',
-    street: '128-152 Furlong Road',
-    suburb: 'North Sunshine',
-    state: 'VIC',
-    postcode: '3020',
-    website: 'https://www.clubitaliasportingclub.com.au/',
-    // The club's stacked script favicon, turned white on its dark grey.
-    mark: {
-      iconSrc: '/images/rooms/club-italia-sporting-club-icon.webp',
-      primary: '#FFFFFF',
-      iconBg: '#222222',
     },
   },
   {
