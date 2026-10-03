@@ -249,7 +249,9 @@ export function createContentStore({
   const stories = collection('story')
   const shorts = collection('short')
 
-  const publicStory = (s) => ({
+  // A story as the site lists it: everything a card needs, no body. The body
+  // is added only for the story being shown (publicContent's bodyFor).
+  const listStory = (s) => ({
     slug: s.slug,
     href: `/stories/${s.slug}`,
     title: s.title,
@@ -258,10 +260,10 @@ export function createContentStore({
     heroImage: s.heroImage,
     heroThumb: s.heroThumb,
     heroAlt: s.heroAlt || s.title,
-    body: s.body,
     publishedAt: s.publishedAt,
     updatedAt: s.updatedAt,
   })
+  const publicStory = (s) => ({ ...listStory(s), body: s.body })
   const publicShort = (s) => ({
     slug: s.slug,
     title: s.title,
@@ -271,14 +273,18 @@ export function createContentStore({
     publishedAt: s.publishedAt,
   })
 
-  /** What the site renders: published records only, newest first. */
-  function publicContent() {
+  /**
+   * What the site renders: published records only, newest first, without
+   * bodies except the one story named by `bodyFor`.
+   * @param {{ bodyFor?: string }} [options]
+   */
+  function publicContent({ bodyFor } = {}) {
     return {
       stories: stories
         .list()
         .filter((s) => s.status === 'published')
         .sort((a, b) => b.date.localeCompare(a.date) || b.publishedAt.localeCompare(a.publishedAt))
-        .map(publicStory),
+        .map((s) => (s.slug === bodyFor ? publicStory(s) : listStory(s))),
       shorts: shorts
         .list()
         .filter((s) => s.status === 'published')

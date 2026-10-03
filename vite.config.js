@@ -88,7 +88,11 @@ function admin(mode) {
     },
     transformIndexHtml: {
       order: 'post',
-      handler: (html) => withRuntimeContent(html, store.content.publicContent()),
+      // A story page needs its own body; every other page gets the card list.
+      handler: (html, ctx) => {
+        const bodyFor = /^\/stories\/([a-z0-9-]+)\/?$/.exec(ctx.originalUrl || ctx.path || '')?.[1]
+        return withRuntimeContent(html, store.content.publicContent({ bodyFor }))
+      },
     },
   }
 }

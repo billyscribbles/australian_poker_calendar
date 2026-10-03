@@ -32,9 +32,12 @@ export function StoryCard({ story }) {
       </li>
     )
   }
+  // A plain anchor, not a router Link: a story's body reaches the browser
+  // only in its own server-rendered document (the lists carry no bodies), so
+  // opening one is a full page load.
   return (
     <li>
-      <Link to={story.href} className="story-card story-card--link">
+      <a href={story.href} className="story-card story-card--link">
         {/* The title beside it names the story; the picture is decoration here. */}
         <ImagePlaceholder
           className="story-card__image"
@@ -47,7 +50,7 @@ export function StoryCard({ story }) {
           <div className="story-card__date">{formatShortDate(story.date)}</div>
           <h3 className="story-card__title">{story.title}</h3>
         </div>
-      </Link>
+      </a>
     </li>
   )
 }

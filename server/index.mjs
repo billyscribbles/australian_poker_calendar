@@ -345,10 +345,19 @@ async function handle(req, res) {
   }
 
   // A prerendered page. A document, not an asset, so it counts as a view.
+  // The published content rides along in its inline block (server/render.mjs,
+  // decorate), so a client-side click from here to the home page shows it.
   if (PRERENDERED.has(pathname)) {
     const doc = documentFor(pathname)
     if (doc) {
       if (req.method === 'GET') recordView(req, pathname)
+      const html = await renderer.decorate(pathname, readFileSync(doc, 'utf8'))
+      if (html) {
+        return sendDocument(req, res, html, {
+          type: MIME['.html'],
+          cacheControl: 'public, max-age=0, must-revalidate',
+        })
+      }
       return serveFile(req, res, doc)
     }
   }
@@ -361,6 +370,14 @@ async function handle(req, res) {
   const shell = join(DIST, 'app-shell.html')
   const notFound = documentFor('/404') || (existsSync(shell) ? shell : join(DIST, 'index.html'))
   if (existsSync(notFound)) {
+    const html = await renderer.decorate('/404', readFileSync(notFound, 'utf8'))
+    if (html) {
+      return sendDocument(req, res, html, {
+        type: MIME['.html'],
+        cacheControl: 'no-store',
+        status: 404,
+      })
+    }
     return serveFile(req, res, notFound, 404, { 'Cache-Control': 'no-store' })
   }
   res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' })

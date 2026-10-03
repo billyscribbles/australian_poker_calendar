@@ -101,11 +101,28 @@ export function createRenderer({
     if (!LIVE.has(path) && !slug) return null
     fresh()
     if (cache.has(path)) return cache.get(path)
-    const runtime = store.content.publicContent()
+    // Only the story being shown carries its body; the rest are card-shaped.
+    const runtime = store.content.publicContent({ bodyFor: slug })
     if (slug && !runtime.stories.some((s) => s.slug === slug)) return null
     const doc = renderDocument(path, runtime)
     cache.set(path, doc)
     return doc
+  }
+
+  /**
+   * A static document (any prerendered page, the 404) with the published
+   * content added as the inline block, so a client-side navigation from it to
+   * the home page shows the published stories and shorts rather than the
+   * demo cards. Those pages do not render the content themselves, so the
+   * block cannot change their first render. Null when live rendering is off:
+   * then the home page is the static demo one too, and the two must agree.
+   */
+  self.decorate = async function decorate(path, html) {
+    if (!(await self.ready)) return null
+    fresh()
+    const key = `static:${path}`
+    if (!cache.has(key)) cache.set(key, withRuntimeContent(html, store.content.publicContent()))
+    return cache.get(key)
   }
 
   /** dist/sitemap.xml with one <url> per published story. */

@@ -104,6 +104,31 @@ describe('createRenderer', () => {
     expect(entry.render).toHaveBeenCalledTimes(3)
   })
 
+  it("carries only the shown story's body in the inline block", async () => {
+    const r = renderer()
+    const a = publish('Alpha')
+    store.content.updateStory(a.id, { body: '<p>Alpha body</p>' })
+    const b = publish('Beta')
+    store.content.updateStory(b.id, { body: '<p>Beta body</p>' })
+    const block = (html) =>
+      JSON.parse(html.match(/<script id="apc-runtime" type="application\/json">(.*)<\/script>/)[1])
+    expect(block(await r.page('/')).stories.some((s) => 'body' in s)).toBe(false)
+    const page = block(await r.page('/stories/alpha')).stories
+    expect(page.find((s) => s.slug === 'alpha').body).toBe('<p>Alpha body</p>')
+    expect(page.find((s) => s.slug === 'beta')).not.toHaveProperty('body')
+  })
+
+  it('adds the published content to a static page, so client navigation home shows it', async () => {
+    const r = renderer()
+    publish('Visible everywhere')
+    const doc = await r.decorate('/about', TEMPLATE)
+    expect(doc).toContain('"title":"Visible everywhere"')
+    expect(doc).not.toContain('"body"')
+    expect(await r.decorate('/about', TEMPLATE)).toBe(doc)
+    const off = createRenderer({ dist: join(dir, 'dist'), entry: join(dir, 'missing.js'), store })
+    expect(await off.decorate('/about', TEMPLATE)).toBeNull()
+  })
+
   it('adds published stories to the sitemap', async () => {
     const r = renderer()
     expect(await r.sitemap()).toBe(SITEMAP)

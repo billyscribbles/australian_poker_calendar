@@ -179,10 +179,16 @@ describe('publicContent', () => {
       heroImage: '/media/2.webp',
       heroThumb: '',
       heroAlt: 'Newer',
-      body: '',
       publishedAt: expect.any(String),
       updatedAt: expect.any(String),
     })
+    // Bodies are heavy and every page carries this list; only the story being
+    // shown gets its body.
+    content.updateStory(s2.id, { body: '<p>Full text</p>' })
+    expect(content.publicContent().stories.some((s) => 'body' in s)).toBe(false)
+    const withBody = content.publicContent({ bodyFor: 'newer' }).stories
+    expect(withBody.find((s) => s.slug === 'newer').body).toBe('<p>Full text</p>')
+    expect(withBody.find((s) => s.slug === 'older')).not.toHaveProperty('body')
     expect(pub.shorts).toEqual([
       {
         slug: 'clip',
