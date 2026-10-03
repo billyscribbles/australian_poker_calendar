@@ -18,6 +18,7 @@ import FAQ from '../components/FAQ.jsx'
 import FestivalTimeline from '../components/FestivalTimeline.jsx'
 import { festivals, STATUS_LABELS, YEARS } from '../content/festivals.js'
 import { calendarPage } from '../content/calendarPage.js'
+import { cities } from '../content/cities.js'
 import { DAY, HEAD, ROW, festivalsInYear } from '../lib/calendar.js'
 
 expect.extend(toHaveNoViolations)
@@ -126,6 +127,19 @@ describe('CalendarPage — static content', () => {
     }
     for (const item of calendarPage.faq) {
       expect(screen.getByRole('button', { name: item.q })).toBeInTheDocument()
+    }
+  })
+
+  it('links to every city page below Up Next', () => {
+    renderPage()
+    const upNext = screen.getByRole('region', { name: calendarPage.upNext.heading })
+    const section = screen.getByRole('region', { name: calendarPage.cityLinks.heading })
+    expect(upNext.compareDocumentPosition(section) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
+    for (const city of cities) {
+      expect(within(section).getByRole('link', { name: city.heading })).toHaveAttribute(
+        'href',
+        city.path,
+      )
     }
   })
 })

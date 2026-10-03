@@ -11,6 +11,7 @@ import { Badge } from '../components/Badge.jsx'
 import { festivalsInYear } from '../lib/calendar.js'
 import FestivalCalendar from '../components/FestivalCalendar.jsx'
 import UpNext from '../components/UpNext.jsx'
+import CityLinks from '../components/CityLinks.jsx'
 import FAQ from '../components/FAQ.jsx'
 import PokerRooms from '../components/PokerRooms.jsx'
 import './CalendarPage.css'
@@ -113,6 +114,8 @@ export default function CalendarPage({ year = YEAR }) {
       <div className="calendar-page__up-next">
         <UpNext />
       </div>
+
+      <CityLinks />
 
       <FAQ items={calendarPage.faq} />
       <PokerRooms />

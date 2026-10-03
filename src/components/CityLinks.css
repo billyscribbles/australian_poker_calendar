@@ -1,0 +1,49 @@
+.city-links__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 28px;
+}
+
+.city-links__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 40px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-text);
+  transition: color var(--transition-fast);
+}
+
+.city-links__icon {
+  color: var(--color-accent);
+  transition: transform var(--transition-fast);
+}
+
+.city-links__link:hover,
+.city-links__link:focus-visible {
+  color: var(--color-champagne);
+}
+
+.city-links__link:hover .city-links__icon {
+  transform: translate(2px, -2px);
+}
+
+/* Phones: two columns, inline so a wrapped name keeps its arrow beside the last word. */
+@media (max-width: 560px) {
+  .city-links__list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 16px;
+  }
+  .city-links__list li {
+    padding: 9px 0;
+  }
+  .city-links__link {
+    display: inline;
+  }
+  .city-links__icon {
+    margin-left: 4px;
+    vertical-align: -2px;
+  }
+}

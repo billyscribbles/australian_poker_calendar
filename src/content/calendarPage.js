@@ -242,6 +242,11 @@ export const calendarPage = {
   },
   countLabel: 'series',
 
+  /** The city page links below Up Next. */
+  cityLinks: {
+    heading: 'Poker by city',
+  },
+
   upNext: {
     heading: 'Up Next',
     eventsLabel: 'events',
