@@ -1411,8 +1411,12 @@ __metadata:
     react-helmet-async: "npm:^3.0.0"
     react-router-dom: "npm:^7.14.0"
     rollup-plugin-visualizer: "npm:^5.12.0"
+    tinymce: "npm:6.8.6"
     vite: "npm:^5.4.0"
     vitest: "npm:^2.1.9"
+  dependenciesMeta:
+    tinymce:
+      unplugged: true
   languageName: unknown
   linkType: soft
 
@@ -4626,6 +4630,13 @@ __metadata:
     fdir: "npm:^6.5.0"
     picomatch: "npm:^4.0.4"
   checksum: 10c0/f2e09fd93dd95c41e522113b686ff6f7c13020962f8698a864a257f3d7737599afc47722b7ab726e12f8a813f779906187911ff8ee6701ede65072671a7e934b
+  languageName: node
+  linkType: hard
+
+"tinymce@npm:6.8.6":
+  version: 6.8.6
+  resolution: "tinymce@npm:6.8.6"
+  checksum: 10c0/69d48677366fa95dc7126f8474db92f2903ebc8b1f287541ac0c3a19e9fcd0eee8515278d6424a4a4c9fb7e6313de985c00dc37fcaa01ae676139634d793e2ee
   languageName: node
   linkType: hard
 

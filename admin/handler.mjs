@@ -23,6 +23,8 @@
 //   POST   api/stories/<id>/unpublish  the record | 404
 //                                      the same six under api/shorts
 //   PUT    api/media?kind=image|video  raw body → 201 { url, bytes, type } | 400 | 413 | 415
+//   GET    preview/stories/<id>        the story as visitors will see it, static (server/render.mjs)
+//   GET    vendor/tinymce/<path>       the editor, served from the tinymce package
 //
 // Everything else falls through to the host server, which is what serves the
 // images the page shows.
@@ -39,7 +41,8 @@
 import { execFile } from 'node:child_process'
 import { createHmac, timingSafeEqual } from 'node:crypto'
 import { createReadStream, existsSync, statSync } from 'node:fs'
-import { dirname, join } from 'node:path'
+import { createRequire } from 'node:module'
+import { dirname, extname, join, normalize, sep } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { saveUpload } from '../server/media.mjs'
 
@@ -51,6 +54,28 @@ const FILES = {
   '': { file: 'index.html', type: 'text/html; charset=utf-8' },
   'app.js': { file: 'app.js', type: 'text/javascript; charset=utf-8' },
   'app.css': { file: 'app.css', type: 'text/css; charset=utf-8' },
+}
+
+// TinyMCE, served from the package so the editor needs no cloud key. Yarn PnP
+// keeps packages zipped, so tinymce is marked `unplugged` in package.json and
+// resolves to real files; without it installed the editor falls back to a
+// plain textarea and this stays null.
+let TINYMCE_DIR = null
+try {
+  TINYMCE_DIR = dirname(createRequire(import.meta.url).resolve('tinymce/tinymce.min.js'))
+} catch {
+  TINYMCE_DIR = null
+}
+const VENDOR_MIME = {
+  '.js': 'text/javascript; charset=utf-8',
+  '.css': 'text/css; charset=utf-8',
+  '.woff': 'font/woff',
+  '.woff2': 'font/woff2',
+  '.svg': 'image/svg+xml',
+  '.png': 'image/png',
+  '.gif': 'image/gif',
+  '.json': 'application/json; charset=utf-8',
+  '.html': 'text/html; charset=utf-8',
 }
 
 const LOOPBACK = /^(::1|127\.\d+\.\d+\.\d+|::ffff:127\.\d+\.\d+\.\d+)$/
@@ -196,12 +221,20 @@ function loginPage(error) {
  * @param {string} [options.prefix]   URL prefix, default '/admin'
  * @param {string} [options.site]     where "open on site" links point; '' = same origin
  * @param {string} [options.password] overrides process.env.ADMIN_PASSWORD
+ * @param {ReturnType<typeof import('../server/render.mjs').createRenderer>} [options.renderer]
+ *   the live renderer; without one the preview answers 503
  * @param {ReturnType<typeof import('../server/store.mjs').createStore>} [options.store]
  *   enquiries and traffic; without one those sections read as empty
  * @returns {(req: import('node:http').IncomingMessage, res: import('node:http').ServerResponse) => boolean}
  *   true when the request was for the dashboard and has been answered
  */
-export function createAdminHandler({ prefix = '/admin', site = '', password, store } = {}) {
+export function createAdminHandler({
+  prefix = '/admin',
+  site = '',
+  password,
+  store,
+  renderer,
+} = {}) {
   const secret = password ?? process.env.ADMIN_PASSWORD ?? ''
   const json = (res, code, value) =>
     send(res, code, JSON.stringify(value), 'application/json; charset=utf-8')
@@ -395,7 +428,64 @@ export function createAdminHandler({ prefix = '/admin', site = '', password, sto
     return {
       stories: count(c ? c.listStories() : []),
       shorts: count(c ? c.listShorts() : []),
+      // 'none' on the dev server and `yarn admin`, which render nothing live.
+      renderer: renderer ? (renderer.error ? 'error' : 'ready') : 'none',
+      rendererError: renderer?.error || '',
     }
+  }
+
+  /** The editor's files from the tinymce package. True when answered. */
+  function vendor(req, res, rest) {
+    if (!rest.startsWith('vendor/tinymce/')) return false
+    if (req.method !== 'GET' && req.method !== 'HEAD') {
+      send(res, 405, 'Method Not Allowed')
+      return true
+    }
+    const file = TINYMCE_DIR && normalize(join(TINYMCE_DIR, rest.slice('vendor/tinymce/'.length)))
+    if (
+      !file ||
+      !file.startsWith(TINYMCE_DIR + sep) ||
+      !existsSync(file) ||
+      !statSync(file).isFile()
+    ) {
+      send(res, 404, 'Not found')
+      return true
+    }
+    res.setHeader('Content-Type', VENDOR_MIME[extname(file)] || 'application/octet-stream')
+    res.setHeader('Cache-Control', 'private, max-age=86400')
+    res.setHeader('X-Content-Type-Options', 'nosniff')
+    res.setHeader('Content-Length', String(statSync(file).size))
+    res.statusCode = 200
+    if (req.method === 'HEAD') res.end()
+    else createReadStream(file).pipe(res)
+    return true
+  }
+
+  /** A story as visitors will see it, from the live renderer. True when answered. */
+  function preview(req, res, rest) {
+    const match = /^preview\/stories\/([a-z0-9]+)$/.exec(rest)
+    if (!match) return false
+    if (req.method !== 'GET' && req.method !== 'HEAD') {
+      send(res, 405, 'Method Not Allowed')
+      return true
+    }
+    const record = store?.content?.getStory(match[1])
+    if (!record) {
+      send(res, 404, 'No such story')
+      return true
+    }
+    if (!renderer) {
+      json(res, 503, { error: 'no-renderer' })
+      return true
+    }
+    renderer.preview(record).then(
+      (html) => {
+        if (html) send(res, 200, html, 'text/html; charset=utf-8')
+        else json(res, 503, { error: 'renderer', message: renderer.error })
+      },
+      (error) => send(res, 500, `preview failed:\n${error.message}`),
+    )
+    return true
   }
 
   return function handleAdmin(req, res) {
@@ -412,6 +502,8 @@ export function createAdminHandler({ prefix = '/admin', site = '', password, sto
 
     if (gate(req, res, rest)) return true
     if (publishing(req, res, rest, url)) return true
+    if (vendor(req, res, rest)) return true
+    if (preview(req, res, rest)) return true
 
     const tick = rest.match(/^api\/enquiries\/([a-z0-9]+)$/)
     if (tick) {

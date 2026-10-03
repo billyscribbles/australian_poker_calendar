@@ -5,7 +5,7 @@
 // checked once, end to end, so a content file that stops importing under plain
 // Node fails here.
 import { describe, it, expect, beforeAll, afterAll } from 'vitest'
-import { createServer } from 'node:http'
+import { createServer, request } from 'node:http'
 import { mkdtempSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
@@ -335,6 +335,54 @@ describe('admin handler', () => {
         body: JSON.stringify({ title: 'x'.repeat(3 * 1024 * 1024) }),
       })
       expect(huge.status).toBe(413)
+    })
+  })
+
+  describe('preview and the editor files', () => {
+    it('serves TinyMCE from the package and nothing outside it', async () => {
+      const js = await fetch(`${open.base}/admin/vendor/tinymce/tinymce.min.js`)
+      expect(js.status).toBe(200)
+      expect(js.headers.get('content-type')).toMatch(/javascript/)
+      expect(js.headers.get('cache-control')).toContain('max-age')
+      expect((await js.text()).length).toBeGreaterThan(10000)
+      const css = await fetch(`${open.base}/admin/vendor/tinymce/skins/ui/oxide-dark/skin.min.css`)
+      expect(css.status).toBe(200)
+      expect(css.headers.get('content-type')).toMatch(/css/)
+      expect((await fetch(`${open.base}/admin/vendor/tinymce/nope.js`)).status).toBe(404)
+      // A raw path with ".." that fetch() would otherwise normalise away.
+      const raw = await new Promise((resolve) => {
+        request(`${open.base}/admin/vendor/tinymce/../../package.json`, (res) =>
+          resolve(res.statusCode),
+        ).end()
+      })
+      expect(raw).toBe(404)
+      expect((await fetch(`${locked.base}/admin/vendor/tinymce/tinymce.min.js`)).status).toBe(401)
+    })
+
+    it('previews a story through the renderer, and says so when there is none', async () => {
+      const draft = store.content.addStory({ title: 'Preview me' })
+      const renderer = {
+        error: '',
+        preview: async (record) => `<html><body>${record.title}</body></html>`,
+      }
+      const withRenderer = await serve(createAdminHandler({ password: '', store, renderer }))
+      try {
+        const res = await fetch(`${withRenderer.base}/admin/preview/stories/${draft.id}`)
+        expect(res.status).toBe(200)
+        expect(res.headers.get('content-type')).toMatch(/text\/html/)
+        expect(res.headers.get('x-robots-tag')).toMatch(/noindex/)
+        expect(await res.text()).toContain('Preview me')
+        expect((await fetch(`${withRenderer.base}/admin/preview/stories/nope`)).status).toBe(404)
+        const status = await (await fetch(`${withRenderer.base}/admin/api/status`)).json()
+        expect(status.publishing.renderer).toBe('ready')
+      } finally {
+        withRenderer.server.close()
+      }
+      const none = await fetch(`${open.base}/admin/preview/stories/${draft.id}`)
+      expect(none.status).toBe(503)
+      const status = await (await fetch(`${open.base}/admin/api/status`)).json()
+      expect(status.publishing.renderer).toBe('none')
+      store.content.deleteStory(draft.id)
     })
   })
 })
