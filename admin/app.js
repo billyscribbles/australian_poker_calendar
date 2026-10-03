@@ -1,4 +1,4 @@
-/* global publishView, bindPublish, loadPublish, leaveEditor, editorOpen, draftBadge */
+/* global publishView, bindPublish, loadPublish, leaveEditor, mayLeaveEditor, editorOpen, draftBadge */
 // The dashboard. Fetches api/status, api/enquiries, api/traffic and (through
 // publish.js, loaded before this file) api/stories and api/shorts, rendered
 // by hash route:
@@ -1333,7 +1333,19 @@ document.getElementById('main').addEventListener('click', (e) => {
   if (row && !e.target.closest('a')) location.hash = row.dataset.href
 })
 document.getElementById('refresh').addEventListener('click', load)
-window.addEventListener('hashchange', () => {
+// Set while putting the hash back after the editor chose to stay, so that
+// restoring it does not ask again.
+let restoringHash = false
+window.addEventListener('hashchange', (e) => {
+  if (restoringHash) {
+    restoringHash = false
+    return
+  }
+  if (!mayLeaveEditor()) {
+    restoringHash = true
+    location.hash = new URL(e.oldURL).hash
+    return
+  }
   state.months.scrolled = false
   leaveEditor()
   render()

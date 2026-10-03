@@ -248,6 +248,17 @@ function editorOpen(page, param) {
   )
 }
 
+/**
+ * True when it is fine to leave the open editor: nothing unsaved, or the
+ * editor said yes. The browser's own prompt covers closing the tab; this
+ * covers a click to anywhere else in the dashboard.
+ */
+// eslint-disable-next-line no-unused-vars -- called from app.js
+function mayLeaveEditor() {
+  if (!pub.editing?.dirty) return true
+  return window.confirm('You have unsaved changes. Leave without saving them?')
+}
+
 /** Tears down an open editor: TinyMCE, the unsaved-changes guard, the flag. */
 function leaveEditor() {
   if (window.tinymce) window.tinymce.remove()
@@ -376,7 +387,7 @@ function editorBar(kind, record, { preview }) {
       </div>
       <div class="editor__actions">
         <span class="editor__saved" id="ed-saved" role="status"></span>
-        <button type="button" class="btn btn--ghost" id="ed-save">Save draft</button>
+        <button type="button" class="btn btn--ghost" id="ed-save">${live ? 'Save changes' : 'Save draft'}</button>
         ${preview ? '<button type="button" class="btn btn--ghost" id="ed-preview">Preview</button>' : ''}
         <button type="button" class="btn" id="ed-publish">${live ? 'Unpublish' : 'Publish'}</button>
       </div>
@@ -425,7 +436,7 @@ function storyEditor(story) {
           <label class="field"><span>Address</span><span class="field__prefix"><span>/stories/</span><input id="ed-slug" value="${esc(story.slug)}" ${live ? 'readonly title="The address is fixed while the story is published."' : ''}></span></label>
           ${
             live
-              ? `<p class="sub">Live at ${external(siteUrl(storyUrl(story)), siteUrl(storyUrl(story)))}</p>`
+              ? `<p class="sub">Live at ${external(siteUrl(storyUrl(story)), siteUrl(storyUrl(story)))}</p><p class="sub"><strong>This story is live.</strong> Changes, including a new hero image, appear on the site as soon as you save. Unpublish first to work on it privately.</p>`
               : '<p class="sub">A draft is visible only here and in Preview.</p>'
           }
         </section>
@@ -719,7 +730,7 @@ function shortEditor(short) {
           <h2>Publishing</h2>
           <p class="sub">${
             short.status === 'published'
-              ? `Live in the Shorts row on ${external(siteUrl('/'), 'the home page')}.`
+              ? `Live in the Shorts row on ${external(siteUrl('/'), 'the home page')}. Changes appear on the site as soon as you save.`
               : 'A draft is visible only here.'
           }</p>
           <p class="sub">Added ${esc(fmtWhen(short.createdAt))}</p>
