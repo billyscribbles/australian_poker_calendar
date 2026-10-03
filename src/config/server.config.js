@@ -52,6 +52,11 @@ export const legacyRedirects = {
  * @type {Record<string, string[]>}
  */
 export const cspExtra = {
+  // Cloudflare Web Analytics: the proxy in front of Railway injects its beacon
+  // into every page. Unlisted, the browser blocks it and logs a CSP error on
+  // every load, which costs the Lighthouse best-practices score.
+  'script-src': ['https://static.cloudflareinsights.com'],
+  'connect-src': ['https://cloudflareinsights.com'],
   // 'script-src': ['https://assets.calendly.com'],
   // 'frame-src': ['https://www.google.com'],
 }
